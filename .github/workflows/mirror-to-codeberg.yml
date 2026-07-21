@@ -35,8 +35,10 @@ jobs:
         run: |
           git config user.name  "rosetta-mirror-bot"
           git config user.email "mirror@rosettaquantum.com"
+          # Forgejo/Codeberg auth: the access token goes as the basic-auth username
+          # (the gitlab-style "oauth2:TOKEN" form is rejected with exit 128)
           git remote add codeberg \
-            "https://oauth2:${CODEBERG_TOKEN}@codeberg.org/RosettaQuantum/evidence.git"
+            "https://${CODEBERG_TOKEN}@codeberg.org/RosettaQuantum/evidence.git"
           # --mirror-style push keeps the two byte-identical; --force so Codeberg
           # always matches GitHub exactly (GitHub stays the single source of truth).
           git push codeberg --force --prune "refs/heads/main:refs/heads/main"
