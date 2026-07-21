@@ -35,3 +35,5 @@ block confirms (~hours); complete them later with `ots upgrade recipes/*.ots`.
 - 2026-07-20: full check — sha256 of all 18 files identical across GitHub raw,
   Codeberg raw, and local clone (dual-push, Option A). OTS proofs upgraded to
   complete (Bitcoin-anchored).
+- 2026-07-21: dual-push verified on both copies; mirror Action activated with
+  repo-scoped CODEBERG_TOKEN (Option B live as automatic redundancy).
