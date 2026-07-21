@@ -30,3 +30,8 @@ ots verify <file>.ots                                    # external timestamp pr
 ## OpenTimestamps note
 `.ots` proofs are committed next to each file. They're "pending" until a Bitcoin
 block confirms (~hours); complete them later with `ots upgrade recipes/*.ots`.
+
+## Verification log
+- 2026-07-20: full check — sha256 of all 18 files identical across GitHub raw,
+  Codeberg raw, and local clone (dual-push, Option A). OTS proofs upgraded to
+  complete (Bitcoin-anchored).
