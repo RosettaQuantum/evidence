@@ -1,0 +1,43 @@
+# .github/workflows/mirror-to-codeberg.yml
+#
+# Copy 2 of the triple archive: every push to GitHub is mirrored, byte-identical,
+# to Codeberg (independent Forgejo infrastructure). This is the automatic,
+# hands-off redundancy the archive spec calls for.
+#
+# SETUP (one time):
+#   1. On Codeberg: create the public repo  RosettaQuantum/evidence
+#   2. On Codeberg: Settings -> Applications -> generate an access token.
+#      Thanks to Forgejo's repo-scoped tokens (codeberg PR #11504), scope it to
+#      ONLY the evidence repo with write:repository — never an account-wide token.
+#   3. On GitHub: repo Settings -> Secrets and variables -> Actions -> New secret
+#      Name:  CODEBERG_TOKEN     Value: <the token from step 2>
+#   4. Commit this file to .github/workflows/ in the GitHub evidence repo.
+#
+# After that, nothing manual: push to GitHub -> Codeberg updates automatically.
+
+name: Mirror to Codeberg
+on:
+  push:
+    branches: [main]
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history so the mirror is complete, not shallow
+
+      - name: Push mirror to Codeberg
+        env:
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+        run: |
+          git config user.name  "rosetta-mirror-bot"
+          git config user.email "mirror@rosettaquantum.com"
+          git remote add codeberg \
+            "https://oauth2:${CODEBERG_TOKEN}@codeberg.org/RosettaQuantum/evidence.git"
+          # --mirror-style push keeps the two byte-identical; --force so Codeberg
+          # always matches GitHub exactly (GitHub stays the single source of truth).
+          git push codeberg --force --prune "refs/heads/main:refs/heads/main"
+          git push codeberg --force --tags

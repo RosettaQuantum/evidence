@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "schema": "rosettaq-archive/v1",
+    "file_name": "RosettaQ__RECIPE__RQ-0033__20260720T1733Z__qaoa--grid-optimization.json",
+    "file_id": "RQ-0033",
+    "type": "RECIPE",
+    "is_demo": true,
+    "content_hash": "1b614b186c35f60819af2f3891b75d00695d289cba6a1fae3b9d8ea8e75eba75"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0033",
+      "recipe_name": "Grid balancing with renewables",
+      "problem_class": "Grid optimization",
+      "vertical": "Energy",
+      "algorithm": "QAOA",
+      "qubits_required": null,
+      "status": "queued",
+      "advantage_claimed": null,
+      "source": null
+    },
+    "como": {
+      "protocol": "harvested recipe card; no fight run yet",
+      "notebook_url": "#"
+    },
+    "cuando": {
+      "archived_at": "2026-07-20T17:33:32.693804+00:00"
+    },
+    "donde": {
+      "note": "recipe card only \u2014 no compute yet"
+    },
+    "porque": {
+      "ledger_goal": "register RQ-0033 in the public pipeline"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude"
+      ],
+      "org": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "identical triple-copy + external anchor; verify by content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/recipes/RosettaQ__RECIPE__RQ-0033__20260720T1733Z__qaoa--grid-optimization.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/recipes/RosettaQ__RECIPE__RQ-0033__20260720T1733Z__qaoa--grid-optimization.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/recipes/RosettaQ__RECIPE__RQ-0033__20260720T1733Z__qaoa--grid-optimization.json",
+        "raw_url": "https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/recipes/RosettaQ__RECIPE__RQ-0033__20260720T1733Z__qaoa--grid-optimization.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "database",
+        "uri": "d1://rosettaq-ledger/recipes/RQ-0033"
+      }
+    ],
+    "anchor": {
+      "kind": "opentimestamps",
+      "proof_file": "RosettaQ__RECIPE__RQ-0033__20260720T1733Z__qaoa--grid-optimization.json.ots"
+    },
+    "self_note": "One of 3 identical copies. If any copy's hash differs, that copy is invalid."
+  }
+}
