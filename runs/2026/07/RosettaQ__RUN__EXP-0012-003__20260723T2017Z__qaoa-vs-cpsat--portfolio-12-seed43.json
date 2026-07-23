@@ -1,0 +1,157 @@
+{
+  "meta": {
+    "schema": "rosettaq-archive/v1",
+    "file_name": "RosettaQ__RUN__EXP-0012-003__20260723T2017Z__qaoa-vs-cpsat--portfolio-12-seed43.json",
+    "file_id": "EXP-0012-003",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Run real medido en simulador CPU (12 qubits, seed 43). Tanda multi-semilla: mide la varianza de la brecha por tamano.",
+    "content_hash": "sha256:bf1e4f8e048af2d99b0c876397bca2609a170527a9d0be6560f40b26e353333e"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0012",
+      "recipe_name": "Constrained portfolio compression",
+      "problem_class": "Portfolio optimization",
+      "instance": "portfolio_12_assets_seed43",
+      "quantum_side": {
+        "framework": "PennyLane",
+        "backend": "default.qubit (CPU sim)",
+        "layers": 2,
+        "optimizer": "Adam, 120 steps",
+        "shots": 2000,
+        "value": -0.13042444097740713,
+        "x": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "runtime_s": 45.405
+      },
+      "classical_side": {
+        "solver": "OR-Tools CP-SAT",
+        "status": "OPTIMAL",
+        "value": -0.2817782959563715,
+        "x": [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "runtime_s": 0.128
+      },
+      "exact_optimum": {
+        "value": -0.2817782959563715,
+        "x": [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "runtime_s": 0.019
+      },
+      "outcome": "not yet — classical wins",
+      "quality_gaps_pct": {
+        "classical": 0.0,
+        "quantum": 53.7138
+      }
+    },
+    "como": {
+      "protocol": "juez-v1: misma instancia + mismo presupuesto ambos lados; optimo exacto como arbitro",
+      "seed": 43,
+      "instance_params": {
+        "n_assets": 12,
+        "k_target": 5,
+        "risk_aversion": 2.0,
+        "penalty": 4.0,
+        "seed": 43,
+        "time_budget_s": 120.0
+      },
+      "lib_versions": {
+        "pennylane": "0.45.1",
+        "numpy": "2.4.4",
+        "python": "3.11.15",
+        "ortools": "9.15.6755"
+      },
+      "compute": "contenedor cloud Cowork (CPU, Linux)",
+      "harness": "harness_param.py (harness_v0 parametrizado; publicado junto al archivo)",
+      "raw_data_url": "pendiente de publicacion en repo"
+    },
+    "cuando": {
+      "started_at": "2026-07-23T20:17:07+00:00",
+      "archived_at": "2026-07-23T20:17:07+00:00",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "donde": {
+      "quantum_backend": "PennyLane default.qubit (simulador CPU)",
+      "classical_backend": "misma maquina, OR-Tools CP-SAT",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "la brecha por tamano tiene varianza entre semillas; esta tanda la mide (3 semillas nuevas por tamano)",
+      "question": "Cual es la dispersion de la brecha QAOA p=2 vs CP-SAT a n=12?",
+      "ledger_goal": "tanda de varianza de la serie EXP-0012; habilita barras de error en la curva de cruce"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "harness_param.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0012-003__20260723T2017Z__qaoa-vs-cpsat--portfolio-12-seed43.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0012-003__20260723T2017Z__qaoa-vs-cpsat--portfolio-12-seed43.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0012-003__20260723T2017Z__qaoa-vs-cpsat--portfolio-12-seed43.json",
+        "raw_url": "https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0012-003__20260723T2017Z__qaoa-vs-cpsat--portfolio-12-seed43.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "database",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0012-003",
+        "public_read": "https://ledger.rosettaquantum.com/api/archive/EXP-0012-003"
+      }
+    ],
+    "self_note": "Este archivo es una de las 3 copias listadas. Si el hash de cualquier copia difiere, esa copia no es valida."
+  }
+}
