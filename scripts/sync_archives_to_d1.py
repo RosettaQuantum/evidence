@@ -20,6 +20,8 @@ rows = []
 for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", recursive=True) + glob.glob("verdicts/**/*.json", recursive=True)):
     doc = json.load(open(path))
     meta, w6 = doc["meta"], doc["w6"]
+    # RUNs usan cuando.archived_at; VERDICTs usan cuando.published_at
+    when = w6["cuando"].get("archived_at") or w6["cuando"].get("published_at") or ""
     payload = open(path).read()
     try:
         ots = base64.b64encode(open(path + ".ots", "rb").read()).decode()
@@ -30,7 +32,7 @@ for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", rec
         "(file_id,file_name,type,recipe_id,is_demo,content_hash,started_at,archived_at,github_url,codeberg_url,ots_proof,payload) VALUES ("
         f"'{esc(meta['file_id'])}','{esc(meta['file_name'])}','{esc(meta['type'])}',"
         f"'{esc(w6['que'].get('recipe_id', meta['file_id']))}',{1 if meta.get('is_demo') else 0},"
-        f"'{esc(meta['content_hash'])}',NULL,'{esc(w6['cuando']['archived_at'])}',"
+        f"'{esc(meta['content_hash'])}',NULL,'{esc(when)}',"
         f"'https://raw.githubusercontent.com/{OWNER}/{REPO}/main/{esc(path)}',"
         f"'https://codeberg.org/{OWNER}/{REPO}/raw/branch/main/{esc(path)}',"
         + (f"'{ots}'" if ots else "NULL") + f",'{esc(payload)}');"
