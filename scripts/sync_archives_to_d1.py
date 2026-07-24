@@ -36,13 +36,18 @@ for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", rec
         + (f"'{ots}'" if ots else "NULL") + f",'{esc(payload)}');"
     )
 
-with tempfile.NamedTemporaryFile("w", suffix=".sql", delete=False) as f:
-    f.write("\n".join(rows))
-    sql_path = f.name
-
-out = subprocess.run(
-    ["npx", "wrangler", "d1", "execute", DB, "--remote", "--file", sql_path, "--json"],
-    capture_output=True, text=True)
-if out.returncode != 0:
-    raise SystemExit(f"wrangler failed:\n{out.stderr[:500]}")
+# D1 limita el tamaño por ejecución: subir en lotes chicos
+BATCH = 6
+done = 0
+for i in range(0, len(rows), BATCH):
+    with tempfile.NamedTemporaryFile("w", suffix=".sql", delete=False) as f:
+        f.write("\n".join(rows[i:i+BATCH]))
+        sql_path = f.name
+    out = subprocess.run(
+        ["npx", "wrangler", "d1", "execute", DB, "--remote", "--file", sql_path, "--json"],
+        capture_output=True, text=True)
+    if out.returncode != 0:
+        raise SystemExit(f"wrangler failed en lote {i//BATCH+1}:\nstderr: {out.stderr[:400]}\nstdout: {out.stdout[:400]}")
+    done += len(rows[i:i+BATCH])
+    print(f"  lote {i//BATCH+1}: {done}/{len(rows)}")
 print(f"synced {len(rows)} archive file(s) to D1 run_archives")
