@@ -1,25 +1,20 @@
-# Caja para Claude Code — pendientes notariales y de infra (al 24 jul 2026)
+# Caja para Claude Code — pendientes (actualizada 24 jul, 3ª pasada)
 
-> Cowork (laboratorio + imprenta) dejó esto listo para tu mano (notario + git/deploy del repo evidence). Un actor por árbol, siempre vía git. Marca cada ítem cuando lo cierres.
+> Un actor por árbol, vía git.
 
-## P1 — Notarización pendiente (repo `evidence`)
-- [x] **OTS upgrade de los primeros 8 runs** (EXP-0012-001…008): Bitcoin ya debería haber confirmado (~horas desde el 23 jul). Corre `ots upgrade` y commitea las pruebas completas.
-- [x] **OTS estampar + upgrade de los 12 nuevos** (EXP-0012-009…020) y del **veredicto V-0012**. Los 13 archivos ya están en el árbol (`runs/2026/07/` y `verdicts/2026/`), sellados y verificados VALID por Cowork.
-- [x] **Push triple** (GitHub + Codeberg) de los 13 archivos nuevos + confirmar mirror verde.
+## PENDIENTE — 6 runs E.ON nuevos (case30 extra + case118)
+Cowork selló y dejó en el árbol `runs/2026/07/`, aún NO en triple copia ni D1:
+- [ ] EXP-0033-004 (case30 seed42), EXP-0033-005 (case30 seed43)  ← de la pasada anterior
+- [ ] EXP-0033-006 (case30 seed44), EXP-0033-007 (case30 seed45), EXP-0033-008 (case30 seed46)
+- [ ] EXP-0033-009 (case118 seed42) ← utility-scale, 118 buses
 
-## P2 — D1 ya está sincronizada por Cowork (solo verificar)
-- Cowork ya insertó en D1: `run_archives` (20 runs reales), `verdicts` (V-0012, is_demo=0), `experiments` (20 filas con las brechas reales y raw_data_url a RosettaQuantum). Estado D1: 20 sealed_runs, 1 real_verdict, 20 experiments.
-- [x] Verificar que tu `sync-ledger` (D1→ledger.json) sigue consistente; el ledger web ya se está sirviendo desde D1 en cada build (verificado en vivo: contador "1 verdict published").
+Por cada uno: verificar VALID → OTS estampar → push triple (GitHub+Codeberg) → insertar en D1 (`run_archives` + fila `experiments` de RQ-0033).
 
-## P3 — Erratas conocidas (bajo impacto, corregir cuando puedas)
-- [x] En el archivo publicado **EXP-0012-001**, el bloque `storage` interno apunta a `RosettaQ/...` (URLs viejas). El sello cubre solo meta+w6, así que puedes corregir el `storage` a `RosettaQuantum/...` sin invalidar el hash — en las 3 copias a la vez. (Los runs 002+ ya salieron con URLs correctas.)
+**CONTADOR WEB (honestidad):** está en **23** a propósito. Total sellado real = 29 runs (20 portafolios + 9 grid). Cuando publiques los 6 pendientes en triple copia + D1, **sube `const SEALED_RUNS` a 29** en `RosettaQuantum/web` (`src/pages/blog/index.astro` y `.../es/blog/index.astro`), commit+push. Ahí el contador calza con la evidencia verificada.
 
-## P4 — Infra de deploy de la web (2 warnings amarillos en el CI de `RosettaQuantum/web`) — de Nicholas
-- El token de Cloudflare del CI aún no puede **leer D1** (el ledger cae al snapshot commiteado) ni **purgar caché**. El deploy funciona igual. Cuando Nicholas amplíe el scope del token (D1:Read + Cache Purge), los warnings desaparecen y el ledger se sirve siempre desde D1 fresco.
+## Arrastrado
+- [ ] `ots upgrade` de pruebas estampadas (E.ON 001-003 + V-0012 + las 6 nuevas) cuando Bitcoin las incluya.
 
-## Contexto: qué viene (para que sepas hacia dónde va)
-- Cowork va a girar el harness a la **clase de problema del challenge E.ON** (grid expansion / network expansion, formulación binaria → QUBO → QAOA) y correr una serie EXP nueva sobre una instancia IEEE/pandapower chica. Esos runs llegarán al mismo árbol `evidence/runs/` para tu notarización, igual que la serie de portafolios.
-- La propuesta Fase I del challenge (deadline 15 sep) se redactará sobre esa evidencia. Intel completo en el proyecto Claude: `claude/rosetta-eon-challenge-intel.md`.
-
----
-**Cierre de Claude Code (24 jul):** P1 completo (V-0012 notarizado; OTS: 001-008 completos desde antes, 9 anclas más confirmadas hoy, el resto pendiente de bloque — se upgradean en la próxima vuelta). P2 verificado. P3 corregido en las 3 copias (sello intacto, VALID). P4 ya estaba resuelto: el token del CI lee D1 y purga desde el arreglo de Nicholas — corridas verdes sin warnings.
+## Contexto
+- **Propuesta Fase I v2 lista** (`Rosetta-Quantum-EON-Phase1-Proposal.pdf` en la carpeta del proyecto): 3 págs con marca, gráficos, y los 3 diferenciadores (pre-registro criptográfico, contribución a QOBLIB, curva de cruce). Cita "29 sealed runs" — será exacto en cuanto publiques los 6. Deadline submit 15 sep.
+- Serie E.ON total: 9 runs (case14 ×3, case30 ×5, case118 ×1). Harness `eon_harness.py` versionado en el repo.

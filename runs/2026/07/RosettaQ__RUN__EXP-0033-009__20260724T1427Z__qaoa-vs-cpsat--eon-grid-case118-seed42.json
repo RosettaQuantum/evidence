@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "schema": "rosettaq-archive/v1",
+    "file_name": "RosettaQ__RUN__EXP-0033-009__20260724T1427Z__qaoa-vs-cpsat--eon-grid-case118-seed42.json",
+    "file_id": "EXP-0033-009",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Run real — track E.ON grid-expansion. ESCALA UTILITY: IEEE case118 (118 buses, 173 lineas). 16 candidatos, congestion real, seed 42. Modelo 2do-orden DC medido; plan validado en AC.",
+    "content_hash": "sha256:f7a0b53734228357c11881dc9cb4c180b163f5c2bcce420b694f21cf1a612112"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0033",
+      "recipe_name": "Grid balancing / network expansion (E.ON track)",
+      "problem_class": "Grid optimization",
+      "instance": "case14_stress1.8_K16_seed42",
+      "quantum_side": {
+        "framework": "PennyLane",
+        "backend": "default.qubit (CPU sim)",
+        "layers": 2,
+        "optimizer": "Adam, 51 steps",
+        "shots": 2000,
+        "value": 2863.3511026537963,
+        "x": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "runtime_s": 97.642,
+        "n_selected": 6
+      },
+      "classical_side": {
+        "solver": "OR-Tools CP-SAT",
+        "status": "OPTIMAL",
+        "value": 2747.955896986816,
+        "x": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "runtime_s": 1.358,
+        "n_selected": 6
+      },
+      "exact_optimum": {
+        "value": 2747.955896986816,
+        "x": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "runtime_s": 0.481,
+        "n_selected": 6
+      },
+      "outcome": "not yet — classical wins",
+      "quality_gaps_pct": {
+        "classical": 0.0,
+        "quantum": 4.1993
+      },
+      "ac_validation": {
+        "base": {
+          "converged": true,
+          "ac_total_overload": 13203.651,
+          "max_loading_pct": 444.0
+        },
+        "classical_build": {
+          "converged": true,
+          "ac_total_overload": 11318.688,
+          "max_loading_pct": 590.7
+        },
+        "built_lines": [
+          0,
+          3,
+          5,
+          7,
+          10,
+          15
+        ]
+      }
+    },
+    "como": {
+      "protocol": "juez-v1: misma instancia + mismo presupuesto ambos lados; optimo exacto DC como arbitro; modelo de congestion 2do-orden DC validado en AC",
+      "seed": 42,
+      "instance_params": {
+        "grid": "IEEE case14",
+        "load_scale": 1.8,
+        "n_candidates": 16,
+        "k_budget": 6,
+        "lambda_cost": 0.02,
+        "seed": 42,
+        "time_budget_s": 120.0
+      },
+      "congestion_model": "2nd-order DC superposition (measured r_i, q_ij via pandapower rundcpp)",
+      "base_congestion_dc": 8224.007,
+      "lib_versions": {
+        "pennylane": "0.45.1",
+        "numpy": "2.4.4",
+        "python": "3.11.15",
+        "pandapower": "3.5.4"
+      },
+      "compute": "contenedor cloud Cowork (CPU, Linux)",
+      "harness": "eon_harness.py",
+      "raw_data_url": "pendiente de publicacion en repo"
+    },
+    "cuando": {
+      "started_at": "2026-07-24T14:27:34+00:00",
+      "archived_at": "2026-07-24T14:27:34+00:00",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "donde": {
+      "quantum_backend": "PennyLane default.qubit (simulador CPU)",
+      "classical_backend": "OR-Tools CP-SAT",
+      "grid_engine": "pandapower (DC + AC)",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "robustez estadistica (mas semillas) y escala utility (case118) para la propuesta Fase I",
+      "question": "QAOA p=2 vs CP-SAT en network-expansion case118 seed 42",
+      "ledger_goal": "serie RQ-0033 robustecida; barras de error + punto utility-scale"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "eon_harness.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum",
+      "team": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0033-009__20260724T1427Z__qaoa-vs-cpsat--eon-grid-case118-seed42.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0033-009__20260724T1427Z__qaoa-vs-cpsat--eon-grid-case118-seed42.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0033-009__20260724T1427Z__qaoa-vs-cpsat--eon-grid-case118-seed42.json",
+        "raw_url": "https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0033-009__20260724T1427Z__qaoa-vs-cpsat--eon-grid-case118-seed42.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "database",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0033-009",
+        "public_read": "https://ledger.rosettaquantum.com/api/archive/EXP-0033-009"
+      }
+    ],
+    "self_note": "Este archivo es una de las 3 copias listadas. Si el hash difiere, esa copia no es valida."
+  }
+}
