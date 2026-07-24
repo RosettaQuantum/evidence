@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "schema": "rosettaq-archive/v1",
+    "file_name": "RosettaQ__VERDICT__V-0012__20260724T1308Z__qaoa-vs-cpsat--portfolio-n12-20.json",
+    "file_id": "V-0012",
+    "type": "VERDICT",
+    "is_demo": false,
+    "scope_note": "Primer veredicto real del ledger. Alcance: QAOA p=2 (simulador CPU sin ruido) vs OR-Tools CP-SAT, portafolios n=12/16/20, presupuestos iguales de 120 s. Un veredicto es una foto fechada del estado medido, no una sentencia final: la serie continua.",
+    "content_hash": "sha256:f510eff654a6ebf94e368b00cd556a2977335c9df1a751fef0ba1ac114ea6636"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0012",
+      "recipe_name": "Constrained portfolio compression",
+      "problem_class": "Portfolio optimization",
+      "outcome": "not yet",
+      "advantage_measured": null,
+      "summary": "CP-SAT alcanzo el optimo exacto probado en los 20 runs sellados (n=12: 8 seeds, n=16: 8, n=20: 4). Brechas medias de QAOA p=2 al optimo: 48.2% (sigma 22.5), 25.1% (sigma 11.1), 41.1% (sigma 14.1). Sin tendencia de tamano defendible: los rangos entre semillas se solapan.",
+      "crossover": "No observado. A n<=20 no hay tendencia que permita extrapolar un punto de cruce; la varianza entre semillas (10-23 puntos) es de primer orden. Estimar un cruce con estos datos seria decoracion.",
+      "supporting_runs": [
+        "EXP-0012-001",
+        "EXP-0012-002",
+        "EXP-0012-003",
+        "EXP-0012-004",
+        "EXP-0012-005",
+        "EXP-0012-006",
+        "EXP-0012-007",
+        "EXP-0012-008",
+        "EXP-0012-009",
+        "EXP-0012-010",
+        "EXP-0012-011",
+        "EXP-0012-012",
+        "EXP-0012-013",
+        "EXP-0012-014",
+        "EXP-0012-015",
+        "EXP-0012-016",
+        "EXP-0012-017",
+        "EXP-0012-018",
+        "EXP-0012-019",
+        "EXP-0012-020"
+      ],
+      "classical_note": "Dato lateral medido: el tiempo de CP-SAT para PROBAR optimalidad crecio ~25x por cada +4 activos (0.05s -> 1.3s -> 29s)."
+    },
+    "como": {
+      "protocol": "juez-v1: misma instancia + mismo presupuesto ambos lados; optimo exacto por fuerza bruta como arbitro; a n>=20 optimizador COBYLA sin gradientes (declarado en cada run)",
+      "evidence": "20 archivos RUN sellados sha256, triple copia (GitHub/Codeberg/D1) + ancla OTS",
+      "lib_versions": {
+        "pennylane": "0.45.1",
+        "ortools": "9.15.6755",
+        "numpy": "2.4.4",
+        "python": "3.11.15"
+      }
+    },
+    "cuando": {
+      "published_at": "2026-07-24T13:08:40+00:00",
+      "covers_runs_from": "2026-07-23",
+      "covers_runs_to": "2026-07-24",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "donde": {
+      "quantum_backend": "PennyLane default.qubit (simulador CPU, sin ruido)",
+      "classical_backend": "OR-Tools CP-SAT, misma maquina",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "a estas escalas la teoria no predice ventaja cuantica; el veredicto fija la linea base publica de la clase de problema",
+      "question": "Le gana QAOA p=2 a CP-SAT en optimizacion de portafolios a n<=20 con presupuesto igual?",
+      "ledger_goal": "primer VERDICT real del Evidence Ledger; reemplaza el demo de RQ-0012 en la web"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "harness_param.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/verdicts/2026/RosettaQ__VERDICT__V-0012__20260724T1308Z__qaoa-vs-cpsat--portfolio-n12-20.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/verdicts/2026/RosettaQ__VERDICT__V-0012__20260724T1308Z__qaoa-vs-cpsat--portfolio-n12-20.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/verdicts/2026/RosettaQ__VERDICT__V-0012__20260724T1308Z__qaoa-vs-cpsat--portfolio-n12-20.json",
+        "raw_url": "https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/verdicts/2026/RosettaQ__VERDICT__V-0012__20260724T1308Z__qaoa-vs-cpsat--portfolio-n12-20.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "database",
+        "uri": "d1://rosettaq-ledger/run_archives/V-0012",
+        "public_read": "https://ledger.rosettaquantum.com/api/archive/V-0012"
+      }
+    ],
+    "self_note": "Este archivo es una de las 3 copias listadas. Si el hash de cualquier copia difiere, esa copia no es valida."
+  }
+}

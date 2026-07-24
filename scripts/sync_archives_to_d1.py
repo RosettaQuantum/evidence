@@ -17,7 +17,7 @@ def esc(s):
     return s.replace("'", "''")
 
 rows = []
-for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", recursive=True) + glob.glob("verdicts/*.json")):
+for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", recursive=True) + glob.glob("verdicts/**/*.json", recursive=True)):
     doc = json.load(open(path))
     meta, w6 = doc["meta"], doc["w6"]
     payload = open(path).read()

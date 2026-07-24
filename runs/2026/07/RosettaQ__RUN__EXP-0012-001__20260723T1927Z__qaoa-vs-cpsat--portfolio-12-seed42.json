@@ -134,15 +134,15 @@
         "n": 1,
         "kind": "github",
         "role": "primary",
-        "url": "https://github.com/RosettaQ/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0012-001__20260723T1927Z__qaoa-vs-cpsat--portfolio-12-seed42.json",
-        "raw_url": "https://raw.githubusercontent.com/RosettaQ/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0012-001__20260723T1927Z__qaoa-vs-cpsat--portfolio-12-seed42.json"
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0012-001__20260723T1927Z__qaoa-vs-cpsat--portfolio-12-seed42.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0012-001__20260723T1927Z__qaoa-vs-cpsat--portfolio-12-seed42.json"
       },
       {
         "n": 2,
         "kind": "codeberg",
         "role": "mirror",
-        "url": "https://codeberg.org/RosettaQ/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0012-001__20260723T1927Z__qaoa-vs-cpsat--portfolio-12-seed42.json",
-        "raw_url": "https://codeberg.org/RosettaQ/evidence/raw/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0012-001__20260723T1927Z__qaoa-vs-cpsat--portfolio-12-seed42.json"
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0012-001__20260723T1927Z__qaoa-vs-cpsat--portfolio-12-seed42.json",
+        "raw_url": "https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0012-001__20260723T1927Z__qaoa-vs-cpsat--portfolio-12-seed42.json"
       },
       {
         "n": 3,
