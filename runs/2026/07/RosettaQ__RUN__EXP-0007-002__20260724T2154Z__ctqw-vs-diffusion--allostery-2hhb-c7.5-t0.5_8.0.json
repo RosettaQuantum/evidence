@@ -1,0 +1,160 @@
+{
+  "meta": {
+    "schema": "rosettaq-archive/v1",
+    "file_name": "RosettaQ__RUN__EXP-0007-002__20260724T2154Z__ctqw-vs-diffusion--allostery-2hhb-c7.5-t0.5_8.0.json",
+    "file_id": "EXP-0007-002",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Sweep de robustez 2HHB (Cleveland Clinic). cutoff=7.5A, ventana [0.5,8.0], 16 tiempos. CTQW vs difusion clasica; bolsillo 2,3-BPG documentado como arbitro.",
+    "content_hash": "sha256:1947ad7b948aa87f8f03977b912b772fcfb2a43a6883dd6ac1355b8e27fa24bd"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0007",
+      "recipe_name": "Allosteric site identification via quantum signal propagation",
+      "problem_class": "Molecular simulation / allostery",
+      "instance": "2HHB_ca_cutoff7.5_t0.5-8.0",
+      "quantum_side": {
+        "method": "continuous-time quantum walk, U(t)=exp(-iAt), integrated",
+        "allosteric_percentile": 57.32,
+        "runtime_s": 4.651
+      },
+      "classical_side": {
+        "method": "continuous-time diffusion, p(t)=exp(-Lt), integrated",
+        "allosteric_percentile": 73.87,
+        "runtime_s": 1.812
+      },
+      "ground_truth": {
+        "active_site": [
+          [
+            "A",
+            87
+          ],
+          [
+            "C",
+            87
+          ],
+          [
+            "B",
+            92
+          ],
+          [
+            "D",
+            92
+          ]
+        ],
+        "allosteric": [
+          [
+            "B",
+            2
+          ],
+          [
+            "B",
+            82
+          ],
+          [
+            "B",
+            143
+          ],
+          [
+            "D",
+            2
+          ],
+          [
+            "D",
+            82
+          ],
+          [
+            "D",
+            143
+          ]
+        ],
+        "ref": "Arnone 1972; textbook 2,3-BPG allosteric pocket of deoxyhemoglobin",
+        "n_active_matched": 4,
+        "n_allosteric_matched": 6
+      },
+      "outcome": "not yet",
+      "metric": "percentil medio de residuos alostericos verdaderos en el mapa de propagacion (entre residuos distales, >6A del sitio activo); 100=top",
+      "scores": {
+        "quantum_percentile": 57.32,
+        "classical_percentile": 73.87
+      }
+    },
+    "como": {
+      "protocol": "juez-v1: misma red de residuos + mismo par fuente/tiempos; sitios alostericos documentados como arbitro (ninguno los define)",
+      "instance_params": {
+        "pdb": "2HHB",
+        "cutoff_A": 7.5,
+        "n_residues": 574,
+        "time_window": [
+          0.5,
+          8.0
+        ],
+        "n_times": 16
+      },
+      "sweep_note": "parte del sweep de robustez de EXP-0007 sobre 2HHB; ground truth y protocolo identicos a EXP-0007-001, solo varian cutoff/ventana",
+      "lib_versions": {
+        "prody": "2.6.1",
+        "numpy": "2.4.4",
+        "scipy": "1.16.3",
+        "python": "3.11.15"
+      },
+      "compute": "contenedor cloud Cowork (CPU, Linux)",
+      "harness": "allo_sweep.py",
+      "raw_data_url": "pendiente de publicacion en repo"
+    },
+    "cuando": {
+      "started_at": "2026-07-24T21:54:48.537040+00:00",
+      "archived_at": "2026-07-24T21:54:48.537065+00:00",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "donde": {
+      "quantum_backend": "CTQW por matrix-exponential (simulacion exacta; ruta NISQ = Hamiltonian simulation gate-based)",
+      "classical_backend": "difusion por matrix-exponential del Laplaciano",
+      "protein_source": "RCSB PDB 2HHB via ProDy",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "si CTQW realmente identificara mejor los sitios alostericos, deberia ganar de forma estable a lo largo de cutoffs y ventanas; el sweep prueba robustez, no una config afortunada",
+      "question": "A cutoff=7.5A y ventana [0.5,8.0], CTQW vs difusion: cual rankea mas alto el bolsillo 2,3-BPG?",
+      "ledger_goal": "robustez del veredicto RQ-0007; insumo de la propuesta Fase I Cleveland"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "allo_sweep.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum",
+      "team": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0007-002__20260724T2154Z__ctqw-vs-diffusion--allostery-2hhb-c7.5-t0.5_8.0.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0007-002__20260724T2154Z__ctqw-vs-diffusion--allostery-2hhb-c7.5-t0.5_8.0.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-002__20260724T2154Z__ctqw-vs-diffusion--allostery-2hhb-c7.5-t0.5_8.0.json",
+        "raw_url": "https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-002__20260724T2154Z__ctqw-vs-diffusion--allostery-2hhb-c7.5-t0.5_8.0.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "database",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0007-002",
+        "public_read": "https://ledger.rosettaquantum.com/api/archive/EXP-0007-002"
+      }
+    ],
+    "self_note": "Este archivo es una de las 3 copias listadas. Si el hash difiere, esa copia no es valida."
+  }
+}

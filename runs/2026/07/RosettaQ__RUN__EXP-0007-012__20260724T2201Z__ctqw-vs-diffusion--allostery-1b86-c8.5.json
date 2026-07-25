@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "schema": "rosettaq-archive/v1",
+    "file_name": "RosettaQ__RUN__EXP-0007-012__20260724T2201Z__ctqw-vs-diffusion--allostery-1b86-c8.5.json",
+    "file_id": "EXP-0007-012",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Suite Cleveland Clinic — hemoglobina (2,3-BPG co-cristalizado; validacion geometrica del bolsillo) (1B86). Sitio alosterico = residuos que contactan el efector co-cristalizado; fuente = sitio alosterico = residuos <4.5A del 2,3-BPG (DG2) realmente co-cristalizado. CTQW vs difusion clasica, cutoff 8.5A.",
+    "content_hash": "sha256:079dc868300ba03b8cbbf33f954c85d51aa9e9afe7b1dba720d22c72e8a12bfa"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0007",
+      "recipe_name": "Allosteric site identification via quantum signal propagation",
+      "problem_class": "Molecular simulation / allostery",
+      "instance": "1B86_ca_cutoff8.5",
+      "protein_family": "hemoglobina (2,3-BPG co-cristalizado; validacion geometrica del bolsillo)",
+      "quantum_side": {
+        "method": "continuous-time quantum walk, U(t)=exp(-iAt), integrated",
+        "allosteric_percentile": 33.69,
+        "runtime_s": 4.749
+      },
+      "classical_side": {
+        "method": "continuous-time diffusion, p(t)=exp(-Lt), integrated",
+        "allosteric_percentile": 25.36,
+        "runtime_s": 1.882
+      },
+      "ground_truth": {
+        "source_active_site": [
+          [
+            "A",
+            29
+          ],
+          [
+            "A",
+            43
+          ],
+          [
+            "A",
+            58
+          ],
+          [
+            "A",
+            62
+          ],
+          [
+            "A",
+            87
+          ],
+          [
+            "C",
+            429
+          ],
+          [
+            "C",
+            443
+          ],
+          [
+            "C",
+            458
+          ],
+          [
+            "C",
+            462
+          ],
+          [
+            "C",
+            487
+          ]
+        ],
+        "allosteric_site": [
+          [
+            "B",
+            145
+          ],
+          [
+            "B",
+            225
+          ],
+          [
+            "B",
+            286
+          ],
+          [
+            "D",
+            545
+          ],
+          [
+            "D",
+            625
+          ]
+        ],
+        "ground_truth_method": "sitio alosterico = residuos <4.5A del 2,3-BPG (DG2) realmente co-cristalizado; fuente = residuos que contactan el O2 unido (OXY). Estructura independiente que valida el bolsillo documentado usado en EXP-0007-001",
+        "n_active": 10,
+        "n_allosteric": 5,
+        "n_allosteric_distal": 5
+      },
+      "outcome": "quantum win",
+      "metric": "percentil medio de residuos alostericos verdaderos en el mapa de propagacion (entre residuos distales, >6A del sitio activo); 100=top",
+      "scores": {
+        "quantum_percentile": 33.69,
+        "classical_percentile": 25.36
+      }
+    },
+    "como": {
+      "protocol": "juez-v1: misma red de residuos + mismo par fuente/tiempos; sitio alosterico definido geometricamente por el efector co-cristalizado (arbitro objetivo, ninguno de los dos lados lo define)",
+      "instance_params": {
+        "pdb": "1B86",
+        "cutoff_A": 8.5,
+        "n_residues": 574,
+        "time_window": [
+          0.5,
+          8.0
+        ],
+        "n_times": 16
+      },
+      "lib_versions": {
+        "prody": "2.6.1",
+        "numpy": "2.4.4",
+        "scipy": "1.16.3",
+        "python": "3.11.15"
+      },
+      "compute": "contenedor cloud Cowork (CPU, Linux)",
+      "harness": "allo_multi.py",
+      "raw_data_url": "pendiente de publicacion en repo"
+    },
+    "cuando": {
+      "started_at": "2026-07-24T22:01:28.454350+00:00",
+      "archived_at": "2026-07-24T22:01:28.454383+00:00",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "donde": {
+      "quantum_backend": "CTQW por matrix-exponential (simulacion exacta; ruta NISQ = Hamiltonian simulation gate-based)",
+      "classical_backend": "difusion por matrix-exponential del Laplaciano",
+      "protein_source": "RCSB PDB 1B86 via ProDy",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "si la caminata cuantica capturara la propagacion de senal alosterica mejor que la difusion, deberia rankear el sitio alosterico verdadero mas alto de forma consistente entre familias de proteinas",
+      "question": "En 1B86 (hemoglobina (2,3-BPG co-cristalizado; validacion geometrica del bolsillo)), CTQW vs difusion: cual rankea mas alto el sitio alosterico definido por el efector unido?",
+      "ledger_goal": "ampliar la suite RQ-0007 a mas familias con ground-truth geometrico; insumo de la propuesta Fase I Cleveland"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "allo_multi.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum",
+      "team": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0007-012__20260724T2201Z__ctqw-vs-diffusion--allostery-1b86-c8.5.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0007-012__20260724T2201Z__ctqw-vs-diffusion--allostery-1b86-c8.5.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-012__20260724T2201Z__ctqw-vs-diffusion--allostery-1b86-c8.5.json",
+        "raw_url": "https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-012__20260724T2201Z__ctqw-vs-diffusion--allostery-1b86-c8.5.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "database",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0007-012",
+        "public_read": "https://ledger.rosettaquantum.com/api/archive/EXP-0007-012"
+      }
+    ],
+    "self_note": "Este archivo es una de las 3 copias listadas. Si el hash difiere, esa copia no es valida."
+  }
+}

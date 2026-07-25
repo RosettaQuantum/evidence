@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "schema": "rosettaq-archive/v1",
+    "file_name": "RosettaQ__PREREG__PR-CLEV-001__20260724T2210Z__cleveland-poc-forward-commitment.json",
+    "file_id": "PR-CLEV-001",
+    "type": "PREREG",
+    "is_demo": false,
+    "scope_note": "Pre-registro del PoC Cleveland Clinic (allosteria molecular): compromiso sellado ANTES de que existan los runs de Fase 2. Hace imposible el cherry-picking de proteinas/parametros.",
+    "content_hash": "sha256:4bbeacd9def9a9f0549330409b7fd1a43f4374faf42e42a8bc55b01d63f936dc"
+  },
+  "prereg": {
+    "title": "Pre-Registration — Rosetta Quantum · Cleveland Clinic Allostery PoC",
+    "team": "Rosetta Quantum",
+    "lead": "Nicholas Iakl Freundlich",
+    "committed_at_utc": "2026-07-24T22:06:45.286515+00:00",
+    "purpose": "Forward commitment sealed BEFORE the Phase-2 molecular PoC runs exist, so proteins and parameters cannot be cherry-picked. Anchored on Bitcoin via OpenTimestamps and mirrored publicly (GitHub + Codeberg + database).",
+    "protocol": "Judge v1 — same residue-contact network, same active-site source, same time window both sides; documented allosteric site as referee (defined by neither propagator; read geometrically from the co-crystallised effector where available); frozen library versions.",
+    "proteins_committed": {
+      "families": [
+        "hemoglobin (2HHB, documented 2,3-BPG pocket)",
+        "caspase-3 (1SHJ/1SHL, dimer-interface allosteric site)",
+        "plus >=3 additional families with experimentally-anchored allosteric sites to be drawn, blind, from the Allosteric Database (ASD) + PDB structures co-crystallising their allosteric effector"
+      ],
+      "ground_truth_rule": "allosteric site = residues within 4.5 A of the co-crystallised allosteric effector where present; otherwise documented residues from primary literature, verified by residue-type match against the structure",
+      "network_rule": "nodes = Ca atoms; edges = contacts under cutoff; source = active/orthosteric site (catalytic dyad by sequence motif + geometry, or O2/substrate contacts)"
+    },
+    "parameters_committed": {
+      "contact_cutoffs_A": [
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0
+      ],
+      "time_windows": [
+        [
+          0.5,
+          4.0
+        ],
+        [
+          0.5,
+          8.0
+        ],
+        [
+          0.5,
+          14.0
+        ]
+      ],
+      "quantum": "continuous-time quantum walk, U(t)=exp(-iAt), integrated over the window",
+      "classical": "continuous-time diffusion, p(t)=exp(-Lt), integrated over the window",
+      "metric": "mean percentile rank of the true allosteric residues among distal residues (>6 A from source); 100 = top"
+    },
+    "baselines": [
+      "classical continuous-time diffusion (Laplacian)",
+      "random-residue null (chance percentile)"
+    ],
+    "success_criteria": {
+      "quantum_win": "CTQW ranks the documented allosteric site strictly higher than classical diffusion, reproducible across >=2 cutoffs and >=2 protein families (robust to graph construction) — not a single lucky configuration",
+      "discrimination_forecast": "error-barred estimate of the structural regime (network size, source-to-pocket path length, coupling topology) where CTQW would separate from diffusion",
+      "negative_is_valid": "a reproducible not-yet is a valid, publishable outcome"
+    },
+    "integrity": "Every run sha256-sealed, triple-copied, OpenTimestamps-anchored. Any deviation from this pre-registration is disclosed in the run archive."
+  },
+  "storage": {
+    "policy": "triple-copia + ancla OTS; el timestamp PRE-DATA los resultados",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/prereg/2026/RosettaQ__PREREG__PR-CLEV-001__20260724T2210Z__cleveland-poc-forward-commitment.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/prereg/2026/RosettaQ__PREREG__PR-CLEV-001__20260724T2210Z__cleveland-poc-forward-commitment.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/prereg/2026/RosettaQ__PREREG__PR-CLEV-001__20260724T2210Z__cleveland-poc-forward-commitment.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "uri": "d1://rosettaq-ledger/run_archives/PR-CLEV-001"
+      }
+    ]
+  }
+}

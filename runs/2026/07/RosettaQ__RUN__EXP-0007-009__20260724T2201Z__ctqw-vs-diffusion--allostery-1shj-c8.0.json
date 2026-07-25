@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "schema": "rosettaq-archive/v1",
+    "file_name": "RosettaQ__RUN__EXP-0007-009__20260724T2201Z__ctqw-vs-diffusion--allostery-1shj-c8.0.json",
+    "file_id": "EXP-0007-009",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Suite Cleveland Clinic — caspasa-3 (proteasa cisteinica; sitio alosterico de interfaz de dimero) (1SHJ). Sitio alosterico = residuos que contactan el efector co-cristalizado; fuente = diada catalitica His144/Cys186 verificada por motivo QACRG (Q184-A185-C186-R187-G188) y contexto His-Gly (S143-H144-G145) + par a 4.56A. CTQW vs difusion clasica, cutoff 8.0A.",
+    "content_hash": "sha256:fca63822edd61e12207af6d2d1e9c1509f7c96dcaea6cb439abdd87c21b4d813"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0007",
+      "recipe_name": "Allosteric site identification via quantum signal propagation",
+      "problem_class": "Molecular simulation / allostery",
+      "instance": "1SHJ_ca_cutoff8.0",
+      "protein_family": "caspasa-3 (proteasa cisteinica; sitio alosterico de interfaz de dimero)",
+      "quantum_side": {
+        "method": "continuous-time quantum walk, U(t)=exp(-iAt), integrated",
+        "allosteric_percentile": 70.87,
+        "runtime_s": 2.878
+      },
+      "classical_side": {
+        "method": "continuous-time diffusion, p(t)=exp(-Lt), integrated",
+        "allosteric_percentile": 73.98,
+        "runtime_s": 0.884
+      },
+      "ground_truth": {
+        "source_active_site": [
+          [
+            "A",
+            144
+          ],
+          [
+            "A",
+            186
+          ],
+          [
+            "B",
+            144
+          ],
+          [
+            "B",
+            186
+          ]
+        ],
+        "allosteric_site": [
+          [
+            "A",
+            147
+          ],
+          [
+            "A",
+            148
+          ],
+          [
+            "A",
+            159
+          ],
+          [
+            "A",
+            160
+          ],
+          [
+            "A",
+            211
+          ],
+          [
+            "A",
+            212
+          ],
+          [
+            "A",
+            213
+          ],
+          [
+            "A",
+            214
+          ],
+          [
+            "A",
+            221
+          ],
+          [
+            "A",
+            223
+          ],
+          [
+            "A",
+            290
+          ],
+          [
+            "A",
+            292
+          ],
+          [
+            "B",
+            147
+          ],
+          [
+            "B",
+            148
+          ],
+          [
+            "B",
+            159
+          ],
+          [
+            "B",
+            160
+          ],
+          [
+            "B",
+            163
+          ],
+          [
+            "B",
+            187
+          ],
+          [
+            "B",
+            211
+          ],
+          [
+            "B",
+            212
+          ],
+          [
+            "B",
+            213
+          ],
+          [
+            "B",
+            214
+          ],
+          [
+            "B",
+            215
+          ],
+          [
+            "B",
+            221
+          ],
+          [
+            "B",
+            223
+          ],
+          [
+            "B",
+            290
+          ],
+          [
+            "B",
+            292
+          ]
+        ],
+        "ground_truth_method": "diada catalitica His144/Cys186 verificada por motivo QACRG (Q184-A185-C186-R187-G188) y contexto His-Gly (S143-H144-G145) + par a 4.56A; sitio alosterico = residuos <4.5A del inhibidor alosterico co-cristalizado en la cavidad de interfaz de dimero (Wells lab)",
+        "n_active": 4,
+        "n_allosteric": 27,
+        "n_allosteric_distal": 26
+      },
+      "outcome": "not yet",
+      "metric": "percentil medio de residuos alostericos verdaderos en el mapa de propagacion (entre residuos distales, >6A del sitio activo); 100=top",
+      "scores": {
+        "quantum_percentile": 70.87,
+        "classical_percentile": 73.98
+      }
+    },
+    "como": {
+      "protocol": "juez-v1: misma red de residuos + mismo par fuente/tiempos; sitio alosterico definido geometricamente por el efector co-cristalizado (arbitro objetivo, ninguno de los dos lados lo define)",
+      "instance_params": {
+        "pdb": "1SHJ",
+        "cutoff_A": 8.0,
+        "n_residues": 417,
+        "time_window": [
+          0.5,
+          8.0
+        ],
+        "n_times": 16
+      },
+      "lib_versions": {
+        "prody": "2.6.1",
+        "numpy": "2.4.4",
+        "scipy": "1.16.3",
+        "python": "3.11.15"
+      },
+      "compute": "contenedor cloud Cowork (CPU, Linux)",
+      "harness": "allo_multi.py",
+      "raw_data_url": "pendiente de publicacion en repo"
+    },
+    "cuando": {
+      "started_at": "2026-07-24T22:01:11.887227+00:00",
+      "archived_at": "2026-07-24T22:01:11.887391+00:00",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "donde": {
+      "quantum_backend": "CTQW por matrix-exponential (simulacion exacta; ruta NISQ = Hamiltonian simulation gate-based)",
+      "classical_backend": "difusion por matrix-exponential del Laplaciano",
+      "protein_source": "RCSB PDB 1SHJ via ProDy",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "si la caminata cuantica capturara la propagacion de senal alosterica mejor que la difusion, deberia rankear el sitio alosterico verdadero mas alto de forma consistente entre familias de proteinas",
+      "question": "En 1SHJ (caspasa-3 (proteasa cisteinica; sitio alosterico de interfaz de dimero)), CTQW vs difusion: cual rankea mas alto el sitio alosterico definido por el efector unido?",
+      "ledger_goal": "ampliar la suite RQ-0007 a mas familias con ground-truth geometrico; insumo de la propuesta Fase I Cleveland"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "allo_multi.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum",
+      "team": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0007-009__20260724T2201Z__ctqw-vs-diffusion--allostery-1shj-c8.0.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0007-009__20260724T2201Z__ctqw-vs-diffusion--allostery-1shj-c8.0.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-009__20260724T2201Z__ctqw-vs-diffusion--allostery-1shj-c8.0.json",
+        "raw_url": "https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-009__20260724T2201Z__ctqw-vs-diffusion--allostery-1shj-c8.0.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "database",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0007-009",
+        "public_read": "https://ledger.rosettaquantum.com/api/archive/EXP-0007-009"
+      }
+    ],
+    "self_note": "Este archivo es una de las 3 copias listadas. Si el hash difiere, esa copia no es valida."
+  }
+}
