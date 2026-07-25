@@ -9,7 +9,17 @@ Requires wrangler authenticated against the account that owns `rosettaq-ledger`
 (in Claude Code: strip CLOUDFLARE_API_TOKEN so the OAuth login is used).
 Idempotent: INSERT OR REPLACE keyed on file_id, so re-running is safe.
 """
-import base64, glob, json, subprocess, tempfile
+import base64, glob, json, subprocess, sys, tempfile
+sys.path.insert(0, "tools")
+from verify_seals import canonical_hash, legacy_hash
+
+def seal_ok(doc):
+    stored = doc["meta"].get("content_hash")
+    if stored == canonical_hash(doc):
+        return True
+    leg = legacy_hash(doc)
+    return bool(leg) and stored in (leg, "sha256:" + leg)
+
 
 OWNER, REPO, DB = "RosettaQuantum", "evidence", "rosettaq-ledger"
 
@@ -17,11 +27,22 @@ def esc(s):
     return s.replace("'", "''")
 
 rows = []
-for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", recursive=True) + glob.glob("verdicts/**/*.json", recursive=True)):
+skipped = []
+for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", recursive=True)
+                   + glob.glob("verdicts/**/*.json", recursive=True)
+                   + glob.glob("prereg/**/*.json", recursive=True)):
     doc = json.load(open(path))
-    meta, w6 = doc["meta"], doc["w6"]
-    # RUNs usan cuando.archived_at; VERDICTs usan cuando.published_at
-    when = w6["cuando"].get("archived_at") or w6["cuando"].get("published_at") or ""
+    # guardarraíl: un sello que no verifica no se publica en ninguna copia
+    if not seal_ok(doc):
+        print(f"  OMITIDO (sello no verifica): {path}")
+        skipped.append(path)
+        continue
+    meta = doc["meta"]
+    # RUN/VERDICT traen w6; PREREG trae su propio bloque con committed_at_utc
+    w6 = doc.get("w6") or {}
+    cuando = w6.get("cuando", {})
+    when = (cuando.get("archived_at") or cuando.get("published_at")
+            or doc.get("prereg", {}).get("committed_at_utc") or "")
     payload = open(path).read()
     try:
         ots = base64.b64encode(open(path + ".ots", "rb").read()).decode()
@@ -31,7 +52,7 @@ for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", rec
         "INSERT OR REPLACE INTO run_archives "
         "(file_id,file_name,type,recipe_id,is_demo,content_hash,started_at,archived_at,github_url,codeberg_url,ots_proof,payload) VALUES ("
         f"'{esc(meta['file_id'])}','{esc(meta['file_name'])}','{esc(meta['type'])}',"
-        f"'{esc(w6['que'].get('recipe_id', meta['file_id']))}',{1 if meta.get('is_demo') else 0},"
+        f"'{esc(w6.get('que', {}).get('recipe_id', meta['file_id']))}',{1 if meta.get('is_demo') else 0},"
         f"'{esc(meta['content_hash'])}',NULL,'{esc(when)}',"
         f"'https://raw.githubusercontent.com/{OWNER}/{REPO}/main/{esc(path)}',"
         f"'https://codeberg.org/{OWNER}/{REPO}/raw/branch/main/{esc(path)}',"
@@ -53,3 +74,5 @@ for i in range(0, len(rows), BATCH):
     done += len(rows[i:i+BATCH])
     print(f"  lote {i//BATCH+1}: {done}/{len(rows)}")
 print(f"synced {len(rows)} archive file(s) to D1 run_archives")
+if skipped:
+    print(f"OJO: {len(skipped)} archivo(s) omitidos por sello inválido: {skipped}")
