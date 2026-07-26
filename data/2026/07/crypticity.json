@@ -1,0 +1,28 @@
+{
+ "KRAS_G12C": {
+  "n_comunes": 162,
+  "rmsd_global": 1.37,
+  "desplazamiento_medio_sitio": 1.7,
+  "desplazamiento_mediano_sitio": 0.84,
+  "desplazamiento_medio_resto": 0.83,
+  "desplazamiento_mediano_resto": 0.61,
+  "razon_sitio_vs_resto": 2.05,
+  "percentil_del_sitio_en_desplazamiento": 88.7,
+  "n_residuos_sitio_comunes": 20,
+  "contactos_sitio_apo": 214.0,
+  "contactos_sitio_holo": 188.0
+ },
+ "BCR_ABL1": {
+  "n_comunes": 428,
+  "rmsd_global": 0.98,
+  "desplazamiento_medio_sitio": 0.43,
+  "desplazamiento_mediano_sitio": 0.37,
+  "desplazamiento_medio_resto": 0.73,
+  "desplazamiento_mediano_resto": 0.57,
+  "razon_sitio_vs_resto": 0.59,
+  "percentil_del_sitio_en_desplazamiento": 32.1,
+  "n_residuos_sitio_comunes": 20,
+  "contactos_sitio_apo": 221.0,
+  "contactos_sitio_holo": 218.0
+ }
+}

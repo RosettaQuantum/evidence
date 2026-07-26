@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "schema": "rosettaq-archive/v2",
+    "file_name": "RosettaQ__PREREG__PR-EON-001__20260724T2130Z__eon-poc-forward-commitment.json",
+    "file_id": "PR-EON-001",
+    "type": "PREREG",
+    "is_demo": false,
+    "scope_note": "Pre-registro del PoC E.ON: compromiso sellado ANTES de que existan los runs de Fase 2. Hace imposible el cherry-picking.",
+    "sealed_at": "2026-07-25T15:14:20.859139+00:00",
+    "sealed_by": {
+      "lib": "rosettaq_seal.py",
+      "lib_version": "2.0.0",
+      "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+      "harness": null,
+      "harness_version": null,
+      "harness_sha256": null,
+      "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+    },
+    "seal_correction": {
+      "corrected_at": "2026-07-25T15:14:20.859109+00:00",
+      "previous_content_hash": "sha256:38276d66545ce6ccd2ac19f685fda4825d8fee14ba0fadc51913a27b9cb09a1d",
+      "reason": "El hash original no se reproduce con NINGUNA de las dos convenciones que convivian bajo la etiqueta rosettaq-archive/v1 (ni la canonica ni la legada). Se probaron 32 variantes de serializacion (meta sin content_hash / content_hash en null, con y sin storage, sort_keys si/no, ensure_ascii si/no, separadores por defecto y compactos): ninguna reproduce el hash almacenado. Conclusion honesta: el sello original se calculo sobre una serializacion no recuperable (sellado inline, fuera de un harness versionado). Mismo modo de falla que EXP-0007-001.",
+      "action": "Re-sellado con rosettaq-archive/v2 mediante seal() de harness/rosettaq_seal.py, ANTES de cualquier notarizacion o anclaje. El hash previo queda registrado aqui. Nunca fue anclado en OpenTimestamps ni publicado (la URL de GitHub devolvia 404), por lo que no existe evidencia publica dependiente de el. La copia que alcanzo a entrar en D1 en la primera pasada fue borrada por el notario.",
+      "verification": "Retenido por Claude Code al aplicar la regla de parada (no se ancla lo que no verifica), sin bloquear los otros 13 archivos de la corrida Cleveland, que si verificaron. El re-sellado lo hace el laboratorio, no el notario: sellar es del harness versionado.",
+      "policy_change": "Todo sello nuevo pasa por seal() de una libreria versionada que se archiva junto al run; prohibido sellar inline. verify_seals.py corre antes de cualquier anclaje OTS y no se estampa nada si algo sale INVALID.",
+      "content_unchanged": "El re-sellado NO toca el contenido del pre-registro: instancias, semillas, presupuestos, baselines y criterios de exito comprometidos son byte a byte los mismos. Cambia solo el bloque meta (esquema, sellado_por, esta correccion) y el hash resultante."
+    },
+    "content_hash": "sha256:8712e7c50a055df068df0a9f777a467f8325104a679818e3ee22e43571187053"
+  },
+  "prereg": {
+    "title": "Pre-Registration — Rosetta Quantum · E.ON Grid-Expansion PoC",
+    "team": "Rosetta Quantum",
+    "lead": "Nicholas Iakl Freundlich",
+    "committed_at_utc": "2026-07-24T21:30:04+00:00",
+    "purpose": "Forward commitment sealed BEFORE the Phase-2 PoC runs exist, so results cannot be cherry-picked. Anchored on Bitcoin via OpenTimestamps and mirrored publicly (GitHub + Codeberg + database).",
+    "protocol": "Judge v1 — same instance, same wall-clock budget both sides; exact optimum as referee where tractable; winning plan re-validated in full AC power flow; fixed seeds; frozen library versions.",
+    "instances_committed": {
+      "grids": [
+        "IEEE case14",
+        "IEEE case30",
+        "IEEE case57",
+        "IEEE case118",
+        "IEEE case300 (stretch)"
+      ],
+      "formulation": "binary line-addition QUBO; congestion-relief coefficients measured by DC power flow (r_i, q_ij) via pandapower; ratings tightened to induce genuine congestion",
+      "hardness_target": "instances where Gurobi/CPLEX cannot prove optimality in reasonable runtime (QOBLIB sense); differing variable counts; at least one NISQ-sized"
+    },
+    "seeds_committed": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "budgets": {
+      "time_per_side_s": 120,
+      "qaoa_depth_p": [
+        2,
+        4
+      ],
+      "note": "identical budget both sides; any change is disclosed"
+    },
+    "baselines": [
+      "OR-Tools CP-SAT",
+      "Gurobi (where licensed)",
+      "exact enumeration (referee, small n)",
+      "MPS / tensor-network simulation (to test poor-objective-value claim)"
+    ],
+    "success_criteria": {
+      "quantum_win": "QAOA (or VQE) achieves a strictly better objective than the strongest classical solver at equal time budget, on a classically-hard instance, validated in AC — reproducible across >=3 seeds",
+      "crossover_forecast": "error-barred estimate of instance size where quantum would cross over, from the measured gap-vs-size curve",
+      "negative_is_valid": "a reproducible 'not yet' is a valid, publishable outcome"
+    },
+    "integrity": "Every run sha256-sealed, triple-copied, OpenTimestamps-anchored. Any deviation from this pre-registration is disclosed in the run archive."
+  },
+  "storage": {
+    "policy": "triple-copia + ancla OTS; el timestamp PRE-DATA los resultados",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/prereg/2026/07/RosettaQ__PREREG__PR-EON-001__20260724T2130Z__eon-poc-forward-commitment.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/prereg/2026/07/RosettaQ__PREREG__PR-EON-001__20260724T2130Z__eon-poc-forward-commitment.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/prereg/2026/07/RosettaQ__PREREG__PR-EON-001__20260724T2130Z__eon-poc-forward-commitment.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "uri": "d1://rosettaq-ledger/run_archives/PR-EON-001"
+      }
+    ]
+  }
+}

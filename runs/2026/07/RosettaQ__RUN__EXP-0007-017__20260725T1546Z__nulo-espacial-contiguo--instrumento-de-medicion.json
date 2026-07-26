@@ -1,0 +1,1350 @@
+{
+  "meta": {
+    "file_name": "RosettaQ__RUN__EXP-0007-017__20260725T1546Z__nulo-espacial-contiguo--instrumento-de-medicion.json",
+    "file_id": "EXP-0007-017",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Contribucion metodologica central del track. Aplicado a los 7 metodos sobre las 3 dianas con ground truth: ninguno alcanza significancia. El resultado va en contra de nuestra propia metrica y se publica igual.",
+    "schema": "rosettaq-archive/v2",
+    "sealed_at": "2026-07-26T12:57:00.567444+00:00",
+    "sealed_by": {
+      "lib": "rosettaq_seal.py",
+      "lib_version": "2.0.0",
+      "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+      "harness": "paired_null.py",
+      "harness_version": "1.0.0",
+      "harness_sha256": "sha256:6f53f3a617c6a6223aa080e645f2e9ecd88093c6e16bf572e94a1a1bbbfdc88f",
+      "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+    },
+    "content_hash": "sha256:ff29769b177ed8c5a7f5cb653e64308b350e304cc086e6eaaf147d62417a43df"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0007",
+      "recipe_name": "Nulo espacial de bolsillo contiguo — instrumento de medicion",
+      "problem_class": "Metodologia estadistica para prediccion de sitios alostericos",
+      "instance": "KRAS G12C, BCR-ABL1 y miosina cardiaca",
+      "quantum_side": {
+        "nota": "el instrumento se aplica a TODOS los metodos por igual, empezando por el nuestro"
+      },
+      "classical_side": {
+        "nota": "idem"
+      },
+      "ground_truth": "los mismos sitios geometricos de EXP-0007-013/014/015",
+      "outcome": "NADA es significativo, para ningun metodo, en ninguna diana: todos los p entre 0.15 y 0.85",
+      "metric": "p-valor por permutacion contra bolsillos distales contiguos del mismo tamano",
+      "hallazgo_central": "El percentil medio de un sitio alosterico no se puede comparar contra 50 suponiendo residuos independientes: los residuos verdaderos forman UN bolsillo contiguo, estan correlacionados espacialmente y el n efectivo es mucho menor que el numero de residuos. Toda prueba que suponga independencia infla la significancia. Al reemplazar ese supuesto por el nulo correcto, los z ingenuos de hasta |4.64| colapsan a |z| < 1.2.",
+      "nulo_espacial": {
+        "KRAS_G12C": {
+          "config": {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "n_nodes": 169,
+            "n_distal": 119,
+            "k_site": 14,
+            "nperm": 2000
+          },
+          "ctqw": {
+            "percentil_observado": 29.9,
+            "null_media": 50.96,
+            "null_sd": 20.57,
+            "null_p05": 12.71,
+            "null_p95": 81.78,
+            "p_mejor_que_azar": 0.801,
+            "p_peor_que_azar": 0.199,
+            "z_aparente_si_iid": -2.6,
+            "z_real_contiguo": -1.02
+          },
+          "diffusion": {
+            "percentil_observado": 53.39,
+            "null_media": 48.25,
+            "null_sd": 20.19,
+            "null_p05": 19.37,
+            "null_p95": 80.45,
+            "p_mejor_que_azar": 0.4235,
+            "p_peor_que_azar": 0.5765,
+            "z_aparente_si_iid": 0.44,
+            "z_real_contiguo": 0.25
+          },
+          "gnm": {
+            "percentil_observado": 52.3,
+            "null_media": 47.67,
+            "null_sd": 19.5,
+            "null_p05": 19.73,
+            "null_p95": 76.88,
+            "p_mejor_que_azar": 0.422,
+            "p_peor_que_azar": 0.578,
+            "z_aparente_si_iid": 0.3,
+            "z_real_contiguo": 0.24
+          },
+          "betweenness": {
+            "percentil_observado": 61.62,
+            "null_media": 54.71,
+            "null_sd": 14.47,
+            "null_p05": 37.53,
+            "null_p95": 82.99,
+            "p_mejor_que_azar": 0.303,
+            "p_peor_que_azar": 0.697,
+            "z_aparente_si_iid": 1.51,
+            "z_real_contiguo": 0.48
+          },
+          "closeness": {
+            "percentil_observado": 62.53,
+            "null_media": 49.18,
+            "null_sd": 17.91,
+            "null_p05": 20.34,
+            "null_p95": 75.54,
+            "p_mejor_que_azar": 0.2885,
+            "p_peor_que_azar": 0.7115,
+            "z_aparente_si_iid": 1.62,
+            "z_real_contiguo": 0.75
+          },
+          "anm": {
+            "percentil_observado": 49.82,
+            "null_media": 45.07,
+            "null_sd": 19.31,
+            "null_p05": 13.56,
+            "null_p95": 74.7,
+            "p_mejor_que_azar": 0.4065,
+            "p_peor_que_azar": 0.6035,
+            "z_aparente_si_iid": -0.02,
+            "z_real_contiguo": 0.25
+          }
+        },
+        "BCR_ABL1": {
+          "config": {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "n_nodes": 451,
+            "n_distal": 391,
+            "k_site": 20,
+            "nperm": 2000
+          },
+          "ctqw": {
+            "percentil_observado": 60.67,
+            "null_media": 51.41,
+            "null_sd": 24.8,
+            "null_p05": 10.18,
+            "null_p95": 85.69,
+            "p_mejor_que_azar": 0.443,
+            "p_peor_que_azar": 0.557,
+            "z_aparente_si_iid": 1.65,
+            "z_real_contiguo": 0.37
+          },
+          "diffusion": {
+            "percentil_observado": 60.58,
+            "null_media": 50.84,
+            "null_sd": 26.26,
+            "null_p05": 5.51,
+            "null_p95": 91.68,
+            "p_mejor_que_azar": 0.391,
+            "p_peor_que_azar": 0.609,
+            "z_aparente_si_iid": 1.64,
+            "z_real_contiguo": 0.37
+          },
+          "gnm": {
+            "percentil_observado": 36.17,
+            "null_media": 48.91,
+            "null_sd": 26.01,
+            "null_p05": 14.06,
+            "null_p95": 90.59,
+            "p_mejor_que_azar": 0.6125,
+            "p_peor_que_azar": 0.3875,
+            "z_aparente_si_iid": -2.14,
+            "z_real_contiguo": -0.49
+          },
+          "betweenness": {
+            "percentil_observado": 60.31,
+            "null_media": 53.36,
+            "null_sd": 15.05,
+            "null_p05": 32.14,
+            "null_p95": 79.16,
+            "p_mejor_que_azar": 0.304,
+            "p_peor_que_azar": 0.696,
+            "z_aparente_si_iid": 1.6,
+            "z_real_contiguo": 0.46
+          },
+          "closeness": {
+            "percentil_observado": 60.23,
+            "null_media": 51.12,
+            "null_sd": 25.21,
+            "null_p05": 5.76,
+            "null_p95": 87.08,
+            "p_mejor_que_azar": 0.396,
+            "p_peor_que_azar": 0.604,
+            "z_aparente_si_iid": 1.58,
+            "z_real_contiguo": 0.36
+          },
+          "anm": {
+            "percentil_observado": 20.06,
+            "null_media": 48.61,
+            "null_sd": 24.09,
+            "null_p05": 12.08,
+            "null_p95": 86.53,
+            "p_mejor_que_azar": 0.846,
+            "p_peor_que_azar": 0.154,
+            "z_aparente_si_iid": -4.64,
+            "z_real_contiguo": -1.18
+          }
+        },
+        "CARDIAC_MYOSIN": {
+          "config": {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "n_nodes": 954,
+            "n_distal": 935,
+            "k_site": 15,
+            "nperm": 2000
+          },
+          "ctqw": {
+            "percentil_observado": 61.32,
+            "null_media": 50.63,
+            "null_sd": 28.46,
+            "null_p05": 4.07,
+            "null_p95": 92.39,
+            "p_mejor_que_azar": 0.4025,
+            "p_peor_que_azar": 0.5975,
+            "z_aparente_si_iid": 1.52,
+            "z_real_contiguo": 0.38
+          },
+          "diffusion": {
+            "percentil_observado": 57.79,
+            "null_media": 50.61,
+            "null_sd": 28.69,
+            "null_p05": 5.87,
+            "null_p95": 93.72,
+            "p_mejor_que_azar": 0.428,
+            "p_peor_que_azar": 0.572,
+            "z_aparente_si_iid": 1.05,
+            "z_real_contiguo": 0.25
+          },
+          "gnm": {
+            "percentil_observado": 27.99,
+            "null_media": 52.36,
+            "null_sd": 28.04,
+            "null_p05": 5.71,
+            "null_p95": 95.93,
+            "p_mejor_que_azar": 0.754,
+            "p_peor_que_azar": 0.246,
+            "z_aparente_si_iid": -2.95,
+            "z_real_contiguo": -0.87
+          },
+          "betweenness": {
+            "percentil_observado": 52.03,
+            "null_media": 52.38,
+            "null_sd": 17.19,
+            "null_p05": 26.54,
+            "null_p95": 81.76,
+            "p_mejor_que_azar": 0.5045,
+            "p_peor_que_azar": 0.4955,
+            "z_aparente_si_iid": 0.27,
+            "z_real_contiguo": -0.02
+          },
+          "closeness": {
+            "percentil_observado": 55.5,
+            "null_media": 50.54,
+            "null_sd": 28.34,
+            "null_p05": 4.08,
+            "null_p95": 93.11,
+            "p_mejor_que_azar": 0.452,
+            "p_peor_que_azar": 0.548,
+            "z_aparente_si_iid": 0.74,
+            "z_real_contiguo": 0.17
+          },
+          "anm": {
+            "percentil_observado": 49.84,
+            "null_media": 49.61,
+            "null_sd": 27.86,
+            "null_p05": 8.12,
+            "null_p95": 96.05,
+            "p_mejor_que_azar": 0.4835,
+            "p_peor_que_azar": 0.5165,
+            "z_aparente_si_iid": -0.02,
+            "z_real_contiguo": 0.01
+          }
+        }
+      },
+      "prueba_pareada": {
+        "KRAS_G12C": {
+          "nperm": 5000,
+          "n_configs": 18,
+          "delta_medio": -18.01,
+          "configs_delta_positivo": 0,
+          "z_medio": -1.19,
+          "z_min": -1.56,
+          "z_max": -0.61,
+          "configs_p_menor_005": 0,
+          "p_mediano": 0.8533
+        },
+        "BCR_ABL1": {
+          "nperm": 5000,
+          "n_configs": 18,
+          "delta_medio": -1.1,
+          "configs_delta_positivo": 10,
+          "z_medio": -0.17,
+          "z_min": -1.19,
+          "z_max": 0.32,
+          "configs_p_menor_005": 0,
+          "p_mediano": 0.4883
+        },
+        "CARDIAC_MYOSIN": {
+          "nperm": 5000,
+          "n_configs": 18,
+          "delta_medio": 5.84,
+          "configs_delta_positivo": 18,
+          "z_medio": 0.58,
+          "z_min": 0.22,
+          "z_max": 1.03,
+          "configs_p_menor_005": 0,
+          "p_mediano": 0.2608
+        }
+      },
+      "prueba_pareada_rejilla": {
+        "KRAS_G12C": [
+          {
+            "cutoff": 7.5,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 40.5,
+            "pct_diffusion": 54.42,
+            "delta_obs": -13.92,
+            "null_media": 0.29,
+            "null_sd": 23.48,
+            "z": -0.61,
+            "p_cuantico_mejor": 0.649,
+            "p_cuantico_peor": 0.351
+          },
+          {
+            "cutoff": 7.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 37.77,
+            "pct_diffusion": 52.66,
+            "delta_obs": -14.89,
+            "null_media": 1.05,
+            "null_sd": 21.1,
+            "z": -0.76,
+            "p_cuantico_mejor": 0.7398,
+            "p_cuantico_peor": 0.2602
+          },
+          {
+            "cutoff": 7.5,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 30.08,
+            "pct_diffusion": 50.67,
+            "delta_obs": -20.58,
+            "null_media": 1.37,
+            "null_sd": 17.15,
+            "z": -1.28,
+            "p_cuantico_mejor": 0.9488,
+            "p_cuantico_peor": 0.0512
+          },
+          {
+            "cutoff": 8.0,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 24.03,
+            "pct_diffusion": 56.66,
+            "delta_obs": -32.63,
+            "null_media": 1.36,
+            "null_sd": 21.88,
+            "z": -1.55,
+            "p_cuantico_mejor": 0.9394,
+            "p_cuantico_peor": 0.0606
+          },
+          {
+            "cutoff": 8.0,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 28.33,
+            "pct_diffusion": 53.63,
+            "delta_obs": -25.3,
+            "null_media": 2.1,
+            "null_sd": 18.45,
+            "z": -1.49,
+            "p_cuantico_mejor": 0.921,
+            "p_cuantico_peor": 0.079
+          },
+          {
+            "cutoff": 8.0,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 25.97,
+            "pct_diffusion": 51.21,
+            "delta_obs": -25.24,
+            "null_media": 1.75,
+            "null_sd": 17.25,
+            "z": -1.56,
+            "p_cuantico_mejor": 0.985,
+            "p_cuantico_peor": 0.015
+          },
+          {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 30.93,
+            "pct_diffusion": 55.51,
+            "delta_obs": -24.58,
+            "null_media": 2.06,
+            "null_sd": 19.17,
+            "z": -1.39,
+            "p_cuantico_mejor": 0.862,
+            "p_cuantico_peor": 0.138
+          },
+          {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 29.9,
+            "pct_diffusion": 53.39,
+            "delta_obs": -23.49,
+            "null_media": 2.2,
+            "null_sd": 17.93,
+            "z": -1.43,
+            "p_cuantico_mejor": 0.9312,
+            "p_cuantico_peor": 0.0688
+          },
+          {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 27.36,
+            "pct_diffusion": 51.63,
+            "delta_obs": -24.27,
+            "null_media": 2.6,
+            "null_sd": 17.27,
+            "z": -1.56,
+            "p_cuantico_mejor": 0.9918,
+            "p_cuantico_peor": 0.0082
+          },
+          {
+            "cutoff": 9.0,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 39.71,
+            "pct_diffusion": 54.06,
+            "delta_obs": -14.35,
+            "null_media": 2.23,
+            "null_sd": 13.51,
+            "z": -1.23,
+            "p_cuantico_mejor": 0.8582,
+            "p_cuantico_peor": 0.1418
+          },
+          {
+            "cutoff": 9.0,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 38.38,
+            "pct_diffusion": 52.06,
+            "delta_obs": -13.68,
+            "null_media": 1.93,
+            "null_sd": 14.02,
+            "z": -1.11,
+            "p_cuantico_mejor": 0.8058,
+            "p_cuantico_peor": 0.1942
+          },
+          {
+            "cutoff": 9.0,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 40.31,
+            "pct_diffusion": 50.97,
+            "delta_obs": -10.65,
+            "null_media": 2.84,
+            "null_sd": 14.7,
+            "z": -0.92,
+            "p_cuantico_mejor": 0.7766,
+            "p_cuantico_peor": 0.2234
+          },
+          {
+            "cutoff": 9.5,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 41.89,
+            "pct_diffusion": 55.93,
+            "delta_obs": -14.04,
+            "null_media": 2.29,
+            "null_sd": 13.5,
+            "z": -1.21,
+            "p_cuantico_mejor": 0.8314,
+            "p_cuantico_peor": 0.1686
+          },
+          {
+            "cutoff": 9.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 43.64,
+            "pct_diffusion": 54.72,
+            "delta_obs": -11.08,
+            "null_media": 2.85,
+            "null_sd": 14.98,
+            "z": -0.93,
+            "p_cuantico_mejor": 0.7656,
+            "p_cuantico_peor": 0.2344
+          },
+          {
+            "cutoff": 9.5,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 40.68,
+            "pct_diffusion": 54.42,
+            "delta_obs": -13.74,
+            "null_media": 2.26,
+            "null_sd": 15.43,
+            "z": -1.04,
+            "p_cuantico_mejor": 0.8484,
+            "p_cuantico_peor": 0.1516
+          },
+          {
+            "cutoff": 10.0,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 40.31,
+            "pct_diffusion": 55.02,
+            "delta_obs": -14.71,
+            "null_media": 2.44,
+            "null_sd": 13.92,
+            "z": -1.23,
+            "p_cuantico_mejor": 0.9464,
+            "p_cuantico_peor": 0.0536
+          },
+          {
+            "cutoff": 10.0,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 38.44,
+            "pct_diffusion": 54.42,
+            "delta_obs": -15.98,
+            "null_media": 1.95,
+            "null_sd": 16.46,
+            "z": -1.09,
+            "p_cuantico_mejor": 0.8034,
+            "p_cuantico_peor": 0.1966
+          },
+          {
+            "cutoff": 10.0,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 14,
+            "n_distal": 119,
+            "pct_ctqw": 43.16,
+            "pct_diffusion": 54.24,
+            "delta_obs": -11.08,
+            "null_media": 3.07,
+            "null_sd": 14.56,
+            "z": -0.97,
+            "p_cuantico_mejor": 0.7884,
+            "p_cuantico_peor": 0.2116
+          }
+        ],
+        "BCR_ABL1": [
+          {
+            "cutoff": 7.5,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 57.83,
+            "pct_diffusion": 59.42,
+            "delta_obs": -1.59,
+            "null_media": -0.46,
+            "null_sd": 4.21,
+            "z": -0.27,
+            "p_cuantico_mejor": 0.6292,
+            "p_cuantico_peor": 0.3708
+          },
+          {
+            "cutoff": 7.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 59.99,
+            "pct_diffusion": 59.79,
+            "delta_obs": 0.19,
+            "null_media": -0.07,
+            "null_sd": 5.57,
+            "z": 0.05,
+            "p_cuantico_mejor": 0.5108,
+            "p_cuantico_peor": 0.4892
+          },
+          {
+            "cutoff": 7.5,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 61.14,
+            "pct_diffusion": 59.82,
+            "delta_obs": 1.32,
+            "null_media": 0.22,
+            "null_sd": 6.23,
+            "z": 0.18,
+            "p_cuantico_mejor": 0.432,
+            "p_cuantico_peor": 0.568
+          },
+          {
+            "cutoff": 8.0,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 59.5,
+            "pct_diffusion": 59.27,
+            "delta_obs": 0.23,
+            "null_media": -0.21,
+            "null_sd": 4.6,
+            "z": 0.1,
+            "p_cuantico_mejor": 0.4856,
+            "p_cuantico_peor": 0.5144
+          },
+          {
+            "cutoff": 8.0,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 57.13,
+            "pct_diffusion": 59.82,
+            "delta_obs": -2.69,
+            "null_media": 0.11,
+            "null_sd": 6.38,
+            "z": -0.44,
+            "p_cuantico_mejor": 0.693,
+            "p_cuantico_peor": 0.307
+          },
+          {
+            "cutoff": 8.0,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 56.73,
+            "pct_diffusion": 59.9,
+            "delta_obs": -3.17,
+            "null_media": 0.29,
+            "null_sd": 7.12,
+            "z": -0.49,
+            "p_cuantico_mejor": 0.6314,
+            "p_cuantico_peor": 0.3686
+          },
+          {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 60.76,
+            "pct_diffusion": 60.45,
+            "delta_obs": 0.31,
+            "null_media": 0.2,
+            "null_sd": 7.05,
+            "z": 0.02,
+            "p_cuantico_mejor": 0.4524,
+            "p_cuantico_peor": 0.5476
+          },
+          {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 60.67,
+            "pct_diffusion": 60.58,
+            "delta_obs": 0.09,
+            "null_media": 0.64,
+            "null_sd": 7.45,
+            "z": -0.07,
+            "p_cuantico_mejor": 0.4844,
+            "p_cuantico_peor": 0.5156
+          },
+          {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 60.42,
+            "pct_diffusion": 60.42,
+            "delta_obs": 0.0,
+            "null_media": 1.25,
+            "null_sd": 8.83,
+            "z": -0.14,
+            "p_cuantico_mejor": 0.582,
+            "p_cuantico_peor": 0.418
+          },
+          {
+            "cutoff": 9.0,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 62.77,
+            "pct_diffusion": 59.81,
+            "delta_obs": 2.96,
+            "null_media": 0.61,
+            "null_sd": 7.26,
+            "z": 0.32,
+            "p_cuantico_mejor": 0.3558,
+            "p_cuantico_peor": 0.6442
+          },
+          {
+            "cutoff": 9.0,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 60.26,
+            "pct_diffusion": 59.69,
+            "delta_obs": 0.56,
+            "null_media": 0.61,
+            "null_sd": 6.08,
+            "z": -0.01,
+            "p_cuantico_mejor": 0.491,
+            "p_cuantico_peor": 0.509
+          },
+          {
+            "cutoff": 9.0,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 50.38,
+            "pct_diffusion": 59.27,
+            "delta_obs": -8.88,
+            "null_media": 1.11,
+            "null_sd": 8.37,
+            "z": -1.19,
+            "p_cuantico_mejor": 0.8782,
+            "p_cuantico_peor": 0.1218
+          },
+          {
+            "cutoff": 9.5,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 56.26,
+            "pct_diffusion": 58.38,
+            "delta_obs": -2.13,
+            "null_media": 0.66,
+            "null_sd": 9.88,
+            "z": -0.28,
+            "p_cuantico_mejor": 0.5638,
+            "p_cuantico_peor": 0.4362
+          },
+          {
+            "cutoff": 9.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 50.32,
+            "pct_diffusion": 58.32,
+            "delta_obs": -8.0,
+            "null_media": 1.05,
+            "null_sd": 14.07,
+            "z": -0.64,
+            "p_cuantico_mejor": 0.7342,
+            "p_cuantico_peor": 0.2658
+          },
+          {
+            "cutoff": 9.5,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 54.74,
+            "pct_diffusion": 57.05,
+            "delta_obs": -2.31,
+            "null_media": 1.41,
+            "null_sd": 16.53,
+            "z": -0.22,
+            "p_cuantico_mejor": 0.4776,
+            "p_cuantico_peor": 0.5224
+          },
+          {
+            "cutoff": 10.0,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 58.85,
+            "pct_diffusion": 58.17,
+            "delta_obs": 0.68,
+            "null_media": 1.0,
+            "null_sd": 9.88,
+            "z": -0.03,
+            "p_cuantico_mejor": 0.4568,
+            "p_cuantico_peor": 0.5432
+          },
+          {
+            "cutoff": 10.0,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 57.63,
+            "pct_diffusion": 57.53,
+            "delta_obs": 0.1,
+            "null_media": 1.28,
+            "null_sd": 11.52,
+            "z": -0.1,
+            "p_cuantico_mejor": 0.4546,
+            "p_cuantico_peor": 0.5454
+          },
+          {
+            "cutoff": 10.0,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 20,
+            "n_distal": 391,
+            "pct_ctqw": 58.44,
+            "pct_diffusion": 55.96,
+            "delta_obs": 2.47,
+            "null_media": 1.23,
+            "null_sd": 13.16,
+            "z": 0.09,
+            "p_cuantico_mejor": 0.4506,
+            "p_cuantico_peor": 0.5494
+          }
+        ],
+        "CARDIAC_MYOSIN": [
+          {
+            "cutoff": 7.5,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 60.28,
+            "pct_diffusion": 58.49,
+            "delta_obs": 1.78,
+            "null_media": -0.42,
+            "null_sd": 8.9,
+            "z": 0.25,
+            "p_cuantico_mejor": 0.391,
+            "p_cuantico_peor": 0.609
+          },
+          {
+            "cutoff": 7.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 60.46,
+            "pct_diffusion": 58.69,
+            "delta_obs": 1.77,
+            "null_media": -0.29,
+            "null_sd": 9.35,
+            "z": 0.22,
+            "p_cuantico_mejor": 0.3502,
+            "p_cuantico_peor": 0.6498
+          },
+          {
+            "cutoff": 7.5,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 62.33,
+            "pct_diffusion": 59.05,
+            "delta_obs": 3.28,
+            "null_media": -0.05,
+            "null_sd": 9.19,
+            "z": 0.36,
+            "p_cuantico_mejor": 0.3204,
+            "p_cuantico_peor": 0.6796
+          },
+          {
+            "cutoff": 8.0,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 64.15,
+            "pct_diffusion": 58.4,
+            "delta_obs": 5.75,
+            "null_media": -0.44,
+            "null_sd": 10.9,
+            "z": 0.57,
+            "p_cuantico_mejor": 0.2658,
+            "p_cuantico_peor": 0.7342
+          },
+          {
+            "cutoff": 8.0,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 68.55,
+            "pct_diffusion": 58.77,
+            "delta_obs": 9.79,
+            "null_media": -0.36,
+            "null_sd": 11.67,
+            "z": 0.87,
+            "p_cuantico_mejor": 0.1894,
+            "p_cuantico_peor": 0.8106
+          },
+          {
+            "cutoff": 8.0,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 69.13,
+            "pct_diffusion": 58.99,
+            "delta_obs": 10.14,
+            "null_media": -0.21,
+            "null_sd": 11.84,
+            "z": 0.87,
+            "p_cuantico_mejor": 0.1676,
+            "p_cuantico_peor": 0.8324
+          },
+          {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 61.0,
+            "pct_diffusion": 57.76,
+            "delta_obs": 3.24,
+            "null_media": -0.24,
+            "null_sd": 10.33,
+            "z": 0.34,
+            "p_cuantico_mejor": 0.3414,
+            "p_cuantico_peor": 0.6586
+          },
+          {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 61.32,
+            "pct_diffusion": 57.79,
+            "delta_obs": 3.53,
+            "null_media": -0.05,
+            "null_sd": 10.52,
+            "z": 0.34,
+            "p_cuantico_mejor": 0.3588,
+            "p_cuantico_peor": 0.6412
+          },
+          {
+            "cutoff": 8.5,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 65.15,
+            "pct_diffusion": 57.68,
+            "delta_obs": 7.47,
+            "null_media": 0.1,
+            "null_sd": 10.61,
+            "z": 0.69,
+            "p_cuantico_mejor": 0.2118,
+            "p_cuantico_peor": 0.7882
+          },
+          {
+            "cutoff": 9.0,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 62.54,
+            "pct_diffusion": 56.8,
+            "delta_obs": 5.74,
+            "null_media": -0.02,
+            "null_sd": 9.26,
+            "z": 0.62,
+            "p_cuantico_mejor": 0.2558,
+            "p_cuantico_peor": 0.7442
+          },
+          {
+            "cutoff": 9.0,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 60.01,
+            "pct_diffusion": 57.15,
+            "delta_obs": 2.86,
+            "null_media": 0.18,
+            "null_sd": 8.01,
+            "z": 0.33,
+            "p_cuantico_mejor": 0.372,
+            "p_cuantico_peor": 0.628
+          },
+          {
+            "cutoff": 9.0,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 59.64,
+            "pct_diffusion": 57.14,
+            "delta_obs": 2.5,
+            "null_media": 0.6,
+            "null_sd": 7.89,
+            "z": 0.24,
+            "p_cuantico_mejor": 0.375,
+            "p_cuantico_peor": 0.625
+          },
+          {
+            "cutoff": 9.5,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 64.96,
+            "pct_diffusion": 57.37,
+            "delta_obs": 7.59,
+            "null_media": -0.06,
+            "null_sd": 9.63,
+            "z": 0.79,
+            "p_cuantico_mejor": 0.2,
+            "p_cuantico_peor": 0.8
+          },
+          {
+            "cutoff": 9.5,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 60.29,
+            "pct_diffusion": 58.09,
+            "delta_obs": 2.2,
+            "null_media": 0.16,
+            "null_sd": 8.16,
+            "z": 0.25,
+            "p_cuantico_mejor": 0.4042,
+            "p_cuantico_peor": 0.5958
+          },
+          {
+            "cutoff": 9.5,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 67.77,
+            "pct_diffusion": 58.8,
+            "delta_obs": 8.97,
+            "null_media": 0.54,
+            "null_sd": 8.17,
+            "z": 1.03,
+            "p_cuantico_mejor": 0.1496,
+            "p_cuantico_peor": 0.8504
+          },
+          {
+            "cutoff": 10.0,
+            "window": [
+              0.5,
+              4.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 67.98,
+            "pct_diffusion": 57.13,
+            "delta_obs": 10.85,
+            "null_media": 0.23,
+            "null_sd": 10.84,
+            "z": 0.98,
+            "p_cuantico_mejor": 0.1678,
+            "p_cuantico_peor": 0.8322
+          },
+          {
+            "cutoff": 10.0,
+            "window": [
+              0.5,
+              8.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 66.7,
+            "pct_diffusion": 57.75,
+            "delta_obs": 8.94,
+            "null_media": 0.35,
+            "null_sd": 10.39,
+            "z": 0.83,
+            "p_cuantico_mejor": 0.1772,
+            "p_cuantico_peor": 0.8228
+          },
+          {
+            "cutoff": 10.0,
+            "window": [
+              0.5,
+              14.0
+            ],
+            "k_site": 15,
+            "n_distal": 935,
+            "pct_ctqw": 67.2,
+            "pct_diffusion": 58.49,
+            "delta_obs": 8.71,
+            "null_media": 0.51,
+            "null_sd": 9.06,
+            "z": 0.91,
+            "p_cuantico_mejor": 0.1818,
+            "p_cuantico_peor": 0.8182
+          }
+        ]
+      },
+      "potencia": {
+        "nota": "el tamano de efecto de miosina (d=+0.589) implica cuantas dianas harian falta para zanjar el unico indicio favorable al cuantico",
+        "dianas_para_p_005": 8,
+        "dianas_para_p_001": 16,
+        "combinado_tres_dianas_d": -0.196,
+        "combinado_stouffer_z": -0.34,
+        "lectura": "no hay evidencia en ninguna direccion con tres dianas; el conjunto de validacion del propio reto es demasiado chico para detectar el efecto que parece existir"
+      }
+    },
+    "como": {
+      "protocol": "nulo por permutacion espacial: se sortea un residuo distal semilla y se toman sus k-1 vecinos distales mas cercanos (k = tamano del sitio verdadero). Preserva contiguidad, tamano y la restriccion distal. La prueba pareada evalua la DIFERENCIA cuantico-menos-clasico contra el mismo nulo, que tiene mucha menos varianza porque ambos propagadores comparten grafo, fuente y ventana.",
+      "instance_params": {
+        "nulo_espacial": {
+          "nperm": 2000,
+          "seed": 20260717,
+          "cutoff_A": 8.5,
+          "window": [
+            0.5,
+            8.0
+          ]
+        },
+        "prueba_pareada": {
+          "nperm": 5000,
+          "seed": 20260717,
+          "configuraciones_por_diana": 18
+        }
+      },
+      "sweep_note": "la prueba pareada corre sobre la rejilla completa congelada, no sobre una configuracion elegida; se reporta cada celda",
+      "lib_versions": {
+        "prody": "2.6.1",
+        "numpy": "2.4.4",
+        "scipy": "1.16.3",
+        "python": "3.11.15"
+      },
+      "compute": "contenedor cloud Cowork (CPU, Linux)",
+      "harness": "paired_null.py",
+      "raw_data_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/data/2026/07/spatial_null.json ; https://raw.githubusercontent.com/RosettaQuantum/evidence/main/data/2026/07/paired_null.json",
+      "procedencia": [
+        {
+          "archivo": "spatial_null.json",
+          "sha256": "sha256:3914def63a518be2b012b4ec290a8f375865f78860539c7ff19bd91b61c08f61"
+        },
+        {
+          "archivo": "paired_null.json",
+          "sha256": "sha256:43015a13119fdee4a9e4399bfc35f97f6ace9ae6fe76d55d6b34877c479664b3"
+        }
+      ],
+      "scripts": [
+        {
+          "archivo": "spatial_null.py",
+          "sha256": "sha256:61194e2eb956df3741f6ad0b5b5b5c1f0534f0e4a42cbcca4a03e22d16d173c5"
+        },
+        {
+          "archivo": "paired_null.py",
+          "sha256": "sha256:6f53f3a617c6a6223aa080e645f2e9ecd88093c6e16bf572e94a1a1bbbfdc88f"
+        },
+        {
+          "archivo": "power.py",
+          "sha256": "sha256:06dd8df00affb4d47fa6f58baf94ff587de8c25ddaf8bc8ad845ada33d09ca81"
+        }
+      ]
+    },
+    "donde": {
+      "quantum_backend": "CTQW por eigendescomposicion",
+      "classical_backend": "difusion, GNM, ANM, betweenness, closeness, nulo aleatorio",
+      "protein_source": "RCSB PDB via ProDy",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "la significancia reportada en este campo esta inflada por un supuesto de independencia que los sitios alostericos violan por construccion",
+      "question": "Con el nulo espacial correcto, algun metodo separa el bolsillo verdadero del azar?",
+      "ledger_goal": "entregar el INSTRUMENTO DE MEDICION, no otra metrica: un nulo reutilizable con el que evaluar la metrica de cualquiera, aplicado primero a la nuestra y con el resultado en contra"
+    },
+    "cuando": {
+      "started_at": "2026-07-25T15:46:34.786148+00:00",
+      "archived_at": "2026-07-25T15:46:34.786148+00:00",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "paired_null.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum",
+      "team": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0007-017__20260725T1546Z__nulo-espacial-contiguo--instrumento-de-medicion.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0007-017__20260725T1546Z__nulo-espacial-contiguo--instrumento-de-medicion.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-017__20260725T1546Z__nulo-espacial-contiguo--instrumento-de-medicion.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "mirror",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0007-017"
+      }
+    ]
+  }
+}

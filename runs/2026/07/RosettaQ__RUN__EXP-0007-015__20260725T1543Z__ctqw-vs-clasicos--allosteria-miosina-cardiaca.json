@@ -1,0 +1,5704 @@
+{
+  "meta": {
+    "file_name": "RosettaQ__RUN__EXP-0007-015__20260725T1543Z__ctqw-vs-clasicos--allosteria-miosina-cardiaca.json",
+    "file_id": "EXP-0007-015",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Diana obligatoria 3/4. Unica ventaja cuantica del conjunto: CTQW supera a la difusion en 18/18 celdas de la rejilla. NO significativa bajo el nulo correcto.",
+    "schema": "rosettaq-archive/v2",
+    "sealed_at": "2026-07-26T12:57:00.550545+00:00",
+    "sealed_by": {
+      "lib": "rosettaq_seal.py",
+      "lib_version": "2.0.0",
+      "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+      "harness": "run_challenge_targets2.py",
+      "harness_version": "1.0.0",
+      "harness_sha256": "sha256:f6172e7a17d783db3cbe28e0f30590bbdcde3f63609bf65d16b3ced4fd63a1da",
+      "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+    },
+    "content_hash": "sha256:6718eba95dba2822b64f62904e0620e559f400eec97b43be4f3a90f1f98b3795"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0007",
+      "recipe_name": "Deteccion de sitios alostericos por propagador sobre red de contactos",
+      "problem_class": "Allosteric site prediction (Cleveland Clinic track)",
+      "instance": "5TBY -> 9GZ1 cadena A",
+      "quantum_side": {
+        "metodo": "CTQW, U(t)=exp(-iAt), probabilidad integrada en la ventana",
+        "percentil_medio": 63.86,
+        "top5_total_18_configs": 0
+      },
+      "classical_side": {
+        "metodos": [
+          "difusion exp(-Lt)",
+          "GNM",
+          "ANM",
+          "betweenness (Brandes)",
+          "closeness",
+          "nulo aleatorio"
+        ],
+        "percentiles_medios": {
+          "diffusion": 58.02,
+          "gnm": 27.07,
+          "anm": 49.84,
+          "betweenness": 56.43,
+          "closeness": 56.52,
+          "random": 47.06
+        }
+      },
+      "ground_truth": {
+        "metodo": "residuos <4.5A de mavacamten (XB2) en 9GZ1, mapeados por numero con identidad verificada",
+        "n_residuos": 15,
+        "descartados_por_numeracion": 0,
+        "residuos": [
+          [
+            "A",
+            163
+          ],
+          [
+            "A",
+            164
+          ],
+          [
+            "A",
+            167
+          ],
+          [
+            "A",
+            168
+          ],
+          [
+            "A",
+            497
+          ],
+          [
+            "A",
+            500
+          ],
+          [
+            "A",
+            666
+          ],
+          [
+            "A",
+            710
+          ],
+          [
+            "A",
+            711
+          ],
+          [
+            "A",
+            712
+          ],
+          [
+            "A",
+            713
+          ],
+          [
+            "A",
+            721
+          ],
+          [
+            "A",
+            722
+          ],
+          [
+            "A",
+            770
+          ],
+          [
+            "A",
+            774
+          ]
+        ]
+      },
+      "fuente_perturbacion": {
+        "metodo": "lazo P / motivo Walker-A GESGAGKT localizado por busqueda de secuencia",
+        "n_residuos": 8,
+        "residuos": [
+          [
+            "A",
+            178
+          ],
+          [
+            "A",
+            179
+          ],
+          [
+            "A",
+            180
+          ],
+          [
+            "A",
+            181
+          ],
+          [
+            "A",
+            182
+          ],
+          [
+            "A",
+            183
+          ],
+          [
+            "A",
+            184
+          ],
+          [
+            "A",
+            185
+          ]
+        ]
+      },
+      "outcome": "cuantico por encima del azar pero no significativo",
+      "metric": "percentil medio de los residuos alostericos verdaderos entre los distales (>6A de la fuente); 100 = el mejor",
+      "scores": {
+        "ctqw": {
+          "percentil_medio": 63.86,
+          "top5_total": 0,
+          "top10_total": 1
+        },
+        "diffusion": {
+          "percentil_medio": 58.02,
+          "top5_total": 0,
+          "top10_total": 0
+        },
+        "gnm": {
+          "percentil_medio": 27.07,
+          "top5_total": 0,
+          "top10_total": 0
+        },
+        "anm": {
+          "percentil_medio": 49.84,
+          "top5_total": 0,
+          "top10_total": 0
+        },
+        "betweenness": {
+          "percentil_medio": 56.43,
+          "top5_total": 0,
+          "top10_total": 0
+        },
+        "closeness": {
+          "percentil_medio": 56.52,
+          "top5_total": 0,
+          "top10_total": 0
+        },
+        "random": {
+          "percentil_medio": 47.06,
+          "top5_total": 0,
+          "top10_total": 3
+        }
+      },
+      "rejilla_completa": [
+        {
+          "cutoff": 7.5,
+          "window": [
+            0.5,
+            4.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.171,
+          "runtime_diffusion_s": 0.139,
+          "ctqw_pct": 60.28,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 58.49,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 28.14,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 52.06,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 57.99,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 51.88,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 7.5,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.176,
+          "runtime_diffusion_s": 0.137,
+          "ctqw_pct": 60.46,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 58.69,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 28.14,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 52.06,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 57.99,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 51.88,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 7.5,
+          "window": [
+            0.5,
+            14.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.178,
+          "runtime_diffusion_s": 0.146,
+          "ctqw_pct": 62.33,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 59.05,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 28.14,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 52.06,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 57.99,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 51.88,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 8.0,
+          "window": [
+            0.5,
+            4.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.177,
+          "runtime_diffusion_s": 0.15,
+          "ctqw_pct": 64.15,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 58.4,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 27.08,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 49.4,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 56.65,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 42.23,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 8.0,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.179,
+          "runtime_diffusion_s": 0.149,
+          "ctqw_pct": 68.55,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 58.77,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 27.08,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 49.4,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 56.65,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 42.23,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 8.0,
+          "window": [
+            0.5,
+            14.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.182,
+          "runtime_diffusion_s": 0.153,
+          "ctqw_pct": 69.13,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 58.99,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 27.08,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 49.4,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 56.65,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 42.23,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 8.5,
+          "window": [
+            0.5,
+            4.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.162,
+          "runtime_diffusion_s": 0.124,
+          "ctqw_pct": 61.0,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 57.76,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 27.99,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 52.03,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 55.5,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 42.53,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 8.5,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.173,
+          "runtime_diffusion_s": 0.137,
+          "ctqw_pct": 61.32,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 57.79,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 27.99,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 52.03,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 55.5,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 42.53,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 8.5,
+          "window": [
+            0.5,
+            14.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.169,
+          "runtime_diffusion_s": 0.128,
+          "ctqw_pct": 65.15,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 57.68,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 27.99,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 52.03,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 55.5,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 42.53,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 9.0,
+          "window": [
+            0.5,
+            4.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.2,
+          "runtime_diffusion_s": 0.193,
+          "ctqw_pct": 62.54,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 56.8,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 26.2,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 58.84,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 52.94,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 39.64,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 9.0,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.216,
+          "runtime_diffusion_s": 0.156,
+          "ctqw_pct": 60.01,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 57.15,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 26.2,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 58.84,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 52.94,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 39.64,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 9.0,
+          "window": [
+            0.5,
+            14.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.189,
+          "runtime_diffusion_s": 0.152,
+          "ctqw_pct": 59.64,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 57.14,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 26.2,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 58.84,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 52.94,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 39.64,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 9.5,
+          "window": [
+            0.5,
+            4.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.197,
+          "runtime_diffusion_s": 0.181,
+          "ctqw_pct": 64.96,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 57.37,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 27.63,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 62.13,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 54.8,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 54.02,
+          "random_top5": 0,
+          "random_top10": 1,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 9.5,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.202,
+          "runtime_diffusion_s": 0.159,
+          "ctqw_pct": 60.29,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 58.09,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 27.63,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 62.13,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 54.8,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 54.02,
+          "random_top5": 0,
+          "random_top10": 1,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 9.5,
+          "window": [
+            0.5,
+            14.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.198,
+          "runtime_diffusion_s": 0.168,
+          "ctqw_pct": 67.77,
+          "ctqw_top5": 0,
+          "ctqw_top10": 1,
+          "diffusion_pct": 58.8,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 27.63,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 62.13,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 54.8,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 54.02,
+          "random_top5": 0,
+          "random_top10": 1,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 10.0,
+          "window": [
+            0.5,
+            4.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.176,
+          "runtime_diffusion_s": 0.144,
+          "ctqw_pct": 67.98,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 57.13,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 25.39,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 64.15,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 61.23,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 52.06,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 10.0,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.166,
+          "runtime_diffusion_s": 0.135,
+          "ctqw_pct": 66.7,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 57.75,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 25.39,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 64.15,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 61.23,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 52.06,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        },
+        {
+          "cutoff": 10.0,
+          "window": [
+            0.5,
+            14.0
+          ],
+          "n_nodes": 954,
+          "n_source": 8,
+          "n_allo": 15,
+          "n_allo_distal": 15,
+          "n_distal": 935,
+          "runtime_ctqw_s": 0.171,
+          "runtime_diffusion_s": 0.138,
+          "ctqw_pct": 67.2,
+          "ctqw_top5": 0,
+          "ctqw_top10": 0,
+          "diffusion_pct": 58.49,
+          "diffusion_top5": 0,
+          "diffusion_top10": 0,
+          "gnm_pct": 25.39,
+          "gnm_top5": 0,
+          "gnm_top10": 0,
+          "betweenness_pct": 64.15,
+          "betweenness_top5": 0,
+          "betweenness_top10": 0,
+          "closeness_pct": 61.23,
+          "closeness_top5": 0,
+          "closeness_top10": 0,
+          "random_pct": 52.06,
+          "random_top5": 0,
+          "random_top10": 0,
+          "anm_pct": 49.84,
+          "anm_top5": 0,
+          "anm_top10": 0
+        }
+      ],
+      "top5_sitios_por_config": {
+        "c7.5_w0.5-4.0": {
+          "ctqw": [
+            {
+              "score": 0.08288262,
+              "n_residues": 75,
+              "residues": [
+                [
+                  "A",
+                  117
+                ],
+                [
+                  "A",
+                  118
+                ],
+                [
+                  "A",
+                  702
+                ],
+                [
+                  "A",
+                  122
+                ],
+                [
+                  "A",
+                  119
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  90
+                ],
+                [
+                  "A",
+                  91
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  705
+                ],
+                [
+                  "A",
+                  703
+                ],
+                [
+                  "A",
+                  89
+                ]
+              ],
+              "centroid": [
+                72.57,
+                83.64,
+                -50.38
+              ]
+            },
+            {
+              "score": 0.06113093,
+              "n_residues": 13,
+              "residues": [
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  199
+                ],
+                [
+                  "A",
+                  194
+                ],
+                [
+                  "A",
+                  200
+                ],
+                [
+                  "A",
+                  195
+                ],
+                [
+                  "A",
+                  202
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  193
+                ],
+                [
+                  "A",
+                  198
+                ],
+                [
+                  "A",
+                  213
+                ],
+                [
+                  "A",
+                  214
+                ],
+                [
+                  "A",
+                  189
+                ]
+              ],
+              "centroid": [
+                59.74,
+                69.66,
+                -29.71
+              ]
+            },
+            {
+              "score": 0.05666125,
+              "n_residues": 3,
+              "residues": [
+                [
+                  "A",
+                  468
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  469
+                ]
+              ],
+              "centroid": [
+                66.08,
+                65.19,
+                -66.87
+              ]
+            },
+            {
+              "score": 0.05082084,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  205
+                ],
+                [
+                  "A",
+                  206
+                ]
+              ],
+              "centroid": [
+                64.24,
+                63.77,
+                -16.1
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.0759693,
+              "n_residues": 11,
+              "residues": [
+                [
+                  "A",
+                  189
+                ],
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  191
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  193
+                ],
+                [
+                  "A",
+                  194
+                ],
+                [
+                  "A",
+                  195
+                ],
+                [
+                  "A",
+                  196
+                ],
+                [
+                  "A",
+                  134
+                ],
+                [
+                  "A",
+                  197
+                ],
+                [
+                  "A",
+                  221
+                ]
+              ],
+              "centroid": [
+                62.68,
+                69.61,
+                -33.74
+              ]
+            },
+            {
+              "score": 0.05544317,
+              "n_residues": 82,
+              "residues": [
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  669
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  479
+                ]
+              ],
+              "centroid": [
+                68.3,
+                73.56,
+                -51.51
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.77070156,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c7.5_w0.5-8.0": {
+          "ctqw": [
+            {
+              "score": 0.06599926,
+              "n_residues": 73,
+              "residues": [
+                [
+                  "A",
+                  118
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  117
+                ],
+                [
+                  "A",
+                  122
+                ],
+                [
+                  "A",
+                  702
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  115
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  89
+                ],
+                [
+                  "A",
+                  119
+                ]
+              ],
+              "centroid": [
+                71.33,
+                83.2,
+                -49.25
+              ]
+            },
+            {
+              "score": 0.04914751,
+              "n_residues": 19,
+              "residues": [
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  199
+                ],
+                [
+                  "A",
+                  213
+                ],
+                [
+                  "A",
+                  204
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  134
+                ],
+                [
+                  "A",
+                  200
+                ],
+                [
+                  "A",
+                  189
+                ],
+                [
+                  "A",
+                  205
+                ],
+                [
+                  "A",
+                  194
+                ],
+                [
+                  "A",
+                  191
+                ],
+                [
+                  "A",
+                  214
+                ]
+              ],
+              "centroid": [
+                61.01,
+                68.57,
+                -27.28
+              ]
+            },
+            {
+              "score": 0.04200108,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  765
+                ]
+              ],
+              "centroid": [
+                59.51,
+                99.27,
+                -38.17
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.09552218,
+              "n_residues": 11,
+              "residues": [
+                [
+                  "A",
+                  189
+                ],
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  191
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  193
+                ],
+                [
+                  "A",
+                  194
+                ],
+                [
+                  "A",
+                  195
+                ],
+                [
+                  "A",
+                  196
+                ],
+                [
+                  "A",
+                  197
+                ],
+                [
+                  "A",
+                  198
+                ],
+                [
+                  "A",
+                  134
+                ]
+              ],
+              "centroid": [
+                62.7,
+                70.59,
+                -33.03
+              ]
+            },
+            {
+              "score": 0.06810812,
+              "n_residues": 82,
+              "residues": [
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  669
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  467
+                ]
+              ],
+              "centroid": [
+                67.68,
+                72.91,
+                -51.33
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.77070156,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c7.5_w0.5-14.0": {
+          "ctqw": [
+            {
+              "score": 0.0590964,
+              "n_residues": 65,
+              "residues": [
+                [
+                  "A",
+                  122
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  118
+                ],
+                [
+                  "A",
+                  117
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  115
+                ],
+                [
+                  "A",
+                  689
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  121
+                ]
+              ],
+              "centroid": [
+                72.0,
+                83.96,
+                -49.35
+              ]
+            },
+            {
+              "score": 0.04986158,
+              "n_residues": 21,
+              "residues": [
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  134
+                ],
+                [
+                  "A",
+                  189
+                ],
+                [
+                  "A",
+                  191
+                ],
+                [
+                  "A",
+                  139
+                ],
+                [
+                  "A",
+                  200
+                ],
+                [
+                  "A",
+                  141
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  199
+                ],
+                [
+                  "A",
+                  214
+                ],
+                [
+                  "A",
+                  213
+                ],
+                [
+                  "A",
+                  217
+                ]
+              ],
+              "centroid": [
+                62.06,
+                69.13,
+                -28.38
+              ]
+            },
+            {
+              "score": 0.04141988,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  130
+                ]
+              ],
+              "centroid": [
+                77.71,
+                67.54,
+                -37.67
+              ]
+            },
+            {
+              "score": 0.04125389,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  765
+                ],
+                [
+                  "A",
+                  764
+                ]
+              ],
+              "centroid": [
+                58.23,
+                100.25,
+                -39.21
+              ]
+            },
+            {
+              "score": 0.04125211,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  466
+                ]
+              ],
+              "centroid": [
+                67.36,
+                68.48,
+                -62.12
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.10153206,
+              "n_residues": 10,
+              "residues": [
+                [
+                  "A",
+                  189
+                ],
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  191
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  193
+                ],
+                [
+                  "A",
+                  194
+                ],
+                [
+                  "A",
+                  195
+                ],
+                [
+                  "A",
+                  196
+                ],
+                [
+                  "A",
+                  197
+                ],
+                [
+                  "A",
+                  198
+                ]
+              ],
+              "centroid": [
+                61.83,
+                70.57,
+                -33.14
+              ]
+            },
+            {
+              "score": 0.06908265,
+              "n_residues": 83,
+              "residues": [
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  669
+                ],
+                [
+                  "A",
+                  467
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  175
+                ],
+                [
+                  "A",
+                  675
+                ]
+              ],
+              "centroid": [
+                67.18,
+                72.85,
+                -51.3
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.77070156,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c8.0_w0.5-4.0": {
+          "ctqw": [
+            {
+              "score": 0.07521038,
+              "n_residues": 81,
+              "residues": [
+                [
+                  "A",
+                  122
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  117
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  118
+                ],
+                [
+                  "A",
+                  120
+                ],
+                [
+                  "A",
+                  119
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  115
+                ],
+                [
+                  "A",
+                  121
+                ]
+              ],
+              "centroid": [
+                72.96,
+                83.12,
+                -47.39
+              ]
+            },
+            {
+              "score": 0.0594608,
+              "n_residues": 4,
+              "residues": [
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  134
+                ],
+                [
+                  "A",
+                  139
+                ],
+                [
+                  "A",
+                  192
+                ]
+              ],
+              "centroid": [
+                66.54,
+                71.17,
+                -33.0
+              ]
+            },
+            {
+              "score": 0.04758075,
+              "n_residues": 4,
+              "residues": [
+                [
+                  "A",
+                  203
+                ],
+                [
+                  "A",
+                  207
+                ],
+                [
+                  "A",
+                  204
+                ],
+                [
+                  "A",
+                  209
+                ]
+              ],
+              "centroid": [
+                64.4,
+                66.79,
+                -19.44
+              ]
+            },
+            {
+              "score": 0.04627826,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  482
+                ],
+                [
+                  "A",
+                  479
+                ]
+              ],
+              "centroid": [
+                61.61,
+                74.31,
+                -59.98
+              ]
+            },
+            {
+              "score": 0.04493288,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  197
+                ]
+              ],
+              "centroid": [
+                60.95,
+                70.75,
+                -27.45
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.0727807,
+              "n_residues": 9,
+              "residues": [
+                [
+                  "A",
+                  189
+                ],
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  191
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  193
+                ],
+                [
+                  "A",
+                  194
+                ],
+                [
+                  "A",
+                  221
+                ],
+                [
+                  "A",
+                  224
+                ],
+                [
+                  "A",
+                  195
+                ]
+              ],
+              "centroid": [
+                62.0,
+                68.44,
+                -35.76
+              ]
+            },
+            {
+              "score": 0.067183,
+              "n_residues": 84,
+              "residues": [
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  482
+                ],
+                [
+                  "A",
+                  123
+                ]
+              ],
+              "centroid": [
+                68.16,
+                73.55,
+                -51.51
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.63930745,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c8.0_w0.5-8.0": {
+          "ctqw": [
+            {
+              "score": 0.06332348,
+              "n_residues": 88,
+              "residues": [
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  765
+                ],
+                [
+                  "A",
+                  117
+                ],
+                [
+                  "A",
+                  118
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  120
+                ],
+                [
+                  "A",
+                  127
+                ]
+              ],
+              "centroid": [
+                72.11,
+                84.54,
+                -46.61
+              ]
+            },
+            {
+              "score": 0.05640828,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  134
+                ]
+              ],
+              "centroid": [
+                68.71,
+                70.16,
+                -34.33
+              ]
+            },
+            {
+              "score": 0.04248242,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  479
+                ]
+              ],
+              "centroid": [
+                61.55,
+                72.7,
+                -61.95
+              ]
+            },
+            {
+              "score": 0.04199741,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  207
+                ]
+              ],
+              "centroid": [
+                67.97,
+                66.93,
+                -18.15
+              ]
+            },
+            {
+              "score": 0.04144002,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  238
+                ]
+              ],
+              "centroid": [
+                72.26,
+                63.08,
+                -54.28
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.08359375,
+              "n_residues": 8,
+              "residues": [
+                [
+                  "A",
+                  189
+                ],
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  191
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  193
+                ],
+                [
+                  "A",
+                  194
+                ],
+                [
+                  "A",
+                  195
+                ],
+                [
+                  "A",
+                  221
+                ]
+              ],
+              "centroid": [
+                62.32,
+                69.3,
+                -35.18
+              ]
+            },
+            {
+              "score": 0.07359607,
+              "n_residues": 85,
+              "residues": [
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  482
+                ]
+              ],
+              "centroid": [
+                67.96,
+                72.76,
+                -51.44
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.63930745,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c8.0_w0.5-14.0": {
+          "ctqw": [
+            {
+              "score": 0.06981177,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  190
+                ]
+              ],
+              "centroid": [
+                65.98,
+                69.5,
+                -36.68
+              ]
+            },
+            {
+              "score": 0.05912422,
+              "n_residues": 88,
+              "residues": [
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  122
+                ],
+                [
+                  "A",
+                  117
+                ],
+                [
+                  "A",
+                  127
+                ],
+                [
+                  "A",
+                  118
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  765
+                ],
+                [
+                  "A",
+                  90
+                ]
+              ],
+              "centroid": [
+                71.34,
+                84.61,
+                -44.74
+              ]
+            },
+            {
+              "score": 0.03831276,
+              "n_residues": 4,
+              "residues": [
+                [
+                  "A",
+                  203
+                ],
+                [
+                  "A",
+                  204
+                ],
+                [
+                  "A",
+                  213
+                ],
+                [
+                  "A",
+                  206
+                ]
+              ],
+              "centroid": [
+                60.89,
+                65.64,
+                -19.3
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.07272773,
+              "n_residues": 8,
+              "residues": [
+                [
+                  "A",
+                  189
+                ],
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  191
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  193
+                ],
+                [
+                  "A",
+                  194
+                ],
+                [
+                  "A",
+                  195
+                ],
+                [
+                  "A",
+                  221
+                ]
+              ],
+              "centroid": [
+                62.32,
+                69.3,
+                -35.18
+              ]
+            },
+            {
+              "score": 0.06970636,
+              "n_residues": 85,
+              "residues": [
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  676
+                ]
+              ],
+              "centroid": [
+                68.2,
+                73.1,
+                -51.58
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.63930745,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c8.5_w0.5-4.0": {
+          "ctqw": [
+            {
+              "score": 0.07556616,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  236
+                ]
+              ],
+              "centroid": [
+                72.66,
+                61.53,
+                -56.42
+              ]
+            },
+            {
+              "score": 0.07010109,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  190
+                ]
+              ],
+              "centroid": [
+                65.98,
+                69.5,
+                -36.68
+              ]
+            },
+            {
+              "score": 0.06692386,
+              "n_residues": 82,
+              "residues": [
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  678
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  114
+                ],
+                [
+                  "A",
+                  122
+                ],
+                [
+                  "A",
+                  120
+                ],
+                [
+                  "A",
+                  118
+                ],
+                [
+                  "A",
+                  117
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  689
+                ],
+                [
+                  "A",
+                  121
+                ]
+              ],
+              "centroid": [
+                75.16,
+                81.86,
+                -48.5
+              ]
+            },
+            {
+              "score": 0.06487435,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  467
+                ]
+              ],
+              "centroid": [
+                67.09,
+                67.94,
+                -63.94
+              ]
+            },
+            {
+              "score": 0.05167641,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  458
+                ]
+              ],
+              "centroid": [
+                53.97,
+                74.98,
+                -42.11
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.0789353,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  462
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  670
+                ]
+              ],
+              "centroid": [
+                67.84,
+                72.76,
+                -50.71
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.51805024,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c8.5_w0.5-8.0": {
+          "ctqw": [
+            {
+              "score": 0.05830814,
+              "n_residues": 85,
+              "residues": [
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  122
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  114
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  120
+                ],
+                [
+                  "A",
+                  705
+                ],
+                [
+                  "A",
+                  701
+                ],
+                [
+                  "A",
+                  152
+                ]
+              ],
+              "centroid": [
+                71.94,
+                81.82,
+                -47.84
+              ]
+            },
+            {
+              "score": 0.05810432,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  236
+                ]
+              ],
+              "centroid": [
+                72.66,
+                61.53,
+                -56.42
+              ]
+            },
+            {
+              "score": 0.04807913,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  190
+                ]
+              ],
+              "centroid": [
+                65.98,
+                69.5,
+                -36.68
+              ]
+            },
+            {
+              "score": 0.04537762,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  196
+                ],
+                [
+                  "A",
+                  199
+                ]
+              ],
+              "centroid": [
+                57.2,
+                71.57,
+                -29.17
+              ]
+            },
+            {
+              "score": 0.03887016,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  160
+                ],
+                [
+                  "A",
+                  159
+                ]
+              ],
+              "centroid": [
+                61.13,
+                83.31,
+                -32.59
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.07799247,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  670
+                ]
+              ],
+              "centroid": [
+                67.98,
+                72.35,
+                -50.53
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.51805024,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c8.5_w0.5-14.0": {
+          "ctqw": [
+            {
+              "score": 0.05433933,
+              "n_residues": 82,
+              "residues": [
+                [
+                  "A",
+                  705
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  122
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  701
+                ],
+                [
+                  "A",
+                  114
+                ],
+                [
+                  "A",
+                  121
+                ],
+                [
+                  "A",
+                  90
+                ],
+                [
+                  "A",
+                  119
+                ],
+                [
+                  "A",
+                  117
+                ]
+              ],
+              "centroid": [
+                73.6,
+                84.59,
+                -46.54
+              ]
+            },
+            {
+              "score": 0.04864213,
+              "n_residues": 3,
+              "residues": [
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  467
+                ],
+                [
+                  "A",
+                  468
+                ]
+              ],
+              "centroid": [
+                66.66,
+                66.67,
+                -65.12
+              ]
+            },
+            {
+              "score": 0.04341195,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  212
+                ],
+                [
+                  "A",
+                  207
+                ]
+              ],
+              "centroid": [
+                64.85,
+                65.51,
+                -20.1
+              ]
+            },
+            {
+              "score": 0.04326163,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  190
+                ],
+                [
+                  "A",
+                  191
+                ]
+              ],
+              "centroid": [
+                64.57,
+                70.78,
+                -36.88
+              ]
+            },
+            {
+              "score": 0.04132887,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  236
+                ]
+              ],
+              "centroid": [
+                73.06,
+                59.98,
+                -58.56
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.06862772,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  462
+                ]
+              ],
+              "centroid": [
+                68.23,
+                72.63,
+                -50.51
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.51805024,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c9.0_w0.5-4.0": {
+          "ctqw": [
+            {
+              "score": 0.06083287,
+              "n_residues": 91,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  479
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  478
+                ],
+                [
+                  "A",
+                  240
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  702
+                ],
+                [
+                  "A",
+                  241
+                ],
+                [
+                  "A",
+                  115
+                ],
+                [
+                  "A",
+                  670
+                ]
+              ],
+              "centroid": [
+                71.99,
+                81.0,
+                -48.44
+              ]
+            },
+            {
+              "score": 0.05379948,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  191
+                ]
+              ],
+              "centroid": [
+                63.16,
+                72.06,
+                -37.07
+              ]
+            },
+            {
+              "score": 0.04551755,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  678
+                ]
+              ],
+              "centroid": [
+                82.0,
+                67.11,
+                -56.23
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.08260984,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  482
+                ],
+                [
+                  "A",
+                  462
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  677
+                ]
+              ],
+              "centroid": [
+                69.39,
+                73.48,
+                -50.95
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.36555547,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c9.0_w0.5-8.0": {
+          "ctqw": [
+            {
+              "score": 0.05245718,
+              "n_residues": 89,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  110
+                ],
+                [
+                  "A",
+                  118
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  241
+                ],
+                [
+                  "A",
+                  90
+                ],
+                [
+                  "A",
+                  113
+                ]
+              ],
+              "centroid": [
+                71.63,
+                81.4,
+                -47.47
+              ]
+            },
+            {
+              "score": 0.04092984,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  497
+                ]
+              ],
+              "centroid": [
+                55.57,
+                95.54,
+                -49.35
+              ]
+            },
+            {
+              "score": 0.04050839,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  191
+                ]
+              ],
+              "centroid": [
+                63.16,
+                72.06,
+                -37.07
+              ]
+            },
+            {
+              "score": 0.04043108,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  49
+                ]
+              ],
+              "centroid": [
+                92.31,
+                94.66,
+                -56.29
+              ]
+            },
+            {
+              "score": 0.03968866,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  450
+                ]
+              ],
+              "centroid": [
+                42.01,
+                68.41,
+                -32.64
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.0752226,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  482
+                ],
+                [
+                  "A",
+                  462
+                ]
+              ],
+              "centroid": [
+                69.11,
+                73.32,
+                -51.07
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.36555547,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c9.0_w0.5-14.0": {
+          "ctqw": [
+            {
+              "score": 0.0496921,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  197
+                ]
+              ],
+              "centroid": [
+                60.95,
+                70.75,
+                -27.45
+              ]
+            },
+            {
+              "score": 0.0469887,
+              "n_residues": 91,
+              "residues": [
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  90
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  100
+                ],
+                [
+                  "A",
+                  152
+                ],
+                [
+                  "A",
+                  115
+                ],
+                [
+                  "A",
+                  93
+                ],
+                [
+                  "A",
+                  105
+                ]
+              ],
+              "centroid": [
+                71.83,
+                81.71,
+                -46.96
+              ]
+            },
+            {
+              "score": 0.03666247,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  191
+                ]
+              ],
+              "centroid": [
+                63.16,
+                72.06,
+                -37.07
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.06329289,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  670
+                ],
+                [
+                  "A",
+                  128
+                ],
+                [
+                  "A",
+                  241
+                ]
+              ],
+              "centroid": [
+                69.55,
+                73.59,
+                -50.88
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.36555547,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c9.5_w0.5-4.0": {
+          "ctqw": [
+            {
+              "score": 0.05583569,
+              "n_residues": 90,
+              "residues": [
+                [
+                  "A",
+                  105
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  113
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  114
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  110
+                ],
+                [
+                  "A",
+                  241
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  112
+                ]
+              ],
+              "centroid": [
+                72.71,
+                83.39,
+                -47.59
+              ]
+            },
+            {
+              "score": 0.04912424,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  49
+                ]
+              ],
+              "centroid": [
+                92.31,
+                94.66,
+                -56.29
+              ]
+            },
+            {
+              "score": 0.04707159,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  466
+                ]
+              ],
+              "centroid": [
+                67.36,
+                68.48,
+                -62.12
+              ]
+            },
+            {
+              "score": 0.0426768,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  202
+                ]
+              ],
+              "centroid": [
+                54.78,
+                68.14,
+                -20.27
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.08089178,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  462
+                ],
+                [
+                  "A",
+                  128
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  482
+                ]
+              ],
+              "centroid": [
+                69.59,
+                73.76,
+                -50.5
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.31314503,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c9.5_w0.5-8.0": {
+          "ctqw": [
+            {
+              "score": 0.05962688,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  18
+                ]
+              ],
+              "centroid": [
+                83.15,
+                83.75,
+                -32.46
+              ]
+            },
+            {
+              "score": 0.04920332,
+              "n_residues": 90,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  115
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  105
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  153
+                ],
+                [
+                  "A",
+                  113
+                ],
+                [
+                  "A",
+                  114
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  241
+                ],
+                [
+                  "A",
+                  461
+                ],
+                [
+                  "A",
+                  675
+                ]
+              ],
+              "centroid": [
+                71.94,
+                83.11,
+                -47.48
+              ]
+            },
+            {
+              "score": 0.0444694,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  190
+                ]
+              ],
+              "centroid": [
+                65.98,
+                69.5,
+                -36.68
+              ]
+            },
+            {
+              "score": 0.04045134,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  466
+                ]
+              ],
+              "centroid": [
+                67.36,
+                68.48,
+                -62.12
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.069328,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  128
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  462
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  238
+                ]
+              ],
+              "centroid": [
+                69.94,
+                73.87,
+                -50.63
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.31314503,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c9.5_w0.5-14.0": {
+          "ctqw": [
+            {
+              "score": 0.04764582,
+              "n_residues": 88,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  105
+                ],
+                [
+                  "A",
+                  113
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  710
+                ],
+                [
+                  "A",
+                  104
+                ],
+                [
+                  "A",
+                  686
+                ],
+                [
+                  "A",
+                  702
+                ],
+                [
+                  "A",
+                  114
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  119
+                ]
+              ],
+              "centroid": [
+                69.8,
+                83.0,
+                -46.21
+              ]
+            },
+            {
+              "score": 0.04052029,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  80
+                ]
+              ],
+              "centroid": [
+                83.15,
+                96.09,
+                -47.8
+              ]
+            },
+            {
+              "score": 0.03698634,
+              "n_residues": 4,
+              "residues": [
+                [
+                  "A",
+                  196
+                ],
+                [
+                  "A",
+                  217
+                ],
+                [
+                  "A",
+                  192
+                ],
+                [
+                  "A",
+                  197
+                ]
+              ],
+              "centroid": [
+                58.85,
+                68.81,
+                -30.89
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.05684538,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  128
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  462
+                ],
+                [
+                  "A",
+                  238
+                ]
+              ],
+              "centroid": [
+                70.9,
+                74.68,
+                -50.2
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.31314503,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  949
+                ],
+                [
+                  "A",
+                  948
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c10.0_w0.5-4.0": {
+          "ctqw": [
+            {
+              "score": 0.05029084,
+              "n_residues": 90,
+              "residues": [
+                [
+                  "A",
+                  105
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  117
+                ],
+                [
+                  "A",
+                  246
+                ],
+                [
+                  "A",
+                  106
+                ],
+                [
+                  "A",
+                  118
+                ],
+                [
+                  "A",
+                  703
+                ],
+                [
+                  "A",
+                  669
+                ],
+                [
+                  "A",
+                  122
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  119
+                ]
+              ],
+              "centroid": [
+                71.44,
+                83.02,
+                -48.63
+              ]
+            },
+            {
+              "score": 0.04457034,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  444
+                ]
+              ],
+              "centroid": [
+                46.53,
+                61.97,
+                -39.82
+              ]
+            },
+            {
+              "score": 0.04420605,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  157
+                ]
+              ],
+              "centroid": [
+                64.38,
+                81.7,
+                -36.76
+              ]
+            },
+            {
+              "score": 0.03942136,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  49
+                ]
+              ],
+              "centroid": [
+                92.31,
+                94.66,
+                -56.29
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.07607586,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  128
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  462
+                ],
+                [
+                  "A",
+                  482
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  676
+                ]
+              ],
+              "centroid": [
+                69.38,
+                74.53,
+                -50.98
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.26336503,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  948
+                ],
+                [
+                  "A",
+                  949
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c10.0_w0.5-8.0": {
+          "ctqw": [
+            {
+              "score": 0.04531248,
+              "n_residues": 87,
+              "residues": [
+                [
+                  "A",
+                  90
+                ],
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  703
+                ],
+                [
+                  "A",
+                  104
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  116
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  91
+                ],
+                [
+                  "A",
+                  676
+                ],
+                [
+                  "A",
+                  93
+                ],
+                [
+                  "A",
+                  92
+                ]
+              ],
+              "centroid": [
+                73.57,
+                84.98,
+                -48.7
+              ]
+            },
+            {
+              "score": 0.04304525,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  249
+                ]
+              ],
+              "centroid": [
+                50.48,
+                71.81,
+                -41.77
+              ]
+            },
+            {
+              "score": 0.04153193,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  517
+                ],
+                [
+                  "A",
+                  520
+                ]
+              ],
+              "centroid": [
+                56.6,
+                82.66,
+                -65.89
+              ]
+            },
+            {
+              "score": 0.04085241,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  157
+                ]
+              ],
+              "centroid": [
+                64.38,
+                81.7,
+                -36.76
+              ]
+            },
+            {
+              "score": 0.04000419,
+              "n_residues": 2,
+              "residues": [
+                [
+                  "A",
+                  13
+                ],
+                [
+                  "A",
+                  18
+                ]
+              ],
+              "centroid": [
+                81.7,
+                80.97,
+                -30.73
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.06206813,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  128
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  676
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  466
+                ],
+                [
+                  "A",
+                  238
+                ],
+                [
+                  "A",
+                  124
+                ]
+              ],
+              "centroid": [
+                69.96,
+                74.8,
+                -50.85
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.26336503,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  948
+                ],
+                [
+                  "A",
+                  949
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        },
+        "c10.0_w0.5-14.0": {
+          "ctqw": [
+            {
+              "score": 0.04523352,
+              "n_residues": 79,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  105
+                ],
+                [
+                  "A",
+                  79
+                ],
+                [
+                  "A",
+                  123
+                ],
+                [
+                  "A",
+                  703
+                ],
+                [
+                  "A",
+                  100
+                ],
+                [
+                  "A",
+                  93
+                ],
+                [
+                  "A",
+                  89
+                ],
+                [
+                  "A",
+                  90
+                ],
+                [
+                  "A",
+                  113
+                ],
+                [
+                  "A",
+                  78
+                ],
+                [
+                  "A",
+                  461
+                ]
+              ],
+              "centroid": [
+                75.22,
+                85.46,
+                -46.83
+              ]
+            },
+            {
+              "score": 0.04060009,
+              "n_residues": 8,
+              "residues": [
+                [
+                  "A",
+                  485
+                ],
+                [
+                  "A",
+                  696
+                ],
+                [
+                  "A",
+                  489
+                ],
+                [
+                  "A",
+                  486
+                ],
+                [
+                  "A",
+                  480
+                ],
+                [
+                  "A",
+                  479
+                ],
+                [
+                  "A",
+                  483
+                ],
+                [
+                  "A",
+                  481
+                ]
+              ],
+              "centroid": [
+                61.05,
+                78.99,
+                -58.24
+              ]
+            },
+            {
+              "score": 0.03668765,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  249
+                ]
+              ],
+              "centroid": [
+                50.48,
+                71.81,
+                -41.77
+              ]
+            },
+            {
+              "score": 0.03512232,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  590
+                ]
+              ],
+              "centroid": [
+                53.44,
+                62.72,
+                -75.58
+              ]
+            },
+            {
+              "score": 0.03440858,
+              "n_residues": 1,
+              "residues": [
+                [
+                  "A",
+                  142
+                ]
+              ],
+              "centroid": [
+                67.83,
+                80.0,
+                -27.13
+              ]
+            }
+          ],
+          "diffusion": [
+            {
+              "score": 0.05005998,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  463
+                ],
+                [
+                  "A",
+                  128
+                ],
+                [
+                  "A",
+                  679
+                ],
+                [
+                  "A",
+                  677
+                ],
+                [
+                  "A",
+                  676
+                ],
+                [
+                  "A",
+                  675
+                ],
+                [
+                  "A",
+                  176
+                ],
+                [
+                  "A",
+                  125
+                ],
+                [
+                  "A",
+                  124
+                ],
+                [
+                  "A",
+                  127
+                ],
+                [
+                  "A",
+                  237
+                ],
+                [
+                  "A",
+                  466
+                ]
+              ],
+              "centroid": [
+                70.55,
+                75.69,
+                -50.66
+              ]
+            }
+          ],
+          "gnm": [
+            {
+              "score": 0.26336503,
+              "n_residues": 93,
+              "residues": [
+                [
+                  "A",
+                  959
+                ],
+                [
+                  "A",
+                  958
+                ],
+                [
+                  "A",
+                  957
+                ],
+                [
+                  "A",
+                  956
+                ],
+                [
+                  "A",
+                  955
+                ],
+                [
+                  "A",
+                  954
+                ],
+                [
+                  "A",
+                  953
+                ],
+                [
+                  "A",
+                  952
+                ],
+                [
+                  "A",
+                  951
+                ],
+                [
+                  "A",
+                  950
+                ],
+                [
+                  "A",
+                  948
+                ],
+                [
+                  "A",
+                  949
+                ]
+              ],
+              "centroid": [
+                10.72,
+                70.65,
+                -48.26
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "como": {
+      "protocol": "juez-v1: misma red de residuos, misma fuente y misma ventana en ambos lados; ground truth leido geometricamente del efector co-cristalizado (<4.5A), definido por NINGUNO de los propagadores",
+      "instance_params": {
+        "cutoffs_A": [
+          7.5,
+          8.0,
+          8.5,
+          9.0,
+          9.5,
+          10.0
+        ],
+        "windows": [
+          [
+            0.5,
+            4.0
+          ],
+          [
+            0.5,
+            8.0
+          ],
+          [
+            0.5,
+            14.0
+          ]
+        ],
+        "n_times": 16,
+        "distal_A": 6.0,
+        "gt_radius_A": 4.5,
+        "n_configuraciones": 18,
+        "n_residuos": 954
+      },
+      "sweep_note": "rejilla IDENTICA a la congelada y sellada en PR-CLEV-001 el 2026-07-24, antes de ver estos datos. Ningun parametro se ajusto por proteina.",
+      "lib_versions": {
+        "prody": "2.6.1",
+        "numpy": "2.4.4",
+        "scipy": "1.16.3",
+        "python": "3.11.15"
+      },
+      "compute": "contenedor cloud Cowork (CPU, Linux)",
+      "harness": "run_challenge_targets2.py",
+      "raw_data_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/data/2026/07/challenge_results_part2.json",
+      "procedencia": [
+        {
+          "archivo": "challenge_results_part2.json",
+          "sha256": "sha256:ad9eb30879b544d49d24d49c1112d2736d6a9c4966713324bdd6a2708cdf5cf4"
+        }
+      ],
+      "scripts": [
+        {
+          "archivo": "run_challenge_targets2.py",
+          "sha256": "sha256:f6172e7a17d783db3cbe28e0f30590bbdcde3f63609bf65d16b3ced4fd63a1da"
+        }
+      ]
+    },
+    "donde": {
+      "quantum_backend": "CTQW por eigendescomposicion (simulacion exacta; ruta NISQ = simulacion hamiltoniana gate-based, costo medido en EXP-0007-019)",
+      "classical_backend": "difusion, GNM, ANM y centralidades por eigendescomposicion / Brandes",
+      "protein_source": "RCSB PDB via ProDy",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "si la caminata cuantica capturara algo que la difusion no captura, deberia rankear el bolsillo alosterico verdadero por encima de ella de forma estable a lo largo de toda la rejilla",
+      "question": "En la diana CARDIAC_MYOSIN del reto, que percentil alcanza el sitio alosterico verdadero bajo cada propagador?",
+      "ledger_goal": "evidencia primaria de la propuesta Fase I del Global Quantum + AI Challenge (Cleveland Clinic); insumo del veredicto RQ-0007"
+    },
+    "cuando": {
+      "started_at": "2026-07-25T15:43:37.863199+00:00",
+      "archived_at": "2026-07-25T15:43:37.863199+00:00",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "run_challenge_targets2.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum",
+      "team": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0007-015__20260725T1543Z__ctqw-vs-clasicos--allosteria-miosina-cardiaca.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0007-015__20260725T1543Z__ctqw-vs-clasicos--allosteria-miosina-cardiaca.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-015__20260725T1543Z__ctqw-vs-clasicos--allosteria-miosina-cardiaca.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "mirror",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0007-015"
+      }
+    ]
+  }
+}

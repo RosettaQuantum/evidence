@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "file_name": "RosettaQ__RUN__EXP-0007-018__20260725T1538Z__cripticidad--dos-regimenes-de-fallo.json",
+    "file_id": "EXP-0007-018",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Explicacion mecanicista del negativo. El bolsillo de KRAS lo crea el ligando; el de BCR-ABL1 esta preformado y rigido y aun asi es inencontrable.",
+    "schema": "rosettaq-archive/v2",
+    "sealed_at": "2026-07-26T12:57:00.571212+00:00",
+    "sealed_by": {
+      "lib": "rosettaq_seal.py",
+      "lib_version": "2.0.0",
+      "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+      "harness": "crypticity.py",
+      "harness_version": "1.0.0",
+      "harness_sha256": "sha256:807f8ef59f9101df11308b3b36d0fdcee6f8c63cc84cec0b00376f6c153ad19c",
+      "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+    },
+    "content_hash": "sha256:5dc317c23db08f6810465286193f6ec1bac9634d0e2983ee380208658a6e602b"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0007",
+      "recipe_name": "Cripticidad del bolsillo — mecanismo de los dos regimenes de fallo",
+      "problem_class": "Diagnostico estructural de por que falla la prediccion alosterica",
+      "instance": "KRAS G12C (4OBE/6OIM) y BCR-ABL1 (1OPL/5MO4)",
+      "quantum_side": {
+        "nota": "no aplica: es un analisis estructural, no un propagador"
+      },
+      "classical_side": {
+        "nota": "no aplica"
+      },
+      "ground_truth": "desplazamiento Ca apo-holo y conteo de contactos, medidos directamente",
+      "outcome": "dos modos de fallo distintos, con mecanismo medido y no supuesto",
+      "metric": "desplazamiento Ca (A) del sitio vs el resto, y contactos antes/despues de unir",
+      "regimen_1_bolsillo_criptico": {
+        "diana": "KRAS G12C",
+        "desplazamiento_sitio_A": 1.7,
+        "desplazamiento_resto_A": 0.83,
+        "razon": 2.05,
+        "percentil_del_sitio": 88.7,
+        "contactos_apo": 214,
+        "contactos_holo": 188,
+        "lectura": "el sitio se mueve el doble que el resto y PIERDE contactos al unirse: el bolsillo lo crea el ligando. Ningun propagador sobre la red de contactos de la apo puede encontrar algo que todavia no existe."
+      },
+      "regimen_2_preformado_rigido": {
+        "diana": "BCR-ABL1",
+        "desplazamiento_sitio_A": 0.43,
+        "desplazamiento_resto_A": 0.73,
+        "razon": 0.59,
+        "percentil_del_sitio": 32.1,
+        "contactos_apo": 221,
+        "contactos_holo": 218,
+        "lectura": "el sitio se mueve MENOS que el promedio y sus contactos no cambian: esta preformado y rigido, y aun asi es inencontrable. Aqui el problema no es que el sitio no exista, es que la topologia de contactos Ca no lo distingue."
+      },
+      "datos_crudos": {
+        "KRAS_G12C": {
+          "n_comunes": 162,
+          "rmsd_global": 1.37,
+          "desplazamiento_medio_sitio": 1.7,
+          "desplazamiento_mediano_sitio": 0.84,
+          "desplazamiento_medio_resto": 0.83,
+          "desplazamiento_mediano_resto": 0.61,
+          "razon_sitio_vs_resto": 2.05,
+          "percentil_del_sitio_en_desplazamiento": 88.7,
+          "n_residuos_sitio_comunes": 20,
+          "contactos_sitio_apo": 214.0,
+          "contactos_sitio_holo": 188.0
+        },
+        "BCR_ABL1": {
+          "n_comunes": 428,
+          "rmsd_global": 0.98,
+          "desplazamiento_medio_sitio": 0.43,
+          "desplazamiento_mediano_sitio": 0.37,
+          "desplazamiento_medio_resto": 0.73,
+          "desplazamiento_mediano_resto": 0.57,
+          "razon_sitio_vs_resto": 0.59,
+          "percentil_del_sitio_en_desplazamiento": 32.1,
+          "n_residuos_sitio_comunes": 20,
+          "contactos_sitio_apo": 221.0,
+          "contactos_sitio_holo": 218.0
+        }
+      }
+    },
+    "como": {
+      "protocol": "superposicion apo-holo por residuos comunes, desplazamiento Ca por residuo, y conteo de contactos del sitio en ambas conformaciones",
+      "instance_params": {
+        "cutoff_A": 8.5,
+        "gt_radius_A": 4.5
+      },
+      "sweep_note": "analisis explicativo posterior a la rejilla; no altera ningun resultado sellado",
+      "lib_versions": {
+        "prody": "2.6.1",
+        "numpy": "2.4.4",
+        "scipy": "1.16.3",
+        "python": "3.11.15"
+      },
+      "compute": "contenedor cloud Cowork (CPU, Linux)",
+      "harness": "crypticity.py",
+      "raw_data_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/data/2026/07/crypticity.json",
+      "procedencia": [
+        {
+          "archivo": "crypticity.json",
+          "sha256": "sha256:e18761ea824129487acb1c72c0c7bbb652024c0ce0726ef9461c8f3407a886c0"
+        }
+      ],
+      "scripts": [
+        {
+          "archivo": "crypticity.py",
+          "sha256": "sha256:807f8ef59f9101df11308b3b36d0fdcee6f8c63cc84cec0b00376f6c153ad19c"
+        }
+      ]
+    },
+    "donde": {
+      "quantum_backend": "no aplica",
+      "classical_backend": "ProDy / numpy",
+      "protein_source": "RCSB PDB via ProDy",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "un negativo sin mecanismo es un negativo debil; si el metodo falla, hay que poder decir POR QUE falla y si el fallo es del metodo o del planteamiento",
+      "question": "Por que ningun propagador encuentra estos bolsillos?",
+      "ledger_goal": "convertir el negativo en diagnostico: dos regimenes, dos rutas de solucion distintas para Fase II"
+    },
+    "cuando": {
+      "started_at": "2026-07-25T15:38:07.468199+00:00",
+      "archived_at": "2026-07-25T15:38:07.468199+00:00",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "crypticity.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum",
+      "team": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0007-018__20260725T1538Z__cripticidad--dos-regimenes-de-fallo.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0007-018__20260725T1538Z__cripticidad--dos-regimenes-de-fallo.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-018__20260725T1538Z__cripticidad--dos-regimenes-de-fallo.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "mirror",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0007-018"
+      }
+    ]
+  }
+}

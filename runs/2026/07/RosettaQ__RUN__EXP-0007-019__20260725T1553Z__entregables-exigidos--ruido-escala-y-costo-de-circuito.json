@@ -1,0 +1,1146 @@
+{
+  "meta": {
+    "file_name": "RosettaQ__RUN__EXP-0007-019__20260725T1553Z__entregables-exigidos--ruido-escala-y-costo-de-circuito.json",
+    "file_id": "EXP-0007-019",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Los tres entregables que el reto exige, medidos. Dos salen desfavorables (coarse-graining inestable, circuito demasiado profundo para NISQ) y se reportan igual.",
+    "schema": "rosettaq-archive/v2",
+    "sealed_at": "2026-07-26T12:57:00.621278+00:00",
+    "sealed_by": {
+      "lib": "rosettaq_seal.py",
+      "lib_version": "2.0.0",
+      "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+      "harness": "required_deliverables.py",
+      "harness_version": "1.0.0",
+      "harness_sha256": "sha256:f516c1a5ebabd88b6291b31ed16dd4a49874507d36d8a6032ddab56d6df6035f",
+      "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+    },
+    "content_hash": "sha256:a4fdb96d1415bdbd4a0ece693b29886dec4c85be37d4065450987e823984bb37"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0007",
+      "recipe_name": "Entregables exigidos por el reto: ruido, escalabilidad y costo de circuito",
+      "problem_class": "Caracterizacion de implementabilidad (Cleveland Clinic track)",
+      "instance": "KRAS G12C, BCR-ABL1, miosina cardiaca",
+      "quantum_side": {
+        "costo_de_circuito_medido": {
+          "KRAS_G12C": {
+            "qubits_codificacion_binaria": 8,
+            "aristas": 927,
+            "grado_maximo": 19,
+            "clases_de_color": 19,
+            "trotter": [
+              {
+                "r": 1,
+                "spearman_vs_exacto": 0.4061,
+                "percentil": 49.27
+              },
+              {
+                "r": 2,
+                "spearman_vs_exacto": 0.4105,
+                "percentil": 41.71
+              },
+              {
+                "r": 4,
+                "spearman_vs_exacto": 0.4014,
+                "percentil": 33.23
+              },
+              {
+                "r": 8,
+                "spearman_vs_exacto": 0.5081,
+                "percentil": 48.18
+              },
+              {
+                "r": 16,
+                "spearman_vs_exacto": 0.841,
+                "percentil": 38.14
+              },
+              {
+                "r": 32,
+                "spearman_vs_exacto": 0.8889,
+                "percentil": 33.72
+              },
+              {
+                "r": 64,
+                "spearman_vs_exacto": 0.965,
+                "percentil": 31.36
+              },
+              {
+                "r": 128,
+                "spearman_vs_exacto": 0.9894,
+                "percentil": 30.87
+              },
+              {
+                "r": 256,
+                "spearman_vs_exacto": 0.9969,
+                "percentil": 30.75
+              }
+            ],
+            "r_para_spearman_099": 256,
+            "profundidad_por_paso_2q": 19,
+            "profundidad_total_2q": 4864,
+            "nota": "cada clase de color es un emparejamiento: en codificacion binaria se implementa como una permutacion + una rotacion controlada, profundidad O(qubits) en 2-qubit gates. La profundidad total reportada esta en unidades de clases de color por paso de Trotter."
+          },
+          "BCR_ABL1": {
+            "qubits_codificacion_binaria": 9,
+            "aristas": 2391,
+            "grado_maximo": 18,
+            "clases_de_color": 19,
+            "trotter": [
+              {
+                "r": 1,
+                "spearman_vs_exacto": 0.778,
+                "percentil": 50.54
+              },
+              {
+                "r": 2,
+                "spearman_vs_exacto": 0.8351,
+                "percentil": 59.37
+              },
+              {
+                "r": 4,
+                "spearman_vs_exacto": 0.7691,
+                "percentil": 53.06
+              },
+              {
+                "r": 8,
+                "spearman_vs_exacto": 0.8145,
+                "percentil": 62.36
+              },
+              {
+                "r": 16,
+                "spearman_vs_exacto": 0.8659,
+                "percentil": 63.88
+              },
+              {
+                "r": 32,
+                "spearman_vs_exacto": 0.9418,
+                "percentil": 60.47
+              },
+              {
+                "r": 64,
+                "spearman_vs_exacto": 0.9813,
+                "percentil": 60.03
+              },
+              {
+                "r": 128,
+                "spearman_vs_exacto": 0.9942,
+                "percentil": 60.32
+              }
+            ],
+            "r_para_spearman_099": 128,
+            "profundidad_por_paso_2q": 19,
+            "profundidad_total_2q": 2432,
+            "nota": "cada clase de color es un emparejamiento: en codificacion binaria se implementa como una permutacion + una rotacion controlada, profundidad O(qubits) en 2-qubit gates. La profundidad total reportada esta en unidades de clases de color por paso de Trotter."
+          },
+          "CARDIAC_MYOSIN": {
+            "qubits_codificacion_binaria": 10,
+            "aristas": 4629,
+            "grado_maximo": 19,
+            "clases_de_color": 19,
+            "trotter": [
+              {
+                "r": 1,
+                "spearman_vs_exacto": 0.5431,
+                "percentil": 49.26
+              },
+              {
+                "r": 2,
+                "spearman_vs_exacto": 0.8266,
+                "percentil": 65.57
+              },
+              {
+                "r": 4,
+                "spearman_vs_exacto": 0.8723,
+                "percentil": 63.25
+              },
+              {
+                "r": 8,
+                "spearman_vs_exacto": 0.8837,
+                "percentil": 60.75
+              },
+              {
+                "r": 16,
+                "spearman_vs_exacto": 0.9375,
+                "percentil": 61.47
+              },
+              {
+                "r": 32,
+                "spearman_vs_exacto": 0.9721,
+                "percentil": 61.54
+              },
+              {
+                "r": 64,
+                "spearman_vs_exacto": 0.99,
+                "percentil": 60.71
+              },
+              {
+                "r": 128,
+                "spearman_vs_exacto": 0.9972,
+                "percentil": 60.83
+              }
+            ],
+            "r_para_spearman_099": 128,
+            "profundidad_por_paso_2q": 19,
+            "profundidad_total_2q": 2432,
+            "nota": "cada clase de color es un emparejamiento: en codificacion binaria se implementa como una permutacion + una rotacion controlada, profundidad O(qubits) en 2-qubit gates. La profundidad total reportada esta en unidades de clases de color por paso de Trotter."
+          }
+        },
+        "hallazgo": "los grafos de contacto de proteinas tienen GRADO ACOTADO: grado maximo 19/18/19 y exactamente 19 clases de color en un rango de tamano de 5.6x (169 a 954 residuos). La profundidad por paso de Trotter es por tanto O(1) en el tamano de la proteina; solo los qubits crecen logaritmicamente. La profundidad TOTAL sigue siendo demasiado grande para NISQ, y lo decimos con el numero."
+      },
+      "classical_side": {
+        "nota": "el propagador exacto por eigendescomposicion es la referencia"
+      },
+      "ground_truth": "los mismos sitios geometricos de EXP-0007-013/014/015",
+      "outcome": "los tres entregables quedan cubiertos, dos de ellos con resultado desfavorable",
+      "metric": "Spearman del ranking distal contra el propagador ideal, y percentil del sitio",
+      "resiliencia_al_ruido": {
+        "desfase_cuantico": {
+          "KRAS_G12C": [
+            {
+              "gamma": 0.0,
+              "spearman_vs_ideal": 1.0,
+              "percentil": 29.9
+            },
+            {
+              "gamma": 0.01,
+              "spearman_vs_ideal": 0.9992,
+              "percentil": 29.84
+            },
+            {
+              "gamma": 0.05,
+              "spearman_vs_ideal": 0.9957,
+              "percentil": 30.08
+            },
+            {
+              "gamma": 0.2,
+              "spearman_vs_ideal": 0.9629,
+              "percentil": 30.93
+            },
+            {
+              "gamma": 1.0,
+              "spearman_vs_ideal": 0.8456,
+              "percentil": 33.78
+            }
+          ],
+          "BCR_ABL1": [
+            {
+              "gamma": 0.0,
+              "spearman_vs_ideal": 1.0,
+              "percentil": 60.67
+            },
+            {
+              "gamma": 0.01,
+              "spearman_vs_ideal": 0.9995,
+              "percentil": 60.87
+            },
+            {
+              "gamma": 0.05,
+              "spearman_vs_ideal": 0.9957,
+              "percentil": 60.78
+            },
+            {
+              "gamma": 0.2,
+              "spearman_vs_ideal": 0.9719,
+              "percentil": 60.86
+            },
+            {
+              "gamma": 1.0,
+              "spearman_vs_ideal": 0.9089,
+              "percentil": 61.56
+            }
+          ],
+          "CARDIAC_MYOSIN": [
+            {
+              "gamma": 0.0,
+              "spearman_vs_ideal": 1.0,
+              "percentil": 61.32
+            },
+            {
+              "gamma": 0.01,
+              "spearman_vs_ideal": 0.9997,
+              "percentil": 61.53
+            },
+            {
+              "gamma": 0.05,
+              "spearman_vs_ideal": 0.9978,
+              "percentil": 61.73
+            },
+            {
+              "gamma": 0.2,
+              "spearman_vs_ideal": 0.9877,
+              "percentil": 62.23
+            },
+            {
+              "gamma": 1.0,
+              "spearman_vs_ideal": 0.965,
+              "percentil": 62.18
+            }
+          ]
+        },
+        "ruido_de_coordenadas": {
+          "KRAS_G12C": [
+            {
+              "sigma_A": 0.25,
+              "spearman_medio": 0.7964,
+              "percentil_medio": 34.38,
+              "percentil_sd": 3.31
+            },
+            {
+              "sigma_A": 0.5,
+              "spearman_medio": 0.7337,
+              "percentil_medio": 34.19,
+              "percentil_sd": 2.94
+            },
+            {
+              "sigma_A": 1.0,
+              "spearman_medio": 0.5873,
+              "percentil_medio": 38.66,
+              "percentil_sd": 6.48
+            }
+          ],
+          "BCR_ABL1": [
+            {
+              "sigma_A": 0.25,
+              "spearman_medio": 0.902,
+              "percentil_medio": 60.02,
+              "percentil_sd": 3.77
+            },
+            {
+              "sigma_A": 0.5,
+              "spearman_medio": 0.8618,
+              "percentil_medio": 57.18,
+              "percentil_sd": 4.29
+            },
+            {
+              "sigma_A": 1.0,
+              "spearman_medio": 0.8297,
+              "percentil_medio": 60.07,
+              "percentil_sd": 6.71
+            }
+          ],
+          "CARDIAC_MYOSIN": [
+            {
+              "sigma_A": 0.25,
+              "spearman_medio": 0.9544,
+              "percentil_medio": 64.13,
+              "percentil_sd": 4.9
+            },
+            {
+              "sigma_A": 0.5,
+              "spearman_medio": 0.9384,
+              "percentil_medio": 63.84,
+              "percentil_sd": 4.95
+            },
+            {
+              "sigma_A": 1.0,
+              "spearman_medio": 0.9042,
+              "percentil_medio": 65.0,
+              "percentil_sd": 7.02
+            }
+          ]
+        },
+        "perdida_de_aristas": {
+          "KRAS_G12C": [
+            {
+              "p": 0.01,
+              "spearman_medio": 0.9604,
+              "percentil_medio": 29.64,
+              "percentil_sd": 0.74
+            },
+            {
+              "p": 0.05,
+              "spearman_medio": 0.8502,
+              "percentil_medio": 30.83,
+              "percentil_sd": 3.97
+            },
+            {
+              "p": 0.1,
+              "spearman_medio": 0.7878,
+              "percentil_medio": 31.76,
+              "percentil_sd": 4.86
+            }
+          ],
+          "BCR_ABL1": [
+            {
+              "p": 0.01,
+              "spearman_medio": 0.9761,
+              "percentil_medio": 61.06,
+              "percentil_sd": 1.8
+            },
+            {
+              "p": 0.05,
+              "spearman_medio": 0.9322,
+              "percentil_medio": 59.82,
+              "percentil_sd": 2.18
+            },
+            {
+              "p": 0.1,
+              "spearman_medio": 0.9126,
+              "percentil_medio": 59.77,
+              "percentil_sd": 2.52
+            }
+          ],
+          "CARDIAC_MYOSIN": [
+            {
+              "p": 0.01,
+              "spearman_medio": 0.9883,
+              "percentil_medio": 61.38,
+              "percentil_sd": 2.47
+            },
+            {
+              "p": 0.05,
+              "spearman_medio": 0.9627,
+              "percentil_medio": 62.46,
+              "percentil_sd": 3.15
+            },
+            {
+              "p": 0.1,
+              "spearman_medio": 0.9467,
+              "percentil_medio": 61.49,
+              "percentil_sd": 3.4
+            }
+          ]
+        },
+        "lectura": "el desfase a gamma=1.0 deja Spearman en 0.85/0.91/0.97 y casi no mueve el percentil del sitio, mientras que 1 A de ruido en coordenadas lo baja a 0.59 en KRAS. El cuello de botella NO es el hardware cuantico: es la estructura de entrada."
+      },
+      "escalabilidad_por_coarse_graining": {
+        "datos": {
+          "KRAS_G12C": [
+            {
+              "bloque": 1,
+              "n_supernodos": 169,
+              "percentil": 29.9,
+              "t_s": 0.0075,
+              "aceleracion": 1.2
+            },
+            {
+              "bloque": 2,
+              "n_supernodos": 85,
+              "percentil": 32.83,
+              "t_s": 0.0027,
+              "aceleracion": 3.3
+            },
+            {
+              "bloque": 4,
+              "n_supernodos": 43,
+              "percentil": 39.29,
+              "t_s": 0.0011,
+              "aceleracion": 7.9
+            },
+            {
+              "bloque": 8,
+              "n_supernodos": 22,
+              "percentil": 16.67,
+              "t_s": 0.0007,
+              "aceleracion": 12.1
+            }
+          ],
+          "BCR_ABL1": [
+            {
+              "bloque": 1,
+              "n_supernodos": 451,
+              "percentil": 60.67,
+              "t_s": 0.0509,
+              "aceleracion": 1.2
+            },
+            {
+              "bloque": 2,
+              "n_supernodos": 226,
+              "percentil": 69.55,
+              "t_s": 0.0126,
+              "aceleracion": 5.0
+            },
+            {
+              "bloque": 4,
+              "n_supernodos": 113,
+              "percentil": 61.94,
+              "t_s": 0.004,
+              "aceleracion": 15.8
+            },
+            {
+              "bloque": 8,
+              "n_supernodos": 57,
+              "percentil": 43.7,
+              "t_s": 0.0015,
+              "aceleracion": 41.8
+            }
+          ],
+          "CARDIAC_MYOSIN": [
+            {
+              "bloque": 1,
+              "n_supernodos": 954,
+              "percentil": 61.32,
+              "t_s": 0.3364,
+              "aceleracion": 0.9
+            },
+            {
+              "bloque": 2,
+              "n_supernodos": 477,
+              "percentil": 58.66,
+              "t_s": 0.0756,
+              "aceleracion": 3.9
+            },
+            {
+              "bloque": 4,
+              "n_supernodos": 239,
+              "percentil": 47.42,
+              "t_s": 0.0194,
+              "aceleracion": 15.2
+            },
+            {
+              "bloque": 8,
+              "n_supernodos": 120,
+              "percentil": 66.88,
+              "t_s": 0.0055,
+              "aceleracion": 53.3
+            }
+          ]
+        },
+        "lectura": "hasta 67x de aceleracion, pero el percentil del sitio se pasea sin monotonia (KRAS 29.9->32.8->39.3->16.7; miosina 61.3->58.7->47.4->66.9). Hay velocidad, no hay senal estable a la resolucion necesaria. Cualquier afirmacion de que 'escala por coarse-graining' seria insostenible con estos datos."
+      },
+      "matrices_de_conectividad_cuantica": {
+        "definicion": "C_ij = promedio_t |<i|exp(-iAt)|j>|^2 sobre la ventana; simetrica, N x N",
+        "config": {
+          "cutoff_A": 8.5,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "n_times": 16
+        },
+        "archivos": [
+          "qmatrix_KRAS_G12C.npy (169x169)",
+          "qmatrix_BCR_ABL1.npy (451x451)",
+          "qmatrix_CARDIAC_MYOSIN.npy (954x954)",
+          "qmatrix_c_MYC.npy (171x171)"
+        ]
+      },
+      "visualizacion_3d": {
+        "archivo": "cleveland_viz.html",
+        "nota": "HTML autocontenido, sin CDN ni almacenamiento del navegador; renderizador 3D propio con el sitio verdadero, el top-5 predicho y el panel estadistico"
+      },
+      "datos_crudos": {
+        "KRAS_G12C": {
+          "n_nodes": 169,
+          "cutoff": 8.5,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "percentil_base": 29.9,
+          "t_exacto_s": 0.009,
+          "ruido_coordenadas": [
+            {
+              "sigma_A": 0.25,
+              "spearman_medio": 0.7964,
+              "percentil_medio": 34.38,
+              "percentil_sd": 3.31
+            },
+            {
+              "sigma_A": 0.5,
+              "spearman_medio": 0.7337,
+              "percentil_medio": 34.19,
+              "percentil_sd": 2.94
+            },
+            {
+              "sigma_A": 1.0,
+              "spearman_medio": 0.5873,
+              "percentil_medio": 38.66,
+              "percentil_sd": 6.48
+            }
+          ],
+          "perdida_aristas": [
+            {
+              "p": 0.01,
+              "spearman_medio": 0.9604,
+              "percentil_medio": 29.64,
+              "percentil_sd": 0.74
+            },
+            {
+              "p": 0.05,
+              "spearman_medio": 0.8502,
+              "percentil_medio": 30.83,
+              "percentil_sd": 3.97
+            },
+            {
+              "p": 0.1,
+              "spearman_medio": 0.7878,
+              "percentil_medio": 31.76,
+              "percentil_sd": 4.86
+            }
+          ],
+          "desfase_hardware": [
+            {
+              "gamma": 0.0,
+              "spearman_vs_ideal": 1.0,
+              "percentil": 29.9
+            },
+            {
+              "gamma": 0.01,
+              "spearman_vs_ideal": 0.9992,
+              "percentil": 29.84
+            },
+            {
+              "gamma": 0.05,
+              "spearman_vs_ideal": 0.9957,
+              "percentil": 30.08
+            },
+            {
+              "gamma": 0.2,
+              "spearman_vs_ideal": 0.9629,
+              "percentil": 30.93
+            },
+            {
+              "gamma": 1.0,
+              "spearman_vs_ideal": 0.8456,
+              "percentil": 33.78
+            }
+          ],
+          "coarse_graining": [
+            {
+              "bloque": 1,
+              "n_supernodos": 169,
+              "percentil": 29.9,
+              "t_s": 0.0075,
+              "aceleracion": 1.2
+            },
+            {
+              "bloque": 2,
+              "n_supernodos": 85,
+              "percentil": 32.83,
+              "t_s": 0.0027,
+              "aceleracion": 3.3
+            },
+            {
+              "bloque": 4,
+              "n_supernodos": 43,
+              "percentil": 39.29,
+              "t_s": 0.0011,
+              "aceleracion": 7.9
+            },
+            {
+              "bloque": 8,
+              "n_supernodos": 22,
+              "percentil": 16.67,
+              "t_s": 0.0007,
+              "aceleracion": 12.1
+            }
+          ],
+          "circuito": {
+            "qubits_codificacion_binaria": 8,
+            "aristas": 927,
+            "grado_maximo": 19,
+            "clases_de_color": 19,
+            "trotter": [
+              {
+                "r": 1,
+                "spearman_vs_exacto": 0.4061,
+                "percentil": 49.27
+              },
+              {
+                "r": 2,
+                "spearman_vs_exacto": 0.4105,
+                "percentil": 41.71
+              },
+              {
+                "r": 4,
+                "spearman_vs_exacto": 0.4014,
+                "percentil": 33.23
+              },
+              {
+                "r": 8,
+                "spearman_vs_exacto": 0.5081,
+                "percentil": 48.18
+              },
+              {
+                "r": 16,
+                "spearman_vs_exacto": 0.841,
+                "percentil": 38.14
+              },
+              {
+                "r": 32,
+                "spearman_vs_exacto": 0.8889,
+                "percentil": 33.72
+              },
+              {
+                "r": 64,
+                "spearman_vs_exacto": 0.965,
+                "percentil": 31.36
+              },
+              {
+                "r": 128,
+                "spearman_vs_exacto": 0.9894,
+                "percentil": 30.87
+              },
+              {
+                "r": 256,
+                "spearman_vs_exacto": 0.9969,
+                "percentil": 30.75
+              }
+            ],
+            "r_para_spearman_099": 256,
+            "profundidad_por_paso_2q": 19,
+            "profundidad_total_2q": 4864,
+            "nota": "cada clase de color es un emparejamiento: en codificacion binaria se implementa como una permutacion + una rotacion controlada, profundidad O(qubits) en 2-qubit gates. La profundidad total reportada esta en unidades de clases de color por paso de Trotter."
+          }
+        },
+        "BCR_ABL1": {
+          "n_nodes": 451,
+          "cutoff": 8.5,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "percentil_base": 60.67,
+          "t_exacto_s": 0.063,
+          "ruido_coordenadas": [
+            {
+              "sigma_A": 0.25,
+              "spearman_medio": 0.902,
+              "percentil_medio": 60.02,
+              "percentil_sd": 3.77
+            },
+            {
+              "sigma_A": 0.5,
+              "spearman_medio": 0.8618,
+              "percentil_medio": 57.18,
+              "percentil_sd": 4.29
+            },
+            {
+              "sigma_A": 1.0,
+              "spearman_medio": 0.8297,
+              "percentil_medio": 60.07,
+              "percentil_sd": 6.71
+            }
+          ],
+          "perdida_aristas": [
+            {
+              "p": 0.01,
+              "spearman_medio": 0.9761,
+              "percentil_medio": 61.06,
+              "percentil_sd": 1.8
+            },
+            {
+              "p": 0.05,
+              "spearman_medio": 0.9322,
+              "percentil_medio": 59.82,
+              "percentil_sd": 2.18
+            },
+            {
+              "p": 0.1,
+              "spearman_medio": 0.9126,
+              "percentil_medio": 59.77,
+              "percentil_sd": 2.52
+            }
+          ],
+          "desfase_hardware": [
+            {
+              "gamma": 0.0,
+              "spearman_vs_ideal": 1.0,
+              "percentil": 60.67
+            },
+            {
+              "gamma": 0.01,
+              "spearman_vs_ideal": 0.9995,
+              "percentil": 60.87
+            },
+            {
+              "gamma": 0.05,
+              "spearman_vs_ideal": 0.9957,
+              "percentil": 60.78
+            },
+            {
+              "gamma": 0.2,
+              "spearman_vs_ideal": 0.9719,
+              "percentil": 60.86
+            },
+            {
+              "gamma": 1.0,
+              "spearman_vs_ideal": 0.9089,
+              "percentil": 61.56
+            }
+          ],
+          "coarse_graining": [
+            {
+              "bloque": 1,
+              "n_supernodos": 451,
+              "percentil": 60.67,
+              "t_s": 0.0509,
+              "aceleracion": 1.2
+            },
+            {
+              "bloque": 2,
+              "n_supernodos": 226,
+              "percentil": 69.55,
+              "t_s": 0.0126,
+              "aceleracion": 5.0
+            },
+            {
+              "bloque": 4,
+              "n_supernodos": 113,
+              "percentil": 61.94,
+              "t_s": 0.004,
+              "aceleracion": 15.8
+            },
+            {
+              "bloque": 8,
+              "n_supernodos": 57,
+              "percentil": 43.7,
+              "t_s": 0.0015,
+              "aceleracion": 41.8
+            }
+          ],
+          "circuito": {
+            "qubits_codificacion_binaria": 9,
+            "aristas": 2391,
+            "grado_maximo": 18,
+            "clases_de_color": 19,
+            "trotter": [
+              {
+                "r": 1,
+                "spearman_vs_exacto": 0.778,
+                "percentil": 50.54
+              },
+              {
+                "r": 2,
+                "spearman_vs_exacto": 0.8351,
+                "percentil": 59.37
+              },
+              {
+                "r": 4,
+                "spearman_vs_exacto": 0.7691,
+                "percentil": 53.06
+              },
+              {
+                "r": 8,
+                "spearman_vs_exacto": 0.8145,
+                "percentil": 62.36
+              },
+              {
+                "r": 16,
+                "spearman_vs_exacto": 0.8659,
+                "percentil": 63.88
+              },
+              {
+                "r": 32,
+                "spearman_vs_exacto": 0.9418,
+                "percentil": 60.47
+              },
+              {
+                "r": 64,
+                "spearman_vs_exacto": 0.9813,
+                "percentil": 60.03
+              },
+              {
+                "r": 128,
+                "spearman_vs_exacto": 0.9942,
+                "percentil": 60.32
+              }
+            ],
+            "r_para_spearman_099": 128,
+            "profundidad_por_paso_2q": 19,
+            "profundidad_total_2q": 2432,
+            "nota": "cada clase de color es un emparejamiento: en codificacion binaria se implementa como una permutacion + una rotacion controlada, profundidad O(qubits) en 2-qubit gates. La profundidad total reportada esta en unidades de clases de color por paso de Trotter."
+          }
+        },
+        "CARDIAC_MYOSIN": {
+          "n_nodes": 954,
+          "cutoff": 8.5,
+          "window": [
+            0.5,
+            8.0
+          ],
+          "percentil_base": 61.32,
+          "t_exacto_s": 0.295,
+          "ruido_coordenadas": [
+            {
+              "sigma_A": 0.25,
+              "spearman_medio": 0.9544,
+              "percentil_medio": 64.13,
+              "percentil_sd": 4.9
+            },
+            {
+              "sigma_A": 0.5,
+              "spearman_medio": 0.9384,
+              "percentil_medio": 63.84,
+              "percentil_sd": 4.95
+            },
+            {
+              "sigma_A": 1.0,
+              "spearman_medio": 0.9042,
+              "percentil_medio": 65.0,
+              "percentil_sd": 7.02
+            }
+          ],
+          "perdida_aristas": [
+            {
+              "p": 0.01,
+              "spearman_medio": 0.9883,
+              "percentil_medio": 61.38,
+              "percentil_sd": 2.47
+            },
+            {
+              "p": 0.05,
+              "spearman_medio": 0.9627,
+              "percentil_medio": 62.46,
+              "percentil_sd": 3.15
+            },
+            {
+              "p": 0.1,
+              "spearman_medio": 0.9467,
+              "percentil_medio": 61.49,
+              "percentil_sd": 3.4
+            }
+          ],
+          "desfase_hardware": [
+            {
+              "gamma": 0.0,
+              "spearman_vs_ideal": 1.0,
+              "percentil": 61.32
+            },
+            {
+              "gamma": 0.01,
+              "spearman_vs_ideal": 0.9997,
+              "percentil": 61.53
+            },
+            {
+              "gamma": 0.05,
+              "spearman_vs_ideal": 0.9978,
+              "percentil": 61.73
+            },
+            {
+              "gamma": 0.2,
+              "spearman_vs_ideal": 0.9877,
+              "percentil": 62.23
+            },
+            {
+              "gamma": 1.0,
+              "spearman_vs_ideal": 0.965,
+              "percentil": 62.18
+            }
+          ],
+          "coarse_graining": [
+            {
+              "bloque": 1,
+              "n_supernodos": 954,
+              "percentil": 61.32,
+              "t_s": 0.3364,
+              "aceleracion": 0.9
+            },
+            {
+              "bloque": 2,
+              "n_supernodos": 477,
+              "percentil": 58.66,
+              "t_s": 0.0756,
+              "aceleracion": 3.9
+            },
+            {
+              "bloque": 4,
+              "n_supernodos": 239,
+              "percentil": 47.42,
+              "t_s": 0.0194,
+              "aceleracion": 15.2
+            },
+            {
+              "bloque": 8,
+              "n_supernodos": 120,
+              "percentil": 66.88,
+              "t_s": 0.0055,
+              "aceleracion": 53.3
+            }
+          ],
+          "circuito": {
+            "qubits_codificacion_binaria": 10,
+            "aristas": 4629,
+            "grado_maximo": 19,
+            "clases_de_color": 19,
+            "trotter": [
+              {
+                "r": 1,
+                "spearman_vs_exacto": 0.5431,
+                "percentil": 49.26
+              },
+              {
+                "r": 2,
+                "spearman_vs_exacto": 0.8266,
+                "percentil": 65.57
+              },
+              {
+                "r": 4,
+                "spearman_vs_exacto": 0.8723,
+                "percentil": 63.25
+              },
+              {
+                "r": 8,
+                "spearman_vs_exacto": 0.8837,
+                "percentil": 60.75
+              },
+              {
+                "r": 16,
+                "spearman_vs_exacto": 0.9375,
+                "percentil": 61.47
+              },
+              {
+                "r": 32,
+                "spearman_vs_exacto": 0.9721,
+                "percentil": 61.54
+              },
+              {
+                "r": 64,
+                "spearman_vs_exacto": 0.99,
+                "percentil": 60.71
+              },
+              {
+                "r": 128,
+                "spearman_vs_exacto": 0.9972,
+                "percentil": 60.83
+              }
+            ],
+            "r_para_spearman_099": 128,
+            "profundidad_por_paso_2q": 19,
+            "profundidad_total_2q": 2432,
+            "nota": "cada clase de color es un emparejamiento: en codificacion binaria se implementa como una permutacion + una rotacion controlada, profundidad O(qubits) en 2-qubit gates. La profundidad total reportada esta en unidades de clases de color por paso de Trotter."
+          }
+        }
+      }
+    },
+    "como": {
+      "protocol": "el costo de circuito se MIDE, no se cita de una cota asintotica: la caminata se descompone por coloreo voraz de aristas en clases que son emparejamientos, cuyo exponencial es exacto en forma cerrada 2x2; se construye el producto de Trotter de primer orden y se mide cuantos pasos r hacen falta para que converja el RANKING (Spearman >= 0.99), exigencia mucho mas debil que converger el estado. El desfase se modela por desdoblamiento estocastico con el ruido INTERCALADO con la evolucion en 8 subintervalos: aplicado solo al final no tendria efecto sobre las poblaciones, que es lo que se mide.",
+      "instance_params": {
+        "cutoff_A": 8.5,
+        "window": [
+          0.5,
+          8.0
+        ],
+        "n_times": 16,
+        "gammas": [
+          0.0,
+          0.01,
+          0.05,
+          0.2,
+          1.0
+        ],
+        "trayectorias": 24,
+        "sigmas_coordenadas_A": [
+          0.25,
+          0.5,
+          1.0
+        ],
+        "prob_perdida_aristas": [
+          0.01,
+          0.05,
+          0.1
+        ],
+        "bloques_coarse_grain": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "barrido_trotter_r": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512
+        ]
+      },
+      "sweep_note": "configuracion central de la rejilla congelada; los parametros de ruido y de circuito se fijaron antes de mirar los resultados",
+      "lib_versions": {
+        "prody": "2.6.1",
+        "numpy": "2.4.4",
+        "scipy": "1.16.3",
+        "python": "3.11.15"
+      },
+      "compute": "contenedor cloud Cowork (CPU, Linux)",
+      "harness": "required_deliverables.py",
+      "raw_data_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/data/2026/07/required_deliverables.json ; https://raw.githubusercontent.com/RosettaQuantum/evidence/main/data/2026/07/qmatrices.npz",
+      "procedencia": [
+        {
+          "archivo": "required_deliverables.json",
+          "sha256": "sha256:91f0f5fc2e299b05500198e83ef0ff93b1462229619a2dcd7c970d1dc97e1c92"
+        },
+        {
+          "archivo": "viz_payload.json",
+          "sha256": "sha256:c00a761ffc4c0085077a728c5c619e70d9cdb6696a7450439b86f70d1dd57421"
+        },
+        {
+          "archivo": "qmatrices.npz",
+          "sha256": "sha256:c94b5c0acc0a9219b2c6309cf83966c55ce6bd642f5ac07a1f7b2b518a80f539"
+        }
+      ],
+      "scripts": [
+        {
+          "archivo": "required_deliverables.py",
+          "sha256": "sha256:f516c1a5ebabd88b6291b31ed16dd4a49874507d36d8a6032ddab56d6df6035f"
+        },
+        {
+          "archivo": "make_viz.py",
+          "sha256": "sha256:a571a2f9b885910c14af8d6e4ef590b19e6c6a59ab725e5535b81528c1452eab"
+        },
+        {
+          "archivo": "build_viz.py",
+          "sha256": "sha256:b71586be83cfdd55ab1a8de21d883346bd8723c3d404bdfa341bb410d3b040e0"
+        }
+      ]
+    },
+    "donde": {
+      "quantum_backend": "CTQW exacta por eigendescomposicion + producto de Trotter de primer orden desde el coloreo de aristas + canal de defasaje por trayectorias",
+      "classical_backend": "numpy / scipy",
+      "protein_source": "RCSB PDB via ProDy",
+      "region": "cloud sandbox Anthropic"
+    },
+    "porque": {
+      "hypothesis": "el reto penaliza los circuitos profundos sin optimizar; hay que llegar con la profundidad medida en la mano, aunque el numero sea malo",
+      "question": "Cuanto ruido tolera el metodo, escala por coarse-graining, y cuanto cuesta el circuito de verdad?",
+      "ledger_goal": "cubrir los tres entregables exigidos de Fase I con medicion propia y reportar los dos que salen desfavorables"
+    },
+    "cuando": {
+      "started_at": "2026-07-25T15:53:57.216101+00:00",
+      "archived_at": "2026-07-25T15:53:57.216101+00:00",
+      "timezone_note": "UTC; equipo en America/Punta_Arenas"
+    },
+    "quien": {
+      "operator": "Nicholas",
+      "agents": [
+        "Claude (Cowork cloud)",
+        "required_deliverables.py"
+      ],
+      "judge_protocol_version": "juez-v1",
+      "org": "Rosetta Quantum",
+      "team": "Rosetta Quantum"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia identica; verificar con content_hash",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "role": "primary",
+        "url": "https://github.com/RosettaQuantum/evidence/blob/main/runs/2026/07/RosettaQ__RUN__EXP-0007-019__20260725T1553Z__entregables-exigidos--ruido-escala-y-costo-de-circuito.json",
+        "raw_url": "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/runs/2026/07/RosettaQ__RUN__EXP-0007-019__20260725T1553Z__entregables-exigidos--ruido-escala-y-costo-de-circuito.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "role": "mirror",
+        "url": "https://codeberg.org/RosettaQuantum/evidence/src/branch/main/runs/2026/07/RosettaQ__RUN__EXP-0007-019__20260725T1553Z__entregables-exigidos--ruido-escala-y-costo-de-circuito.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "role": "mirror",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0007-019"
+      }
+    ]
+  }
+}

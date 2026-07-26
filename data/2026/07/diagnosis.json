@@ -1,0 +1,314 @@
+{
+ "KRAS_G12C": {
+  "config": {
+   "cutoff": 8.5,
+   "window": [
+    0.5,
+    8.0
+   ],
+   "eps": 1.0,
+   "n_nodes": 169,
+   "n_distal": 119,
+   "n_allo_distal": 14
+  },
+  "H1_conectividad": {
+   "grado_medio_sitio_alosterico": 10.71,
+   "grado_medio_distales": 10.46,
+   "grado_mediana_distales": 10.0,
+   "percentil_de_grado_del_sitio": 52.1
+  },
+  "H2_metricas": {
+   "ctqw_amplitud": {
+    "percentil": 29.9,
+    "top5_aciertos": 0,
+    "top10_aciertos": 0,
+    "top5_residuos": [
+     [
+      "A",
+      112
+     ],
+     [
+      "A",
+      81
+     ],
+     [
+      "A",
+      113
+     ],
+     [
+      "A",
+      139
+     ],
+     [
+      "A",
+      152
+     ]
+    ]
+   },
+   "difusion_amplitud": {
+    "percentil": 53.39,
+    "top5_aciertos": 1,
+    "top10_aciertos": 2,
+    "top5_residuos": [
+     [
+      "A",
+      59
+     ],
+     [
+      "A",
+      26
+     ],
+     [
+      "A",
+      25
+     ],
+     [
+      "A",
+      23
+     ],
+     [
+      "A",
+      152
+     ]
+    ]
+   },
+   "gnm": {
+    "percentil": 52.3,
+    "top5_aciertos": 0,
+    "top10_aciertos": 0,
+    "top5_residuos": [
+     [
+      "A",
+      169
+     ],
+     [
+      "A",
+      48
+     ],
+     [
+      "A",
+      47
+     ],
+     [
+      "A",
+      107
+     ],
+     [
+      "A",
+      122
+     ]
+    ]
+   },
+   "eco_loschmidt_cuantico": {
+    "percentil": 46.67,
+    "top5_aciertos": 0,
+    "top10_aciertos": 1,
+    "top5_residuos": [
+     [
+      "A",
+      156
+     ],
+     [
+      "A",
+      126
+     ],
+     [
+      "A",
+      26
+     ],
+     [
+      "A",
+      125
+     ],
+     [
+      "A",
+      23
+     ]
+    ]
+   },
+   "respuesta_perturbacion_clasica": {
+    "percentil": 54.6,
+    "top5_aciertos": 1,
+    "top10_aciertos": 3,
+    "top5_residuos": [
+     [
+      "A",
+      59
+     ],
+     [
+      "A",
+      152
+     ],
+     [
+      "A",
+      26
+     ],
+     [
+      "A",
+      81
+     ],
+     [
+      "A",
+      85
+     ]
+    ]
+   }
+  }
+ },
+ "BCR_ABL1": {
+  "config": {
+   "cutoff": 8.5,
+   "window": [
+    0.5,
+    8.0
+   ],
+   "eps": 1.0,
+   "n_nodes": 451,
+   "n_distal": 391,
+   "n_allo_distal": 20
+  },
+  "H1_conectividad": {
+   "grado_medio_sitio_alosterico": 11.05,
+   "grado_medio_distales": 10.42,
+   "grado_mediana_distales": 10.0,
+   "percentil_de_grado_del_sitio": 62.7
+  },
+  "H2_metricas": {
+   "ctqw_amplitud": {
+    "percentil": 60.67,
+    "top5_aciertos": 0,
+    "top10_aciertos": 0,
+    "top5_residuos": [
+     [
+      "A",
+      395
+     ],
+     [
+      "A",
+      260
+     ],
+     [
+      "A",
+      264
+     ],
+     [
+      "A",
+      285
+     ],
+     [
+      "A",
+      344
+     ]
+    ]
+   },
+   "difusion_amplitud": {
+    "percentil": 60.58,
+    "top5_aciertos": 0,
+    "top10_aciertos": 0,
+    "top5_residuos": [
+     [
+      "A",
+      265
+     ],
+     [
+      "A",
+      286
+     ],
+     [
+      "A",
+      264
+     ],
+     [
+      "A",
+      263
+     ],
+     [
+      "A",
+      392
+     ]
+    ]
+   },
+   "gnm": {
+    "percentil": 36.17,
+    "top5_aciertos": 0,
+    "top10_aciertos": 0,
+    "top5_residuos": [
+     [
+      "A",
+      265
+     ],
+     [
+      "A",
+      264
+     ],
+     [
+      "A",
+      263
+     ],
+     [
+      "A",
+      296
+     ],
+     [
+      "A",
+      293
+     ]
+    ]
+   },
+   "eco_loschmidt_cuantico": {
+    "percentil": 59.21,
+    "top5_aciertos": 0,
+    "top10_aciertos": 0,
+    "top5_residuos": [
+     [
+      "A",
+      285
+     ],
+     [
+      "A",
+      265
+     ],
+     [
+      "A",
+      260
+     ],
+     [
+      "A",
+      264
+     ],
+     [
+      "A",
+      280
+     ]
+    ]
+   },
+   "respuesta_perturbacion_clasica": {
+    "percentil": 60.54,
+    "top5_aciertos": 0,
+    "top10_aciertos": 0,
+    "top5_residuos": [
+     [
+      "A",
+      286
+     ],
+     [
+      "A",
+      265
+     ],
+     [
+      "A",
+      392
+     ],
+     [
+      "A",
+      263
+     ],
+     [
+      "A",
+      264
+     ]
+    ]
+   }
+  }
+ }
+}

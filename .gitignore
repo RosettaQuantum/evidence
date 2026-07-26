@@ -1,3 +1,4 @@
 .wrangler/
 *.ots.bak
 __pycache__/
+*.tar.gz
