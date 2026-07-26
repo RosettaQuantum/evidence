@@ -9,19 +9,19 @@ Requires wrangler authenticated against the account that owns `rosettaq-ledger`
 (in Claude Code: strip CLOUDFLARE_API_TOKEN so the OAuth login is used).
 Idempotent: INSERT OR REPLACE keyed on file_id, so re-running is safe.
 """
-import base64, glob, json, subprocess, sys, tempfile
+import base64, glob, json, os, re, sys, urllib.request
 sys.path.insert(0, "tools")
-from verify_seals import canonical_hash, legacy_hash
-
-def seal_ok(doc):
-    stored = doc["meta"].get("content_hash")
-    if stored == canonical_hash(doc):
-        return True
-    leg = legacy_hash(doc)
-    return bool(leg) and stored in (leg, "sha256:" + leg)
-
+from verify_seals import identify   # API v2: (convencion, hash) | (None, esperado)
 
 OWNER, REPO, DB = "RosettaQuantum", "evidence", "rosettaq-ledger"
+
+
+def seal_ok(doc):
+    """True si el sello reproduce bajo ALGUNA convencion reconocida (v2, v1-canonica
+    o v1-legada ya anclada). El guardarrail no publica lo que no verifica."""
+    convention, _ = identify(doc)
+    return convention is not None
+
 
 def esc(s):
     return s.replace("'", "''")
@@ -48,31 +48,55 @@ for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", rec
         ots = base64.b64encode(open(path + ".ots", "rb").read()).decode()
     except FileNotFoundError:
         ots = None
-    rows.append(
-        "INSERT OR REPLACE INTO run_archives "
-        "(file_id,file_name,type,recipe_id,is_demo,content_hash,started_at,archived_at,github_url,codeberg_url,ots_proof,payload) VALUES ("
-        f"'{esc(meta['file_id'])}','{esc(meta['file_name'])}','{esc(meta['type'])}',"
-        f"'{esc(w6.get('que', {}).get('recipe_id', meta['file_id']))}',{1 if meta.get('is_demo') else 0},"
-        f"'{esc(meta['content_hash'])}',NULL,'{esc(when)}',"
-        f"'https://raw.githubusercontent.com/{OWNER}/{REPO}/main/{esc(path)}',"
-        f"'https://codeberg.org/{OWNER}/{REPO}/raw/branch/main/{esc(path)}',"
-        + (f"'{ots}'" if ots else "NULL") + f",'{esc(payload)}');"
-    )
+    rows.append([
+        meta["file_id"], meta["file_name"], meta["type"],
+        w6.get("que", {}).get("recipe_id", meta["file_id"]),
+        1 if meta.get("is_demo") else 0,
+        meta["content_hash"], None, when,
+        f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/{path}",
+        f"https://codeberg.org/{OWNER}/{REPO}/raw/branch/main/{path}",
+        ots, payload,
+    ])
 
-# D1 limita el tamaño por ejecución: subir en lotes chicos
-BATCH = 6
-done = 0
-for i in range(0, len(rows), BATCH):
-    with tempfile.NamedTemporaryFile("w", suffix=".sql", delete=False) as f:
-        f.write("\n".join(rows[i:i+BATCH]))
-        sql_path = f.name
-    out = subprocess.run(
-        ["npx", "wrangler", "d1", "execute", DB, "--remote", "--file", sql_path, "--json"],
-        capture_output=True, text=True)
-    if out.returncode != 0:
-        raise SystemExit(f"wrangler failed en lote {i//BATCH+1}:\nstderr: {out.stderr[:400]}\nstdout: {out.stdout[:400]}")
-    done += len(rows[i:i+BATCH])
-    print(f"  lote {i//BATCH+1}: {done}/{len(rows)}")
+# Transporte: API REST de D1 con parametros ligados, NO texto SQL.
+# Por que: `wrangler d1 execute --file` mete el payload dentro del texto de la
+# sentencia, y una sentencia tiene limite duro (SQLITE_TOOBIG). Los archivos con
+# bloque de procedencia ya pasan los 180 KB, asi que ningun tamano de lote alcanza:
+# hay filas individuales mas grandes que el limite. Con parametros, la sentencia es
+# corta y el payload viaja como dato — escala con el archivo, que solo crece.
+ACCOUNT_ID = "6398d10da6c1f1e8b38b5e7c15d2410f"
+DB_UUID = "f0919403-5bd0-4842-a1d3-0954fdd47633"
+SQL = ("INSERT OR REPLACE INTO run_archives "
+       "(file_id,file_name,type,recipe_id,is_demo,content_hash,started_at,"
+       "archived_at,github_url,codeberg_url,ots_proof,payload) "
+       "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)")
+
+
+def d1_token():
+    """El token OAuth de wrangler (el unico con permiso D1 en este Mac)."""
+    cfg = open(os.path.expanduser(
+        "~/Library/Preferences/.wrangler/config/default.toml")).read()
+    m = re.search(r'oauth_token\s*=\s*"([^"]+)"', cfg)
+    if not m:
+        raise SystemExit("no encontre el token OAuth de wrangler: corre `npx wrangler login`")
+    return m.group(1)
+
+
+token = d1_token()
+url = f"https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/d1/database/{DB_UUID}/query"
+for n, params in enumerate(rows, 1):
+    req = urllib.request.Request(
+        url, data=json.dumps({"sql": SQL, "params": params}).encode(),
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        method="POST")
+    try:
+        res = json.load(urllib.request.urlopen(req, timeout=120))
+    except Exception as e:
+        raise SystemExit(f"D1 falló en {params[0]}: {str(e)[:300]}")
+    if not res.get("success"):
+        raise SystemExit(f"D1 rechazó {params[0]}: {json.dumps(res.get('errors'))[:300]}")
+    if n % 10 == 0 or n == len(rows):
+        print(f"  {n}/{len(rows)}")
 print(f"synced {len(rows)} archive file(s) to D1 run_archives")
 if skipped:
     print(f"OJO: {len(skipped)} archivo(s) omitidos por sello inválido: {skipped}")
