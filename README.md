@@ -149,6 +149,11 @@ hashes are inside the sealed hash: you can re-run the script and compare.
 
 Full protocol: [`PROTOCOL.md`](PROTOCOL.md) · Sealing spec: [`SPEC-SELLADO.md`](SPEC-SELLADO.md)
 
+Commits to this archive are signed with the laboratory's SSH key, so GitHub marks them
+`Verified`. Signing starts from 2026-07-28 onward; earlier commits are unsigned and were
+left untouched rather than rewritten — rewriting published history to make a badge look
+better is exactly the kind of tidying an evidence archive must not do.
+
 ## Licence
 
 Data (verdicts, run records, raw outputs) — **CC BY 4.0**, see
