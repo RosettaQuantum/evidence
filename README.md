@@ -1,68 +1,162 @@
 # Rosetta Quantum — Evidence Archive
 
-The public, immutable record of Rosetta's verdicts. For each recipe (a
-parametrized quantum algorithm) and problem class, this archive states whether
-quantum beat the best classical solver, at what size, with reproducible
-evidence. **The thesis is "show, don't claim"** — so this repo shows the raw
-evidence instead of asking anyone to trust a number.
+The public, immutable record of what we measured. For each recipe (a parametrised
+quantum algorithm) and problem class, this archive states whether the quantum method
+beat the best available classical method, on which instance, under which budget — with
+the raw evidence attached. **This is a record, not a pitch:** the results below include
+the ones where quantum lost, because those are the majority and hiding them would make
+the rest worthless.
 
-> Status (jul 2026): the protocol is live; entries are marked `is_demo: true`
-> until the first real verdict replaces them. Nothing here is a measured result yet.
+**State of the archive — 2026-07-28**
 
-## How to verify anything here yourself
+| | |
+|---|---|
+| Sealed runs | **48** |
+| Published verdicts | **1** (`V-0012`) |
+| Pre-registrations | **2** (E.ON, Cleveland Clinic) |
+| Problem classes | **3** — portfolio optimisation · grid expansion · molecular allostery |
+| Measured quantum wins | **0** |
+| Optimisation runs where the classical solver reached the proven optimum | **29 / 29** |
 
-Every archive file is sealed with a SHA-256 hash and stored **byte-identical in
-three places** — this repo (GitHub), a Codeberg mirror, and Rosetta's own
-database — plus an external timestamp anchor nobody controls. To check that a
-verdict hasn't been altered:
+Every file is sealed with SHA-256, stored byte-identical in three independent places
+(this repo, a Codeberg mirror, and a Cloudflare D1 database) and timestamp-anchored in
+the Bitcoin blockchain, which none of the three parties controls.
+
+---
+
+## Verify it yourself — three commands
+
+You do not need to trust us, and you do not need to ask us anything. Clone the repo and
+run these.
+
+**1. Every seal reproduces from the file's own content**
 
 ```bash
-# 1. Recompute the hash of a file's content (over meta + w6, with content_hash null)
-python3 - <<'PY'
-import json, hashlib
-doc = json.load(open("runs/2026/07/<file>.json"))
-meta = dict(doc["meta"]); meta["content_hash"] = None
-payload = {"meta": meta, "w6": doc["w6"]}
-h = hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",",":")).encode()).hexdigest()
-print("recomputed:", h)
-print("sealed    :", doc["meta"]["content_hash"])
-print("MATCH" if h == doc["meta"]["content_hash"] else "TAMPERED")
-PY
+python3 tools/verify_seals.py 'runs/**/*.json' 'prereg/**/*.json' 'verdicts/**/*.json'
 ```
+
+Expected: `0 INVALID`. The tool prints, per file, which sealing convention reproduced
+its hash — `v2` (current), `v1-canonica`, or `v1-legado`. Two conventions exist under
+the `rosettaq-archive/v1` tag for a documented historical reason (see
+[`SPEC-SELLADO.md`](SPEC-SELLADO.md) and the manifest in `manifests/`); the earlier
+series were already published and anchored when the convention was tightened, and
+re-sealing them would have invalidated real timestamps. The verifier declares which one
+each file used rather than hiding the difference.
+
+**2. The three copies are byte-identical**
 
 ```bash
-# 2. Confirm the Codeberg mirror is identical
-diff <(curl -s <github raw_url>) <(curl -s <codeberg raw_url>)   # no output = identical
+F=runs/2026/07/RosettaQ__RUN__EXP-0007-015__20260725T1543Z__ctqw-vs-clasicos--allosteria-miosina-cardiaca.json
+diff <(curl -s "https://raw.githubusercontent.com/RosettaQuantum/evidence/main/$F") \
+     <(curl -s "https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/$F") && echo IDENTICAL
 ```
 
-If the recomputed hash matches, the three copies agree, and the OpenTimestamps
-proof (`.ots`) verifies, the verdict is exactly as first published. If any check
-fails, that copy is invalid — and because the files are immutable (corrections
-are new, chained files, never edits), git history exposes any change.
+**3. The timestamp is anchored in Bitcoin**
 
-## What each file contains
+```bash
+pip install opentimestamps-client
+ots info runs/2026/07/<file>.json.ots      # shows BitcoinBlockHeaderAttestation(<height>)
+ots verify runs/2026/07/<file>.json.ots    # full check; needs a local Bitcoin node
+```
 
-Each archive answers six questions — **what** ran, **how** (seeds, versions,
-protocol), **when**, **where** it computed, **why** (the hypothesis under test),
-and **who**. Naming: `RosettaQ__<TYPE>__<ID>__<DATE-UTC>__<context>.json`. Layout:
-`runs/<year>/<month>/`, `verdicts/<year>/`, `recipes/`.
+Without a node, check the attestation against any block explorer — the Merkle root in
+the proof must equal the block's:
 
-## Honesty rules (non-negotiable)
+```bash
+H=959715
+HASH=$(curl -s https://blockstream.info/api/block-height/$H)
+curl -s https://blockstream.info/api/block/$HASH | jq -r '.merkle_root, .timestamp'
+```
 
-- `is_demo: true` on every file until a real run exists — no illustrative result
-  is ever presented as measured.
-- Immutable: published = sealed. Corrections are new files that reference the old
-  one, never edits.
-- The classical champion is always the strongest available solver (a weak
-  baseline invalidates the whole archive).
-- Negative results get published. "Quantum doesn't beat classical here yet" is
-  the product, not a failure.
+Block **959715** was mined 2026-07-26 15:26 UTC. The seals below existed before that
+block, which is what the anchor proves — and no party to this archive can move it.
 
-## Reading & reuse
+---
 
-Evidence data is licensed **CC BY 4.0** (see `LICENSE-evidence.md`) — reuse it
-freely, just attribute Rosetta Quantum. This repo is read-only for the world:
-open an issue if you find an error (that's the free-QA loop we want), but the
-verdicts themselves are sealed.
+## Cleveland Clinic track — allosteric site prediction (recipe `RQ-0007`)
 
-Full protocol: see the archive spec. Live ledger: https://rosettaquantum.com/ledger.html
+Continuous-time quantum walk (CTQW) versus classical propagation on residue-contact
+networks, over the four mandated targets. The parameter grid, the null models and the
+success criteria were **sealed before the runs** in the pre-registration
+[`PR-CLEV-001`](prereg/2026/07/), so nothing here was chosen after seeing the results.
+
+| Run | Target | Structures | Effector | Sealed | sha256 (first 16) | BTC block |
+|---|---|---|---|---|---|---|
+| [`EXP-0007-013`](runs/2026/07/RosettaQ__RUN__EXP-0007-013__20260725T1542Z__ctqw-vs-clasicos--allosteria-kras-g12c.json) | KRAS G12C | 4OBE → 6OIM | AMG 510 (MOV) | 2026-07-25 | `1dc7ccc51e031588…` | 959715 |
+| [`EXP-0007-014`](runs/2026/07/RosettaQ__RUN__EXP-0007-014__20260725T1542Z__ctqw-vs-clasicos--allosteria-bcr-abl1.json) | BCR-ABL1 | 1OPL → 5MO4 | asciminib (AY7) | 2026-07-25 | `1b61568b68e5cc04…` | 959715 |
+| [`EXP-0007-015`](runs/2026/07/RosettaQ__RUN__EXP-0007-015__20260725T1543Z__ctqw-vs-clasicos--allosteria-miosina-cardiaca.json) | Cardiac myosin | 5TBY → 9GZ1 | mavacamten (XB2) | 2026-07-25 | `6718eba95dba2822…` | 959715 |
+| [`EXP-0007-016`](runs/2026/07/RosettaQ__RUN__EXP-0007-016__20260725T1543Z__ctqw--prediccion-ciega-c-myc.json) | c-Myc / Max | 1NKP | none — blind prediction | 2026-07-25 | `9a49ff3ae0b4d359…` | 959715 |
+| [`EXP-0007-017`](runs/2026/07/RosettaQ__RUN__EXP-0007-017__20260725T1546Z__nulo-espacial-contiguo--instrumento-de-medicion.json) | all three | spatial null | — | 2026-07-25 | `ff29769b177ed8c5…` | 959715 |
+| [`EXP-0007-018`](runs/2026/07/RosettaQ__RUN__EXP-0007-018__20260725T1538Z__cripticidad--dos-regimenes-de-fallo.json) | KRAS G12C, BCR-ABL1 | crypticity | — | 2026-07-25 | `5dc317c23db08f68…` | 959715 |
+| [`EXP-0007-019`](runs/2026/07/RosettaQ__RUN__EXP-0007-019__20260725T1553Z__entregables-exigidos--ruido-escala-y-costo-de-circuito.json) | all three | required deliverables | — | 2026-07-25 | `a4fdb96d1415bdbd…` | 959715 |
+
+All seven share the same anchor batch; `ots info` on each proof also lists blocks
+959725 and 959747.
+
+**What these runs found:** CTQW did not beat the classical baselines. On KRAS G12C it
+ranked *below chance*; on the others it sat above chance but not significantly, and
+under an honest spatial null (`EXP-0007-017`) **nothing was significant for any method
+on any target** — including the classical ones. `EXP-0007-018` measures *why*, and
+separates two distinct failure modes rather than assuming one. `EXP-0007-016` is a
+blind prediction on a target with no co-crystallised effector: sealed and dated now, so
+it can be scored later by someone else.
+
+That is the result. We publish it because a benchmark that only reports its wins is
+not a benchmark.
+
+**Ground-truth correction:** the challenge brief lists `6C1H` for validating mavacamten
+on cardiac myosin, but `6C1H` contains only ADP and Mg — no mavacamten. We used `9GZ1`
+(ligand `XB2` = mavacamten). Declared, dated and independently checkable in
+[`NOTES/2026-07-28-6C1H-mavacamten.md`](NOTES/2026-07-28-6C1H-mavacamten.md).
+
+A machine-readable summary of every sealed `RQ-0007` run — including the earlier
+exploratory series — is in
+[`RosettaQ-Cleveland-sealed-runs.csv`](RosettaQ-Cleveland-sealed-runs.csv), generated
+from the archives themselves by `scripts/make_cleveland_csv.py` so it cannot drift from
+what is sealed.
+
+---
+
+## What is in here
+
+| Path | Contents |
+|---|---|
+| `runs/<year>/<month>/` | One sealed archive per fight, plus its `.ots` timestamp proof |
+| `verdicts/<year>/` | Dated judgments over a series of runs |
+| `prereg/<year>/<month>/` | Forward commitments, sealed *before* the runs exist |
+| `recipes/` | The algorithm cards being tested |
+| `data/`, `code/` | Raw result files and the scripts that produced them, hashed inside each run |
+| `harness/`, `tools/`, `scripts/` | The sealing library, the verifier, the sync utilities |
+| `NOTES/` | Dated corrections and clarifications |
+
+Each run records the six questions — what ran, how, when, where, why, who — under its
+`w6` key, with frozen library versions and fixed seeds. Runs sealed under `v2` also
+record the SHA-256 of the exact data file and script that produced them, and those
+hashes are inside the sealed hash: you can re-run the script and compare.
+
+## Rules this archive follows
+
+1. **Verify before anchoring.** A seal that does not reproduce is never timestamped and
+   never published. One pre-registration is being held back right now for exactly this.
+2. **Published means sealed.** Corrections are new files that reference the old one —
+   never edits.
+3. **The classical champion is the strongest solver available.** A weak baseline would
+   invalidate everything here.
+4. **Negative results get published.** A reproducible "not yet" is a valid outcome and
+   the main product of this archive.
+5. **The public counters never run ahead of the evidence.** They move after all three
+   copies are up and verifiable, not before.
+
+Full protocol: [`PROTOCOL.md`](PROTOCOL.md) · Sealing spec: [`SPEC-SELLADO.md`](SPEC-SELLADO.md)
+
+## Licence
+
+Data (verdicts, run records, raw outputs) — **CC BY 4.0**, see
+[`LICENSE-evidence.md`](LICENSE-evidence.md). Code (harness, tooling) — **Apache 2.0**,
+see [`LICENSE`](LICENSE). Attribution is deliberate: cite the archive, and the citation
+trail is the point.
+
+---
+
+*Found an error? Open an issue. External correction is the free QA loop this archive
+wants — but the verdicts themselves stay sealed.*
