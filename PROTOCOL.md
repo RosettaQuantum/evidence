@@ -19,7 +19,9 @@ This document is the part that belongs in the open: the rules the evidence must 
 | `PREREG` | `PR-<track>-<nnn>` | A forward commitment sealed *before* the runs exist |
 
 File naming: `RosettaQ__<TYPE>__<ID>__<UTC-DATE>__<context>.json`, e.g.
-`RosettaQ__RUN__EXP-0033-009__20260724T1427Z__qaoa-vs-cpsat--eon-grid-case118-seed42.json`.
+`RosettaQ__RUN__EXP-0007-015__20260725T1543Z__ctqw-vs-clasicos--allosteria-miosina-cardiaca.json`.
+(Deliberately not using an `EXP-0033-*` filename as the example: six of those are
+mislabeled and the correction is pending — see `NOTES/2026-07-29-eon-scale-errata.md`.)
 Each file has a sibling `.ots` timestamp proof.
 
 ## 2. The w6 structure

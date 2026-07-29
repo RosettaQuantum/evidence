@@ -147,6 +147,13 @@ hashes are inside the sealed hash: you can re-run the script and compare.
 5. **The public counters never run ahead of the evidence.** They move after all three
    copies are up and verifiable, not before.
 
+**Open errata.** Six runs of the E.ON series (`EXP-0033-004…009`) are named after a
+larger grid than the one their own parameters record; all nine ran on IEEE case14.
+Disclosed, with the audit table, in
+[`NOTES/2026-07-29-eon-scale-errata.md`](NOTES/2026-07-29-eon-scale-errata.md).
+Corrected re-seals are pending; the published files keep their hashes and their
+contradiction rather than being quietly edited.
+
 Full protocol: [`PROTOCOL.md`](PROTOCOL.md) · Sealing spec: [`SPEC-SELLADO.md`](SPEC-SELLADO.md)
 
 Commits to this archive are signed with the laboratory's SSH key, so GitHub marks them
