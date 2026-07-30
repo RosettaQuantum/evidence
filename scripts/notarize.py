@@ -160,5 +160,14 @@ if muestra and not DRY:
 else:
     print("   (nada nuevo que comprobar)" if not muestra else "   (dry)")
 
+# ---- 7. cadena de procedencia -------------------------------------------------
+paso(7, "auditar la cadena de procedencia")
+if os.path.exists("scripts/check_provenance.py"):
+    r = sh([sys.executable, "scripts/check_provenance.py"])
+    for linea in r.stdout.strip().splitlines():
+        print("   " + linea)
+# No aborta: un sello valido con un archivo de apoyo pendiente es publicable si la
+# falta se declara. Lo que no se tolera es que pase inadvertida.
+
 print("\nlisto." if not DRY else "\n--dry: no se toco nada.")
 print("Recordatorio: el contador publico de la web se mueve DESPUES de esto, nunca antes.")

@@ -68,6 +68,16 @@ neither is not published.
 > to `rosettaq-archive/v2` so that an external verifier reading the canonical spec does not
 > flag 30 legitimate files as invalid.
 
+**Code and data are versioned by hash, never overwritten.** A `v2` seal declares the
+sha256 of the exact data file and script that produced it, and those hashes are inside
+the sealed hash. Editing such a file in place silently breaks every seal that pointed at
+it — it happened here with `sigo_features.py`, which a pre-registration had frozen. So
+when a referenced file evolves, the new version is published *alongside* the old one
+under a hash-qualified name (`sigo_features@0460d1f6.py`), and each seal keeps resolving
+to the file it actually used. `scripts/check_provenance.py` audits this: it recomputes
+every declared sha256 against what is published and reports anything that does not
+resolve.
+
 **Sealing policy.** Every seal is produced by a `seal()` function of a versioned harness
 that is archived alongside the run. **Inline sealing is forbidden** — it produced one
 unreproducible hash in this archive's history (`EXP-0007-001`), which was re-sealed
