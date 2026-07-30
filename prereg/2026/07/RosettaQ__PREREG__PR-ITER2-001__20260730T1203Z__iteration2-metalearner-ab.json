@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "file_name": "RosettaQ__PREREG__PR-ITER2-001__20260730T1203Z__iteration2-metalearner-ab.json",
+    "file_id": "PR-ITER2-001",
+    "type": "PREREG",
+    "is_demo": false,
+    "scope_note": "Pre-registro de la Iteracion 2 (gestor de modelos + Glifo + A/B con ML clasico). Congela set, rejilla, pesos, gestor, brazo B y criterio de exito ANTES de correr, para impedir p-hacking.",
+    "schema": "rosettaq-archive/v2",
+    "sealed_at": "2026-07-30T12:03:36.924296+00:00",
+    "sealed_by": {
+      "lib": "rosettaq_seal.py",
+      "lib_version": "2.0.0",
+      "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+      "harness": "ab_harness.py",
+      "harness_version": "1.0.0",
+      "harness_sha256": "sha256:09edcefc057abe328b6fdde8eee774288706423551ca0bb937599a7901c4ca41",
+      "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+    },
+    "content_hash": "sha256:cbc4272eeaff0a024f4325707ae8387958296050acbae841daae5b8ba333a123"
+  },
+  "prereg": {
+    "title": "Pre-Registration — Rosetta Quantum · Iteration 2 (model-manager + Glifo, permanent A/B)",
+    "team": "Rosetta Quantum",
+    "lead": "Nicholas Iakl Freundlich",
+    "committed_at_utc": "2026-07-30T12:03:36.922418+00:00",
+    "hypothesis": "A model-manager (meta-learner) that picks, per protein and BLIND, the best propagator/variables from protein descriptors — learning from labeled proteins — beats any single fixed method at allosteric-site identification, and crosses significance against the contiguous-pocket spatial null with >=16 proteins.",
+    "frozen_labeled_set_16": [
+      "KRAS_G12C",
+      "BCR_ABL1",
+      "CARDIAC_MYOSIN",
+      "SHP2_PTPN11",
+      "PTP1B",
+      "IDH1_R132H",
+      "IDH2",
+      "MEK1",
+      "AKT1",
+      "PKM2",
+      "GLS",
+      "PDK1_PDPK1",
+      "CASP3",
+      "HIV1_RT",
+      "P38A_MAPK",
+      "HEMOGLOBIN_B"
+    ],
+    "blind_only": [
+      "c_MYC"
+    ],
+    "set_reference": "cleveland_manifest_v2.json (frozen:true); each protein apo->holo with hand-curated ALLOSTERIC ligand (never auto-detected by size) and GT>=5 by number+identity",
+    "definitions": {
+      "graph": "Ca contact network, cutoff in {7.5,8.0,8.5,9.0,9.5,10.0} A",
+      "source": "active site per src_rule per protein: residues <4.5A of the natural cofactor/substrate present, or catalytic motif by sequence; never memorised numbers unverified",
+      "ground_truth": "residues <4.5A of the curated allosteric ligand, mapped to apo by number + residue-type identity",
+      "distal": ">6.0 A from source; time windows {(0.5,4),(0.5,8),(0.5,14)}, 16 steps",
+      "spatial_null": "contiguous pocket (distal seed + k-1 distal neighbours), NPERM=2000, seed 20260717; paired null on delta = pct_glifo - pct_bare",
+      "glifo_weights_preregistered": {
+        "uni_binding_site": 1.0,
+        "uni_active_site": 1.0,
+        "clinvar_density": 0.5,
+        "coordination": 0.3,
+        "edges": "gaussian sigma=6.0"
+      }
+    },
+    "arm_A_manager": {
+      "config_space": "propagator in {ctqw_bare, ctqw_glifo, diffusion, gnm, anm} x window(3) x weight-bank",
+      "descriptors": "n_residues, fold/domain (InterPro), Glifo feature summary stats, graph spectral gap — NEVER the answer",
+      "selector": "leave-one-protein-out; held-out protein's config chosen by k-NN transfer from nearest-by-descriptor neighbours among the other 15; zero contact with held-out answer"
+    },
+    "arm_B_ml": {
+      "purpose": "permanent internal A/B in every run: does a classical ML on the same data match/beat the quantum approach?",
+      "model": "regularised logistic regression (C=1.0, class_weight=balanced, max_iter=2000, standardised features) — FROZEN, no model/hyperparam change by looking at result",
+      "features": "per-residue classical + Glifo (degree, closeness-to-active, coordination, UniProt binding/active/domain/PTM/motif, ClinVar density, classical propagators diffusion/GNM/betweenness). QUANTUM WALK IS NOT A FEATURE OF ARM B.",
+      "train_test": "strict leave-one-protein-out; score = predicted probability per residue; same metric + spatial null as arm A"
+    },
+    "success_criteria": {
+      "primary": "in leave-one-out over the 16, the manager-selected config ranks the true allosteric pocket above the spatial null, Fisher-combined p across the 16 < 0.05",
+      "secondary": "the manager (blind per-protein choice) beats the best fixed single method in (a) mean distal percentile and (b) count of proteins with p<0.05",
+      "ab_mandatory": "every run reports arm A (quantum manager) vs arm B (classical ML) side by side, same metric and null; published either way",
+      "negative_is_valid": "a not-yet with 16 is a valid, publishable outcome; it says how many more are needed"
+    },
+    "guardrails": [
+      "the manager never sees the answer of the protein it evaluates (strict leave-one-out)",
+      "the allosteric ligand is hand-curated and identity-checked, never auto-detected by size (lesson 29 Jul: auto-pick grabs the active site)",
+      "sealing by seal() versioned; verify_seals before anchoring; if INVALID nothing is stamped",
+      "one actor per tree: the lab (Cowork) runs AND seals; the notary (Code) anchors and publishes"
+    ],
+    "committed_code_sha256": {
+      "cleveland_manifest_v2.json": "sha256:f4f470d56458432508d18569bc3d07f8e8f085f711c21401123290d0dda37b79",
+      "sigo_features.py": "sha256:0460d1f638c1244ea97fcbbf991b3f1da773353f035741c40132e2fa6e68869f",
+      "ab_harness.py": "sha256:09edcefc057abe328b6fdde8eee774288706423551ca0bb937599a7901c4ca41",
+      "glifo_eval.py": "sha256:2a4b9fd4813bcda71e0b5178617df9a9d92418ae20250c6de4c5cecdaa57fac1",
+      "allo_challenge.py": "sha256:cc9ff89d663ed3df6365a6f84245a43284648d48d735adc021a03bd250397b50"
+    },
+    "integrity": "This pre-registration is sha256-sealed by the lab (rosettaq-archive/v2) and handed to the notary to OTS-anchor and triple-copy. The seal PRE-DATES the Iteration-2 results. Any deviation is disclosed as a dated amendment, never a silent edit."
+  },
+  "storage": {
+    "policy": "triple-copia + ancla OTS; el timestamp PRE-DATA los resultados de la Iteracion 2",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "path": "prereg/2026/07/RosettaQ__PREREG__PR-ITER2-001__20260730T1203Z__iteration2-metalearner-ab.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "path": "prereg/2026/07/RosettaQ__PREREG__PR-ITER2-001__20260730T1203Z__iteration2-metalearner-ab.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "uri": "d1://rosettaq-ledger/run_archives/PR-ITER2-001"
+      }
+    ]
+  }
+}

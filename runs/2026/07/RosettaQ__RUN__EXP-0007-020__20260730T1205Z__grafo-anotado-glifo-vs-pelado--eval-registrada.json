@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "file_name": "RosettaQ__RUN__EXP-0007-020__20260730T1205Z__grafo-anotado-glifo-vs-pelado--eval-registrada.json",
+    "file_id": "EXP-0007-020",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Eval registrada Iteracion 2: caminata cuantica sobre grafo ANOTADO (Glifo) vs grafo PELADO, pesos pre-registrados sin tunear, bajo el nulo espacial de EXP-0007-017. Resultado honesto: Glifo mueve el percentil marginalmente y NADA cruza significancia.",
+    "schema": "rosettaq-archive/v2",
+    "sealed_at": "2026-07-30T12:05:14.294086+00:00",
+    "sealed_by": {
+      "lib": "rosettaq_seal.py",
+      "lib_version": "2.0.0",
+      "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+      "harness": "glifo_eval.py",
+      "harness_version": "1.0.0",
+      "harness_sha256": "sha256:2a4b9fd4813bcda71e0b5178617df9a9d92418ae20250c6de4c5cecdaa57fac1",
+      "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+    },
+    "content_hash": "sha256:dd384ac647b30dbe13539fd161572adb08caafdedb3da1e7106b5a8f88555f2b"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0007",
+      "recipe_name": "Grafo anotado (Glifo) vs grafo pelado — eval registrada",
+      "problem_class": "Prediccion de sitios alostericos — capa de variables por residuo (Glifo)",
+      "instance": "KRAS G12C, BCR-ABL1, miosina cardiaca (config central cut 8.5, ventana 0.5-8.0)",
+      "pesos_preregistrados": {
+        "uni_binding_site": 1.0,
+        "uni_active_site": 1.0,
+        "clinvar_density": 0.5,
+        "coordination": 0.3,
+        "edges": "gaussian sigma=6.0"
+      },
+      "resultado": {
+        "KRAS_G12C": {
+          "n": 169,
+          "n_distal": 119,
+          "k_site": 14,
+          "ctqw_bare": {
+            "obs": 29.9,
+            "null_mean": 50.96,
+            "p_better_than_chance": 0.801,
+            "z_real_contiguous": -1.02
+          },
+          "ctqw_glifo": {
+            "obs": 31.72,
+            "null_mean": 50.12,
+            "p_better_than_chance": 0.8205,
+            "z_real_contiguous": -0.96
+          },
+          "diffusion": {
+            "obs": 53.39,
+            "null_mean": 48.25,
+            "p_better_than_chance": 0.4235,
+            "z_real_contiguous": 0.25
+          },
+          "glifo_minus_bare_pct": 1.82
+        },
+        "BCR_ABL1": {
+          "n": 451,
+          "n_distal": 391,
+          "k_site": 20,
+          "ctqw_bare": {
+            "obs": 60.67,
+            "null_mean": 51.41,
+            "p_better_than_chance": 0.443,
+            "z_real_contiguous": 0.37
+          },
+          "ctqw_glifo": {
+            "obs": 60.88,
+            "null_mean": 51.35,
+            "p_better_than_chance": 0.4185,
+            "z_real_contiguous": 0.37
+          },
+          "diffusion": {
+            "obs": 60.58,
+            "null_mean": 50.84,
+            "p_better_than_chance": 0.391,
+            "z_real_contiguous": 0.37
+          },
+          "glifo_minus_bare_pct": 0.21
+        },
+        "CARDIAC_MYOSIN": {
+          "n": 954,
+          "n_distal": 935,
+          "k_site": 15,
+          "ctqw_bare": {
+            "obs": 61.32,
+            "null_mean": 50.63,
+            "p_better_than_chance": 0.4025,
+            "z_real_contiguous": 0.38
+          },
+          "ctqw_glifo": {
+            "obs": 63.05,
+            "null_mean": 50.63,
+            "p_better_than_chance": 0.3895,
+            "z_real_contiguous": 0.43
+          },
+          "diffusion": {
+            "obs": 57.79,
+            "null_mean": 50.61,
+            "p_better_than_chance": 0.428,
+            "z_real_contiguous": 0.25
+          },
+          "glifo_minus_bare_pct": 1.73
+        }
+      },
+      "veredicto": "Glifo mueve el percentil de forma marginal (Δ +0.2 a +1.8) y ningun metodo cruza significancia contra el nulo espacial; KRAS sigue peor que el azar, miosina el mejor (z +0.43). Coherente con EXP-0007-017. Negativo medido, se publica igual."
+    },
+    "como": {
+      "protocol": "pesos pre-registrados (NO tuneados a las dianas); mismo nulo espacial contiguo (NPERM=2000, seed 20260717) de EXP-0007-017; src/allo desde el registro sellado (challenge_results), no reconstruidos.",
+      "lib_versions": {
+        "numpy": "2.4.4",
+        "scipy": "1.16.3",
+        "scikit-learn": "1.8.0",
+        "python": "3.11.15"
+      },
+      "harness": {
+        "archivo": "glifo_eval.py",
+        "sha256": "sha256:2a4b9fd4813bcda71e0b5178617df9a9d92418ae20250c6de4c5cecdaa57fac1"
+      },
+      "raw_data_url": "runs/2026/07/RosettaQ__RUN__EXP-0007-020__20260730T1205Z__grafo-anotado-glifo-vs-pelado--eval-registrada--glifo_eval.json",
+      "procedencia": [
+        {
+          "archivo": "glifo_eval.json",
+          "sha256": "sha256:c7bf9c7d2e4b7f75b0644b947f1dcddbb511305f52925432c17e278430c8a861"
+        },
+        {
+          "archivo": "cleveland_manifest.json",
+          "sha256": "sha256:0d93143f5ee52528d50e65cf6ad68509dcaf22a9b8cf3f369a682bb184d23be8"
+        }
+      ],
+      "scripts": [
+        {
+          "archivo": "glifo_eval.py",
+          "sha256": "sha256:2a4b9fd4813bcda71e0b5178617df9a9d92418ae20250c6de4c5cecdaa57fac1"
+        },
+        {
+          "archivo": "sigo_features.py",
+          "sha256": "sha256:0460d1f638c1244ea97fcbbf991b3f1da773353f035741c40132e2fa6e68869f"
+        },
+        {
+          "archivo": "allo_challenge.py",
+          "sha256": "sha256:cc9ff89d663ed3df6365a6f84245a43284648d48d735adc021a03bd250397b50"
+        }
+      ]
+    },
+    "donde": {
+      "policy": "triple-copia + ancla OTS (lo estampa el notario)"
+    },
+    "porque": "cerrar el A/B pelado-vs-anotado de la Iteracion 1 con un numero crudo, honesto, sellado — insumo del gestor de la Iteracion 2.",
+    "cuando": "2026-07-30T12:05:14.253001+00:00",
+    "quien": {
+      "team": "Rosetta Quantum",
+      "lab": "Cowork (sella)",
+      "notario": "Claude Code (ancla y publica)"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia + ancla OTS",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "path": "runs/2026/07/RosettaQ__RUN__EXP-0007-020__20260730T1205Z__grafo-anotado-glifo-vs-pelado--eval-registrada.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "path": "runs/2026/07/RosettaQ__RUN__EXP-0007-020__20260730T1205Z__grafo-anotado-glifo-vs-pelado--eval-registrada.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0007-020"
+      }
+    ]
+  }
+}
