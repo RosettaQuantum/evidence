@@ -94,8 +94,29 @@ else:
             print("   commit fallo:", (r.stdout + r.stderr)[:200])
         firma = sh("git log -1 --format=%G?").stdout.strip()
         print(f"   firma del commit: {firma} (G = buena)")
-        push = sh("git push")
-        print("   push:", (push.stdout + push.stderr).strip().splitlines()[-1][:100])
+        sh("git push")
+        # No se confia en el codigo de salida de `git push`: origin escribe a dos
+        # remotos y si uno falla el comando devuelve error aunque el otro haya
+        # recibido el commit. Se comprueba el estado real de cada copia por HTTPS,
+        # que ademas no depende de la llave SSH.
+        import urllib.request as _u
+        local = sh("git rev-parse HEAD").stdout.strip()
+        def remoto(url, extraer):
+            try:
+                req = _u.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+                return extraer(json.load(_u.urlopen(req, timeout=45)))
+            except Exception as e:
+                return f"no responde ({str(e)[:40]})"
+        gh = remoto("https://api.github.com/repos/RosettaQuantum/evidence/commits/main",
+                    lambda d: d["sha"])
+        cb = remoto("https://codeberg.org/api/v1/repos/RosettaQuantum/evidence/commits?limit=1",
+                    lambda d: d[0]["sha"])
+        print(f"   local    {local[:8]}")
+        for nombre, sha in (("github  ", gh), ("codeberg", cb)):
+            estado = "al dia" if sha == local else f"DESFASADO ({sha[:8]})"
+            print(f"   {nombre} {sha[:8]}  {estado}")
+        if cb != local:
+            print("   nota: el Action del mirror sincroniza Codeberg en ~1 min; re-comprobar")
 
 # ---- 4. tercera copia --------------------------------------------------------
 paso(4, "sincronizar D1 (tercera copia)")
