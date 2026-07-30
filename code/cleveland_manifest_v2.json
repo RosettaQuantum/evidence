@@ -1,0 +1,25 @@
+{
+  "_doc": "SET ETIQUETADO CONGELADO — Iteración 2 (16 proteínas + c-Myc). Todas verificadas con la tubería: apo carga, holo tiene el ligando ALOSTÉRICO curado a mano (no auto-detectado), GT>=5 sobre la apo por número+identidad. Oncológico-pesado + algunos pliegues distintos para generalización. src (sitio activo/fuente) por regla: residuos <4.5A del cofactor/sustrato natural presente, o motivo catalítico por secuencia; se finaliza en el setup de la corrida. Este set entra al pre-registro PR-ITER2-001.",
+  "frozen": true,
+  "targets": {
+    "KRAS_G12C":     {"apo":"4OBE","holo":"6OIM","chain":"A","gt_ligand":"MOV","gt_drug":"sotorasib","uniprot":"P01116","gene":"KRAS","gt_n":21,"src_rule":"GDP+Mg (nucleotido)","area":"onco"},
+    "BCR_ABL1":      {"apo":"1OPL","holo":"5MO4","chain":"A","gt_ligand":"AY7","gt_drug":"asciminib","uniprot":"P00519","gene":"ABL1","gt_n":26,"src_rule":"sitio ATP (P16)","area":"onco","caveat":"5MO4 tiene tambien NIL en sitio ATP; el alosterico es AY7 (curado)"},
+    "CARDIAC_MYOSIN":{"apo":"5TBY","holo":"9GZ1","chain":"A","gt_ligand":"XB2","gt_drug":"mavacamten","uniprot":"P12883","gene":"MYH7","gt_n":15,"src_rule":"motivo Walker-A","area":"cardio"},
+    "SHP2_PTPN11":   {"apo":"2SHP","holo":"5EHR","chain":"A","gt_ligand":"5OD","gt_drug":"inhibidor de tunel (SHP099-like)","uniprot":"Q06124","gene":"PTPN11","gt_n":17,"src_rule":"Cys catalitica PTP","area":"onco"},
+    "PTP1B":         {"apo":"2HNP","holo":"1T49","chain":"A","gt_ligand":"892","gt_drug":"inhibidor alosterico (Wiesmann 2004)","uniprot":"P18031","gene":"PTPN1","gt_n":14,"src_rule":"Cys215 catalitica","area":"onco"},
+    "IDH1_R132H":    {"apo":"3INM","holo":"6B0Z","chain":"A","gt_ligand":"C81","gt_drug":"ivosidenib-like","uniprot":"O75874","gene":"IDH1","gt_n":28,"src_rule":"sitio NADP/isocitrato","area":"onco"},
+    "IDH2":          {"apo":"5I95","holo":"5I96","chain":"A","gt_ligand":"69Q","gt_drug":"enasidenib-like","uniprot":"P48735","gene":"IDH2","gt_n":14,"src_rule":"sitio NADP (NDP)","area":"onco"},
+    "MEK1":          {"apo":"3EQC","holo":"4U7Z","chain":"A","gt_ligand":"3EW","gt_drug":"inhibidor alosterico MEK","uniprot":"Q02750","gene":"MAP2K1","gt_n":19,"src_rule":"sitio ATP","area":"onco"},
+    "AKT1":          {"apo":"3CQW","holo":"3O96","chain":"A","gt_ligand":"IQO","gt_drug":"inhibidor alosterico (interfaz PH-kinasa)","uniprot":"P31749","gene":"AKT1","gt_n":16,"src_rule":"sitio ATP/catalitico","area":"onco"},
+    "PKM2":          {"apo":"3BJT","holo":"3GR4","chain":"A","gt_ligand":"FBP","gt_drug":"fructosa-1,6-BP (activador alosterico natural)","uniprot":"P14618","gene":"PKM","gt_n":13,"src_rule":"sitio activo (PEP)","area":"onco"},
+    "GLS":           {"apo":"3CZD","holo":"5HL1","chain":"A","gt_ligand":"63J","gt_drug":"telaglenastat-like (CB-839)","uniprot":"O94925","gene":"GLS","gt_n":9,"src_rule":"sitio de glutamina","area":"onco"},
+    "PDK1_PDPK1":    {"apo":"1H1W","holo":"3ORX","chain":"A","gt_ligand":"1F8","gt_drug":"compuesto del bolsillo PIF","uniprot":"O15530","gene":"PDPK1","gt_n":11,"src_rule":"sitio ATP","area":"onco"},
+    "CASP3":         {"apo":"2J30","holo":"1SHJ","chain":"A","gt_ligand":"NXN","gt_drug":"inhibidor alosterico de interfaz de dimero","uniprot":"P42574","gene":"CASP3","gt_n":13,"src_rule":"diada catalitica (motivo QACRG)","area":"onco"},
+    "HIV1_RT":       {"apo":"1DLO","holo":"1VRT","chain":"A","gt_ligand":"NVP","gt_drug":"nevirapina","uniprot":"P03366","gene":"pol","gt_n":16,"src_rule":"aspartatos cataliticos polimerasa","area":"antiviral"},
+    "P38A_MAPK":     {"apo":"1P38","holo":"1KV2","chain":"A","gt_ligand":"B96","gt_drug":"BIRB796","uniprot":"Q16539","gene":"MAPK14","gt_n":24,"src_rule":"sitio ATP","area":"inflam"},
+    "HEMOGLOBIN_B":  {"apo":"2HHB","holo":"1B86","chain":"B","gt_ligand":"DG2","gt_drug":"2,3-BPG","uniprot":"P68871","gene":"HBB","gt_n":22,"src_rule":"His F8 proximal del hemo","area":"clasico"}
+  },
+  "blind_prediction_only": {
+    "c_MYC": {"apo":"1NKP","holo":null,"chain":"A","uniprot":"P01106","gene":"MYC","src_rule":"contactos con ADN","note":"sin verdad-terreno por diseno; prediccion ciega sellada"}
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "meta": {
+    "file_name": "RosettaQ__RUN__EXP-0009-001__20260730T2133Z__motor-iteracion-52prot-audit-de-novo.json",
+    "file_id": "EXP-0009-001",
+    "type": "RUN",
+    "is_demo": false,
+    "scope_note": "Ronda del MOTOR de iteracion (RQ-Engine): set ampliado a 52 proteinas alostericas via conector AlloBench (verificadas con prody), arms A (gestor cuantico) / B (ML features) / C (ML apilado sobre propagadores), nulo espacial contiguo + Fisher. HALLAZGO PRINCIPAL: la senal DE NOVO (sin anotaciones UniProt) cruza significancia (Fisher p=0.0001) y sobrevive a quitar posicion-en-grafo (0.0018); conservacion sola es el driver mas fuerte (0.0002). El brazo cuantico (A) no cruza (seleccion k-NN debil; techo oraculo 0.0004).",
+    "schema": "rosettaq-archive/v2",
+    "sealed_at": "2026-07-30T21:33:19.850137+00:00",
+    "sealed_by": {
+      "lib": "rosettaq_seal.py",
+      "lib_version": "2.0.0",
+      "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+      "harness": "rq_engine/engine.py",
+      "harness_version": "1.0.0",
+      "harness_sha256": "sha256:f3d4d557c7f5b019a40d97d7cb688f8ab152d1b81ade78eac9bc767905b1c983",
+      "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+    },
+    "content_hash": "sha256:b096b8d6246d1699d65c866ba6cc3de04eab20c5d6ef9b43b746bedea14ad35c"
+  },
+  "w6": {
+    "que": {
+      "recipe_id": "RQ-0009",
+      "recipe_name": "Motor de iteracion — 52 proteinas, audit de novo, arms A/B/C",
+      "problem_class": "Prediccion de sitios alostericos — set escalado + medicion honesta de la senal de novo",
+      "instance": "52 proteinas alostericas (14 curadas a mano + 38 de AlloBench/ASD verificadas por geometria; orthostericas rechazadas: HSPA5, NRAS, ARF6)",
+      "resultado_N52": {
+        "n_proteins": 52,
+        "fisher_p": {
+          "armA_manager": 0.2461,
+          "armB_ml": 0.0,
+          "armC_stacked": 0.0
+        },
+        "n_sig_p05": {
+          "armA": 1,
+          "armB": 8,
+          "armC": 8
+        },
+        "mean_pct": {
+          "armA": 58.8,
+          "armB": 66.8,
+          "armC": 63.7
+        },
+        "mean_pct_by_method": {
+          "ctqw_bare": 52.0,
+          "ctqw_glifo_fixed": 53.7,
+          "ctqw_glifo_learned": 56.2,
+          "diffusion": 58.2,
+          "gnm": 45.7
+        },
+        "manager_choices": {
+          "ctqw_bare": 0,
+          "ctqw_glifo_fixed": 0,
+          "ctqw_glifo_learned": 14,
+          "diffusion": 27,
+          "gnm": 11
+        }
+      },
+      "audit_de_novo": {
+        "sin_anotaciones": {
+          "fisher_p": 0.0001,
+          "n_sig": 9,
+          "dropped": [
+            "uni_active_site",
+            "uni_binding_site",
+            "uni_domain",
+            "uni_motif",
+            "uni_ptm",
+            "uni_site"
+          ]
+        },
+        "sin_anot_sin_grafopos": {
+          "fisher_p": 0.0018,
+          "n_sig": 6,
+          "dropped": [
+            "betweenness",
+            "closeness_to_active",
+            "coordination",
+            "degree",
+            "uni_active_site",
+            "uni_binding_site",
+            "uni_domain",
+            "uni_motif",
+            "uni_ptm",
+            "uni_site"
+          ]
+        },
+        "solo_dinamica_conservacion": {
+          "fisher_p": 0.0455,
+          "n_sig": 1,
+          "dropped": [
+            "betweenness",
+            "clinvar_density",
+            "closeness_to_active",
+            "coordination",
+            "degree",
+            "diffusion",
+            "gnm",
+            "uni_active_site",
+            "uni_binding_site",
+            "uni_domain",
+            "uni_motif",
+            "uni_ptm",
+            "uni_site"
+          ]
+        },
+        "solo_dinamica": {
+          "fisher_p": 0.0684,
+          "n_sig": 1,
+          "dropped": [
+            "betweenness",
+            "clinvar_density",
+            "closeness_to_active",
+            "conservation",
+            "coordination",
+            "degree",
+            "diffusion",
+            "gnm",
+            "uni_active_site",
+            "uni_binding_site",
+            "uni_domain",
+            "uni_motif",
+            "uni_ptm",
+            "uni_site"
+          ]
+        },
+        "solo_conservacion": {
+          "fisher_p": 0.0002,
+          "n_sig": 6,
+          "dropped": [
+            "anm_msf",
+            "betweenness",
+            "clinvar_density",
+            "closeness_to_active",
+            "coordination",
+            "degree",
+            "diffusion",
+            "gnm",
+            "gnm_msf",
+            "uni_active_site",
+            "uni_binding_site",
+            "uni_domain",
+            "uni_motif",
+            "uni_ptm",
+            "uni_site"
+          ]
+        },
+        "solo_propagadores": {
+          "fisher_p": 0.0012,
+          "n_sig": 4,
+          "dropped": [
+            "anm_msf",
+            "clinvar_density",
+            "closeness_to_active",
+            "conservation",
+            "coordination",
+            "degree",
+            "gnm_msf",
+            "uni_active_site",
+            "uni_binding_site",
+            "uni_domain",
+            "uni_motif",
+            "uni_ptm",
+            "uni_site"
+          ]
+        }
+      },
+      "manager_diag": {
+        "knn3_pct_actual": 0.2461,
+        "knn5_pct": 0.0999,
+        "knn7_pct": 0.0892,
+        "knn5_nullp": 0.1692,
+        "best_fixed_diffusion": 0.0802,
+        "ensemble_suave": 0.2393,
+        "oraculo_techo": 0.0004,
+        "lectura": "El techo oraculo cruza (0.0004): la info esta por proteina, pero ninguna seleccion practica cruza; el combinador aprendido (brazo C) es la arquitectura correcta."
+      },
+      "veredicto": "Primer cruce DE NOVO honesto del proyecto: sin ninguna anotacion de UniProt, solo estructura+dinamica(GNM/ANM)+conservacion+propagacion, Fisher p=0.0001 (9/52). Robusto: sobrevive a quitar posicion-en-grafo (0.0018); conservacion sola cruza fuerte (0.0002); propagadores solos cruzan (0.0012). A N=26 el cruce era 100% recall de anotaciones (ablacion 0.41); las proteinas extra revelaron senal fisica real. Matiz: efecto de agregado (9/52), no per-proteina. El brazo cuantico-gestor (A) NO cruza (0.25); su techo oraculo (0.0004) dice que la seleccion es el cuello, y el combinador aprendido (brazo C) es la arquitectura correcta. Negativo y positivo, ambos medidos."
+    },
+    "como": {
+      "protocol": "RQ-Engine: catalogo auto-describible -> build resumible (estructura, sitio activo curado o por posiciones UniProt de AlloBench, grafo Ca, features) -> arms LOPO -> nulo espacial contiguo (NPERM=2000, seed 20260717) -> Fisher. Ligando alosterico verificado DISTAL con prody (>=5 residuos, sep>6A). Conservacion de UniRef50+entropia. Dinamica GNM/ANM. Ablaciones para aislar la senal de novo. Nada auto-detectado sin verificar.",
+      "lib_versions": {
+        "numpy": "2.4.4",
+        "scipy": "1.16.3",
+        "scikit-learn": "1.8.0",
+        "python": "3.11.15"
+      },
+      "harness": {
+        "archivo": "rq_engine/engine.py",
+        "sha256": "sha256:f3d4d557c7f5b019a40d97d7cb688f8ab152d1b81ade78eac9bc767905b1c983"
+      },
+      "raw_data_url": "runs/2026/07/RosettaQ__RUN__EXP-0009-001__20260730T2133Z__motor-iteracion-52prot-audit-de-novo--RQ-EXP-ALLOBENCH-FULL.json",
+      "procedencia": [
+        {
+          "archivo": "rq_engine/results/RQ-EXP-ALLOBENCH-FULL.json",
+          "sha256": "sha256:0fd4668a5a320cab85e74cb6c033e465e6463e262c80dd0a6540bf4ffeebeab0"
+        },
+        {
+          "archivo": "rq_engine/results/RQ-EXP-AUDIT-DENOVO.json",
+          "sha256": "sha256:c8b5d7b7dbde8a3f949ea9800da504e3b7db4f1862daeb2782ea57dce6ea59d6"
+        },
+        {
+          "archivo": "rq_engine/catalog.json",
+          "sha256": "sha256:15ca01a9c1e826fef3c8b6bdc2a27ef6f6b8a6f1c58b4852863f8699654fcbc8"
+        }
+      ],
+      "scripts": [
+        {
+          "archivo": "rq_engine/engine.py",
+          "sha256": "sha256:f3d4d557c7f5b019a40d97d7cb688f8ab152d1b81ade78eac9bc767905b1c983"
+        },
+        {
+          "archivo": "rq_engine/allobench_connector.py",
+          "sha256": "sha256:6f634f1e6a7098721c82bc81721a32653adfce95cf0b795a30e048b5215277ea"
+        },
+        {
+          "archivo": "sigo_features.py",
+          "sha256": "sha256:5ad5e83852ddbc7a6062ceb5135e50325551b53169d73a1bdcb4ec7b1306821b"
+        },
+        {
+          "archivo": "conservation.py",
+          "sha256": "sha256:5f337d26c79291eb1095709e8da1fd975dfb6dcbc82b909b8b1c8cd01b66f027"
+        },
+        {
+          "archivo": "allo_challenge.py",
+          "sha256": "sha256:cc9ff89d663ed3df6365a6f84245a43284648d48d735adc021a03bd250397b50"
+        }
+      ]
+    },
+    "donde": {
+      "policy": "triple-copia + ancla OTS (lo estampa el notario)"
+    },
+    "porque": "escalar el set (palanca #1) y medir con dureza si hay senal de novo real; el motor hace la iteracion rapida y reproducible. Insumo directo de la propuesta Cleveland.",
+    "cuando": {
+      "archived_at": "2026-07-30T21:33:19.848464+00:00"
+    },
+    "quien": {
+      "team": "Rosetta Quantum",
+      "lab": "Cowork (sella)",
+      "notario": "Claude Code (ancla y publica)"
+    }
+  },
+  "storage": {
+    "policy": "triple-copia + ancla OTS",
+    "locations": [
+      {
+        "n": 1,
+        "kind": "github",
+        "path": "runs/2026/07/RosettaQ__RUN__EXP-0009-001__20260730T2133Z__motor-iteracion-52prot-audit-de-novo.json"
+      },
+      {
+        "n": 2,
+        "kind": "codeberg",
+        "path": "runs/2026/07/RosettaQ__RUN__EXP-0009-001__20260730T2133Z__motor-iteracion-52prot-audit-de-novo.json"
+      },
+      {
+        "n": 3,
+        "kind": "cloudflare-d1",
+        "uri": "d1://rosettaq-ledger/run_archives/EXP-0009-001"
+      }
+    ]
+  }
+}

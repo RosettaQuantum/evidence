@@ -1,0 +1,1168 @@
+{
+ "schema": "rq-engine/catalog-v1",
+ "proteins": {
+  "KRAS_G12C": {
+   "apo": "4OBE",
+   "holo": "6OIM",
+   "chain": "A",
+   "uniprot": "P01116",
+   "gene": "KRAS",
+   "gt_ligand": "MOV",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "(resname GDP or resname MG)",
+    "fallback_mg": true
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "BCR_ABL1": {
+   "apo": "1OPL",
+   "holo": "5MO4",
+   "chain": "A",
+   "uniprot": "P00519",
+   "gene": "ABL1",
+   "gt_ligand": "AY7",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname P16",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "CARDIAC_MYOSIN": {
+   "apo": "5TBY",
+   "holo": "9GZ1",
+   "chain": "A",
+   "uniprot": "P12883",
+   "gene": "MYH7",
+   "gt_ligand": "XB2",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "GESGAGK",
+    "fallback_mg": false
+   },
+   "area": "cardio",
+   "source": "curado"
+  },
+  "SHP2_PTPN11": {
+   "apo": "2SHP",
+   "holo": "5EHR",
+   "chain": "A",
+   "uniprot": "Q06124",
+   "gene": "PTPN11",
+   "gt_ligand": "5OD",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "HC.{5}R",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "PTP1B": {
+   "apo": "2HNP",
+   "holo": "1T49",
+   "chain": "A",
+   "uniprot": "P18031",
+   "gene": "PTPN1",
+   "gt_ligand": "892",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "HC.{5}R",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "IDH1_R132H": {
+   "apo": "3INM",
+   "holo": "6B0Z",
+   "chain": "A",
+   "uniprot": "O75874",
+   "gene": "IDH1",
+   "gt_ligand": "C81",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname NDP",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "IDH2": {
+   "apo": "5I95",
+   "holo": "5I96",
+   "chain": "A",
+   "uniprot": "P48735",
+   "gene": "IDH2",
+   "gt_ligand": "69Q",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname NDP",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "MEK1": {
+   "apo": "3EQC",
+   "holo": "4U7Z",
+   "chain": "A",
+   "uniprot": "Q02750",
+   "gene": "MAP2K1",
+   "gt_ligand": "3EW",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "HRD[LIVM]K",
+    "fallback_mg": true
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "AKT1": {
+   "apo": "3CQW",
+   "holo": "3O96",
+   "chain": "A",
+   "uniprot": "P31749",
+   "gene": "AKT1",
+   "gt_ligand": "IQO",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "DFG",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "PKM2": {
+   "apo": "3BJT",
+   "holo": "3GR4",
+   "chain": "A",
+   "uniprot": "P14618",
+   "gene": "PKM",
+   "gt_ligand": "FBP",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "GG.{1,3}[KR].{5,20}D",
+    "fallback_mg": true
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "GLS": {
+   "apo": "3CZD",
+   "holo": "5HL1",
+   "chain": "A",
+   "uniprot": "O94925",
+   "gene": "GLS",
+   "gt_ligand": "63J",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "[ST].K.{2}[ILV].{2,4}[ST]",
+    "fallback_mg": true
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "PDK1_PDPK1": {
+   "apo": "1H1W",
+   "holo": "3ORX",
+   "chain": "A",
+   "uniprot": "O15530",
+   "gene": "PDPK1",
+   "gt_ligand": "1F8",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "HRD[LIVM]K",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "CASP3": {
+   "apo": "2J30",
+   "holo": "1SHJ",
+   "chain": "A",
+   "uniprot": "P42574",
+   "gene": "CASP3",
+   "gt_ligand": "NXN",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "QAC.G",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "curado"
+  },
+  "HIV1_RT": {
+   "apo": "1DLO",
+   "holo": "1VRT",
+   "chain": "A",
+   "uniprot": "P03366",
+   "gene": "pol",
+   "gt_ligand": "NVP",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "YMDD",
+    "fallback_mg": false
+   },
+   "area": "antiviral",
+   "source": "curado"
+  },
+  "P38A_MAPK": {
+   "apo": "1P38",
+   "holo": "1KV2",
+   "chain": "A",
+   "uniprot": "Q16539",
+   "gene": "MAPK14",
+   "gt_ligand": "B96",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "HRD[LIVM]K",
+    "fallback_mg": false
+   },
+   "area": "inflam",
+   "source": "curado"
+  },
+  "HEMOGLOBIN_B": {
+   "apo": "2HHB",
+   "holo": "1B86",
+   "chain": "B",
+   "uniprot": "P68871",
+   "gene": "HBB",
+   "gt_ligand": "DG2",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname HEM",
+    "fallback_mg": false
+   },
+   "area": "clasico",
+   "source": "curado"
+  },
+  "GCK_GLUCOKINASE": {
+   "apo": "3IMX",
+   "holo": "3IMX",
+   "chain": "A",
+   "uniprot": "P35557",
+   "gene": "GCK",
+   "gt_ligand": "B84",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname GLC",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "AlloBench/ASD (verificado prody)"
+  },
+  "PYGL_GLYCOGEN_PHOS": {
+   "apo": "1EM6",
+   "holo": "1EM6",
+   "chain": "A",
+   "uniprot": "P06737",
+   "gene": "PYGL",
+   "gt_ligand": "CP4",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname PLP",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "AlloBench/ASD (verificado prody)"
+  },
+  "PKLR_PYRUVATE_K": {
+   "apo": "4IMA",
+   "holo": "4IMA",
+   "chain": "A",
+   "uniprot": "P30613",
+   "gene": "PKLR",
+   "gt_ligand": "FBP",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname FLC",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "AlloBench/ASD (verificado prody, sep 22A)"
+  },
+  "CASP7_CASPASE7": {
+   "apo": "1SHJ",
+   "holo": "1SHJ",
+   "chain": "A",
+   "uniprot": "P55210",
+   "gene": "CASP7",
+   "gt_ligand": "NXN",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "motif",
+    "pat": "QAC.G",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "AlloBench/ASD (verificado prody, sep 9.7A)"
+  },
+  "SIRT1_STAC": {
+   "apo": "4ZZI",
+   "holo": "4ZZI",
+   "chain": "A",
+   "uniprot": "Q96EB6",
+   "gene": "SIRT1",
+   "gt_ligand": "4TQ",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname 1NS",
+    "fallback_mg": false
+   },
+   "area": "onco",
+   "source": "subagente curador verificado"
+  },
+  "ME2_MALIC": {
+   "apo": "1PJ4",
+   "holo": "1PJ4",
+   "chain": "A",
+   "uniprot": "P23368",
+   "gene": "ME2",
+   "gt_ligand": "FUM",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname MLT",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "subagente curador verificado"
+  },
+  "DHODH_TUNNEL": {
+   "apo": "3G0U",
+   "holo": "3G0U",
+   "chain": "A",
+   "uniprot": "Q02127",
+   "gene": "DHODH",
+   "gt_ligand": "MDY",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname ORO",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "subagente curador verificado"
+  },
+  "PFKP_FBP": {
+   "apo": "4XZ2",
+   "holo": "4XZ2",
+   "chain": "B",
+   "uniprot": "Q01813",
+   "gene": "PFKP",
+   "gt_ligand": "FBP",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname F6P",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "subagente curador verificado"
+  },
+  "FBP1_AMPSITE": {
+   "apo": "1Q9D",
+   "holo": "1Q9D",
+   "chain": "A",
+   "uniprot": "P00636",
+   "gene": "FBP1",
+   "gt_ligand": "OI1",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname F6P",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "subagente curador verificado"
+  },
+  "GLUD1_GW5074": {
+   "apo": "3ETG",
+   "holo": "3ETG",
+   "chain": "A",
+   "uniprot": "Q3SYY0",
+   "gene": "GLUD1",
+   "gt_ligand": "GWD",
+   "gt_sel": null,
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname NDP",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "subagente curador verificado"
+  },
+  "HK1_G6P": {
+   "apo": "1QHA",
+   "holo": "1QHA",
+   "chain": "A",
+   "uniprot": "P19367",
+   "gene": "HK1",
+   "gt_ligand": "G6P",
+   "gt_sel": "resname G6P and resnum 919",
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname GLC and resnum 920",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "subagente curador verificado"
+  },
+  "G6PD_STRUCT": {
+   "apo": "2BH9",
+   "holo": "2BH9",
+   "chain": "A",
+   "uniprot": "P11413",
+   "gene": "G6PD",
+   "gt_ligand": "NAP",
+   "gt_sel": "resname NAP and resnum 811",
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname NAP and resnum 799",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "subagente curador verificado"
+  },
+  "PYGM_IMP": {
+   "name": "PYGM_IMP",
+   "apo": "1ABB",
+   "holo": "1ABB",
+   "chain": "A",
+   "uniprot": "P00489",
+   "gene": "PYGM",
+   "gt_ligand": "IMP",
+   "active_src": {
+    "kind": "lig",
+    "pat": "resname PDP",
+    "fallback_mg": false
+   },
+   "area": "onco-metab",
+   "source": "pool demo (verificado por motor)"
+  },
+  "ESR1_ALLO": {
+   "name": "ESR1_ALLO",
+   "apo": "5DKS",
+   "holo": "5DKS",
+   "chain": "A",
+   "uniprot": "P03372",
+   "gene": "ESR1",
+   "gt_ligand": "5C6",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     353,
+     394,
+     524
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD01040000_1"
+  },
+  "SLC6A4_ALLO": {
+   "name": "SLC6A4_ALLO",
+   "apo": "5I73",
+   "holo": "5I73",
+   "chain": "A",
+   "uniprot": "P31645",
+   "gene": "SLC6A4",
+   "gt_ligand": "68P",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     94,
+     96,
+     97,
+     98,
+     101,
+     336,
+     368,
+     434,
+     437,
+     438,
+     439,
+     494,
+     495,
+     556,
+     559
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD01530000_1"
+  },
+  "PDE4D_ALLO": {
+   "name": "PDE4D_ALLO",
+   "apo": "6BOJ",
+   "holo": "6BOJ",
+   "chain": "A",
+   "uniprot": "Q07343",
+   "gene": "PDE4D",
+   "gt_ligand": "E31",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     406,
+     410,
+     446,
+     447,
+     564,
+     615,
+     618
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD02190000_1"
+  },
+  "NTRK1_ALLO": {
+   "name": "NTRK1_ALLO",
+   "apo": "5H3Q",
+   "holo": "5H3Q",
+   "chain": "A",
+   "uniprot": "P04629",
+   "gene": "NTRK1",
+   "gt_ligand": "7HF",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     516,
+     517,
+     518,
+     519,
+     520,
+     521,
+     522,
+     523,
+     524,
+     544,
+     650
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD07480000_1"
+  },
+  "PARP1_ALLO": {
+   "name": "PARP1_ALLO",
+   "apo": "6BHV",
+   "holo": "6BHV",
+   "chain": "A",
+   "uniprot": "P09874",
+   "gene": "PARP1",
+   "gt_ligand": "DQV",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     21,
+     24,
+     53,
+     56,
+     125,
+     128,
+     159,
+     162,
+     295,
+     298,
+     311,
+     321,
+     862,
+     863,
+     864,
+     871,
+     878,
+     904,
+     988
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD17380000_1"
+  },
+  "FFAR1_ALLO": {
+   "name": "FFAR1_ALLO",
+   "apo": "5KW2",
+   "holo": "5KW2",
+   "chain": "A",
+   "uniprot": "P00720",
+   "gene": "FFAR1",
+   "gt_ligand": "6XQ",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     11,
+     20,
+     32,
+     104,
+     117,
+     132
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD09380000_1"
+  },
+  "RIPK2_ALLO": {
+   "name": "RIPK2_ALLO",
+   "apo": "4C8B",
+   "holo": "4C8B",
+   "chain": "A",
+   "uniprot": "O43353",
+   "gene": "RIPK2",
+   "gt_ligand": "0LI",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32,
+     47,
+     146
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD17040000_1"
+  },
+  "PAK1_ALLO": {
+   "name": "PAK1_ALLO",
+   "apo": "4ZJJ",
+   "holo": "4ZJJ",
+   "chain": "A",
+   "uniprot": "Q13153",
+   "gene": "PAK1",
+   "gt_ligand": "4OR",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     276,
+     277,
+     278,
+     279,
+     280,
+     281,
+     282,
+     283,
+     284,
+     299,
+     345,
+     346,
+     347,
+     389
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD05730000_1"
+  },
+  "PANK3_ALLO": {
+   "name": "PANK3_ALLO",
+   "apo": "5KQD",
+   "holo": "5KQD",
+   "chain": "A",
+   "uniprot": "Q9H999",
+   "gene": "PANK3",
+   "gt_ligand": "PKZ",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     138,
+     192,
+     195,
+     207
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD06550000_1"
+  },
+  "FLT3_ALLO": {
+   "name": "FLT3_ALLO",
+   "apo": "4RT7",
+   "holo": "4RT7",
+   "chain": "A",
+   "uniprot": "P36888",
+   "gene": "FLT3",
+   "gt_ligand": "P30",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     616,
+     617,
+     618,
+     619,
+     620,
+     621,
+     622,
+     623,
+     624,
+     644,
+     811
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD15970000_1"
+  },
+  "PTPRZ1_ALLO": {
+   "name": "PTPRZ1_ALLO",
+   "apo": "5H08",
+   "holo": "5H08",
+   "chain": "A",
+   "uniprot": "P23471",
+   "gene": "PTPRZ1",
+   "gt_ligand": "7WL",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     1901,
+     1933,
+     1934,
+     1935,
+     1936,
+     1937,
+     1938,
+     1939,
+     1977
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD15530000_1"
+  },
+  "BRAF_ALLO": {
+   "name": "BRAF_ALLO",
+   "apo": "4WO5",
+   "holo": "4WO5",
+   "chain": "A",
+   "uniprot": "P15056",
+   "gene": "BRAF",
+   "gt_ligand": "324",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     235,
+     248,
+     251,
+     261,
+     264,
+     269,
+     272,
+     280,
+     463,
+     464,
+     465,
+     466,
+     467,
+     468,
+     469,
+     470,
+     471,
+     483,
+     576
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD00450000_1"
+  },
+  "ACACB_ALLO": {
+   "name": "ACACB_ALLO",
+   "apo": "5KKN",
+   "holo": "5KKN",
+   "chain": "B",
+   "uniprot": "O00763",
+   "gene": "ACACB",
+   "gt_ligand": "6U3",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     458,
+     459,
+     460,
+     461,
+     462,
+     463,
+     567,
+     580,
+     582,
+     584,
+     1934,
+     2238,
+     2240
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD13160000_1"
+  },
+  "SNRNP200_ALLO": {
+   "name": "SNRNP200_ALLO",
+   "apo": "5URJ",
+   "holo": "5URJ",
+   "chain": "A",
+   "uniprot": "O75643",
+   "gene": "SNRNP200",
+   "gt_ligand": "8LS",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     503,
+     504,
+     505,
+     506,
+     507,
+     508,
+     509,
+     510,
+     1350,
+     1351,
+     1352,
+     1353,
+     1354,
+     1355,
+     1356,
+     1357
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD15100000_1"
+  },
+  "ENPP2_ALLO": {
+   "name": "ENPP2_ALLO",
+   "apo": "5M0M",
+   "holo": "5M0M",
+   "chain": "A",
+   "uniprot": "Q64610",
+   "gene": "ENPP2",
+   "gt_ligand": "7CF",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     171,
+     209,
+     230,
+     311,
+     315,
+     358,
+     359,
+     474,
+     764,
+     766,
+     768,
+     770,
+     772
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD16590000_1"
+  },
+  "EGFR_ALLO": {
+   "name": "EGFR_ALLO",
+   "apo": "5D41",
+   "holo": "5D41",
+   "chain": "A",
+   "uniprot": "P00533",
+   "gene": "EGFR",
+   "gt_ligand": "57N",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     718,
+     719,
+     720,
+     721,
+     722,
+     723,
+     724,
+     725,
+     726,
+     745,
+     790,
+     791,
+     837,
+     855
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD01020000_1"
+  },
+  "ADRB2_ALLO": {
+   "name": "ADRB2_ALLO",
+   "apo": "5X7D",
+   "holo": "5X7D",
+   "chain": "A",
+   "uniprot": "P07550",
+   "gene": "ADRB2",
+   "gt_ligand": "8VS",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     113,
+     118,
+     203,
+     293,
+     312,
+     316
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD03130000_1"
+  },
+  "PTGS2_ALLO": {
+   "name": "PTGS2_ALLO",
+   "apo": "4RUT",
+   "holo": "4RUT",
+   "chain": "A",
+   "uniprot": "Q05769",
+   "gene": "PTGS2",
+   "gt_ligand": "LM8",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     106,
+     189,
+     193,
+     341,
+     370,
+     371,
+     374,
+     512,
+     516
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD04270000_2"
+  },
+  "WNK1_ALLO": {
+   "name": "WNK1_ALLO",
+   "apo": "5WDY",
+   "holo": "5WDY",
+   "chain": "A",
+   "uniprot": "Q9H4A3",
+   "gene": "WNK1",
+   "gt_ligand": "A6S",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     231,
+     283,
+     299,
+     301,
+     302,
+     303,
+     304,
+     351,
+     368,
+     369,
+     371
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD14350000_1"
+  },
+  "PARP14_ALLO": {
+   "name": "PARP14_ALLO",
+   "apo": "5O2D",
+   "holo": "5O2D",
+   "chain": "A",
+   "uniprot": "Q460N5",
+   "gene": "PARP14",
+   "gt_ligand": "9HH",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     824,
+     833,
+     922,
+     923,
+     924,
+     925,
+     926,
+     961,
+     1023,
+     1024,
+     1034,
+     1046,
+     1047,
+     1048,
+     1049,
+     1133,
+     1134,
+     1135,
+     1136,
+     1137,
+     1175,
+     1176,
+     1177,
+     1178,
+     1235,
+     1236,
+     1247,
+     1258,
+     1332,
+     1333,
+     1334,
+     1335,
+     1336,
+     1371
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD15510000_1"
+  },
+  "KIF18A_ALLO": {
+   "name": "KIF18A_ALLO",
+   "apo": "5OGC",
+   "holo": "5OGC",
+   "chain": "K",
+   "uniprot": "Q8NI77",
+   "gene": "KIF18A",
+   "gt_ligand": "9V5",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     113,
+     114,
+     115,
+     116,
+     117,
+     118,
+     119,
+     120
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD17120000_1"
+  },
+  "CRHR1_ALLO": {
+   "name": "CRHR1_ALLO",
+   "apo": "4K5Y",
+   "holo": "4K5Y",
+   "chain": "A",
+   "uniprot": "P00720",
+   "gene": "CRHR1",
+   "gt_ligand": "1Q5",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     11,
+     20,
+     32,
+     104,
+     117,
+     132
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD00730000_1"
+  },
+  "SLC1A3_ALLO": {
+   "name": "SLC1A3_ALLO",
+   "apo": "5LM4",
+   "holo": "5LM4",
+   "chain": "A",
+   "uniprot": "Q15758",
+   "gene": "SLC1A3",
+   "gt_ligand": "6Z6",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     382,
+     384,
+     386,
+     471,
+     475
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD10010000_1"
+  },
+  "PRKAG1_ALLO": {
+   "name": "PRKAG1_ALLO",
+   "apo": "4REW",
+   "holo": "4REW",
+   "chain": "G",
+   "uniprot": "P54619",
+   "gene": "PRKAG1",
+   "gt_ligand": "AMP",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     70,
+     85,
+     86,
+     87,
+     88,
+     89,
+     90,
+     130,
+     151,
+     152,
+     170,
+     200,
+     205,
+     226,
+     227,
+     242,
+     243,
+     244,
+     245,
+     269,
+     277,
+     298,
+     299,
+     314,
+     315,
+     316,
+     317
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD16240000_1"
+  },
+  "KIF11_ALLO": {
+   "name": "KIF11_ALLO",
+   "apo": "3WPN",
+   "holo": "3WPN",
+   "chain": "A",
+   "uniprot": "P52732",
+   "gene": "KIF11",
+   "gt_ligand": "B4S",
+   "active_src": {
+    "kind": "uniprot_pos",
+    "positions": [
+     105,
+     106,
+     107,
+     108,
+     109,
+     110,
+     111,
+     112
+    ]
+   },
+   "area": "onco",
+   "source": "AlloBench ASD01000000_1"
+  }
+ }
+}

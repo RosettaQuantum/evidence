@@ -1,0 +1,74 @@
+{
+ "KRAS_G12C": {
+  "n": 169,
+  "n_distal": 119,
+  "k_site": 14,
+  "ctqw_bare": {
+   "obs": 29.9,
+   "null_mean": 50.96,
+   "p_better_than_chance": 0.801,
+   "z_real_contiguous": -1.02
+  },
+  "ctqw_glifo": {
+   "obs": 31.72,
+   "null_mean": 50.12,
+   "p_better_than_chance": 0.8205,
+   "z_real_contiguous": -0.96
+  },
+  "diffusion": {
+   "obs": 53.39,
+   "null_mean": 48.25,
+   "p_better_than_chance": 0.4235,
+   "z_real_contiguous": 0.25
+  },
+  "glifo_minus_bare_pct": 1.82
+ },
+ "BCR_ABL1": {
+  "n": 451,
+  "n_distal": 391,
+  "k_site": 20,
+  "ctqw_bare": {
+   "obs": 60.67,
+   "null_mean": 51.41,
+   "p_better_than_chance": 0.443,
+   "z_real_contiguous": 0.37
+  },
+  "ctqw_glifo": {
+   "obs": 60.88,
+   "null_mean": 51.35,
+   "p_better_than_chance": 0.4185,
+   "z_real_contiguous": 0.37
+  },
+  "diffusion": {
+   "obs": 60.58,
+   "null_mean": 50.84,
+   "p_better_than_chance": 0.391,
+   "z_real_contiguous": 0.37
+  },
+  "glifo_minus_bare_pct": 0.21
+ },
+ "CARDIAC_MYOSIN": {
+  "n": 954,
+  "n_distal": 935,
+  "k_site": 15,
+  "ctqw_bare": {
+   "obs": 61.32,
+   "null_mean": 50.63,
+   "p_better_than_chance": 0.4025,
+   "z_real_contiguous": 0.38
+  },
+  "ctqw_glifo": {
+   "obs": 63.05,
+   "null_mean": 50.63,
+   "p_better_than_chance": 0.3895,
+   "z_real_contiguous": 0.43
+  },
+  "diffusion": {
+   "obs": 57.79,
+   "null_mean": 50.61,
+   "p_better_than_chance": 0.428,
+   "z_real_contiguous": 0.25
+  },
+  "glifo_minus_bare_pct": 1.73
+ }
+}
