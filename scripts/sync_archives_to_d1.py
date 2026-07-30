@@ -9,7 +9,7 @@ Requires wrangler authenticated against the account that owns `rosettaq-ledger`
 (in Claude Code: strip CLOUDFLARE_API_TOKEN so the OAuth login is used).
 Idempotent: INSERT OR REPLACE keyed on file_id, so re-running is safe.
 """
-import base64, glob, json, os, re, sys, urllib.request
+import base64, glob, json, os, re, subprocess, sys, urllib.request
 sys.path.insert(0, "tools")
 from verify_seals import identify   # API v2: (convencion, hash) | (None, esperado)
 
@@ -73,7 +73,15 @@ SQL = ("INSERT OR REPLACE INTO run_archives "
 
 
 def d1_token():
-    """El token OAuth de wrangler (el unico con permiso D1 en este Mac)."""
+    """El token OAuth de wrangler (el unico con permiso D1 en este Mac).
+
+    Se invoca wrangler primero a proposito: el access token OAuth caduca en horas y
+    wrangler lo renueva con su refresh token al ejecutarse. Leyendo el archivo sin ese
+    paso, un token vencido da 401 y la tercera copia se queda sin actualizar.
+    """
+    subprocess.run(["npx", "wrangler", "whoami"], capture_output=True, text=True,
+                   env={k: v for k, v in os.environ.items()
+                        if k not in ("CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID")})
     cfg = open(os.path.expanduser(
         "~/Library/Preferences/.wrangler/config/default.toml")).read()
     m = re.search(r'oauth_token\s*=\s*"([^"]+)"', cfg)
