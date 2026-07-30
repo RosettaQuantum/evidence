@@ -16,6 +16,24 @@ OTS = os.path.expanduser("~/Library/Python/3.9/bin/ots")
 OUT = "RosettaQ-Cleveland-sealed-runs.csv"
 
 
+def fecha_de(doc):
+    """Fecha del archivo, tolerando las dos formas que ha tenido `cuando`.
+
+    Era un objeto {archived_at | published_at | started_at}; desde EXP-0007-020 el
+    laboratorio tambien emite una cadena ISO suelta. Un PREREG la lleva en
+    prereg.committed_at_utc. Como los archivos ya estan sellados y anclados, no se
+    pueden normalizar: se normaliza la lectura.
+    """
+    c = (doc.get("w6") or {}).get("cuando")
+    if isinstance(c, str):
+        return c[:10]
+    if isinstance(c, dict):
+        for k in ("archived_at", "published_at", "started_at"):
+            if c.get(k):
+                return str(c[k])[:10]
+    return str((doc.get("prereg") or {}).get("committed_at_utc", ""))[:10]
+
+
 def bitcoin_blocks(ots_path):
     """Bloques de Bitcoin que atestiguan el sello (vacio si sigue pendiente)."""
     try:
@@ -41,7 +59,7 @@ for path in sorted(glob.glob("runs/2026/07/*EXP-0007-0*.json")):
         # previa (2HHB / caspasa-3). Se publican las dos: recortar el CSV a lo que
         # luce bien seria elegir la evidencia despues de verla.
         "series": "cleveland-mandated" if n >= 13 else "exploratory-2HHB-caspase",
-        "archived_at": doc["w6"]["cuando"].get("archived_at", "")[:10],
+        "archived_at": fecha_de(doc),
         "instance": q.get("instance", ""),
         "problem_class": q.get("problem_class", ""),
         "outcome": q.get("outcome", ""),

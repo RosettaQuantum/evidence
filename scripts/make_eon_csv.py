@@ -19,6 +19,24 @@ OTS = os.path.expanduser("~/Library/Python/3.9/bin/ots")
 OUT = "RosettaQ-EON-sealed-runs.csv"
 
 
+def fecha_de(doc):
+    """Fecha del archivo, tolerando las dos formas que ha tenido `cuando`.
+
+    Era un objeto {archived_at | published_at | started_at}; desde EXP-0007-020 el
+    laboratorio tambien emite una cadena ISO suelta. Un PREREG la lleva en
+    prereg.committed_at_utc. Como los archivos ya estan sellados y anclados, no se
+    pueden normalizar: se normaliza la lectura.
+    """
+    c = (doc.get("w6") or {}).get("cuando")
+    if isinstance(c, str):
+        return c[:10]
+    if isinstance(c, dict):
+        for k in ("archived_at", "published_at", "started_at"):
+            if c.get(k):
+                return str(c[k])[:10]
+    return str((doc.get("prereg") or {}).get("committed_at_utc", ""))[:10]
+
+
 def bitcoin_blocks(ots_path):
     try:
         info = subprocess.run([OTS, "info", ots_path], capture_output=True, text=True).stdout
@@ -41,7 +59,7 @@ for path in sorted(glob.glob("runs/2026/07/*EXP-0033-*.json")):
     internal = str(ip.get("grid", ""))
     rows.append({
         "file_id": meta["file_id"],
-        "archived_at": doc["w6"]["cuando"].get("archived_at", "")[:10],
+        "archived_at": fecha_de(doc),
         "grid_per_filename": filename_claim,
         "grid_per_internal_params": internal,
         "labels_agree": "yes" if filename_claim == internal else "NO",

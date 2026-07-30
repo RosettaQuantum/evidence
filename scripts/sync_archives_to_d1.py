@@ -23,6 +23,24 @@ def seal_ok(doc):
     return convention is not None
 
 
+def fecha_de(doc):
+    """Fecha del archivo, tolerando las dos formas que ha tenido `cuando`.
+
+    Era un objeto {archived_at | published_at | started_at}; desde EXP-0007-020 el
+    laboratorio tambien emite una cadena ISO suelta. Un PREREG la lleva en
+    prereg.committed_at_utc. Como los archivos ya estan sellados y anclados, no se
+    pueden normalizar: se normaliza la lectura.
+    """
+    c = (doc.get("w6") or {}).get("cuando")
+    if isinstance(c, str):
+        return c[:10]
+    if isinstance(c, dict):
+        for k in ("archived_at", "published_at", "started_at"):
+            if c.get(k):
+                return str(c[k])[:10]
+    return str((doc.get("prereg") or {}).get("committed_at_utc", ""))[:10]
+
+
 def esc(s):
     return s.replace("'", "''")
 
@@ -40,9 +58,7 @@ for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", rec
     meta = doc["meta"]
     # RUN/VERDICT traen w6; PREREG trae su propio bloque con committed_at_utc
     w6 = doc.get("w6") or {}
-    cuando = w6.get("cuando", {})
-    when = (cuando.get("archived_at") or cuando.get("published_at")
-            or doc.get("prereg", {}).get("committed_at_utc") or "")
+    when = fecha_de(doc)
     payload = open(path).read()
     try:
         ots = base64.b64encode(open(path + ".ots", "rb").read()).decode()
