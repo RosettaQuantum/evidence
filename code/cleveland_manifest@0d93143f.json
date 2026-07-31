@@ -1,0 +1,41 @@
+{
+  "_doc": "Manifest de dianas Cleveland para el pipe SIGO⇄Cleveland. apo/holo/ligand codes tomados del harness ya corrido (run_challenge_targets.py); UniProt/gene agregados para la capa de variables. El pipe corre igual para cualquier proteina nueva que se agregue con esta misma forma.",
+  "targets": {
+    "KRAS_G12C": {
+      "apo": "4OBE", "holo": "6OIM", "chain": "A",
+      "sel": "protein and name CA and chain A",
+      "source_ligsel": "(resname GDP or resname MG) and chain A",
+      "gt_ligand": "MOV", "gt_drug": "sotorasib (AMG 510)",
+      "uniprot": "P01116", "gene": "KRAS",
+      "pocket": "switch-II pocket (S-IIP)",
+      "note": "verdad-terreno = residuos <4.5A de MOV en 6OIM. Ancla de literatura: Cys12/Gly60/Glu99 (Ostrem 2013)."
+    },
+    "BCR_ABL1": {
+      "apo": "1OPL", "holo": "5MO4", "chain": "A",
+      "sel": "protein and name CA and chain A",
+      "source_ligsel": "resname P16 and chain A",
+      "gt_ligand": "AY7", "gt_drug": "asciminib (ABL001)",
+      "uniprot": "P00519", "gene": "ABL1",
+      "pocket": "bolsillo miristoilo",
+      "caveat": "1OPL tiene acido miristico (MYR) en el bolsillo: la conformacion de entrada NO es ciega. Declarado; usar control sin MYR."
+    },
+    "CARDIAC_MYOSIN": {
+      "apo": "5TBY", "holo": "9GZ1", "chain": "A",
+      "sel": "protein and name CA and chain A",
+      "source_ligsel": null,
+      "gt_ligand": "XB2", "gt_drug": "mavacamten",
+      "uniprot": "P12883", "gene": "MYH7",
+      "pocket": "sitio del estado super-relajado (SRX)",
+      "note": "fuente via motivo Walker-A (lazo P), no ligando. 5TBY es MODELO POR HOMOLOGIA; la numeracion puede no calzar con UniProt -> el alineador descarta lo que no verifica. Correccion documentada: 6C1H del reto no contiene mavacamten; se usa 9GZ1 y se corrobora con 8QYR."
+    },
+    "c_MYC": {
+      "apo": "1NKP", "holo": null, "chain": "A",
+      "sel": "protein and name CA and (chain A or chain B)",
+      "source_ligsel": "nucleic",
+      "gt_ligand": null, "gt_drug": null,
+      "uniprot": "P01106", "gene": "MYC",
+      "pocket": "sin verdad-terreno por diseno del reto",
+      "note": "extrapolacion: factor de transcripcion intrinsecamente desordenado. Fuente = contactos con el ADN. Prediccion sellada y fechada ANTES del consenso entre equipos."
+    }
+  }
+}

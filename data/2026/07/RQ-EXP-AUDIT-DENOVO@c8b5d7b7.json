@@ -1,0 +1,593 @@
+{
+ "exp_id": "RQ-EXP-AUDIT-DENOVO",
+ "note": "escalera de ablaciones para aislar la senal de novo (N=52)",
+ "n_proteins": 52,
+ "proteins": [
+  "KRAS_G12C",
+  "BCR_ABL1",
+  "CARDIAC_MYOSIN",
+  "SHP2_PTPN11",
+  "PTP1B",
+  "IDH1_R132H",
+  "IDH2",
+  "MEK1",
+  "AKT1",
+  "PKM2",
+  "PDK1_PDPK1",
+  "CASP3",
+  "HIV1_RT",
+  "P38A_MAPK",
+  "GCK_GLUCOKINASE",
+  "PYGL_GLYCOGEN_PHOS",
+  "PKLR_PYRUVATE_K",
+  "CASP7_CASPASE7",
+  "SIRT1_STAC",
+  "ME2_MALIC",
+  "DHODH_TUNNEL",
+  "PFKP_FBP",
+  "FBP1_AMPSITE",
+  "GLUD1_GW5074",
+  "HK1_G6P",
+  "G6PD_STRUCT",
+  "PYGM_IMP",
+  "ESR1_ALLO",
+  "SLC6A4_ALLO",
+  "PDE4D_ALLO",
+  "NTRK1_ALLO",
+  "PARP1_ALLO",
+  "FFAR1_ALLO",
+  "RIPK2_ALLO",
+  "PAK1_ALLO",
+  "PANK3_ALLO",
+  "FLT3_ALLO",
+  "PTPRZ1_ALLO",
+  "BRAF_ALLO",
+  "ACACB_ALLO",
+  "SNRNP200_ALLO",
+  "ENPP2_ALLO",
+  "EGFR_ALLO",
+  "ADRB2_ALLO",
+  "PTGS2_ALLO",
+  "WNK1_ALLO",
+  "PARP14_ALLO",
+  "KIF18A_ALLO",
+  "CRHR1_ALLO",
+  "SLC1A3_ALLO",
+  "PRKAG1_ALLO",
+  "KIF11_ALLO"
+ ],
+ "config": {
+  "glifo_feats": [
+   "uni_binding_site",
+   "uni_active_site",
+   "uni_domain",
+   "uni_ptm",
+   "uni_motif",
+   "clinvar_density",
+   "coordination",
+   "degree",
+   "closeness_to_active",
+   "conservation",
+   "gnm_msf",
+   "anm_msf"
+  ],
+  "feat_cols": [
+   "degree",
+   "closeness_to_active",
+   "coordination",
+   "uni_binding_site",
+   "uni_active_site",
+   "uni_domain",
+   "uni_ptm",
+   "uni_motif",
+   "clinvar_density",
+   "conservation",
+   "gnm_msf",
+   "anm_msf",
+   "diffusion",
+   "gnm",
+   "betweenness"
+  ],
+  "arms": [
+   "B"
+  ],
+  "nperm": 2000,
+  "seed": 20260717,
+  "window": [
+   0.5,
+   8.0
+  ]
+ },
+ "fisher_p": {
+  "armB_ml": 0.0
+ },
+ "n_sig_p05": {
+  "armB": 8
+ },
+ "mean_pct": {
+  "armB": 66.8
+ },
+ "per_protein": [
+  {
+   "name": "KRAS_G12C",
+   "n": 169,
+   "k": 14,
+   "B_pct": 36.7,
+   "B_p": 0.726
+  },
+  {
+   "name": "BCR_ABL1",
+   "n": 451,
+   "k": 20,
+   "B_pct": 56.4,
+   "B_p": 0.387
+  },
+  {
+   "name": "CARDIAC_MYOSIN",
+   "n": 954,
+   "k": 15,
+   "B_pct": 73.3,
+   "B_p": 0.253
+  },
+  {
+   "name": "SHP2_PTPN11",
+   "n": 491,
+   "k": 17,
+   "B_pct": 72.9,
+   "B_p": 0.256
+  },
+  {
+   "name": "PTP1B",
+   "n": 278,
+   "k": 14,
+   "B_pct": 41.2,
+   "B_p": 0.673
+  },
+  {
+   "name": "IDH1_R132H",
+   "n": 407,
+   "k": 25,
+   "B_pct": 57.5,
+   "B_p": 0.475
+  },
+  {
+   "name": "IDH2",
+   "n": 413,
+   "k": 14,
+   "B_pct": 59.8,
+   "B_p": 0.461
+  },
+  {
+   "name": "MEK1",
+   "n": 312,
+   "k": 17,
+   "B_pct": 76.8,
+   "B_p": 0.127
+  },
+  {
+   "name": "AKT1",
+   "n": 319,
+   "k": 13,
+   "B_pct": 85.6,
+   "B_p": 0.03
+  },
+  {
+   "name": "PKM2",
+   "n": 512,
+   "k": 13,
+   "B_pct": 77.7,
+   "B_p": 0.104
+  },
+  {
+   "name": "PDK1_PDPK1",
+   "n": 285,
+   "k": 11,
+   "B_pct": 33.2,
+   "B_p": 0.781
+  },
+  {
+   "name": "CASP3",
+   "n": 245,
+   "k": 11,
+   "B_pct": 61.2,
+   "B_p": 0.385
+  },
+  {
+   "name": "HIV1_RT",
+   "n": 556,
+   "k": 16,
+   "B_pct": 86.3,
+   "B_p": 0.083
+  },
+  {
+   "name": "P38A_MAPK",
+   "n": 351,
+   "k": 22,
+   "B_pct": 77.0,
+   "B_p": 0.114
+  },
+  {
+   "name": "GCK_GLUCOKINASE",
+   "n": 447,
+   "k": 23,
+   "B_pct": 45.1,
+   "B_p": 0.596
+  },
+  {
+   "name": "PYGL_GLYCOGEN_PHOS",
+   "n": 787,
+   "k": 13,
+   "B_pct": 64.8,
+   "B_p": 0.294
+  },
+  {
+   "name": "PKLR_PYRUVATE_K",
+   "n": 522,
+   "k": 19,
+   "B_pct": 79.6,
+   "B_p": 0.089
+  },
+  {
+   "name": "CASP7_CASPASE7",
+   "n": 208,
+   "k": 14,
+   "B_pct": 65.2,
+   "B_p": 0.281
+  },
+  {
+   "name": "SIRT1_STAC",
+   "n": 335,
+   "k": 12,
+   "B_pct": 11.0,
+   "B_p": 0.938
+  },
+  {
+   "name": "ME2_MALIC",
+   "n": 552,
+   "k": 9,
+   "B_pct": 61.1,
+   "B_p": 0.305
+  },
+  {
+   "name": "DHODH_TUNNEL",
+   "n": 361,
+   "k": 18,
+   "B_pct": 69.5,
+   "B_p": 0.203
+  },
+  {
+   "name": "PFKP_FBP",
+   "n": 728,
+   "k": 16,
+   "B_pct": 86.9,
+   "B_p": 0.025
+  },
+  {
+   "name": "FBP1_AMPSITE",
+   "n": 328,
+   "k": 7,
+   "B_pct": 14.0,
+   "B_p": 0.945
+  },
+  {
+   "name": "GLUD1_GW5074",
+   "n": 502,
+   "k": 9,
+   "B_pct": 36.3,
+   "B_p": 0.73
+  },
+  {
+   "name": "HK1_G6P",
+   "n": 903,
+   "k": 15,
+   "B_pct": 78.8,
+   "B_p": 0.121
+  },
+  {
+   "name": "G6PD_STRUCT",
+   "n": 489,
+   "k": 18,
+   "B_pct": 68.5,
+   "B_p": 0.254
+  },
+  {
+   "name": "PYGM_IMP",
+   "n": 823,
+   "k": 16,
+   "B_pct": 65.4,
+   "B_p": 0.285
+  },
+  {
+   "name": "ESR1_ALLO",
+   "n": 225,
+   "k": 19,
+   "B_pct": 64.6,
+   "B_p": 0.286
+  },
+  {
+   "name": "SLC6A4_ALLO",
+   "n": 540,
+   "k": 14,
+   "B_pct": 90.6,
+   "B_p": 0.005
+  },
+  {
+   "name": "PDE4D_ALLO",
+   "n": 335,
+   "k": 14,
+   "B_pct": 65.3,
+   "B_p": 0.301
+  },
+  {
+   "name": "NTRK1_ALLO",
+   "n": 302,
+   "k": 19,
+   "B_pct": 85.3,
+   "B_p": 0.015
+  },
+  {
+   "name": "PARP1_ALLO",
+   "n": 238,
+   "k": 7,
+   "B_pct": 55.3,
+   "B_p": 0.419
+  },
+  {
+   "name": "FFAR1_ALLO",
+   "n": 411,
+   "k": 25,
+   "B_pct": 50.5,
+   "B_p": 0.358
+  },
+  {
+   "name": "RIPK2_ALLO",
+   "n": 279,
+   "k": 17,
+   "B_pct": 85.1,
+   "B_p": 0.056
+  },
+  {
+   "name": "PAK1_ALLO",
+   "n": 280,
+   "k": 20,
+   "B_pct": 83.9,
+   "B_p": 0.025
+  },
+  {
+   "name": "PANK3_ALLO",
+   "n": 312,
+   "k": 12,
+   "B_pct": 61.8,
+   "B_p": 0.33
+  },
+  {
+   "name": "FLT3_ALLO",
+   "n": 274,
+   "k": 18,
+   "B_pct": 84.5,
+   "B_p": 0.028
+  },
+  {
+   "name": "PTPRZ1_ALLO",
+   "n": 282,
+   "k": 13,
+   "B_pct": 79.5,
+   "B_p": 0.095
+  },
+  {
+   "name": "BRAF_ALLO",
+   "n": 266,
+   "k": 16,
+   "B_pct": 84.2,
+   "B_p": 0.105
+  },
+  {
+   "name": "ACACB_ALLO",
+   "n": 482,
+   "k": 18,
+   "B_pct": 48.1,
+   "B_p": 0.51
+  },
+  {
+   "name": "SNRNP200_ALLO",
+   "n": 1707,
+   "k": 20,
+   "B_pct": 86.8,
+   "B_p": 0.028
+  },
+  {
+   "name": "ENPP2_ALLO",
+   "n": 774,
+   "k": 22,
+   "B_pct": 75.7,
+   "B_p": 0.135
+  },
+  {
+   "name": "EGFR_ALLO",
+   "n": 300,
+   "k": 9,
+   "B_pct": 90.6,
+   "B_p": 0.019
+  },
+  {
+   "name": "ADRB2_ALLO",
+   "n": 440,
+   "k": 21,
+   "B_pct": 62.2,
+   "B_p": 0.396
+  },
+  {
+   "name": "PTGS2_ALLO",
+   "n": 552,
+   "k": 11,
+   "B_pct": 83.5,
+   "B_p": 0.062
+  },
+  {
+   "name": "WNK1_ALLO",
+   "n": 260,
+   "k": 10,
+   "B_pct": 72.7,
+   "B_p": 0.239
+  },
+  {
+   "name": "PARP14_ALLO",
+   "n": 189,
+   "k": 11,
+   "B_pct": 75.7,
+   "B_p": 0.102
+  },
+  {
+   "name": "KIF18A_ALLO",
+   "n": 328,
+   "k": 14,
+   "B_pct": 70.4,
+   "B_p": 0.268
+  },
+  {
+   "name": "CRHR1_ALLO",
+   "n": 407,
+   "k": 17,
+   "B_pct": 65.6,
+   "B_p": 0.249
+  },
+  {
+   "name": "SLC1A3_ALLO",
+   "n": 390,
+   "k": 12,
+   "B_pct": 57.3,
+   "B_p": 0.385
+  },
+  {
+   "name": "PRKAG1_ALLO",
+   "n": 301,
+   "k": 7,
+   "B_pct": 68.5,
+   "B_p": 0.186
+  },
+  {
+   "name": "KIF11_ALLO",
+   "n": 309,
+   "k": 11,
+   "B_pct": 81.8,
+   "B_p": 0.098
+  }
+ ],
+ "mean_pct_by_method": {
+  "ctqw_bare": 52.0,
+  "ctqw_glifo_fixed": 53.7,
+  "ctqw_glifo_learned": 56.2,
+  "diffusion": 58.2,
+  "gnm": 45.7
+ },
+ "manager_choices": {},
+ "ablations": {
+  "sin_anotaciones": {
+   "fisher_p": 0.0001,
+   "n_sig": 9,
+   "dropped": [
+    "uni_active_site",
+    "uni_binding_site",
+    "uni_domain",
+    "uni_motif",
+    "uni_ptm",
+    "uni_site"
+   ]
+  },
+  "sin_anot_sin_grafopos": {
+   "fisher_p": 0.0018,
+   "n_sig": 6,
+   "dropped": [
+    "betweenness",
+    "closeness_to_active",
+    "coordination",
+    "degree",
+    "uni_active_site",
+    "uni_binding_site",
+    "uni_domain",
+    "uni_motif",
+    "uni_ptm",
+    "uni_site"
+   ]
+  },
+  "solo_dinamica_conservacion": {
+   "fisher_p": 0.0455,
+   "n_sig": 1,
+   "dropped": [
+    "betweenness",
+    "clinvar_density",
+    "closeness_to_active",
+    "coordination",
+    "degree",
+    "diffusion",
+    "gnm",
+    "uni_active_site",
+    "uni_binding_site",
+    "uni_domain",
+    "uni_motif",
+    "uni_ptm",
+    "uni_site"
+   ]
+  },
+  "solo_dinamica": {
+   "fisher_p": 0.0684,
+   "n_sig": 1,
+   "dropped": [
+    "betweenness",
+    "clinvar_density",
+    "closeness_to_active",
+    "conservation",
+    "coordination",
+    "degree",
+    "diffusion",
+    "gnm",
+    "uni_active_site",
+    "uni_binding_site",
+    "uni_domain",
+    "uni_motif",
+    "uni_ptm",
+    "uni_site"
+   ]
+  },
+  "solo_conservacion": {
+   "fisher_p": 0.0002,
+   "n_sig": 6,
+   "dropped": [
+    "anm_msf",
+    "betweenness",
+    "clinvar_density",
+    "closeness_to_active",
+    "coordination",
+    "degree",
+    "diffusion",
+    "gnm",
+    "gnm_msf",
+    "uni_active_site",
+    "uni_binding_site",
+    "uni_domain",
+    "uni_motif",
+    "uni_ptm",
+    "uni_site"
+   ]
+  },
+  "solo_propagadores": {
+   "fisher_p": 0.0012,
+   "n_sig": 4,
+   "dropped": [
+    "anm_msf",
+    "clinvar_density",
+    "closeness_to_active",
+    "conservation",
+    "coordination",
+    "degree",
+    "gnm_msf",
+    "uni_active_site",
+    "uni_binding_site",
+    "uni_domain",
+    "uni_motif",
+    "uni_ptm",
+    "uni_site"
+   ]
+  }
+ }
+}
