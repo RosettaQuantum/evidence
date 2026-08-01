@@ -1,0 +1,112 @@
+# Auditoría continua del archivo.
+#
+# Por que existe: hasta ahora el archivo solo se verificaba cuando alguien publicaba.
+# Entre una tanda y la siguiente podian pasar dias en los que un archivo corrupto, un
+# borrado accidental o un espejo desincronizado no los habria visto nadie. Un
+# repositorio se revisa cuando se toca; una autoridad de evidencia se revisa sola,
+# todos los dias, y avisa cuando algo cambio.
+#
+# No usa NINGUN secreto a proposito: compara las dos copias publicas por HTTPS. La
+# tercera copia (D1) se comprueba en la notarizacion local, que si tiene credencial.
+# Asi este workflow no necesita acceso a los secrets de organizacion.
+
+name: Auditoria del archivo
+on:
+  schedule:
+    - cron: '17 6 * * *'      # diario, 06:17 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  issues: write               # solo para avisar cuando algo falla
+
+jobs:
+  auditar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 1. Los sellos reproducen (la regla de parada, aplicada de forma continua)
+      - name: Verificar sellos
+        id: sellos
+        run: |
+          python3 tools/verify_seals.py 'runs/**/*.json' 'prereg/**/*.json' \
+            'verdicts/**/*.json' 'recipes/*.json' 'manifests/*.json' | tee sellos.txt
+          if grep -qE "^INVALID" sellos.txt; then
+            echo "::error::hay sellos que no reproducen — el archivo esta comprometido"
+            exit 1
+          fi
+
+      # 2. La cadena de procedencia sigue completa
+      - name: Auditar procedencia
+        run: |
+          python3 scripts/check_provenance.py | tee proc.txt
+          FALTAN=$(grep -oE "SIN publicar: +[0-9]+" proc.txt | grep -oE "[0-9]+$")
+          echo "sin_publicar=$FALTAN" >> $GITHUB_ENV
+          # Una referencia sin publicar es deuda declarada, no corrupcion: avisa, no rompe.
+          # La unica conocida y aceptada es sigo_features@0460d1f6 (ver NOTES/).
+          if [ "${FALTAN:-0}" -gt 1 ]; then
+            echo "::warning::${FALTAN} referencias de procedencia sin publicar (esperada: 1)"
+          fi
+
+      # 3. Las dos copias publicas siguen byte-identicas
+      - name: Comparar GitHub vs Codeberg
+        run: |
+          python3 - <<'PY'
+          import hashlib, subprocess, sys, urllib.parse, urllib.request
+          archivos = subprocess.run(["git","ls-files"],capture_output=True,text=True).stdout.split()
+          def remoto(url):
+              req = urllib.request.Request(url, headers={"User-Agent":"rosetta-audit"})
+              return hashlib.sha256(urllib.request.urlopen(req, timeout=60).read()).hexdigest()
+          distintos, sin_responder = [], []
+          for f in archivos:
+              q = urllib.parse.quote(f)
+              local = hashlib.sha256(open(f,"rb").read()).hexdigest()
+              try:
+                  cb = remoto(f"https://codeberg.org/RosettaQuantum/evidence/raw/branch/main/{q}")
+              except Exception as e:
+                  sin_responder.append((f, str(e)[:60])); continue
+              if cb != local:
+                  distintos.append(f)
+          print(f"archivos comparados: {len(archivos)}")
+          print(f"distintos en Codeberg: {len(distintos)}")
+          print(f"sin responder: {len(sin_responder)}")
+          for f in distintos[:10]: print("  DIFIERE", f)
+          for f,e in sin_responder[:10]: print("  no responde", f, e)
+          # Un espejo desincronizado no es corrupcion — el Action del mirror puede ir
+          # atrasado un minuto. Pero si difiere el CONTENIDO de un archivo que existe en
+          # ambos lados, eso si es grave.
+          if distintos:
+              print("::error::el espejo tiene contenido distinto — una de las dos copias fue alterada")
+              sys.exit(1)
+          PY
+
+      # 4. Avisar por issue solo si algo se rompio
+      - name: Abrir issue si la auditoria fallo
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title: `Auditoria del archivo fallo — ${new Date().toISOString().slice(0,10)}`,
+              body: [
+                'La auditoria diaria encontro una desviacion en el archivo.',
+                '',
+                `Corrida: ${url}`,
+                '',
+                'Posibles causas, de mas a menos grave:',
+                '- un sello dejo de reproducir (contenido alterado)',
+                '- una copia publica difiere de la otra',
+                '- referencias de procedencia sin publicar por encima de lo declarado',
+                '',
+                'Regla: **nada se ancla ni se publica hasta entender la causa.**'
+              ].join('\n'),
+              labels: ['auditoria']
+            });
