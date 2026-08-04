@@ -1,0 +1,96 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-POC-QPU-001__20260801T1851Z__ctqw-kras-ibm-kingston.json",
+  "file_id": "RQ-POC-QPU-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "PoC de capacidad: caminata cuantica de tiempo continuo (CTQW) sobre sub-grafo real de KRAS en QPU real ibm_kingston. Mide resistencia al ruido, NO ventaja cuantica.",
+  "schema": "rosettaq-archive/v2",
+  "sealed_at": "2026-08-04T16:33:46.453148+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "2.0.0",
+   "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+   "harness": "poc_ibm.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:db044b45c9867cfb019e6f905e901f0ec86b5e04a3e68f6b34dc446df0e366bc",
+   "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+  },
+  "content_hash": "sha256:d026eddc617f2ccdc631d20a01ca5694fa327daf7e6e357e308e50c2c952cbfb"
+ },
+ "w6": {
+  "que": {
+   "recipe": "CTQW 12 nodos (KRAS_G12C) en hardware IBM — resistencia al ruido",
+   "job_id": "d9mu2bmij12s73ft86t0",
+   "backend": "ibm_kingston",
+   "shots": 2000,
+   "shots_validos_one_hot": 1228,
+   "fraccion_valida": 0.614,
+   "fraccion_ruido": 0.386,
+   "cadenas_distintas_observadas": 301,
+   "cadenas_alcanzables_ideal": 12,
+   "masa_bolsillo_alosterico_cond_validos": 0.6262,
+   "masa_en_fuente_cond_validos": 0.0358,
+   "distribucion_por_nodo_cond_validos": {
+    "0": 0.0065,
+    "1": 0.0358,
+    "2": 0.2223,
+    "3": 0.0847,
+    "4": 0.1197,
+    "5": 0.0879,
+    "6": 0.0106,
+    "7": 0.0033,
+    "8": 0.2419,
+    "9": 0.0309,
+    "10": 0.1515,
+    "11": 0.0049
+   },
+   "pocket_nodes": [
+    0,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11
+   ],
+   "source_nodes": [
+    1
+   ],
+   "outcome": "el hardware ejecuta la caminata; 38.6% de los shots los mata el ruido; de lo que sobrevive, 62.6% de la masa cae en el bolsillo alosterico (estructura, no ruido blanco). Resistencia al ruido, NO cruce.",
+   "cruce_ventaja_cuantica": "0 (esta PoC no compite contra clasico; solo mide capacidad+ruido)"
+  },
+  "como": {
+   "protocol": "modelo XY subespacio 1-excitacion; salto exp(-i t w (XX+YY)/2) via RXX·RYY; on-site RZ; Trotter r pasos",
+   "valido": "cadena one-hot (exactamente un 1) = fisica valida; el resto es ruido de hardware",
+   "mapa_nodo_residuo": "sub-grafo KRAS de poc_ibm.py subgraph(); pocket/source de poc_result_KRAS_G12C.json",
+   "script": "poc_ibm.py",
+   "script_sha256": "sha256:db044b45c9867cfb019e6f905e901f0ec86b5e04a3e68f6b34dc446df0e366bc",
+   "raw_data_file": "poc_job_d9mu2bmij12s73ft86t0.json",
+   "raw_data_sha256": "sha256:3b45dd494e307b720bd2f25c429160ec1763cf588d4d1c236dbfa599564e7f85",
+   "limite_1": "UN circuito llego a hardware, NO la bateria de tres (r=1,2,3). No decir 'bateria' en la propuesta.",
+   "limite_2": "el job de IBM NO registra proteina ni radio de Trotter r; se reconstruye por contexto. Para la proxima: el envio debe emitir manifiesto job_id+parametros y el recogedor adjuntarlo (sellable)."
+  },
+  "cuando": {
+   "started_at": "2026-08-01T18:51:20Z",
+   "finished_at": "2026-08-01T18:51:25Z",
+   "billed_s": 3,
+   "queued_note": "6h45m en cola vs 4.5s de computo — patron asincrono obligatorio",
+   "archived_at": "2026-08-03T00:00:00Z"
+  },
+  "donde": {
+   "quantum_backend": "ibm_kingston (IBM Quantum, hardware real)",
+   "region": "us-east"
+  },
+  "porque": {
+   "hypothesis": "una CTQW de 12 nodos se puede ejecutar en QPU real de hoy y medir cuanto la degrada el ruido",
+   "question": "¿cuanto presupuesto de coherencia consume hoy un CTQW de 12 nodos en hardware? (peaje que toda afirmacion de ventaja debe pagar)"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum (Cowork)",
+   "lead": "Nicholas Iakl Freundlich",
+   "recogida": "fetch_job.py (Code, notario) — recogio crudo; interpretacion nodo->bolsillo es del lab"
+  }
+ }
+}

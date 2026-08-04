@@ -1,0 +1,62 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-QMARGIN-001__20260803T0130Z__quantum-marginal-contribution.json",
+  "file_id": "RQ-EXP-QMARGIN-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Resultado de PR-QMARGIN-001 (pre-registrado forward, sello 88d0fbf8). Mide si los propagadores CTQW aportan senal no-redundante sobre los clasicos.",
+  "schema": "rosettaq-archive/v2",
+  "sealed_at": "2026-08-04T16:41:09.323848+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "2.0.0",
+   "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+   "harness": "qmargin.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:ec2340db4d855d324b0de7a703cb664a9fcf1e0488be41399cbcf88be7fcb87d",
+   "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+  },
+  "content_hash": "sha256:f07244acfdea6446910a567fc8d0b4a4926051f860b847bbe55922e2c1392aca"
+ },
+ "w6": {
+  "que": {
+   "recipe": "contribucion marginal de la caminata cuantica (C_all 6 prop vs C_classical 3 prop)",
+   "n_proteins": 90,
+   "fisher_p_C_all": 0.0,
+   "fisher_p_C_classical": 0.0,
+   "wilcoxon_pareado_p": 0.0949,
+   "delta_pct_medio": 0.073,
+   "n_mejoradas": 54,
+   "n_empeoradas": 35,
+   "n_sig_all": 11,
+   "n_sig_classical": 13,
+   "veredicto": "NEGATIVO PRECISO: la caminata cuantica NO aporta senal extra sobre los propagadores clasicos (pareado n.s.)",
+   "outcome": "NEGATIVO PRECISO: contribucion cuantica NO-redundante NO alcanza significancia (Wilcoxon pareado p=0.095). Tendencia positiva (delta +0.073, 54/89 mejoradas) pero n.s.; el clasico solo tiene mas individuales significativas (13 vs 11).",
+   "cruce_ventaja_cuantica": "0",
+   "contribucion_no_redundante": "no medida (p=0.095, tendencia)"
+  },
+  "como": {
+   "protocol": "LOPO; percentil distal del bolsillo; nulo espacial nperm=2000 seed 20260717; Wilcoxon pareado una-cola (greater) C_all vs C_classical; LogisticRegression C=1.0 balanced identica",
+   "budget_parity": "unica diferencia = 3 columnas cuanticas; todo lo demas identico",
+   "prereg": "PR-QMARGIN-001 (sello 88d0fbf8, committed_before_run=true)",
+   "script": "qmargin.py",
+   "script_sha256": "sha256:ec2340db4d855d324b0de7a703cb664a9fcf1e0488be41399cbcf88be7fcb87d",
+   "raw_result_url": "code/qmargin_result.json"
+  },
+  "cuando": {
+   "archived_at": "2026-08-03T01:30:00Z"
+  },
+  "donde": {
+   "compute": "contenedor cloud (Cowork lab)",
+   "region": "us"
+  },
+  "porque": {
+   "hypothesis": "los propagadores CTQW aportan senal no-redundante mas alla de los clasicos",
+   "question": "¿la caminata cuantica SUMA (no gana) informacion util para el bolsillo alosterico?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum (Cowork)",
+   "lead": "Nicholas Iakl Freundlich"
+  }
+ }
+}

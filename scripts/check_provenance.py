@@ -34,15 +34,44 @@ def publicados():
 
 
 def referencias(doc):
-    """(nombre, sha256) de cada bloque de procedencia, a cualquier profundidad."""
+    """(nombre, sha256) de cada bloque de procedencia, a cualquier profundidad.
+
+    Dos formas conviven en el archivo y las dos cuentan:
+
+      A) un bloque con su nombre y su hash:   {"file": "x.py", "sha256": "..."}
+      B) claves hermanas sufijadas:           {"script": "x.py", "script_sha256": "..."}
+
+    La forma B aparecio con RQ-POC-QPU-001 y esta funcion no la veia. El efecto fue
+    peor que no auditarla: el resumen decia "43 declaradas, 41 resueltas" con las dos
+    referencias nuevas invisibles, o sea daba por auditado lo que nunca miro. Un
+    auditor ciego a un campo nuevo no avisa menos — miente mas.
+    """
     out = []
 
     def rec(o):
         if isinstance(o, dict):
+            # forma A
             nombre = next((o[k] for k in CLAVES_NOMBRE if o.get(k)), None)
             sha = o.get("sha256")
             if nombre and sha:
                 out.append((str(nombre), str(sha).replace("sha256:", "")))
+            # forma B: cualquier <algo>_sha256 cuyo <algo> (o <algo>_file) sea el nombre
+            for k, v in o.items():
+                if not k.endswith("_sha256") or not v:
+                    continue
+                base = k[: -len("_sha256")]
+                # El valor puede ser un hash suelto o un mapa {archivo: hash} — en
+                # PR-ITER2-001 es lo segundo, y tratarlo como cadena convertia todo el
+                # diccionario en un unico "archivo" inexistente: seis referencias reales
+                # se contaban como una falsa.
+                if isinstance(v, dict):
+                    for nom, h in v.items():
+                        if isinstance(h, str):
+                            out.append((str(nom), h.replace("sha256:", "")))
+                    continue
+                ref = next((c for c in (o.get(base), o.get(base + "_file"),
+                                        o.get(base + "_name")) if isinstance(c, str)), base)
+                out.append((ref, str(v).replace("sha256:", "")))
             for v in o.values():
                 rec(v)
         elif isinstance(o, list):

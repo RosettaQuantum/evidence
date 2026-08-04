@@ -1,0 +1,47 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__PREREG__PR-QMARGIN-001__20260803T0100Z__quantum-marginal-contribution.json",
+  "file_id": "PR-QMARGIN-001",
+  "type": "PREREG",
+  "is_demo": false,
+  "scope_note": "Pre-registro FORWARD: congela hipotesis, dos conjuntos de propagadores, protocolo LOPO, nulo espacial y criterio de exito ANTES de correr RQ-EXP-QMARGIN-001. Sellado antes de ver el resultado.",
+  "schema": "rosettaq-archive/v2",
+  "sealed_at": "2026-08-04T16:36:06.375446+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "2.0.0",
+   "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+   "harness": "qmargin.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:ec2340db4d855d324b0de7a703cb664a9fcf1e0488be41399cbcf88be7fcb87d",
+   "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+  },
+  "content_hash": "sha256:88d0fbf8d83140ed9753c284606f98820dd718142eba8e122d03fa7196228f4e"
+ },
+ "prereg": {
+  "title": "Pre-Registration — Rosetta Quantum · Contribucion marginal de la caminata cuantica",
+  "team": "Rosetta Quantum",
+  "lead": "Nicholas Iakl Freundlich",
+  "hypothesis": "Los propagadores CTQW (ctqw_bare, ctqw_glifo_fixed, ctqw_glifo_learned) aportan senal NO-REDUNDANTE para identificar el bolsillo alosterico, mas alla de los propagadores clasicos (diffusion, gnm, betweenness), bajo presupuesto identico.",
+  "frozen_set": "las 90 proteinas del RUN RQ-EXP-N90 (referencia _train90.json)",
+  "variants": {
+   "C_all": "LogisticRegression LOPO sobre 6 propagadores (3 cuanticos + 3 clasicos)",
+   "C_classical": "LogisticRegression LOPO sobre 3 propagadores clasicos SOLAMENTE"
+  },
+  "model": "LogisticRegression(C=1.0, class_weight=balanced, max_iter=2000, standardized) — identico en ambas variantes, congelado",
+  "protocol": "leave-one-protein-out; percentil distal del bolsillo por proteina; nulo espacial contiguo nperm=2000 seed 20260717",
+  "primary_test": "Wilcoxon pareado (una cola, greater) sobre los percentiles del bolsillo: C_all > C_classical",
+  "secondary": "Fisher p de cada variante vs nulo; delta medio de percentil; #proteinas mejoradas",
+  "success_criteria": {
+   "positive": "Wilcoxon pareado p<0.05 y delta medio>0 => contribucion cuantica NO-REDUNDANTE medida (novedad real)",
+   "negative_is_valid": "un no-significativo es un NEGATIVO PRECISO publicable: la caminata no aporta senal extra sobre lo clasico"
+  },
+  "budget_parity": "unica diferencia entre variantes = 3 columnas cuanticas; mismo modelo, mismo LOPO, mismas proteinas, mismo nulo",
+  "guardrails": [
+   "no se cambia el modelo ni las columnas mirando el resultado",
+   "el resultado se publica en cualquier direccion (cruce/significancia/negativo)",
+   "script congelado: qmargin.py sha256:ec2340db4d855d324b0de7a703cb664a9fcf1e0488be41399cbcf88be7fcb87d"
+  ],
+  "committed_before_run": true
+ }
+}
