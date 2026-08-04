@@ -21,8 +21,8 @@ from verify_seals import identify
 
 OTS = os.path.expanduser("~/Library/Python/3.9/bin/ots")
 DRY = "--dry" in sys.argv
-ARCHIVE_GLOBS = ("runs/**/*.json", "prereg/**/*.json", "verdicts/**/*.json",
-                 "recipes/*.json", "manifests/*.json")
+sys.path.insert(0, "scripts")
+from notarize_globs import ARCHIVE_GLOBS   # definicion unica; ver el modulo
 
 
 def sh(cmd, **kw):

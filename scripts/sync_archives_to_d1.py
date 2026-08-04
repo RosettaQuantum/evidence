@@ -44,11 +44,18 @@ def fecha_de(doc):
 def esc(s):
     return s.replace("'", "''")
 
+# La lista de carpetas la manda notarize.py: tener dos listas separadas ya costo caro.
+# Este script se olvidaba de manifests/, asi que la tercera copia iba 63 de 64 y el
+# archivo ausente era justamente el MANIFEST que documenta como verificar los sellos —
+# el sitio ofrecia comprobarlo todo salvo las instrucciones para comprobar. Importarla
+# de un solo lugar hace imposible que vuelvan a divergir en silencio.
+sys.path.insert(0, "scripts")
+from notarize_globs import ARCHIVE_GLOBS
+
 rows = []
 skipped = []
-for path in sorted(glob.glob("recipes/*.json") + glob.glob("runs/**/*.json", recursive=True)
-                   + glob.glob("verdicts/**/*.json", recursive=True)
-                   + glob.glob("prereg/**/*.json", recursive=True)):
+for path in sorted(p for g in ARCHIVE_GLOBS for p in glob.glob(g, recursive=True)
+                   if not p.endswith(".ots")):
     doc = json.load(open(path))
     # guardarraíl: un sello que no verifica no se publica en ninguna copia
     if not seal_ok(doc):
