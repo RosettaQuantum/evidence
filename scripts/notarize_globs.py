@@ -12,6 +12,7 @@ Si se agrega una carpeta nueva al archivo, se agrega aqui y en ningun otro lado.
 ARCHIVE_GLOBS = (
     "runs/**/*.json",
     "prereg/**/*.json",
+    "predictions/**/*.json",   # PREDICTION: se compromete un resultado ANTES de saberlo
     "verdicts/**/*.json",
     "recipes/*.json",
     "manifests/*.json",

@@ -1,0 +1,90 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__MANIFEST__PARITY-N90__20260803T0230Z__budget-parity-table.json",
+  "file_id": "PARITY-N90",
+  "type": "MANIFEST",
+  "is_demo": false,
+  "covers": [
+   "RQ-EXP-N90",
+   "RQ-EXP-HOLDOUT-K3",
+   "RQ-EXP-QMARGIN-001"
+  ],
+  "scope_note": "MANIFEST: propiedad del protocolo (presupuesto pareado entre brazos), no una medicion. Cubre los runs cuyo presupuesto describe. No mueve el contador de evidencia.",
+  "schema": "rosettaq-archive/v2",
+  "sealed_at": "2026-08-04T23:35:23.291923+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "2.0.0",
+   "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+   "harness": "engine.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:f3d4d557c7f5b019a40d97d7cb688f8ab152d1b81ade78eac9bc767905b1c983",
+   "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+  },
+  "content_hash": "sha256:0a134c231a437d880a1ae6021a8388c931b501cd2cf45892af343a422e018a8c"
+ },
+ "w6": {
+  "que": {
+   "recipe": "paridad de presupuesto — brazos vs baselines (run N=90)",
+   "tabla": [
+    {
+     "brazo": "A_cuantico_gestor_CTQW",
+     "tuning_por_brazo": "5 metodos, eleccion k-NN (no sobre la respuesta)",
+     "ajustes_por_fold": 1,
+     "params_libres": 12,
+     "protocolo": "LOPO"
+    },
+    {
+     "brazo": "difusion_exp(-Lt)",
+     "tuning_por_brazo": "0 (determinista)",
+     "ajustes_por_fold": 0,
+     "params_libres": 0,
+     "protocolo": "LOPO"
+    },
+    {
+     "brazo": "GNM_ANM",
+     "tuning_por_brazo": "0 (determinista)",
+     "ajustes_por_fold": 0,
+     "params_libres": 0,
+     "protocolo": "LOPO"
+    },
+    {
+     "brazo": "B_ML_features",
+     "tuning_por_brazo": "0 (C=1.0 fijo)",
+     "ajustes_por_fold": 1,
+     "params_libres": 16,
+     "protocolo": "LOPO"
+    },
+    {
+     "brazo": "C_ML_propagadores",
+     "tuning_por_brazo": "0 (C=1.0 fijo)",
+     "ajustes_por_fold": 1,
+     "params_libres": 7,
+     "protocolo": "LOPO"
+    }
+   ],
+   "protocolo_comun": "LOPO; nulo espacial contiguo nperm=2000 seed 20260717; mismas 90 proteinas; mismas features; LogisticRegression C=1.0 balanced max_iter=2000",
+   "giro": "baselines clasicos libres de parametros (0); brazo cuantico con 12 -> lo cuantico estuvo MAS dotado y aun asi 0 cruces. El 0 no se puede achacar a sub-dotar lo cuantico.",
+   "run_base": "RQ-EXP-N90"
+  },
+  "como": {
+   "protocol": "presupuesto igual y pre-registrado entre brazos; regla en claude/rosetta-regla-paridad-presupuesto.md v1.1",
+   "script": "engine.py",
+   "script_sha256": "sha256:f3d4d557c7f5b019a40d97d7cb688f8ab152d1b81ade78eac9bc767905b1c983"
+  },
+  "cuando": {
+   "archived_at": "2026-08-03T02:30:00Z"
+  },
+  "donde": {
+   "compute": "contenedor cloud (Cowork lab)"
+  },
+  "porque": {
+   "hypothesis": "neutralizar el ataque #1 del revisor: comparacion cuantico-vs-clasico con presupuesto pareado",
+   "question": "¿el 0 cruces es por sub-dotar lo cuantico? No: tuvo mas params libres."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum (Cowork)",
+   "lead": "Nicholas Iakl Freundlich"
+  }
+ }
+}
