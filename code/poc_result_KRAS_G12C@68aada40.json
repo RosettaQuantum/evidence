@@ -1,0 +1,25 @@
+{
+ "protein": "KRAS_G12C",
+ "nodes": 12,
+ "trotter_r": 2,
+ "source": [
+  1
+ ],
+ "pocket": [
+  0,
+  4,
+  5,
+  6,
+  7,
+  8,
+  10,
+  11
+ ],
+ "exact_pocket_mass": 0.47993469088288404,
+ "ideal_pocket_mass": 0.18737474776059676,
+ "ideal_vs_exact_fid": 0.5460600666869477,
+ "noisy_pocket_mass": 0.206927575348628,
+ "noisy_vs_ideal_fid_restringida": 0.9961564394206706,
+ "noisy_survival_1exc": 0.55575,
+ "transpiled_depth": 186
+}
