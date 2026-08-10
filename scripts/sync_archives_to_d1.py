@@ -13,6 +13,18 @@ import base64, glob, json, os, re, subprocess, sys, urllib.request
 sys.path.insert(0, "tools")
 from verify_seals import identify   # API v2: (convencion, hash) | (None, esperado)
 
+# La convencion con la que un sello reproduce NO se puede deducir del archivo: 47 de los
+# 69 anclados declaran `rosettaq-archive/v1` en `meta.schema` y son DOS convenciones
+# distintas —34 v1-legada y 13 v1-canonica— que se recomputan de forma distinta. Quien
+# construya la instruccion de verificacion leyendo esa etiqueta manda a decenas de
+# personas a una receta que no reproduce, y el fallo se ve como manipulacion.
+#
+# Por eso se computa aqui, UNA vez, con el unico que sabe de verdad —el verificador— y
+# se guarda junto al hash. La API deriva de esa columna el texto de "como verificar", en
+# vez de tenerlo escrito en dos lugares que divergen. Sirve para los 69 ya anclados sin
+# tocar ninguno, y el aviso de "solo reproduce en Python" desaparecera solo el dia que
+# aparezcan los primeros v3.
+
 OWNER, REPO, DB = "RosettaQuantum", "evidence", "rosettaq-ledger"
 
 
@@ -63,6 +75,7 @@ for path in sorted(p for g in ARCHIVE_GLOBS for p in glob.glob(g, recursive=True
         skipped.append(path)
         continue
     meta = doc["meta"]
+    convencion, _ = identify(doc)      # ya paso seal_ok, asi que nunca es None
     # RUN/VERDICT traen w6; PREREG trae su propio bloque con committed_at_utc
     w6 = doc.get("w6") or {}
     when = fecha_de(doc)
@@ -78,7 +91,7 @@ for path in sorted(p for g in ARCHIVE_GLOBS for p in glob.glob(g, recursive=True
         meta["content_hash"], None, when,
         f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/{path}",
         f"https://codeberg.org/{OWNER}/{REPO}/raw/branch/main/{path}",
-        ots, payload,
+        ots, payload, convencion,
     ])
 
 # Transporte: API REST de D1 con parametros ligados, NO texto SQL.
@@ -91,8 +104,8 @@ ACCOUNT_ID = "6398d10da6c1f1e8b38b5e7c15d2410f"
 DB_UUID = "f0919403-5bd0-4842-a1d3-0954fdd47633"
 SQL = ("INSERT OR REPLACE INTO run_archives "
        "(file_id,file_name,type,recipe_id,is_demo,content_hash,started_at,"
-       "archived_at,github_url,codeberg_url,ots_proof,payload) "
-       "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)")
+       "archived_at,github_url,codeberg_url,ots_proof,payload,seal_convention) "
+       "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")
 
 
 def d1_token():
