@@ -13,6 +13,7 @@ ARCHIVE_GLOBS = (
     "runs/**/*.json",
     "prereg/**/*.json",
     "predictions/**/*.json",   # PREDICTION: se compromete un resultado ANTES de saberlo
+    "reports/**/*.json",       # REPORT: documento entregable sellado (metodologia, spec)
     "verdicts/**/*.json",
     "recipes/*.json",
     "manifests/*.json",
