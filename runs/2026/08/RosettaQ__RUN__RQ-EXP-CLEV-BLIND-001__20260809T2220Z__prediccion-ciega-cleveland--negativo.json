@@ -1,0 +1,409 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-CLEV-BLIND-001__20260809T2220Z__prediccion-ciega-cleveland--negativo.json",
+  "file_id": "RQ-EXP-CLEV-BLIND-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Prediccion CIEGA de sitios alostericos para el challenge Cleveland (4 blancos), puntuada contra bolsillos validados. Resultado NEGATIVO en los 3 blancos con bolsillo publicado. Se publica igual: el trato era publicar gane o pierda. Incluye el diagnostico MEDIDO de por que fallo. Sellado por el laboratorio; el anclaje y la publicacion son del notario.",
+  "schema": "rosettaq-archive/v2",
+  "sealed_at": "2026-08-10T12:52:22.595235+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "2.0.0",
+   "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+   "harness": "score_predictions.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:740f13e622659e91156426ab2647a1f27850e9388e6b520d984b292fac280cdd",
+   "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+  },
+  "content_hash": "sha256:ca916f94a138ae3b19279d045f9631be3944276b8ccb71e637b9a46963497214"
+ },
+ "w6": {
+  "que": {
+   "recipe": "mixing matrix CTQW (promedio temporal infinito) sobre la red de contactos CA; score = media de C(i,src); sitios = clustering de enlace simple 8 A del top 10% distal",
+   "n_blancos_predichos": 4,
+   "n_blancos_puntuados": 3,
+   "blancos_sin_puntuar": [
+    "MYC_1NKP"
+   ],
+   "razon_sin_puntuar": "c-Myc no tiene bolsillo alosterico validado publicado. Se predijo a ciegas y la prediccion esta comprometida (4cfac34), pero no hay verdad de terreno contra la cual puntuarla. No se puntua lo que no se puede puntuar.",
+   "metricas_por_blanco": {
+    "KRAS_4OBE": {
+     "target": "KRAS_4OBE",
+     "farmaco": "MOV (sotorasib, 6OIM)",
+     "nota": null,
+     "bolsillo_validado": {
+      "residuos_holo": 21,
+      "mapeados_en_red": 21,
+      "en_distal": 14,
+      "resnums": [
+       9,
+       10,
+       11,
+       12,
+       13,
+       16,
+       34,
+       58,
+       59,
+       60,
+       61,
+       62,
+       63,
+       68,
+       69,
+       72,
+       95,
+       96,
+       99,
+       100,
+       103
+      ]
+     },
+     "rank_primer_sitio_que_acierta": 2,
+     "sitios": [
+      {
+       "rank": 1,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 4.86
+      },
+      {
+       "rank": 2,
+       "overlap_residuos": 1,
+       "dist_min_al_bolsillo_A": 0.0
+      },
+      {
+       "rank": 3,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 10.93
+      },
+      {
+       "rank": 4,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 13.61
+      },
+      {
+       "rank": 5,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 16.32
+      }
+     ],
+     "percentil_bolsillo_entre_distales": 47.82,
+     "p_permutacion_parches_contiguos": 0.5212,
+     "n_permutaciones_efectivas": 2000
+    },
+    "ABL1_1OPL": {
+     "target": "ABL1_1OPL",
+     "farmaco": "AY7 (asciminib, 5MO4)",
+     "nota": null,
+     "bolsillo_validado": {
+      "residuos_holo": 20,
+      "mapeados_en_red": 20,
+      "en_distal": 20,
+      "resnums": [
+       351,
+       356,
+       359,
+       360,
+       363,
+       448,
+       451,
+       452,
+       453,
+       454,
+       456,
+       481,
+       482,
+       483,
+       484,
+       487,
+       512,
+       521,
+       525,
+       529
+      ]
+     },
+     "rank_primer_sitio_que_acierta": null,
+     "sitios": [
+      {
+       "rank": 1,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 10.47
+      },
+      {
+       "rank": 2,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 29.48
+      },
+      {
+       "rank": 3,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 12.11
+      },
+      {
+       "rank": 4,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 10.88
+      }
+     ],
+     "percentil_bolsillo_entre_distales": 60.12,
+     "p_permutacion_parches_contiguos": 0.4153,
+     "n_permutaciones_efectivas": 2000
+    },
+    "MYOSIN_5TBY": {
+     "target": "MYOSIN_5TBY",
+     "farmaco": "XB2 (mavacamten, 9GZ1)",
+     "nota": "9GZ1 y no 6C1H — errata publica 2026-07-28, sustitucion pre-registrada en PR-CLEV-001",
+     "bolsillo_validado": {
+      "residuos_holo": 12,
+      "mapeados_en_red": 12,
+      "en_distal": 12,
+      "resnums": [
+       163,
+       164,
+       167,
+       168,
+       497,
+       500,
+       666,
+       710,
+       711,
+       712,
+       713,
+       774
+      ]
+     },
+     "rank_primer_sitio_que_acierta": null,
+     "sitios": [
+      {
+       "rank": 1,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 6.02
+      },
+      {
+       "rank": 2,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 11.92
+      },
+      {
+       "rank": 3,
+       "overlap_residuos": 0,
+       "dist_min_al_bolsillo_A": 3.83
+      }
+     ],
+     "percentil_bolsillo_entre_distales": 60.62,
+     "p_permutacion_parches_contiguos": 0.4038,
+     "n_permutaciones_efectivas": 2000
+    }
+   },
+   "veredicto": "NEGATIVO en los 3 blancos con bolsillo validado. Ningun p alcanza significancia (0,4038 a 0,5212), los percentiles del bolsillo quedan en el medio del reparto (47,82 / 60,12 / 60,62), y solo KRAS tiene un sitio del top-5 que toca el bolsillo (rank 2, un residuo de solapamiento) con p = 0,5212 — que no es un acierto.",
+   "outcome": "NEGATIVO. El metrico ciego no identifica los bolsillos alostericos validados de KRAS G12C, BCR-ABL1 ni miosina cardiaca por encima del azar, bajo el nulo de parches contiguos.",
+   "cruce_ventaja_cuantica": "0",
+   "significancia_vs_azar": "ninguna (p = 0,4038 a 0,5212 en los 3 blancos)"
+  },
+  "como": {
+   "protocol": "prediccion ciega: los caches se construyen SOLO desde las apo oficiales del challenge; ninguna estructura holo se abre hasta la etapa de scoring, que es un script separado y posterior. Nulo espacial de 2000 parches CONTIGUOS (BFS sobre la red, mismo tamano que el bolsillo mapeado, solo distales), semilla 20260810.",
+   "tres_metricas_decididas_antes": [
+    "1. rank del primer sitio del top-5 con >=1 residuo dentro del bolsillo validado, mas la distancia minima de cada sitio al bolsillo",
+    "2. percentil promedio de los residuos del bolsillo entre los distales",
+    "3. p por permutacion de parches contiguos (2000, semilla fija)"
+   ],
+   "cadena_de_ceguera": [
+    {
+     "commit": "407fa7b7aab70330b30b2cf3872ca9fded434fb8",
+     "corto": "407fa7b",
+     "papel": "metrico pre-registrado, sin parametros libres, antes de predecir",
+     "fecha_utc": "2026-08-09T18:14:45Z",
+     "titulo": "Pre-registro del metrico: mixing matrix CTQW, sin parametros libres",
+     "archivos": [
+      "rank_quantum.py"
+     ]
+    },
+    {
+     "commit": "4cfac340d42cc0671ae4be824647f95a02c056b8",
+     "corto": "4cfac34",
+     "papel": "predicciones ciegas de los 4 blancos, comprometidas",
+     "fecha_utc": "2026-08-09T18:15:14Z",
+     "titulo": "Predicciones CIEGAS de los 4 blancos del challenge — comprometidas",
+     "archivos": [
+      "predictions_blind/ABL1_1OPL.connectivity.npz",
+      "predictions_blind/ABL1_1OPL.prediction.json",
+      "predictions_blind/KRAS_4OBE.connectivity.npz",
+      "predictions_blind/KRAS_4OBE.prediction.json",
+      "predictions_blind/MYC_1NKP.connectivity.npz",
+      "predictions_blind/MYC_1NKP.prediction.json",
+      "predictions_blind/MYOSIN_5TBY.connectivity.npz",
+      "predictions_blind/MYOSIN_5TBY.prediction.json"
+     ]
+    },
+    {
+     "commit": "f119f427651bad26ccb2597e0896edb5b4e059db",
+     "corto": "f119f42",
+     "papel": "puntuador comprometido ANTES de correrlo (y 9GZ1 archivada)",
+     "fecha_utc": "2026-08-09T18:19:30Z",
+     "titulo": "Puntuador comprometido ANTES de correrlo + 9GZ1 archivada",
+     "archivos": [
+      "score_predictions.py",
+      "structures/9gz1.pdb.gz"
+     ]
+    },
+    {
+     "commit": "b2a29e45e228592fcede44934343657d44d5f689",
+     "corto": "b2a29e4",
+     "papel": "resultado del scoring, publicado tal cual salio",
+     "fecha_utc": "2026-08-09T18:20:21Z",
+     "titulo": "Resultado del scoring ciego: NEGATIVO, y se publica tal cual",
+     "archivos": [
+      "scoring/RESULTADO.json"
+     ]
+    }
+   ],
+   "cadena_verificada_como": "cada eslabon comprobado ancestro del siguiente con `git merge-base --is-ancestor`, y los cuatro comprobados dentro de origin/main. No se leyo el log de titulos: se comprobo la ancestria.",
+   "limite_conocido_de_la_cadena": {
+    "hecho": "dos de las tres estructuras holo (6OIM de KRAS y 5MO4 de ABL1) ya estaban en el arbol de git en el commit 2538c47, ANTERIOR a las predicciones (4cfac34). Solo 9GZ1 (miosina) entro despues.",
+    "consecuencia": "la ceguera de KRAS y ABL1 NO es fisica (el archivo no existia) sino de codigo y de proceso: los insumos del predictor son auditables y no incluyen las holo.",
+    "como_se_comprueba": "build_cache.py solo abre las apo declaradas en TARGETS (4OBE, 1OPL, 5TBY, 1NKP); rank_quantum.py solo lee cache_blind/; los 4 caches ciegos no traen la clave 'allo' y declaran ciego=true, con caso positivo en tests/test_engine.py.",
+    "se_declara_porque": "un tercero tiene que poder ver esta debilidad sin tener que descubrirla. Para miosina la cadena fisica si se sostiene."
+   },
+   "fuga_de_entrenamiento": {
+    "aplica": false,
+    "razon": "este RUN no usa modelo entrenado. El metrico ciego no tiene parametros libres ni entrenamiento: es la mixing matrix de la CTQW. El solapamiento entre los blancos del challenge y las 90 proteinas de entrenamiento (KRAS_G12C, BCR_ABL1, CARDIAC_MYOSIN) afecta al brazo apilado, que es un experimento SEPARADO y todavia no sellado.",
+    "guardia": "tests/test_engine.py hace visible el solapamiento y falla si la lista cambia."
+   },
+   "convenciones_selladas": {
+    "cutoff_contacto_CA_A": 8.5,
+    "gt_radius_A": 4.5,
+    "distal_A": 6.0,
+    "sigma_kernel_A": 6.0
+   },
+   "bolsillo_validado_definicion": "residuos de proteina con algun atomo a < 4,5 A del farmaco co-cristalizado, en la cadena del farmaco",
+   "farmacos_de_referencia": {
+    "KRAS": "6OIM / MOV = sotorasib",
+    "ABL1": "5MO4 / AY7 = asciminib (NIL nilotinib excluido: marca el sitio ATP, que es nuestra fuente, no el bolsillo alosterico)",
+    "MIOSINA": "9GZ1 / XB2 = mavacamten — NO 6C1H: la Tabla 1 del challenge cita 6C1H pero esa estructura solo contiene ADP/Mg (errata publica 2026-07-28; sustitucion pre-registrada en PR-CLEV-001)"
+   },
+   "harness_sha256": {
+    "build_cache.py": "sha256:206011ba18c194a115a0dd03b3776bb10c2810eda114d034f9452129e09a4f92",
+    "rank_quantum.py": "sha256:1cd2a9c818bd34d8a5c43fcec1864a857ea607156a47fab83a581f1ba8a709bf",
+    "score_predictions.py": "sha256:740f13e622659e91156426ab2647a1f27850e9388e6b520d984b292fac280cdd",
+    "diagnose_proximity.py": "sha256:30d3d7473d01460477b30cda1f0835cf59ae505762a9c13e4c7af71278f5eeab",
+    "tests/test_engine.py": "sha256:b19501c4d1652e911ae1ed5798fe2f2555db0cdaaf8277e3d382541fe13ab9f7"
+   },
+   "motor_sha256": {
+    "engine.py": "sha256:f3d4d557c7f5b019a40d97d7cb688f8ab152d1b81ade78eac9bc767905b1c983",
+    "sigo_features.py": "sha256:882c5311a6309da1cf6b42e32e0c9b31c8847844e219a955fd46a027f3c3eae3",
+    "allo_challenge.py": "sha256:cc9ff89d663ed3df6365a6f84245a43284648d48d735adc021a03bd250397b50",
+    "conservation.py": "sha256:5f337d26c79291eb1095709e8da1fd975dfb6dcbc82b909b8b1c8cd01b66f027"
+   },
+   "tests": {
+    "antes": 30,
+    "despues": 30,
+    "self_test": 3,
+    "fallaron": 0,
+    "nota": "el motor no se toco en este tramo; el conteo se reporta igual porque una suite verde por ausencia es el peor resultado"
+   },
+   "raw_result_url": "quantum-run/scoring/RESULTADO.json"
+  },
+  "cuando": {
+   "prediccion_comprometida_utc": "2026-08-09T18:15:14Z",
+   "resultado_comprometido_utc": "2026-08-09T18:20:21Z",
+   "archived_at": "2026-08-09T22:20:21Z"
+  },
+  "donde": {
+   "compute": "Mac local (sesion laboratorio)",
+   "repo": "quantum-run (clon local; los 4 commits estan en origin/main)"
+  },
+  "porque": {
+   "hypothesis": "la conectividad dinamica por caminata cuantica continua identifica bolsillos alostericos distales mejor que el azar",
+   "question": "¿el metrico ciego, sin parametros libres, encuentra el bolsillo alosterico validado de los blancos del challenge?",
+   "diagnostico_de_por_que_fallo": {
+    "hallazgo": "el score es una medida de PROXIMIDAD A LA FUENTE disfrazada de conectividad dinamica. Un bolsillo alosterico es, por definicion, distal: el metrico y el objetivo estan en tension por construccion.",
+    "medido_no_heredado": {
+     "_doc": "Diagnostico de proximidad del metrico ciego CTQW. Mide la correlacion de rango entre el score y la distancia a la fuente. No abre ninguna holo.",
+     "denominador": {
+      "blancos_vistos": 4,
+      "medidos": 4,
+      "saltados": 0
+     },
+     "saltados": [],
+     "rango_spearman_distales": [
+      -0.8501,
+      -0.6162
+     ],
+     "blancos": [
+      {
+       "blanco": "ABL1_1OPL",
+       "pdb": "1OPL",
+       "n_residuos": 451,
+       "n_fuente": 21,
+       "n_distal": 391,
+       "matriz_verificada": "sha256:23750ad6d4650f2e7edabedee323ffcab7667db2abc74e017b98a0b446008b6c",
+       "spearman_score_vs_dist_fuente_todos": -0.8772,
+       "spearman_score_vs_dist_fuente_distales": -0.8178,
+       "dist_fuente_A": {
+        "min": 0.0,
+        "max": 48.33,
+        "mediana": 19.16
+       }
+      },
+      {
+       "blanco": "KRAS_4OBE",
+       "pdb": "4OBE",
+       "n_residuos": 169,
+       "n_fuente": 25,
+       "n_distal": 119,
+       "matriz_verificada": "sha256:65bc626e76d23563e2d5c87757fad9a84a912f15e0cc13bbc4694d773638fb04",
+       "spearman_score_vs_dist_fuente_todos": -0.8293,
+       "spearman_score_vs_dist_fuente_distales": -0.6162,
+       "dist_fuente_A": {
+        "min": 0.0,
+        "max": 27.25,
+        "mediana": 10.5
+       }
+      },
+      {
+       "blanco": "MYC_1NKP",
+       "pdb": "1NKP",
+       "n_residuos": 88,
+       "n_fuente": 16,
+       "n_distal": 53,
+       "matriz_verificada": "sha256:652335b3805252260550ee4c78df9a3a6bba77b0c2cfad12a3f66820625448f6",
+       "spearman_score_vs_dist_fuente_todos": -0.8943,
+       "spearman_score_vs_dist_fuente_distales": -0.7855,
+       "dist_fuente_A": {
+        "min": 0.0,
+        "max": 65.29,
+        "mediana": 9.99
+       }
+      },
+      {
+       "blanco": "MYOSIN_5TBY",
+       "pdb": "5TBY",
+       "n_residuos": 954,
+       "n_fuente": 8,
+       "n_distal": 935,
+       "matriz_verificada": "sha256:273c56798e75d670f5671b37e2294cdf220368574291efd108575db8de7619f6",
+       "spearman_score_vs_dist_fuente_todos": -0.8582,
+       "spearman_score_vs_dist_fuente_distales": -0.8501,
+       "dist_fuente_A": {
+        "min": 0.0,
+        "max": 105.87,
+        "mediana": 29.94
+       }
+      }
+     ]
+    },
+    "resumen_medido": "Spearman(score, distancia a la fuente) entre los residuos distales: -0.8501 a -0.6162 en los 4 blancos (4 de 4 medidos, 0 saltados). Sobre todos los residuos, -0.8943 a -0.8293.",
+    "correccion_de_una_cifra_que_circulaba": "en encargos y notas internas se venia repitiendo el rango '-0,55 a -0,85'. Medido sobre las matrices comprometidas, el rango real entre distales es -0,6162 a -0,8501. La cifra anterior no estaba instrumentada en ninguna parte del repositorio: se corrige aqui y se deja el script que la mide.",
+    "mecanismo": "localizacion espectral. En un grafo camino, la mixing matrix es PLANA en el interior y se dispara en los DOS extremos: el extremo lejano puntua igual que la propia fuente. En una proteina eso significa que los extremos de cadena y las protuberancias de superficie suben solos.",
+    "probado_en": "tests/test_engine.py — dos guardias: 'en un camino, el extremo lejano puntua como la fuente' y 'el interior del camino es plano'. El caso sintetico prueba el mecanismo; diagnose_proximity.py mide la magnitud en las 4 proteinas.",
+    "consecuencia_para_el_diseno": "cualquier metrico futuro tiene que reportar su correlacion con la distancia a la fuente junto al resultado. Un predictor de alosteria que correlaciona -0,8 con la proximidad esta midiendo geometria, no acoplamiento."
+   }
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; el anclaje OTS, la publicacion en las tres copias y la auditoria de procedencia son de la sesion coordinadora (notario). El que corre el experimento no lo ancla."
+  }
+ }
+}
