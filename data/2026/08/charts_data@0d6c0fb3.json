@@ -1,0 +1,267 @@
+{
+ "_doc": "Chart data for the Cleveland methodology report. Every figure carries its source seal and its n, which the chart engine requires. Values are read from the sealed files, never retyped.",
+ "charts": [
+  {
+   "id": "significance",
+   "headline": "No target beats chance: every p-value sits far from 0.05.",
+   "type": "bar",
+   "source": "RQ-EXP-CLEV-BLIND-001 (sha256:ca916f94a138ae3b19279d045f9631be3944276b8ccb71e637b9a46963497214)",
+   "n": 3,
+   "y_label": "p (contiguous-patch permutation)",
+   "reference_line": {
+    "value": 0.05,
+    "label": "significance threshold"
+   },
+   "data": [
+    {
+     "label": "KRAS G12C",
+     "value": 0.5212
+    },
+    {
+     "label": "BCR-ABL1",
+     "value": 0.4153
+    },
+    {
+     "label": "Cardiac myosin",
+     "value": 0.4038
+    }
+   ]
+  },
+  {
+   "id": "proximity",
+   "headline": "The score tracks distance to the source, not allosteric coupling.",
+   "type": "grouped_bar",
+   "source": "RQ-EXP-CLEV-BLIND-001 (sha256:ca916f94a138ae3b19279d045f9631be3944276b8ccb71e637b9a46963497214), measured by diagnose_proximity.py",
+   "n": 4,
+   "y_label": "Spearman ρ (score vs distance to source)",
+   "series": [
+    "distal residues",
+    "all residues"
+   ],
+   "data": [
+    {
+     "label": "KRAS G12C",
+     "values": [
+      -0.6162,
+      -0.8293
+     ]
+    },
+    {
+     "label": "BCR-ABL1",
+     "values": [
+      -0.8178,
+      -0.8772
+     ]
+    },
+    {
+     "label": "Cardiac myosin",
+     "values": [
+      -0.8501,
+      -0.8582
+     ]
+    },
+    {
+     "label": "c-Myc",
+     "values": [
+      -0.7855,
+      -0.8943
+     ]
+    }
+   ]
+  },
+  {
+   "id": "coarse_grain_order",
+   "headline": "Residue ordering does not survive compression at any level tested.",
+   "type": "line",
+   "source": "RQ-EXP-COARSE-001 (sha256:296e1c7055747017a2c1774ff7bce258f683f46616433cca3c83f7796cdd67a2), pre-registered as PR-COARSE-001",
+   "n": 16,
+   "x_label": "block size (residues per supernode)",
+   "y_label": "Spearman ρ vs fine-grained ordering",
+   "reference_line": {
+    "value": 0.9,
+    "label": "pre-registered survival threshold"
+   },
+   "data": [
+    {
+     "label": "KRAS G12C",
+     "points": [
+      {
+       "x": 2,
+       "y": 0.5422
+      },
+      {
+       "x": 4,
+       "y": 0.4784
+      },
+      {
+       "x": 8,
+       "y": 0.2018
+      },
+      {
+       "x": 16,
+       "y": 0.0838
+      }
+     ]
+    },
+    {
+     "label": "BCR-ABL1",
+     "points": [
+      {
+       "x": 2,
+       "y": 0.8356
+      },
+      {
+       "x": 4,
+       "y": 0.7898
+      },
+      {
+       "x": 8,
+       "y": 0.7315
+      },
+      {
+       "x": 16,
+       "y": 0.7354
+      }
+     ]
+    },
+    {
+     "label": "Cardiac myosin",
+     "points": [
+      {
+       "x": 2,
+       "y": 0.8859
+      },
+      {
+       "x": 4,
+       "y": 0.8301
+      },
+      {
+       "x": 8,
+       "y": 0.8001
+      },
+      {
+       "x": 16,
+       "y": 0.7846
+      }
+     ]
+    },
+    {
+     "label": "c-Myc",
+     "points": [
+      {
+       "x": 2,
+       "y": 0.5118
+      },
+      {
+       "x": 4,
+       "y": 0.5822
+      },
+      {
+       "x": 8,
+       "y": 0.4169
+      },
+      {
+       "x": 16,
+       "y": 0.7882
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "coarse_grain_topset",
+   "headline": "The set that decides which sites are predicted is mostly replaced.",
+   "type": "line",
+   "source": "RQ-EXP-COARSE-001 (sha256:296e1c7055747017a2c1774ff7bce258f683f46616433cca3c83f7796cdd67a2)",
+   "n": 16,
+   "x_label": "block size (residues per supernode)",
+   "y_label": "Jaccard index of the top 10 % distal set",
+   "data": [
+    {
+     "label": "KRAS G12C",
+     "points": [
+      {
+       "x": 2,
+       "y": 0.2941
+      },
+      {
+       "x": 4,
+       "y": 0.2222
+      },
+      {
+       "x": 8,
+       "y": 0.2222
+      },
+      {
+       "x": 16,
+       "y": 0.0476
+      }
+     ]
+    },
+    {
+     "label": "BCR-ABL1",
+     "points": [
+      {
+       "x": 2,
+       "y": 0.625
+      },
+      {
+       "x": 4,
+       "y": 0.6596
+      },
+      {
+       "x": 8,
+       "y": 0.5918
+      },
+      {
+       "x": 16,
+       "y": 0.4444
+      }
+     ]
+    },
+    {
+     "label": "Cardiac myosin",
+     "points": [
+      {
+       "x": 2,
+       "y": 0.4419
+      },
+      {
+       "x": 4,
+       "y": 0.3985
+      },
+      {
+       "x": 8,
+       "y": 0.2828
+      },
+      {
+       "x": 16,
+       "y": 0.2828
+      }
+     ]
+    },
+    {
+     "label": "c-Myc",
+     "points": [
+      {
+       "x": 2,
+       "y": 0.25
+      },
+      {
+       "x": 4,
+       "y": 0.25
+      },
+      {
+       "x": 8,
+       "y": 0.0
+      },
+      {
+       "x": 16,
+       "y": 0.4286
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

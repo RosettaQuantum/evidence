@@ -1,0 +1,114 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__REPORT__RQ-REPORT-CLEV-METHOD-002__20260810T1600Z__cleveland-methodology-report--en.json",
+  "file_id": "RQ-REPORT-CLEV-METHOD-002",
+  "type": "REPORT",
+  "is_demo": false,
+  "scope_note": "Entregable 3 del challenge Cleveland: reporte metodologico, en ingles, aprobado por Nicholas en su version en espanol antes de traducir. El sello ancla el documento por sha256; el .md y los datos de los graficos viajan junto a el. Sellado en v3 por decision declarada del laboratorio; el primer v3 del archivo fue el 001, al que este corrige.",
+  "corrige_a": {
+   "file_id": "RQ-REPORT-CLEV-METHOD-001",
+   "content_hash": "sha256:f86d75d95d9d5855cfd432b53db9ee3f7471540038c62d32137f0d660ba6c7ef",
+   "que_cambio": "SOLO charts_data.json: los cuatro titulares terminan ahora en punto. El documento (.md) es byte-identico — mismo sha256 006daf19… en las dos versiones.",
+   "por_que": "el guardia `grafico()` del motor de la sesion web exige que el titular termine en punto. Ese guardia existe porque una vez se publico un rotulo de tema ('Significancia por blanco') en vez de una afirmacion, y el punto final es el proxy barato que lo atrapa. Nuestros titulares ya afirmaban; faltaba el punto.",
+   "por_que_un_archivo_nuevo_y_no_una_edicion": "el 001 esta anclado y publicado. Lo anclado no se re-sella: sus hashes son hechos publicos que un tercero puede citar. Las correcciones son archivos nuevos que declaran a quien corrigen, y el 001 se queda donde esta.",
+   "se_prefirio_esto_a_aflojar_el_guardia": "la sesion web ofrecio cambiar el guardia por uno que exigiera verbo conjugado en vez de puntuacion. Se declino: un guardia con una excepcion hecha para un documento deja de ser guardia, y 'tiene verbo conjugado' es mucho mas dificil de comprobar con precision que 'termina en punto'. Precision sobre cobertura: el proxy barato y exacto gana al criterio correcto pero difuso."
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-10T19:24:21.210388+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "build_methodology_en.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:66e1c953565c351ce6076865eff971e5e56fd5c8801a9a7565a91814aae9655f",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:fb6c55dec5c0d7a829fe6f06b286313837718872aedb305befc919f5c59fb802"
+ },
+ "w6": {
+  "que": {
+   "deliverable": "Cleveland Clinic Challenge — deliverable 3, methodology report",
+   "language": "en",
+   "documento": {
+    "archivo": "REPORTE-METODOLOGICO-EN.md",
+    "sha256": "sha256:006daf1941015a42890d1854befc9b4080f67eb5db2573c87f063cdfb1333dc9",
+    "lineas": 256
+   },
+   "datos_de_graficos": {
+    "archivo": "charts_data.json",
+    "sha256": "sha256:0d6c0fb37f1fb19244694f9bdf19f1af340a01eace04b28bb447d025ec08f30c",
+    "n_graficos": 4,
+    "nota": "cada grafico declara su `source` (el sello del que salen los numeros) y su `n`; el motor de graficos se niega a renderizar sin eso"
+   },
+   "generador": {
+    "archivo": "build_methodology_en.py",
+    "sha256": "sha256:66e1c953565c351ce6076865eff971e5e56fd5c8801a9a7565a91814aae9655f",
+    "regla": "las cifras se leen de los sellos en tiempo de armado y nunca se tipean; la prosa se escribe en el generador. Si un sello no verifica, el documento no se arma."
+   },
+   "afirmaciones_centrales": [
+    "prediccion ciega NEGATIVA en los 3 blancos con bolsillo validado (p 0,4038 a 0,5212)",
+    "el metrico es proximidad a la fuente disfrazada: Spearman -0,6162 a -0,8501 entre distales, 4 de 4 blancos medidos",
+    "grano grueso NEGATIVO: 0 de 16 celdas alcanzan el umbral pre-registrado",
+    "cruce de ventaja cuantica: CERO, y ningun experimento de este reporte podia producirlo",
+    "corrida en hardware DECLARADA EN CURSO con sus 7 job_id, no esperada"
+   ],
+   "cruce_ventaja_cuantica": "0"
+  },
+  "como": {
+   "sellos_citados": [
+    {
+     "file_id": "RQ-EXP-CLEV-BLIND-001",
+     "type": "RUN",
+     "content_hash": "sha256:ca916f94a138ae3b19279d045f9631be3944276b8ccb71e637b9a46963497214",
+     "schema": "rosettaq-archive/v2"
+    },
+    {
+     "file_id": "PR-COARSE-001",
+     "type": "PREREG",
+     "content_hash": "sha256:5af5af0e79dfad074ce28f47363424751d44a83a3a9794240b6402e9961a499b",
+     "schema": "rosettaq-archive/v2"
+    },
+    {
+     "file_id": "RQ-EXP-COARSE-001",
+     "type": "RUN",
+     "content_hash": "sha256:296e1c7055747017a2c1774ff7bce258f683f46616433cca3c83f7796cdd67a2",
+     "schema": "rosettaq-archive/v2"
+    }
+   ],
+   "aprobacion": "Nicholas aprobo la version en espanol antes de la traduccion, y autorizo explicitamente el paso a ingles. Texto que lee alguien de afuera no sale sin que el lo vea.",
+   "hardware_declarado": {
+    "experimento": "RQ-VOYAGE2-CORRIDOR",
+    "estado_al_sellar": "SUBMITTED",
+    "n_circuitos": 7,
+    "job_ids": [
+     "d9t16s7tfhrs73dtb550",
+     "d9t16s8pdb6s73e6jh9g",
+     "d9t16sgpdb6s73e6jha0",
+     "d9t16svpemts73cu9fhg",
+     "d9t16t7tfhrs73dtb580",
+     "d9t16tftfhrs73dtb58g",
+     "d9t16tfpemts73cu9fig"
+    ],
+    "por_que_se_declara_sin_esperar": "el documento no depende de una cola. Los identificadores quedan sellados para que el analisis posterior no pueda elegir cuales trabajos contar."
+   },
+   "seccion_de_verificacion": "el documento le dice al lector como recomputar los hashes, que la convencion la determina el verificador y no la etiqueta del archivo, y que para v1 y v2 hay que verificar en Python. Esas instrucciones se ejercieron antes de escribirlas."
+  },
+  "cuando": {
+   "archived_at": "2026-08-10T15:00:00Z"
+  },
+  "donde": {
+   "compute": "Mac local (sesion laboratorio)",
+   "render_grafico": "lo produce la sesion web con su motor, desde charts_data.json"
+  },
+  "porque": {
+   "question": "¿por que este metrico, como se hizo ciega la prediccion, que dio, y que NO se afirma?",
+   "por_que_se_publica_un_negativo": "el trato era publicar gane o pierda. Un archivo que solo publica lo que le conviene no es un archivo."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; el anclaje, la publicacion y el empaquetado son del notario."
+  }
+ }
+}
