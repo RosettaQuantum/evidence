@@ -1,0 +1,223 @@
+{
+ "_doc": "Vectores de validacion cruzada para rosettaq-archive/v3 (RFC 8785, JCS). Producidos por la implementacion Python del laboratorio. El objetivo es que otra implementacion, en otro lenguaje, los CONTRADIGA si estan mal.",
+ "que_comprobar": [
+  "1. Para cada vector: su canonicalizador tiene que producir EXACTAMENTE `canonico_esperado`, caracter por caracter. Compare el texto, no solo el hash: el texto dice donde esta la diferencia.",
+  "2. Para cada sello: `content_hash_v3_seria` = 'sha256:' + sha256(utf8(canonico del payload)), donde el payload es meta sin content_hash ni schema, mas el cuerpo sin storage.",
+  "3. Si algo no calza, el que esta mal puede ser el nuestro. Digalo con el texto que le dio, no solo con el hash."
+ ],
+ "en_javascript_es_casi_gratis": "JSON.stringify ya formatea numeros con el algoritmo de ECMAScript que exige el RFC, y Array.prototype.sort sobre cadenas ya ordena por unidades UTF-16. El canonizador es recursion + sort + join.",
+ "implementacion_de_referencia_python": "evidence-staging/jcs.py",
+ "AVISO_normalizacion": "Las claves no ASCII de estos vectores estan escritas POR PUNTO DE CODIGO en el generador, y la letra hebrea del vector unicode DEBE estar precompuesta (U+FB33). Si un editor, un shell o un filtro de git normaliza este archivo a NFD, U+FB33 se convierte en U+05D3 U+05BC y el vector DEJA DE DISCRIMINAR: descompuesto, el orden por unidades UTF-16 y el orden por code point coinciden, asi que una implementacion que ordene mal lo pasa igual. Y no falla nunca, porque un caso que no distingue no puede fallar. Compruebe con el hash del paquete antes de usarlo.",
+ "escapes_de_control": "En el texto canonico, SOLO los caracteres U+0000..U+001F van escapados (RFC 8785 §3.2.2.2, igual que JSON.stringify). U+0080 es un control C1 pero vale 0x80 >= 0x20, asi que va LITERAL en UTF-8 (bytes C2 80), no como \\u0080. Es invisible: comparelo por bytes, no por lo que muestre su terminal.",
+ "vectores": [
+  {
+   "porque_esta": "el defecto que origino v3: Python escribe 6.0, JS escribe 6",
+   "entrada": {
+    "a": 6.0
+   },
+   "canonico_esperado": "{\"a\":6}",
+   "sha256_del_canonico": "97ff8ae7ad6a7e502c9df4f7c5f19dbb2d6538eb8d4c26c7acd31ef6d377f016"
+  },
+  {
+   "porque_esta": "las convenciones selladas reales del motor, mezclando enteros y fracciones",
+   "entrada": {
+    "distal_A": 6.0,
+    "gt_radius_A": 4.5,
+    "cutoff": 8.5
+   },
+   "canonico_esperado": "{\"cutoff\":8.5,\"distal_A\":6,\"gt_radius_A\":4.5}",
+   "sha256_del_canonico": "b733f1637772dfda44e3be24abf481ef4e2170008403b4157700d4948bee9044"
+  },
+  {
+   "porque_esta": "cero y cero negativo: los dos se escriben 0",
+   "entrada": {
+    "d": 0.0,
+    "n": -0.0
+   },
+   "canonico_esperado": "{\"d\":0,\"n\":0}",
+   "sha256_del_canonico": "7d638e5063b1c84cb4a517ca9826b9272665ea187f228bf178397167b66c6890"
+  },
+  {
+   "porque_esta": "los tres bordes del formato exponencial de ECMAScript",
+   "entrada": {
+    "x": 1e+21,
+    "y": 1e-07,
+    "z": 1e-06
+   },
+   "canonico_esperado": "{\"x\":1e+21,\"y\":1e-7,\"z\":0.000001}",
+   "sha256_del_canonico": "484de079b0e5da56c4cd8d03aaac2a51e9e44c7a885b381295b33a1652278c21"
+  },
+  {
+   "porque_esta": "vectores IEEE754 del apendice del RFC 8785",
+   "entrada": {
+    "g": 9.999999999999997e+22,
+    "h": 5e-324,
+    "i": 1.7976931348623157e+308
+   },
+   "canonico_esperado": "{\"g\":9.999999999999997e+22,\"h\":5e-324,\"i\":1.7976931348623157e+308}",
+   "sha256_del_canonico": "90a5ddc71eacd2137089a3c2af2c4ab1fb8eb7f56d13d4f790a598e0bd51feb4"
+  },
+  {
+   "porque_esta": "2^53: el ultimo entero que un double representa exacto",
+   "entrada": {
+    "n": 9007199254740992.0
+   },
+   "canonico_esperado": "{\"n\":9007199254740992}",
+   "sha256_del_canonico": "66c87d9cb3014e05a11baa97df62282d89d425f22ee15816577c84534e2ef1bb"
+  },
+  {
+   "porque_esta": "EL vector unicode del RFC, con las claves escritas por punto de codigo. Por unidades UTF-16 el emoji (primera unidad 0xD83D) va ANTES de U+FB33; por code point iria despues. Si su implementacion ordena por code point, este caso lo delata",
+   "entrada": {
+    "€": 1,
+    "\r": 2,
+    "דּ": 3,
+    "1": 4,
+    "😀": 5,
+    "": 6,
+    "ö": 7
+   },
+   "canonico_esperado": "{\"\\r\":2,\"1\":4,\"\":6,\"ö\":7,\"€\":1,\"😀\":5,\"דּ\":3}",
+   "sha256_del_canonico": "0d922ac8e15a6d17d5d50fab064983e86009ebae7b5998cbfc4ed172e6ff74a9"
+  },
+  {
+   "porque_esta": "el MISMO hebreo pero DESCOMPUESTO (U+05D3 U+05BC): asi ordena ANTES del emoji, al reves que precompuesto. No es un caso de JCS: es el aviso de que si el archivo que transporta los vectores se normaliza a NFD, el orden cambia sin que nadie toque el dato, y el sintoma parece un error de implementacion ajena",
+   "entrada": {
+    "דּ": 1,
+    "😀": 2,
+    "ö": 3
+   },
+   "canonico_esperado": "{\"ö\":3,\"דּ\":1,\"😀\":2}",
+   "sha256_del_canonico": "7622471605178b53fb030efb1fe3ca4e9ec6ec40f3755daf6e8dfe39ca50721b"
+  },
+  {
+   "porque_esta": "anidamiento, literales y el orden dentro de objetos anidados",
+   "entrada": {
+    "b": [
+     1,
+     2.0,
+     null,
+     true,
+     false
+    ],
+    "a": {
+     "z": "x",
+     "y": 6.0
+    }
+   },
+   "canonico_esperado": "{\"a\":{\"y\":6,\"z\":\"x\"},\"b\":[1,2,null,true,false]}",
+   "sha256_del_canonico": "8a19544729c51435a7e47c571d1c99e0f7488e5c29f87a68dd57d0f85ba39cfd"
+  },
+  {
+   "porque_esta": "los escapes cortos de JSON.stringify",
+   "entrada": {
+    "s": "comillas \" barra \\ tab \t nueva \n"
+   },
+   "canonico_esperado": "{\"s\":\"comillas \\\" barra \\\\ tab \\t nueva \\n\"}",
+   "sha256_del_canonico": "96266c3dbc9b1ebfbc2d2595b8ecc38f05f15b4b0d014aae843102d8a5eff64b"
+  },
+  {
+   "porque_esta": "no-ASCII literal en UTF-8, no escapado",
+   "entrada": {
+    "s": "ñ €  literales, sin \\u"
+   },
+   "canonico_esperado": "{\"s\":\"ñ €  literales, sin \\\\u\"}",
+   "sha256_del_canonico": "ca9b8748e892eaf436d5ec281a695f9b65e640831cc5110792a2e2c77d84d9dd"
+  },
+  {
+   "porque_esta": "lista y objeto vacios",
+   "entrada": {
+    "vacios": [],
+    "tambien": {}
+   },
+   "canonico_esperado": "{\"tambien\":{},\"vacios\":[]}",
+   "sha256_del_canonico": "853309bccc4536f86f2c9d7bdbb454526e1b7d89c12c647d31df13b726d16fb0"
+  },
+  {
+   "porque_esta": "EL literal exponencial REAL del archivo: es el UNICO de los 67 sellos, esta en RQ-EXP-HOLDOUT-K3, y cae del lado PLANO del borde — JCS lo escribe 0.000001, no 1e-6. Un vector inventado probablemente no habria caido justo ahi",
+   "entrada": {
+    "sin_anotaciones_fisher_p": 1e-06
+   },
+   "canonico_esperado": "{\"sin_anotaciones_fisher_p\":0.000001}",
+   "sha256_del_canonico": "0507927201f8b3e08edab6f9b5ea112fe1ab5d16853a41d78958c49c5c8299b2"
+  },
+  {
+   "porque_esta": "los dos lados del borde, juntos: 1e-6 va plano y 1e-7 va exponencial",
+   "entrada": {
+    "a": 1e-06,
+    "b": 1e-07
+   },
+   "canonico_esperado": "{\"a\":0.000001,\"b\":1e-7}",
+   "sha256_del_canonico": "dbaa36b84d8229460cfb838ead61afff677aa0c5c1526e2b1d7e111ea69def5b"
+  },
+  {
+   "porque_esta": "los flotantes de valor entero mas frecuentes del archivo real (8.0 aparece 95 veces)",
+   "entrada": {
+    "f": 8.0,
+    "g": 14.0,
+    "h": 120.0,
+    "i": 2365.0,
+    "j": -33.0
+   },
+   "canonico_esperado": "{\"f\":8,\"g\":14,\"h\":120,\"i\":2365,\"j\":-33}",
+   "sha256_del_canonico": "fb4f7f157cefef93f4950dd635d8d2d6661a2e08d98f5296b7f52d2c158fdbf9"
+  }
+ ],
+ "sellos_reales": [
+  {
+   "file_id": "PR-COARSE-001",
+   "archivo": "RosettaQ__PREREG__PR-COARSE-001__20260810T1200Z__grano-grueso-supervivencia-del-orden.json",
+   "content_hash_v2_actual": "sha256:5af5af0e79dfad074ce28f47363424751d44a83a3a9794240b6402e9961a499b",
+   "content_hash_v3_seria": "sha256:043f10e1da550029210cdaccecf2eaa0b4cc2e1d5caa4c8ff8b01f8d73d4215c",
+   "bytes_del_canonico_v3": 5289,
+   "nota": "el v2 sigue siendo el sello valido de este archivo; el v3 es lo que daria si se sellara hoy con la convencion nueva. NO se re-sella nada."
+  },
+  {
+   "file_id": "PR-QMARGIN-001",
+   "archivo": "RosettaQ__PREREG__PR-QMARGIN-001__20260803T0100Z__quantum-marginal-contribution.json",
+   "content_hash_v2_actual": "sha256:88d0fbf8d83140ed9753c284606f98820dd718142eba8e122d03fa7196228f4e",
+   "content_hash_v3_seria": "sha256:2554c0040ba214e56e76aa6bf53eb0fda5c4a881bf2385b0f1afdec329b462b5",
+   "bytes_del_canonico_v3": 2654,
+   "nota": "el v2 sigue siendo el sello valido de este archivo; el v3 es lo que daria si se sellara hoy con la convencion nueva. NO se re-sella nada."
+  },
+  {
+   "file_id": "RQ-EXP-CLEV-BLIND-001",
+   "archivo": "RosettaQ__RUN__RQ-EXP-CLEV-BLIND-001__20260809T2220Z__prediccion-ciega-cleveland--negativo.json",
+   "content_hash_v2_actual": "sha256:ca916f94a138ae3b19279d045f9631be3944276b8ccb71e637b9a46963497214",
+   "content_hash_v3_seria": "sha256:6ce22dae4ce412eb4c6a96ff19da31eb325330fc343128020b031176cb191ad6",
+   "bytes_del_canonico_v3": 13622,
+   "nota": "el v2 sigue siendo el sello valido de este archivo; el v3 es lo que daria si se sellara hoy con la convencion nueva. NO se re-sella nada."
+  },
+  {
+   "file_id": "RQ-EXP-COARSE-001",
+   "archivo": "RosettaQ__RUN__RQ-EXP-COARSE-001__20260810T1230Z__grano-grueso-supervivencia-del-orden.json",
+   "content_hash_v2_actual": "sha256:296e1c7055747017a2c1774ff7bce258f683f46616433cca3c83f7796cdd67a2",
+   "content_hash_v3_seria": "sha256:73d99232d1b2489d7d0342d9af53f7f267b9d87cc872aeeaec66c01ef230c24a",
+   "bytes_del_canonico_v3": 11398,
+   "nota": "el v2 sigue siendo el sello valido de este archivo; el v3 es lo que daria si se sellara hoy con la convencion nueva. NO se re-sella nada."
+  },
+  {
+   "file_id": "RQ-EXP-HOLDOUT-K3",
+   "archivo": "RosettaQ__RUN__RQ-EXP-HOLDOUT-K3__20260803T0000Z__kfold-grouped-robustness--n90.json",
+   "content_hash_v2_actual": "sha256:19df65c1a6659164e9269e79c6f7e86f4c9448e86d12ca10c925720cde5e1471",
+   "content_hash_v3_seria": "sha256:f8a4ecbb8b21242c9b222e26daec2a2f410f85d8343c9aff887e36ad87ea8c50",
+   "bytes_del_canonico_v3": 2792,
+   "nota": "el v2 sigue siendo el sello valido de este archivo; el v3 es lo que daria si se sellara hoy con la convencion nueva. NO se re-sella nada."
+  },
+  {
+   "file_id": "RQ-EXP-QMARGIN-001",
+   "archivo": "RosettaQ__RUN__RQ-EXP-QMARGIN-001__20260803T0130Z__quantum-marginal-contribution.json",
+   "content_hash_v2_actual": "sha256:f07244acfdea6446910a567fc8d0b4a4926051f860b847bbe55922e2c1392aca",
+   "content_hash_v3_seria": "sha256:08b7c741d4d0feee51240760da68c61ce5e5549c0d74e55adde2a6e2ab763006",
+   "bytes_del_canonico_v3": 2443,
+   "nota": "el v2 sigue siendo el sello valido de este archivo; el v3 es lo que daria si se sellara hoy con la convencion nueva. NO se re-sella nada."
+  },
+  {
+   "file_id": "RQ-POC-QPU-001",
+   "archivo": "RosettaQ__RUN__RQ-POC-QPU-001__20260801T1851Z__ctqw-kras-ibm-kingston.json",
+   "content_hash_v2_actual": "sha256:d026eddc617f2ccdc631d20a01ca5694fa327daf7e6e357e308e50c2c952cbfb",
+   "content_hash_v3_seria": "sha256:25fdcd4fa87bcdb4d6125bb6eb9763169a899c38aea52d70c4b00d22e9286edd",
+   "bytes_del_canonico_v3": 3365,
+   "nota": "el v2 sigue siendo el sello valido de este archivo; el v3 es lo que daria si se sellara hoy con la convencion nueva. NO se re-sella nada."
+  }
+ ]
+}
