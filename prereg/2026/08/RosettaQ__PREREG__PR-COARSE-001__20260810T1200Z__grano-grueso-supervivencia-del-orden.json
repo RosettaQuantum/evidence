@@ -1,0 +1,73 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__PREREG__PR-COARSE-001__20260810T1200Z__grano-grueso-supervivencia-del-orden.json",
+  "file_id": "PR-COARSE-001",
+  "type": "PREREG",
+  "is_demo": false,
+  "scope_note": "Pre-registro FORWARD del objetivo secundario del challenge Cleveland (escalabilidad por grano grueso). Congela pregunta, red, metrico, niveles de compresion, metricas y umbrales ANTES de correr nada. El script del experimento queda congelado por sha256 y se niega a correr si cambia.",
+  "schema": "rosettaq-archive/v2",
+  "sealed_at": "2026-08-10T12:56:43.695386+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "2.0.0",
+   "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+   "harness": "coarse_grain_test.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:11ca233e84ff4ae803118a067977470026980e53b032a10cc1d09c4e41686a34",
+   "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+  },
+  "content_hash": "sha256:5af5af0e79dfad074ce28f47363424751d44a83a3a9794240b6402e9961a499b"
+ },
+ "prereg": {
+  "title": "Pre-Registro — Rosetta Quantum · Grano grueso: cuanto del orden de residuos sobrevive a la compresion",
+  "team": "Rosetta Quantum — sesion laboratorio",
+  "lead": "Nicholas Iakl Freundlich",
+  "pregunta": "Al comprimir la red de contactos en super-nodos de residuos consecutivos, ¿cuanto del ORDEN de los residuos que produce el metrico ciego sobrevive? Lo ya medido (percentil del bolsillo y aceleracion, en required_deliverables.py) no contesta esto: un metodo que acelera 50 veces y reordena la lista no acelera nada, resuelve otro problema.",
+  "por_que_no_es_una_hipotesis_de_ventaja": "esto NO compara cuantico contra clasico y no puede producir un cruce. Es una caracterizacion del costo de la compresion sobre nuestro propio metrico.",
+  "blancos": [
+   "ABL1_1OPL",
+   "KRAS_4OBE",
+   "MYC_1NKP",
+   "MYOSIN_5TBY"
+  ],
+  "por_que_los_cuatro": "la comparacion es grueso-contra-fino y no necesita bolsillo validado, asi que c-Myc —excluido del scoring por no tener verdad de terreno publicada— si entra aqui. Denominador 4 de 4.",
+  "referencia_fina": "el score fino NO se recalcula: sale de las matrices de conectividad COMPROMETIDAS en el commit 4cfac34 (predictions_blind/*.connectivity.npz), con su firma de contenido recomputada antes de usarla. Si una firma no calza, ese blanco se salta y se cuenta como saltado.",
+  "compresion": {
+   "receta": "agrupacion de residuos consecutivos en super-nodos de tamano b; adyacencia binarizada A_c = (T'AT > 0) con diagonal en cero; coordenadas del super-nodo = centroide. Es la receta de evidence/code/cleveland/required_deliverables.py::coarse_grain, replicada sin cambios.",
+   "niveles_b": [
+    2,
+    4,
+    8,
+    16
+   ],
+   "metrico_sobre_la_red_gruesa": "el mismo metrico ciego pre-registrado en 407fa7b: W = exp(-d^2/(2*6^2)) sobre la adyacencia, mixing matrix CTQW, score = media de C(i, src). La fuente gruesa son los super-nodos que contienen algun residuo fuente.",
+   "vuelta_a_residuos": "cada residuo hereda el score de su super-nodo."
+  },
+  "metricas": {
+   "primaria": "Spearman entre el score grueso devuelto a residuos y el score fino, restringido a los residuos DISTALES de la mascara ciega (>6 A de la fuente) — que es el universo sobre el que el metrico compite.",
+   "secundaria_1": "Jaccard entre el top 10% distal fino y el grueso (TOP_FRAC de cluster_sites): si el conjunto que entra al clustering cambia, cambian los sitios predichos.",
+   "secundaria_2": "fraccion de los residuos del sitio rank-1 COMPROMETIDO que siguen dentro del top 10% distal grueso.",
+   "secundaria_3": "aceleracion MEDIDA con el mismo reloj para fino y grueso, sobre la misma maquina y en la misma corrida. No se cita ninguna cota asintotica."
+  },
+  "umbrales_congelados_antes_de_mirar": {
+   "sobrevive": "Spearman >= 0.90",
+   "parcial": "0.70 <= Spearman < 0.90",
+   "no_sobrevive": "Spearman < 0.70",
+   "lectura_principal": "el mayor b que todavia cae en 'sobrevive', por blanco"
+  },
+  "limitacion_declarada_antes_de_correr": "dentro de un super-nodo todos los residuos reciben el mismo score por construccion, lo que pone un techo a Spearman que depende del tamano de bloque y no del metodo. Es parte de lo que la compresion cuesta y por eso entra en la medicion; queda dicho aqui para que no se presente despues ni como hallazgo ni como excusa.",
+  "aleatoriedad": "ninguna. El experimento es determinista: no hay semilla porque no hay sorteo.",
+  "costo": "cero. Solo CPU local: sin QPU, sin API de pago, sin descargas.",
+  "guardrails": [
+   "el resultado se publica en cualquier direccion, incluido 'el orden no sobrevive a ningun nivel de compresion'",
+   "los umbrales y los niveles b no se tocan despues de ver un numero",
+   "todo proceso reporta su denominador: blancos vistos/medidos/saltados y celdas blanco x bloque calculadas/saltadas",
+   "el script del experimento queda congelado por sha256 y verifica el suyo contra este pre-registro antes de correr; si no calza, aborta"
+  ],
+  "guardrails_script": "coarse_grain_test.py",
+  "guardrails_script_sha256": "sha256:11ca233e84ff4ae803118a067977470026980e53b032a10cc1d09c4e41686a34",
+  "committed_before_run": true,
+  "como_se_comprueba_el_antes": "este PREREG se sella y se entrega al notario ANTES de que exista el RUN. El sello congela el sha256 del script, y el script aborta si no coincide con el suyo: cambiar el metodo despues de ver un resultado rompe la corrida en vez de pasar desapercibido.",
+  "quien_ancla": "la sesion coordinadora (notario). El laboratorio sella y no ancla."
+ }
+}
