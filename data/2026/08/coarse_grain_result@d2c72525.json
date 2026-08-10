@@ -1,0 +1,261 @@
+{
+ "_doc": "Grano grueso: cuanto del orden de residuos sobrevive a la compresion de la red. Compara el ranking grueso contra el ranking fino COMPROMETIDO (4cfac34). No abre ninguna holo.",
+ "prereg": {
+  "file_id": "PR-COARSE-001",
+  "content_hash": "sha256:5af5af0e79dfad074ce28f47363424751d44a83a3a9794240b6402e9961a499b",
+  "sealed_at": "2026-08-10T12:56:43.695386+00:00"
+ },
+ "script_sha256": "sha256:11ca233e84ff4ae803118a067977470026980e53b032a10cc1d09c4e41686a34",
+ "denominador": {
+  "blancos_vistos": 4,
+  "blancos_medidos": 4,
+  "blancos_saltados": 0,
+  "celdas_blanco_x_bloque": 16,
+  "celdas_calculadas": 16,
+  "celdas_saltadas": 0
+ },
+ "saltados": [],
+ "umbrales_pre_registrados": {
+  "sobrevive": ">= 0.90",
+  "parcial": "0.70 a 0.90",
+  "no_sobrevive": "< 0.70"
+ },
+ "blancos": [
+  {
+   "blanco": "ABL1_1OPL",
+   "pdb": "1OPL",
+   "n_residuos": 451,
+   "n_distal": 391,
+   "n_fuente": 21,
+   "matriz_verificada": "sha256:23750ad6d4650f2e7edabedee323ffcab7667db2abc74e017b98a0b446008b6c",
+   "n_residuos_sitio_rank1": 36,
+   "niveles": [
+    {
+     "bloque": 2,
+     "n_supernodos": 226,
+     "compresion": 2.0,
+     "spearman_orden_vs_fino_distales": 0.8356,
+     "veredicto_orden": "parcial",
+     "jaccard_top10pct_distal": 0.625,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.8056,
+     "t_fino_s": 0.2594,
+     "t_grueso_s": 0.0391,
+     "aceleracion_medida": 6.6
+    },
+    {
+     "bloque": 4,
+     "n_supernodos": 113,
+     "compresion": 3.99,
+     "spearman_orden_vs_fino_distales": 0.7898,
+     "veredicto_orden": "parcial",
+     "jaccard_top10pct_distal": 0.6596,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.8333,
+     "t_fino_s": 0.2594,
+     "t_grueso_s": 0.0032,
+     "aceleracion_medida": 82.1
+    },
+    {
+     "bloque": 8,
+     "n_supernodos": 57,
+     "compresion": 7.91,
+     "spearman_orden_vs_fino_distales": 0.7315,
+     "veredicto_orden": "parcial",
+     "jaccard_top10pct_distal": 0.5918,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.7778,
+     "t_fino_s": 0.2594,
+     "t_grueso_s": 0.0006,
+     "aceleracion_medida": 399.1
+    },
+    {
+     "bloque": 16,
+     "n_supernodos": 29,
+     "compresion": 15.55,
+     "spearman_orden_vs_fino_distales": 0.7354,
+     "veredicto_orden": "parcial",
+     "jaccard_top10pct_distal": 0.4444,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.6389,
+     "t_fino_s": 0.2594,
+     "t_grueso_s": 0.0003,
+     "aceleracion_medida": 754.0
+    }
+   ]
+  },
+  {
+   "blanco": "KRAS_4OBE",
+   "pdb": "4OBE",
+   "n_residuos": 169,
+   "n_distal": 119,
+   "n_fuente": 25,
+   "matriz_verificada": "sha256:65bc626e76d23563e2d5c87757fad9a84a912f15e0cc13bbc4694d773638fb04",
+   "n_residuos_sitio_rank1": 4,
+   "niveles": [
+    {
+     "bloque": 2,
+     "n_supernodos": 85,
+     "compresion": 1.99,
+     "spearman_orden_vs_fino_distales": 0.5422,
+     "veredicto_orden": "no sobrevive",
+     "jaccard_top10pct_distal": 0.2941,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.25,
+     "t_fino_s": 0.0154,
+     "t_grueso_s": 0.0021,
+     "aceleracion_medida": 7.3
+    },
+    {
+     "bloque": 4,
+     "n_supernodos": 43,
+     "compresion": 3.93,
+     "spearman_orden_vs_fino_distales": 0.4784,
+     "veredicto_orden": "no sobrevive",
+     "jaccard_top10pct_distal": 0.2222,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.0,
+     "t_fino_s": 0.0154,
+     "t_grueso_s": 0.0009,
+     "aceleracion_medida": 17.0
+    },
+    {
+     "bloque": 8,
+     "n_supernodos": 22,
+     "compresion": 7.68,
+     "spearman_orden_vs_fino_distales": 0.2018,
+     "veredicto_orden": "no sobrevive",
+     "jaccard_top10pct_distal": 0.2222,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.25,
+     "t_fino_s": 0.0154,
+     "t_grueso_s": 0.0003,
+     "aceleracion_medida": 54.9
+    },
+    {
+     "bloque": 16,
+     "n_supernodos": 11,
+     "compresion": 15.36,
+     "spearman_orden_vs_fino_distales": 0.0838,
+     "veredicto_orden": "no sobrevive",
+     "jaccard_top10pct_distal": 0.0476,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.0,
+     "t_fino_s": 0.0154,
+     "t_grueso_s": 0.0001,
+     "aceleracion_medida": 247.8
+    }
+   ]
+  },
+  {
+   "blanco": "MYC_1NKP",
+   "pdb": "1NKP",
+   "n_residuos": 88,
+   "n_distal": 53,
+   "n_fuente": 16,
+   "matriz_verificada": "sha256:652335b3805252260550ee4c78df9a3a6bba77b0c2cfad12a3f66820625448f6",
+   "n_residuos_sitio_rank1": 5,
+   "niveles": [
+    {
+     "bloque": 2,
+     "n_supernodos": 44,
+     "compresion": 2.0,
+     "spearman_orden_vs_fino_distales": 0.5118,
+     "veredicto_orden": "no sobrevive",
+     "jaccard_top10pct_distal": 0.25,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.4,
+     "t_fino_s": 0.002,
+     "t_grueso_s": 0.0005,
+     "aceleracion_medida": 4.5
+    },
+    {
+     "bloque": 4,
+     "n_supernodos": 22,
+     "compresion": 4.0,
+     "spearman_orden_vs_fino_distales": 0.5822,
+     "veredicto_orden": "no sobrevive",
+     "jaccard_top10pct_distal": 0.25,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.4,
+     "t_fino_s": 0.002,
+     "t_grueso_s": 0.0001,
+     "aceleracion_medida": 17.1
+    },
+    {
+     "bloque": 8,
+     "n_supernodos": 11,
+     "compresion": 8.0,
+     "spearman_orden_vs_fino_distales": 0.4169,
+     "veredicto_orden": "no sobrevive",
+     "jaccard_top10pct_distal": 0.0,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.0,
+     "t_fino_s": 0.002,
+     "t_grueso_s": 0.0001,
+     "aceleracion_medida": 14.5
+    },
+    {
+     "bloque": 16,
+     "n_supernodos": 6,
+     "compresion": 14.67,
+     "spearman_orden_vs_fino_distales": 0.7882,
+     "veredicto_orden": "parcial",
+     "jaccard_top10pct_distal": 0.4286,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.6,
+     "t_fino_s": 0.002,
+     "t_grueso_s": 0.0001,
+     "aceleracion_medida": 27.4
+    }
+   ]
+  },
+  {
+   "blanco": "MYOSIN_5TBY",
+   "pdb": "5TBY",
+   "n_residuos": 954,
+   "n_distal": 935,
+   "n_fuente": 8,
+   "matriz_verificada": "sha256:273c56798e75d670f5671b37e2294cdf220368574291efd108575db8de7619f6",
+   "n_residuos_sitio_rank1": 85,
+   "niveles": [
+    {
+     "bloque": 2,
+     "n_supernodos": 477,
+     "compresion": 2.0,
+     "spearman_orden_vs_fino_distales": 0.8859,
+     "veredicto_orden": "parcial",
+     "jaccard_top10pct_distal": 0.4419,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.6353,
+     "t_fino_s": 1.3834,
+     "t_grueso_s": 0.2116,
+     "aceleracion_medida": 6.5
+    },
+    {
+     "bloque": 4,
+     "n_supernodos": 239,
+     "compresion": 3.99,
+     "spearman_orden_vs_fino_distales": 0.8301,
+     "veredicto_orden": "parcial",
+     "jaccard_top10pct_distal": 0.3985,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.6235,
+     "t_fino_s": 1.3834,
+     "t_grueso_s": 0.0347,
+     "aceleracion_medida": 39.9
+    },
+    {
+     "bloque": 8,
+     "n_supernodos": 120,
+     "compresion": 7.95,
+     "spearman_orden_vs_fino_distales": 0.8001,
+     "veredicto_orden": "parcial",
+     "jaccard_top10pct_distal": 0.2828,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.4824,
+     "t_fino_s": 1.3834,
+     "t_grueso_s": 0.0065,
+     "aceleracion_medida": 212.1
+    },
+    {
+     "bloque": 16,
+     "n_supernodos": 60,
+     "compresion": 15.9,
+     "spearman_orden_vs_fino_distales": 0.7846,
+     "veredicto_orden": "parcial",
+     "jaccard_top10pct_distal": 0.2828,
+     "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.4824,
+     "t_fino_s": 1.3834,
+     "t_grueso_s": 0.0019,
+     "aceleracion_medida": 742.8
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,337 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-COARSE-001__20260810T1230Z__grano-grueso-supervivencia-del-orden.json",
+  "file_id": "RQ-EXP-COARSE-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Objetivo secundario del challenge Cleveland: escalabilidad por grano grueso. Mide cuanto del ORDEN de residuos sobrevive a la compresion de la red, contra el ranking fino COMPROMETIDO en 4cfac34. Pre-registrado en PR-COARSE-001 antes de correr. Resultado NEGATIVO. Sellado por el laboratorio; anclaje y publicacion son del notario.",
+  "schema": "rosettaq-archive/v2",
+  "sealed_at": "2026-08-10T12:59:01.843158+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "2.0.0",
+   "lib_sha256": "sha256:0965542a9532451b6ddea7f5b7bb1724dfd2499a84ecf72ace8031a0cb682008",
+   "harness": "coarse_grain_test.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:11ca233e84ff4ae803118a067977470026980e53b032a10cc1d09c4e41686a34",
+   "convention": "v2: sha256(json.dumps({meta sin content_hash/schema, cuerpo sin storage}, sort_keys=True, ensure_ascii=False))"
+  },
+  "content_hash": "sha256:296e1c7055747017a2c1774ff7bce258f683f46616433cca3c83f7796cdd67a2"
+ },
+ "w6": {
+  "que": {
+   "recipe": "compresion en super-nodos de residuos consecutivos (receta required_deliverables.coarse_grain) + el metrico ciego de 407fa7b sobre la red gruesa; el score vuelve a residuos por super-nodo",
+   "denominador": {
+    "blancos_vistos": 4,
+    "blancos_medidos": 4,
+    "blancos_saltados": 0,
+    "celdas_blanco_x_bloque": 16,
+    "celdas_calculadas": 16,
+    "celdas_saltadas": 0
+   },
+   "umbrales_pre_registrados": {
+    "sobrevive": ">= 0.90",
+    "parcial": "0.70 a 0.90",
+    "no_sobrevive": "< 0.70"
+   },
+   "reparto_de_celdas": {
+    "sobrevive": 0,
+    "parcial": 9,
+    "no_sobrevive": 7,
+    "total": 16
+   },
+   "rango_spearman": [
+    0.0838,
+    0.8859
+   ],
+   "resultados_por_blanco": [
+    {
+     "blanco": "ABL1_1OPL",
+     "pdb": "1OPL",
+     "n_residuos": 451,
+     "n_distal": 391,
+     "n_fuente": 21,
+     "matriz_verificada": "sha256:23750ad6d4650f2e7edabedee323ffcab7667db2abc74e017b98a0b446008b6c",
+     "n_residuos_sitio_rank1": 36,
+     "niveles": [
+      {
+       "bloque": 2,
+       "n_supernodos": 226,
+       "compresion": 2.0,
+       "spearman_orden_vs_fino_distales": 0.8356,
+       "veredicto_orden": "parcial",
+       "jaccard_top10pct_distal": 0.625,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.8056,
+       "t_fino_s": 0.4666,
+       "t_grueso_s": 0.0932,
+       "aceleracion_medida": 5.0
+      },
+      {
+       "bloque": 4,
+       "n_supernodos": 113,
+       "compresion": 3.99,
+       "spearman_orden_vs_fino_distales": 0.7898,
+       "veredicto_orden": "parcial",
+       "jaccard_top10pct_distal": 0.6596,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.8333,
+       "t_fino_s": 0.4666,
+       "t_grueso_s": 0.0372,
+       "aceleracion_medida": 12.6
+      },
+      {
+       "bloque": 8,
+       "n_supernodos": 57,
+       "compresion": 7.91,
+       "spearman_orden_vs_fino_distales": 0.7315,
+       "veredicto_orden": "parcial",
+       "jaccard_top10pct_distal": 0.5918,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.7778,
+       "t_fino_s": 0.4666,
+       "t_grueso_s": 0.002,
+       "aceleracion_medida": 232.1
+      },
+      {
+       "bloque": 16,
+       "n_supernodos": 29,
+       "compresion": 15.55,
+       "spearman_orden_vs_fino_distales": 0.7354,
+       "veredicto_orden": "parcial",
+       "jaccard_top10pct_distal": 0.4444,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.6389,
+       "t_fino_s": 0.4666,
+       "t_grueso_s": 0.0002,
+       "aceleracion_medida": 2093.3
+      }
+     ]
+    },
+    {
+     "blanco": "KRAS_4OBE",
+     "pdb": "4OBE",
+     "n_residuos": 169,
+     "n_distal": 119,
+     "n_fuente": 25,
+     "matriz_verificada": "sha256:65bc626e76d23563e2d5c87757fad9a84a912f15e0cc13bbc4694d773638fb04",
+     "n_residuos_sitio_rank1": 4,
+     "niveles": [
+      {
+       "bloque": 2,
+       "n_supernodos": 85,
+       "compresion": 1.99,
+       "spearman_orden_vs_fino_distales": 0.5422,
+       "veredicto_orden": "no sobrevive",
+       "jaccard_top10pct_distal": 0.2941,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.25,
+       "t_fino_s": 0.0669,
+       "t_grueso_s": 0.0017,
+       "aceleracion_medida": 39.5
+      },
+      {
+       "bloque": 4,
+       "n_supernodos": 43,
+       "compresion": 3.93,
+       "spearman_orden_vs_fino_distales": 0.4784,
+       "veredicto_orden": "no sobrevive",
+       "jaccard_top10pct_distal": 0.2222,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.0,
+       "t_fino_s": 0.0669,
+       "t_grueso_s": 0.0004,
+       "aceleracion_medida": 163.1
+      },
+      {
+       "bloque": 8,
+       "n_supernodos": 22,
+       "compresion": 7.68,
+       "spearman_orden_vs_fino_distales": 0.2018,
+       "veredicto_orden": "no sobrevive",
+       "jaccard_top10pct_distal": 0.2222,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.25,
+       "t_fino_s": 0.0669,
+       "t_grueso_s": 0.0001,
+       "aceleracion_medida": 470.6
+      },
+      {
+       "bloque": 16,
+       "n_supernodos": 11,
+       "compresion": 15.36,
+       "spearman_orden_vs_fino_distales": 0.0838,
+       "veredicto_orden": "no sobrevive",
+       "jaccard_top10pct_distal": 0.0476,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.0,
+       "t_fino_s": 0.0669,
+       "t_grueso_s": 0.0001,
+       "aceleracion_medida": 1310.5
+      }
+     ]
+    },
+    {
+     "blanco": "MYC_1NKP",
+     "pdb": "1NKP",
+     "n_residuos": 88,
+     "n_distal": 53,
+     "n_fuente": 16,
+     "matriz_verificada": "sha256:652335b3805252260550ee4c78df9a3a6bba77b0c2cfad12a3f66820625448f6",
+     "n_residuos_sitio_rank1": 5,
+     "niveles": [
+      {
+       "bloque": 2,
+       "n_supernodos": 44,
+       "compresion": 2.0,
+       "spearman_orden_vs_fino_distales": 0.5118,
+       "veredicto_orden": "no sobrevive",
+       "jaccard_top10pct_distal": 0.25,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.4,
+       "t_fino_s": 0.066,
+       "t_grueso_s": 0.0008,
+       "aceleracion_medida": 81.0
+      },
+      {
+       "bloque": 4,
+       "n_supernodos": 22,
+       "compresion": 4.0,
+       "spearman_orden_vs_fino_distales": 0.5822,
+       "veredicto_orden": "no sobrevive",
+       "jaccard_top10pct_distal": 0.25,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.4,
+       "t_fino_s": 0.066,
+       "t_grueso_s": 0.0001,
+       "aceleracion_medida": 500.4
+      },
+      {
+       "bloque": 8,
+       "n_supernodos": 11,
+       "compresion": 8.0,
+       "spearman_orden_vs_fino_distales": 0.4169,
+       "veredicto_orden": "no sobrevive",
+       "jaccard_top10pct_distal": 0.0,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.0,
+       "t_fino_s": 0.066,
+       "t_grueso_s": 0.0,
+       "aceleracion_medida": 1349.8
+      },
+      {
+       "bloque": 16,
+       "n_supernodos": 6,
+       "compresion": 14.67,
+       "spearman_orden_vs_fino_distales": 0.7882,
+       "veredicto_orden": "parcial",
+       "jaccard_top10pct_distal": 0.4286,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.6,
+       "t_fino_s": 0.066,
+       "t_grueso_s": 0.0,
+       "aceleracion_medida": 2365.0
+      }
+     ]
+    },
+    {
+     "blanco": "MYOSIN_5TBY",
+     "pdb": "5TBY",
+     "n_residuos": 954,
+     "n_distal": 935,
+     "n_fuente": 8,
+     "matriz_verificada": "sha256:273c56798e75d670f5671b37e2294cdf220368574291efd108575db8de7619f6",
+     "n_residuos_sitio_rank1": 85,
+     "niveles": [
+      {
+       "bloque": 2,
+       "n_supernodos": 477,
+       "compresion": 2.0,
+       "spearman_orden_vs_fino_distales": 0.8859,
+       "veredicto_orden": "parcial",
+       "jaccard_top10pct_distal": 0.4419,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.6353,
+       "t_fino_s": 2.5051,
+       "t_grueso_s": 0.6757,
+       "aceleracion_medida": 3.7
+      },
+      {
+       "bloque": 4,
+       "n_supernodos": 239,
+       "compresion": 3.99,
+       "spearman_orden_vs_fino_distales": 0.8301,
+       "veredicto_orden": "parcial",
+       "jaccard_top10pct_distal": 0.3985,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.6235,
+       "t_fino_s": 2.5051,
+       "t_grueso_s": 0.1403,
+       "aceleracion_medida": 17.9
+      },
+      {
+       "bloque": 8,
+       "n_supernodos": 120,
+       "compresion": 7.95,
+       "spearman_orden_vs_fino_distales": 0.8001,
+       "veredicto_orden": "parcial",
+       "jaccard_top10pct_distal": 0.2828,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.4824,
+       "t_fino_s": 2.5051,
+       "t_grueso_s": 0.019,
+       "aceleracion_medida": 131.9
+      },
+      {
+       "bloque": 16,
+       "n_supernodos": 60,
+       "compresion": 15.9,
+       "spearman_orden_vs_fino_distales": 0.7846,
+       "veredicto_orden": "parcial",
+       "jaccard_top10pct_distal": 0.2828,
+       "frac_residuos_del_sitio_rank1_en_top10pct_grueso": 0.4824,
+       "t_fino_s": 2.5051,
+       "t_grueso_s": 0.1176,
+       "aceleracion_medida": 21.3
+      }
+     ]
+    }
+   ],
+   "veredicto": "NEGATIVO. CERO de 16 celdas alcanzan el umbral pre-registrado de supervivencia (Spearman >= 0,90). Ni siquiera la compresion mas suave —bloque 2, que solo junta pares de residuos consecutivos— lo alcanza en ningun blanco: el mejor caso de todo el experimento es miosina a bloque 2 con 0,8859.",
+   "outcome": "El orden de residuos NO sobrevive a la compresion en ningun nivel probado: 0 celdas 'sobrevive', 9 'parcial' y 7 'no sobrevive'. Las 7 que caen por debajo del umbral parcial son las 4 de KRAS (0,5422 a 0,0838) y 3 de las 4 de c-Myc (0,5118 a 0,4169). Y el conjunto que de verdad decide la prediccion —el top 10% distal que entra al clustering— se conserva entre 0,00 y 0,66 de Jaccard. Un top-10% con Jaccard 0,22 no produce los mismos sitios: produce otros.",
+   "cruce_ventaja_cuantica": "0 — este experimento no compara cuantico contra clasico y no puede producir un cruce. Es el costo de la compresion sobre nuestro propio metrico.",
+   "significancia_vs_azar": "no aplica — es una caracterizacion, no una prueba contra el azar"
+  },
+  "como": {
+   "prereg": {
+    "file_id": "PR-COARSE-001",
+    "content_hash": "sha256:5af5af0e79dfad074ce28f47363424751d44a83a3a9794240b6402e9961a499b",
+    "sealed_at": "2026-08-10T12:56:43.695386+00:00",
+    "committed_before_run": true
+   },
+   "script_congelado": {
+    "archivo": "coarse_grain_test.py",
+    "sha256": "sha256:11ca233e84ff4ae803118a067977470026980e53b032a10cc1d09c4e41686a34",
+    "coincide_con_el_prereg": true
+   },
+   "guardia_probado_por_caso_positivo": "se copio el script, se le agrego un byte y se corrio: aborto declarando los dos sha256. Un guardia que nunca se comprobo gritando es indistinguible de uno borrado.",
+   "referencia_fina": "matrices de conectividad comprometidas en 4cfac34; la firma de contenido de cada .npz se recomputo antes de usarla y calzo en los 4 blancos (0 saltados).",
+   "harness_sha256": {
+    "coarse_grain_test.py": "sha256:11ca233e84ff4ae803118a067977470026980e53b032a10cc1d09c4e41686a34",
+    "seal_run_coarse.py": "sha256:8e793e5f47044b8c2e4f45d50623baedca9444522eb2c3673486d044bc95c409",
+    "build_cache.py": "sha256:206011ba18c194a115a0dd03b3776bb10c2810eda114d034f9452129e09a4f92",
+    "rank_quantum.py": "sha256:1cd2a9c818bd34d8a5c43fcec1864a857ea607156a47fab83a581f1ba8a709bf"
+   },
+   "raw_result_url": "evidence-staging/coarse_grain_result.json",
+   "bitacora": "evidence-staging/coarse_grain_log.jsonl — abierta al empezar, una linea por blanco ANTES de medirlo",
+   "limitaciones_medidas_no_escondidas": {
+    "aceleracion_es_orden_de_magnitud_no_medicion": "los tiempos se tomaron una vez por celda, en una maquina con otra carga, y a menos de ~100 super-nodos la diagonalizacion baja del milisegundo. La evidencia directa del ruido esta en los propios numeros: miosina marca 131,9x a bloque 8 y 21,3x a bloque 16, que es imposible como medicion real. Las aceleraciones se leen como orden de magnitud, no como cifra.",
+    "spearman_sobre_pocos_valores_distintos": "a bloque 16, c-Myc queda en 6 super-nodos: el score grueso toma 6 valores distintos sobre 53 residuos distales, y el Spearman de esa celda (0,7882, mas alto que el de bloque 8) es un artefacto de resolucion, no una mejora. Se reporta igual y se declara.",
+    "techo_estructural_declarado_antes": "dentro de un super-nodo todos los residuos comparten score por construccion. Estaba dicho en el pre-registro, antes de ver ningun numero."
+   }
+  },
+  "cuando": {
+   "archived_at": "2026-08-10T12:30:00Z"
+  },
+  "donde": {
+   "compute": "Mac local (sesion laboratorio)",
+   "costo": "cero: solo CPU local, sin QPU y sin API de pago"
+  },
+  "porque": {
+   "hypothesis": "la compresion de la red conserva el orden de residuos lo bastante como para que el grano grueso sea una via de escalabilidad real",
+   "question": "¿cuanto del orden sobrevive, y hasta que nivel de compresion?",
+   "lectura": "La respuesta util no es la aceleracion: es que la aceleracion no se puede cobrar. Para este metrico, el grano grueso por bloques de secuencia no es una via de escalabilidad — cambia la respuesta antes de acelerarla. Si el grano grueso se va a usar, el agrupamiento tiene que respetar la estructura (dominios, comunidades del grafo), no el orden de la secuencia; y esa es una hipotesis nueva que habria que pre-registrar aparte, no un ajuste de esta.",
+   "que_queda_fuera": "no se probaron agrupamientos por comunidad ni por dominio; no se probaron bloques mayores a 16; no se midio el efecto sobre el acierto contra bolsillos validados (eso exigiria abrir las holo y es otro experimento)."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje OTS, publicacion y auditoria de procedencia son del notario."
+  }
+ }
+}
