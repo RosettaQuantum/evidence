@@ -1,5 +1,13 @@
 # Especificación de sellado — RosettaQ
 
+> **Addendum (2026-08-10):** a fourth, newer seal convention exists — **v3**
+> (`rosettaq-archive/v3`, RFC 8785 / JCS canonicalization, reproducible from any
+> language). The first v3-sealed file is `RQ-REPORT-CLEV-METHOD-001`; every v3 seal
+> **describes its own convention** in `sealed_by.convention`, so it can be verified
+> without this document. This spec predates v3 and covers only v1/v2; the updated
+> edition (regenerated from the archive, not written by hand) is pending review and
+> will replace this note. Verify counts yourself: `tools/verify_seals.py`.
+
 > Cómo se calcula el `content_hash` de cada archivo de este repositorio, por qué
 > hay tres convenciones, y cómo verificar cualquiera de ellas.
 
