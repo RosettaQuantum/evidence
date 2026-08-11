@@ -14,7 +14,7 @@ Nada verificaba eso de punta a punta. Este script si:
 No bloquea el anclaje a proposito: un sello valido con un archivo de apoyo pendiente es
 publicable siempre que la falta se declare. Lo que no se tolera es que pase inadvertida.
 """
-import glob, hashlib, json, os, sys
+import glob, hashlib, json, os, re, sys
 
 VERBOSE = "-v" in sys.argv
 CLAVES_NOMBRE = ("name", "file", "path", "script", "archivo", "nombre")
@@ -101,9 +101,30 @@ for p in sorted(glob.glob("runs/**/*.json", recursive=True)
         else:
             faltan.setdefault((nombre, sha), set()).add(fid)
 
+# Un hueco IMPOSIBLE contado junto a los pendientes hace que el numero mienta en la
+# direccion comoda: parece que queda trabajo por hacer cuando en realidad no lo hay, y
+# el pendiente real se esconde detras del arrastrado. PROCEDENCIA-PERDIDA.md declara
+# cuales no se van a poder publicar nunca, con la busqueda que lo determino; aqui se
+# cuentan aparte para que "sin publicar" vuelva a significar "pendiente de publicar".
+PERDIDA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                       "PROCEDENCIA-PERDIDA.md")
+declarados_perdidos = set()
+if os.path.exists(PERDIDA):
+    declarados_perdidos = {m.lower() for m in
+                           re.findall(r'sha256:([0-9a-f]{8,})', open(PERDIDA).read())}
+
+perdidas = {k: v for k, v in faltan.items()
+            if any(k[1].split(":")[-1].lower().startswith(h) for h in declarados_perdidos)}
+faltan = {k: v for k, v in faltan.items() if k not in perdidas}
+
 print(f"referencias de procedencia declaradas: {total}")
-print(f"resueltas contra archivos publicados:  {total - sum(len(v) for v in faltan.values())}")
-print(f"SIN publicar:                          {len(faltan)}")
+print(f"resueltas contra archivos publicados:  "
+      f"{total - sum(len(v) for v in faltan.values()) - sum(len(v) for v in perdidas.values())}")
+print(f"SIN publicar (pendientes):             {len(faltan)}")
+print(f"declaradas PERDIDAS (no recuperables): {len(perdidas)}"
+      f"{'' if not perdidas else '  <- ver PROCEDENCIA-PERDIDA.md'}")
+for (nombre, sha), ids in sorted(perdidas.items()):
+    print(f"   perdida  {nombre[:32]:<34} {sha[:16]}...  la declaran {', '.join(sorted(ids))}")
 if VERBOSE:
     for fid, nombre, ruta in ok:
         print(f"   ok  {fid:<14} {nombre[:30]:<32} -> {ruta}")
