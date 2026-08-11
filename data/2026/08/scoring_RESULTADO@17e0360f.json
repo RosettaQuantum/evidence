@@ -1,0 +1,173 @@
+{
+ "_doc": "Scoring de las predicciones ciegas (4cfac34) contra bolsillos validados. c-Myc excluido: sin bolsillo validado publicado. Se publica tal cual salga.",
+ "seed": 20260810,
+ "targets": {
+  "KRAS_4OBE": {
+   "target": "KRAS_4OBE",
+   "farmaco": "MOV (sotorasib, 6OIM)",
+   "nota": null,
+   "bolsillo_validado": {
+    "residuos_holo": 21,
+    "mapeados_en_red": 21,
+    "en_distal": 14,
+    "resnums": [
+     9,
+     10,
+     11,
+     12,
+     13,
+     16,
+     34,
+     58,
+     59,
+     60,
+     61,
+     62,
+     63,
+     68,
+     69,
+     72,
+     95,
+     96,
+     99,
+     100,
+     103
+    ]
+   },
+   "rank_primer_sitio_que_acierta": 2,
+   "sitios": [
+    {
+     "rank": 1,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 4.86
+    },
+    {
+     "rank": 2,
+     "overlap_residuos": 1,
+     "dist_min_al_bolsillo_A": 0.0
+    },
+    {
+     "rank": 3,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 10.93
+    },
+    {
+     "rank": 4,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 13.61
+    },
+    {
+     "rank": 5,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 16.32
+    }
+   ],
+   "percentil_bolsillo_entre_distales": 47.82,
+   "p_permutacion_parches_contiguos": 0.5212,
+   "n_permutaciones_efectivas": 2000
+  },
+  "ABL1_1OPL": {
+   "target": "ABL1_1OPL",
+   "farmaco": "AY7 (asciminib, 5MO4)",
+   "nota": null,
+   "bolsillo_validado": {
+    "residuos_holo": 20,
+    "mapeados_en_red": 20,
+    "en_distal": 20,
+    "resnums": [
+     351,
+     356,
+     359,
+     360,
+     363,
+     448,
+     451,
+     452,
+     453,
+     454,
+     456,
+     481,
+     482,
+     483,
+     484,
+     487,
+     512,
+     521,
+     525,
+     529
+    ]
+   },
+   "rank_primer_sitio_que_acierta": null,
+   "sitios": [
+    {
+     "rank": 1,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 10.47
+    },
+    {
+     "rank": 2,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 29.48
+    },
+    {
+     "rank": 3,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 12.11
+    },
+    {
+     "rank": 4,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 10.88
+    }
+   ],
+   "percentil_bolsillo_entre_distales": 60.12,
+   "p_permutacion_parches_contiguos": 0.4153,
+   "n_permutaciones_efectivas": 2000
+  },
+  "MYOSIN_5TBY": {
+   "target": "MYOSIN_5TBY",
+   "farmaco": "XB2 (mavacamten, 9GZ1)",
+   "nota": "9GZ1 y no 6C1H — errata publica 2026-07-28, sustitucion pre-registrada en PR-CLEV-001",
+   "bolsillo_validado": {
+    "residuos_holo": 12,
+    "mapeados_en_red": 12,
+    "en_distal": 12,
+    "resnums": [
+     163,
+     164,
+     167,
+     168,
+     497,
+     500,
+     666,
+     710,
+     711,
+     712,
+     713,
+     774
+    ]
+   },
+   "rank_primer_sitio_que_acierta": null,
+   "sitios": [
+    {
+     "rank": 1,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 6.02
+    },
+    {
+     "rank": 2,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 11.92
+    },
+    {
+     "rank": 3,
+     "overlap_residuos": 0,
+     "dist_min_al_bolsillo_A": 3.83
+    }
+   ],
+   "percentil_bolsillo_entre_distales": 60.62,
+   "p_permutacion_parches_contiguos": 0.4038,
+   "n_permutaciones_efectivas": 2000
+  }
+ }
+}
