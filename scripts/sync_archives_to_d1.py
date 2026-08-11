@@ -9,7 +9,7 @@ Requires wrangler authenticated against the account that owns `rosettaq-ledger`
 (in Claude Code: strip CLOUDFLARE_API_TOKEN so the OAuth login is used).
 Idempotent: INSERT OR REPLACE keyed on file_id, so re-running is safe.
 """
-import base64, glob, json, os, re, subprocess, sys, urllib.request
+import base64, datetime, glob, json, os, re, subprocess, sys, urllib.request
 sys.path.insert(0, "tools")
 from verify_seals import identify   # API v2: (convencion, hash) | (None, esperado)
 
@@ -108,21 +108,61 @@ SQL = ("INSERT OR REPLACE INTO run_archives "
        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")
 
 
+# La version de wrangler va FIJA, y esa es la leccion de un fallo real (2026-08-11):
+# `npx wrangler` sin version trae la ultima, y la ultima pedia un miniflare alpha que
+# no existe en el registro. npx moria en la instalacion, el refresco nunca ocurria, el
+# token vencido daba 401 y la tercera copia se quedaba atras — todo esto mientras el
+# notario imprimia el resto de sus pasos en verde. Una dependencia flotante convierte
+# un problema ajeno en una copia perdida sin que nadie lo pida.
+WRANGLER = "wrangler@4.120.1"
+
+
 def d1_token():
     """El token OAuth de wrangler (el unico con permiso D1 en este Mac).
 
     Se invoca wrangler primero a proposito: el access token OAuth caduca en horas y
     wrangler lo renueva con su refresh token al ejecutarse. Leyendo el archivo sin ese
     paso, un token vencido da 401 y la tercera copia se queda sin actualizar.
+
+    Ojo con el token de la variable de ambiente: en esta cuenta hay dos tokens con
+    permisos distintos y el de `CLOUDFLARE_API_TOKEN` es el de despliegue — da 403 en
+    D1. Se le saca del ambiente a proposito para que wrangler use el OAuth y lo renueve;
+    si se le deja, wrangler lo prefiere, no refresca nada, y el 403 se disfraza de
+    problema de permisos cuando en realidad es el token equivocado.
     """
-    subprocess.run(["npx", "wrangler", "whoami"], capture_output=True, text=True,
-                   env={k: v for k, v in os.environ.items()
-                        if k not in ("CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID")})
-    cfg = open(os.path.expanduser(
-        "~/Library/Preferences/.wrangler/config/default.toml")).read()
+    limpio = {k: v for k, v in os.environ.items()
+              if k not in ("CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID")}
+    try:
+        r = subprocess.run(["npx", "--yes", WRANGLER, "whoami"],
+                           capture_output=True, text=True, env=limpio)
+        motivo = None if r.returncode == 0 else (r.stderr or r.stdout).strip()[:300]
+    except OSError as e:
+        # `npx` ausente del PATH lanza excepcion en vez de devolver codigo: sin este
+        # except, el guardia de abajo nunca llega a correr y el script muere con un
+        # rastro de Python en vez de decir que la tercera copia se va a quedar atras.
+        motivo = str(e)
+    if motivo:
+        # Falla ruidosa: sin refresco, lo que sigue usa un token que puede estar vencido.
+        print("  OJO: no pude correr %s para refrescar el token OAuth.\n"
+              "       motivo: %s" % (WRANGLER, motivo))
+    cfg_path = os.path.expanduser(
+        "~/Library/Preferences/.wrangler/config/default.toml")
+    cfg = open(cfg_path).read()
     m = re.search(r'oauth_token\s*=\s*"([^"]+)"', cfg)
     if not m:
         raise SystemExit("no encontre el token OAuth de wrangler: corre `npx wrangler login`")
+    exp = re.search(r'expiration_time\s*=\s*"([^"]+)"', cfg)
+    if exp:
+        vencido = exp.group(1) < datetime.datetime.now(
+            datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")
+        print("  token OAuth vence %s%s" % (exp.group(1), "  <-- VENCIDO" if vencido else ""))
+        if vencido:
+            raise SystemExit(
+                "el token OAuth esta vencido y el refresco no funciono: corre\n"
+                "  npx --yes %s whoami\n"
+                "sin CLOUDFLARE_API_TOKEN en el ambiente, o `npx wrangler login`.\n"
+                "Se para aqui a proposito: seguir daria 401 por archivo y dejaria la\n"
+                "tercera copia atras mientras el resto del notario sale en verde." % WRANGLER)
     return m.group(1)
 
 
