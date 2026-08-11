@@ -1,0 +1,231 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-N90-LOPO-001__20260811T2200Z__n90-deja-una-fuera-sin-fuga.json",
+  "file_id": "RQ-EXP-N90-LOPO-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "N=90 deja-una-fuera sin fuga: cada proteina se puntua con un modelo entrenado en las otras 89. Tres brazos (gestor cuantico, ML de features, ML apilado de propagadores) mas tres ablaciones. El brazo cuantico NO alcanza significancia. Sellado por el laboratorio; el anclaje es del notario.",
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-11T22:31:24.008685+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "analyze_n90.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:1e280ea597dfcc8f82daa1412bfee7ba51c439cb0d7a04cde97d31061a65ec51",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:9df99e6df716ac5d58670f518099208369adaf164f83fae2aa4b3a43a16810df"
+ },
+ "w6": {
+  "que": {
+   "recipe": "LOPO sobre 90 proteinas; percentil distal del bolsillo; nulo espacial de parches contiguos (nperm=2000, semilla 20260717); Fisher combina las 90",
+   "denominador": {
+    "proteinas_declaradas": 90,
+    "filas_en_per_protein": 90,
+    "calzan": true
+   },
+   "brazos": [
+    {
+     "brazo": "armA_manager",
+     "nombre": "gestor cuantico",
+     "chi2": 203.94,
+     "grados_de_libertad": 180,
+     "p_recomputado": 0.10661870156492066,
+     "p_publicado": 0.1066,
+     "razon_recomputado_sobre_publicado": 1.0002,
+     "reproduce": true,
+     "n_significativas_p05": 2,
+     "n_proteinas": 90,
+     "p_minimo": 0.013,
+     "en_el_piso": 0
+    },
+    {
+     "brazo": "armB_ml",
+     "nombre": "ML de features",
+     "chi2": 310.69,
+     "grados_de_libertad": 180,
+     "p_recomputado": 5.05592308457327e-09,
+     "p_publicado": 5.06e-09,
+     "razon_recomputado_sobre_publicado": 0.9992,
+     "reproduce": true,
+     "n_significativas_p05": 10,
+     "n_proteinas": 90,
+     "p_minimo": 0.0004997501249375312,
+     "en_el_piso": 1
+    },
+    {
+     "brazo": "armC_stacked",
+     "nombre": "ML apilado de propagadores",
+     "chi2": 295.11,
+     "grados_de_libertad": 180,
+     "p_recomputado": 1.3428334471134813e-07,
+     "p_publicado": 1.34e-07,
+     "razon_recomputado_sobre_publicado": 1.0021,
+     "reproduce": true,
+     "n_significativas_p05": 11,
+     "n_proteinas": 90,
+     "p_minimo": 0.0004997501249375312,
+     "en_el_piso": 1
+    }
+   ],
+   "todos_los_brazos_reproducen_desde_los_conteos": true,
+   "percentil_medio_por_metodo": {
+    "ctqw_bare": 53.9,
+    "ctqw_glifo_fixed": 55.3,
+    "ctqw_glifo_learned": 57.7,
+    "diffusion": 60.5,
+    "gnm": 46.4
+   },
+   "elecciones_del_gestor": {
+    "ctqw_bare": 2,
+    "ctqw_glifo_fixed": 3,
+    "ctqw_glifo_learned": 21,
+    "diffusion": 50,
+    "gnm": 14
+   },
+   "ablaciones": [
+    {
+     "ablacion": "sin_conservacion",
+     "recomputable": true,
+     "p_recomputado": 5.05592308457327e-09,
+     "p_publicado": 5.06e-09,
+     "reproduce": true,
+     "n_significativas": 10,
+     "dropped": [
+      "conservation"
+     ]
+    },
+    {
+     "ablacion": "sin_estructura_uniprot",
+     "recomputable": true,
+     "p_recomputado": 5.936541791040678e-06,
+     "p_publicado": 5.94e-06,
+     "reproduce": true,
+     "n_significativas": 8,
+     "dropped": [
+      "uni_active_site",
+      "uni_binding_site",
+      "uni_domain",
+      "uni_motif",
+      "uni_ptm"
+     ]
+    },
+    {
+     "ablacion": "solo_topologia",
+     "recomputable": true,
+     "p_recomputado": 3.9752488923064545e-05,
+     "p_publicado": 3.98e-05,
+     "reproduce": true,
+     "n_significativas": 6,
+     "dropped": [
+      "anm_msf",
+      "clinvar_density",
+      "conservation",
+      "gnm_msf",
+      "uni_active_site",
+      "uni_binding_site",
+      "uni_domain",
+      "uni_motif",
+      "uni_ptm"
+     ]
+    }
+   ],
+   "veredicto": "NEGATIVO para la tesis cuantica. El brazo A —el gestor que elige propagador— da p = 0.1066, que NO alcanza significancia, con 2 de 90 proteinas por debajo de 0,05. Y el desglose dice por que: el mejor propagador individual es la DIFUSION CLASICA (60.5 de percentil medio), por encima de las tres variantes de caminata cuantica (53.9, 55.3, 57.7). El gestor la eligio en 50 de 90 proteinas.",
+   "outcome": "Con n=90 y sin fuga, la caminata cuantica no aporta: pierde contra la difusion clasica como propagador individual y su gestor no supera el azar. Los brazos B y C SI son significativos (5.06e-09 y 1.34e-07), pero son ML sobre anotaciones y no tienen nada de cuantico — atribuirles la senal a la caminata seria leer mal el experimento.",
+   "cruce_ventaja_cuantica": "0",
+   "significancia_vs_azar": "brazo A (cuantico): NO (p = 0.1066). Brazos B y C: si, pero son clasicos."
+  },
+  "como": {
+   "artefacto": {
+    "archivo": "RQ-EXP-N90-LOPO@116e42d4.json",
+    "sha256": "sha256:116e42d413442898a03e694d56139ddc5622600400617a1bba816ccb40ef8cf1",
+    "corrida_ci": "31537334853",
+    "donde_vive": "quantum-run/resultados_n90/ en origin/main — no en rq_engine/results/, que esta ignorado: el artefacto de CI expira y el repo es la copia durable"
+   },
+   "recomputo_independiente": {
+    "script": "analyze_n90.py",
+    "sha256": "sha256:1e280ea597dfcc8f82daa1412bfee7ba51c439cb0d7a04cde97d31061a65ec51",
+    "resultado": "n90_result.json",
+    "resultado_sha256": "sha256:fedae3a8556628da0246b9376b43b7b1ea585d2ffee63c1c05fb9ab98b74d8ec",
+    "metodo": "Fisher rehecho desde los CONTEOS CRUDOS (n_ge, nperm) de cada proteina, con el piso 1/(nperm+1) explicito. No se usaron los p publicados como entrada.",
+    "las_seis_cifras_reproducen": "3 brazos + 3 ablaciones"
+   },
+   "la_trampa_que_esto_evita": {
+    "que_paso": "la corrida anterior (31531185175) publicaba p = 0.0 para SLC6A4_ALLO, porque el p se redondeaba a 3 decimales y el suyo caia bajo el piso del test.",
+    "consecuencia": "un p de permutacion NO puede ser cero: el piso es 1/(nperm+1) = 4,9975e-4. Metido a Fisher, ese cero llevaba la combinada del brazo B de 4,9e-09 a 6,8e-241 — 232 ordenes, todos en la direccion de parecer un resultado mas fuerte del medido.",
+    "como_se_cerro": "el artefacto guarda ahora los conteos crudos y el p pasa a ser cantidad derivada. `analyze_n90.py` falla cerrado si encuentra un p publicado en cero o una fila sin conteos.",
+    "por_que_los_conteos_y_no_el_piso": "el piso es un parche que hay que acordarse de aplicar; el conteo es el dato del que el p es consecuencia. Con los conteos el recomputo deja de depender de saber que existe un piso."
+   },
+   "por_que_los_valores_cambiaron_algo": "B paso de 4,896e-09 a 5.06e-09 y C de 1,333e-07 a 1.34e-07 respecto de la corrida rota. No es ruido de recomputo: antes el p de SLC6A4_ALLO venia redondeado a 3 decimales y ahora sale del conteo crudo. El brazo A no se movio.",
+   "config": {
+    "glifo_feats": [
+     "uni_binding_site",
+     "uni_active_site",
+     "uni_domain",
+     "uni_ptm",
+     "uni_motif",
+     "clinvar_density",
+     "coordination",
+     "degree",
+     "closeness_to_active",
+     "conservation",
+     "gnm_msf",
+     "anm_msf"
+    ],
+    "feat_cols": [
+     "degree",
+     "closeness_to_active",
+     "coordination",
+     "uni_binding_site",
+     "uni_active_site",
+     "uni_domain",
+     "uni_ptm",
+     "uni_motif",
+     "clinvar_density",
+     "conservation",
+     "gnm_msf",
+     "anm_msf",
+     "diffusion",
+     "gnm",
+     "betweenness"
+    ],
+    "arms": [
+     "A",
+     "B",
+     "C"
+    ],
+    "nperm": 2000,
+    "seed": 20260717,
+    "window": [
+     0.5,
+     8.0
+    ]
+   },
+   "bitacora": "evidence-staging/n90_log.jsonl"
+  },
+  "cuando": {
+   "corrida_ci": "31537334853",
+   "archived_at": "2026-08-11T22:00:00Z"
+  },
+  "donde": {
+   "compute": "GitHub Actions (CI de quantum-run)",
+   "recomputo": "Mac local (sesion laboratorio)"
+  },
+  "porque": {
+   "question": "con n=90 y sin fuga, ¿la caminata cuantica aporta algo?",
+   "respuesta": "no. Y el desglose por metodo lo dice mejor que el p: la difusion clasica gana.",
+   "hallazgo_de_las_ablaciones": {
+    "quitar_la_conservacion_no_mueve_nada": "`sin_conservacion` da 5.056e-09, IDENTICO al brazo B completo. La senal del brazo B vive en las anotaciones de UniProt (5.937e-06 al quitarlas) y en la topologia (3.975e-05 quedandose solo con ella), no en la conservacion.",
+    "consecuencia_para_el_bloqueo_del_brazo_apilado": "el §8 del reporte justifica el brazo apilado bloqueado por la conservacion rota (Biopython 1.79). Si la conservacion no aporta al brazo B, ese bloqueo pesa menos de lo que dijimos. OJO: la ablacion se midio sobre el brazo B; el brazo C usa la conservacion dentro del potencial aprendido, entre 12 features. Es plausible que tampoco aporte, pero NO esta medido — y esa distincion es la diferencia entre corregir el §8 y especular."
+   },
+   "por_que_se_publica": "el trato era publicar gane o pierda. Un resultado que contradice nuestra propia tesis, medido sobre 90 proteinas y sin fuga, vale mas que cualquier numero que pudieramos maquillar."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "el experimento lo corrio el CI y lo preparo la sesion coordinadora; el laboratorio recomputo de forma independiente y sella; el anclaje y la publicacion son del notario."
+  }
+ }
+}
