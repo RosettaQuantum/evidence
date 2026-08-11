@@ -1,0 +1,385 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-QPU-VOYAGE2-001__20260811T1930Z__bateria-viaje2-ibm-kingston.json",
+  "file_id": "RQ-EXP-QPU-VOYAGE2-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Bateria de 7 circuitos en hardware real (ibm_kingston, 26.000 disparos) con control negativo, repeticion y replica. Los 7 job_id y sus roles estaban SELLADOS en RQ-REPORT-CLEV-METHOD-001 antes de existir ningun resultado. Sellado por el laboratorio; el anclaje es del notario.",
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-11T19:21:10.543335+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "analyze_battery.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:4a69fb7177127d04865e53bcf8fb8d0a3fb0560f177e46305836e1061cbe149c",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:9f4c796868007f0c26eafa9c9a21b966483f1477bc779071cb5cdbc694317d72"
+ },
+ "w6": {
+  "que": {
+   "recipe": "CTQW por Trotter sobre el sub-grafo del corredor, codificacion one-hot; masa en el bolsillo condicionada a los disparos validos",
+   "denominador": {
+    "circuitos_declarados": 7,
+    "medidos": 7,
+    "sin_archivo": 0,
+    "cuales_faltan": []
+   },
+   "shots_totales": 26000,
+   "todos_los_shots_calzan_con_lo_declarado": true,
+   "rango_fraccion_valida": [
+    0.3387,
+    0.6402
+   ],
+   "predicciones_pre_declaradas_cumplidas": "7 de 7",
+   "desvio_vs_simulacion_ideal": {
+    "maximo_absoluto": 0.034,
+    "mediano": 0.0199
+   },
+   "circuitos": [
+    {
+     "job_id": "d9t16s7tfhrs73dtb550",
+     "role": "control-positivo",
+     "protein": "KRAS_G12C",
+     "shots_declarados": 4000,
+     "shots_recibidos": 4000,
+     "calzan_los_shots": true,
+     "pocket_nodes": [
+      0,
+      6,
+      7
+     ],
+     "ideal_pocket_mass": 0.5736,
+     "classical_ceiling": 0.375,
+     "techo_es_la_uniforme": true,
+     "supera_el_techo_MEDIDO": true,
+     "supera_el_techo_PREDICHO": true,
+     "la_prediccion_se_cumplio": true,
+     "desvio_vs_ideal": -0.0053,
+     "shots": 4000,
+     "validos": 2168,
+     "frac_valida": 0.542,
+     "masa_bolsillo_entre_validos": 0.5683,
+     "n_nodos": 8,
+     "distribucion_por_nodo": [
+      710,
+      503,
+      176,
+      25,
+      40,
+      192,
+      347,
+      175
+     ]
+    },
+    {
+     "job_id": "d9t16s8pdb6s73e6jh9g",
+     "role": "control-secundario",
+     "protein": "PFKP_FBP",
+     "shots_declarados": 4000,
+     "shots_recibidos": 4000,
+     "calzan_los_shots": true,
+     "pocket_nodes": [
+      6
+     ],
+     "ideal_pocket_mass": 0.2724,
+     "classical_ceiling": 0.125,
+     "techo_es_la_uniforme": true,
+     "supera_el_techo_MEDIDO": true,
+     "supera_el_techo_PREDICHO": true,
+     "la_prediccion_se_cumplio": true,
+     "desvio_vs_ideal": -0.034,
+     "shots": 4000,
+     "validos": 1355,
+     "frac_valida": 0.3387,
+     "masa_bolsillo_entre_validos": 0.2384,
+     "n_nodos": 8,
+     "distribucion_por_nodo": [
+      41,
+      46,
+      83,
+      137,
+      112,
+      302,
+      323,
+      311
+     ]
+    },
+    {
+     "job_id": "d9t16sgpdb6s73e6jha0",
+     "role": "exploracion-largo",
+     "protein": "HK1_G6P",
+     "shots_declarados": 4000,
+     "shots_recibidos": 4000,
+     "calzan_los_shots": true,
+     "pocket_nodes": [
+      1
+     ],
+     "ideal_pocket_mass": 0.4922,
+     "classical_ceiling": 0.1,
+     "techo_es_la_uniforme": true,
+     "supera_el_techo_MEDIDO": true,
+     "supera_el_techo_PREDICHO": true,
+     "la_prediccion_se_cumplio": true,
+     "desvio_vs_ideal": -0.0199,
+     "shots": 4000,
+     "validos": 1916,
+     "frac_valida": 0.479,
+     "masa_bolsillo_entre_validos": 0.4723,
+     "n_nodos": 10,
+     "distribucion_por_nodo": [
+      13,
+      905,
+      35,
+      138,
+      29,
+      30,
+      26,
+      526,
+      39,
+      175
+     ]
+    },
+    {
+     "job_id": "d9t16svpemts73cu9fhg",
+     "role": "repeticion",
+     "protein": "KRAS_G12C",
+     "shots_declarados": 4000,
+     "shots_recibidos": 4000,
+     "calzan_los_shots": true,
+     "pocket_nodes": [
+      0,
+      6,
+      7
+     ],
+     "ideal_pocket_mass": 0.5736,
+     "classical_ceiling": 0.375,
+     "techo_es_la_uniforme": true,
+     "supera_el_techo_MEDIDO": true,
+     "supera_el_techo_PREDICHO": true,
+     "la_prediccion_se_cumplio": true,
+     "desvio_vs_ideal": -0.0054,
+     "shots": 4000,
+     "validos": 2022,
+     "frac_valida": 0.5055,
+     "masa_bolsillo_entre_validos": 0.5682,
+     "n_nodos": 8,
+     "distribucion_por_nodo": [
+      665,
+      465,
+      202,
+      25,
+      41,
+      140,
+      321,
+      163
+     ]
+    },
+    {
+     "job_id": "d9t16t7tfhrs73dtb580",
+     "role": "replica-corrida-1",
+     "protein": "KRAS_G12C",
+     "shots_declarados": 2000,
+     "shots_recibidos": 2000,
+     "calzan_los_shots": true,
+     "pocket_nodes": [
+      0,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10,
+      11
+     ],
+     "ideal_pocket_mass": 0.1874,
+     "classical_ceiling": 0.6667,
+     "techo_es_la_uniforme": true,
+     "supera_el_techo_MEDIDO": false,
+     "supera_el_techo_PREDICHO": false,
+     "la_prediccion_se_cumplio": true,
+     "desvio_vs_ideal": 0.0302,
+     "shots": 2000,
+     "validos": 1011,
+     "frac_valida": 0.5055,
+     "masa_bolsillo_entre_validos": 0.2176,
+     "n_nodos": 12,
+     "distribucion_por_nodo": [
+      17,
+      51,
+      515,
+      16,
+      37,
+      2,
+      43,
+      41,
+      27,
+      209,
+      5,
+      48
+     ]
+    },
+    {
+     "job_id": "d9t16tftfhrs73dtb58g",
+     "role": "transporte-abl1",
+     "protein": "ABL1_1OPL",
+     "shots_declarados": 4000,
+     "shots_recibidos": 4000,
+     "calzan_los_shots": true,
+     "pocket_nodes": [
+      7
+     ],
+     "ideal_pocket_mass": 0.2732,
+     "classical_ceiling": 0.125,
+     "techo_es_la_uniforme": true,
+     "supera_el_techo_MEDIDO": true,
+     "supera_el_techo_PREDICHO": true,
+     "la_prediccion_se_cumplio": true,
+     "desvio_vs_ideal": 0.004,
+     "shots": 4000,
+     "validos": 2561,
+     "frac_valida": 0.6402,
+     "masa_bolsillo_entre_validos": 0.2772,
+     "n_nodos": 8,
+     "distribucion_por_nodo": [
+      337,
+      769,
+      257,
+      76,
+      205,
+      126,
+      81,
+      710
+     ]
+    },
+    {
+     "job_id": "d9t16tfpemts73cu9fig",
+     "role": "control-negativo",
+     "protein": "KRAS_G12C",
+     "shots_declarados": 4000,
+     "shots_recibidos": 4000,
+     "calzan_los_shots": true,
+     "pocket_nodes": [
+      0,
+      6,
+      7
+     ],
+     "ideal_pocket_mass": 0.2633,
+     "classical_ceiling": 0.375,
+     "techo_es_la_uniforme": true,
+     "supera_el_techo_MEDIDO": false,
+     "supera_el_techo_PREDICHO": false,
+     "la_prediccion_se_cumplio": true,
+     "desvio_vs_ideal": 0.0208,
+     "shots": 4000,
+     "validos": 2105,
+     "frac_valida": 0.5262,
+     "masa_bolsillo_entre_validos": 0.2841,
+     "n_nodos": 8,
+     "distribucion_por_nodo": [
+      282,
+      941,
+      197,
+      70,
+      227,
+      72,
+      245,
+      71
+     ]
+    }
+   ],
+   "comparaciones": {
+    "nulo_vs_control": {
+     "que_compara": "control NEGATIVO (barajado) contra el control POSITIVO, misma proteina y mismos disparos",
+     "masa_control_positivo": 0.5683,
+     "masa_control_negativo": 0.2841,
+     "delta": 0.2842,
+     "lectura": "si el barajado da una masa parecida, el circuito no esta midiendo la estructura de la red sino algo que sobrevive a destruirla"
+    },
+    "repeticion_vs_original": {
+     "que_compara": "el MISMO circuito corrido dos veces en el mismo backend",
+     "masa_primera": 0.5683,
+     "masa_repeticion": 0.5682,
+     "delta_masa": 0.0001,
+     "frac_valida_primera": 0.542,
+     "frac_valida_repeticion": 0.5055,
+     "delta_frac_valida": 0.0365,
+     "lectura": "es la barra de error que no teniamos: cuanto se mueve el numero sin que cambie nada del experimento"
+    },
+    "replica_vs_RQ-POC-QPU-001": {
+     "que_compara": "la replica del circuito de julio contra la corrida original",
+     "frac_valida_replica": 0.5055,
+     "frac_valida_original": 0.614,
+     "delta": -0.1085,
+     "original": {
+      "job_id": "d9mu2bmij12s73ft86t0",
+      "validos": 1228,
+      "shots": 2000,
+      "frac_valida": 0.614,
+      "fuente": "RQ-POC-QPU-001 / resultados/RESUMEN-QPU.md"
+     },
+     "lectura": "la reproducibilidad entre dias en el mismo hardware. Una diferencia grande dice que el 61,4 % de julio era una foto, no una constante"
+    }
+   },
+   "veredicto": "POSITIVO ACOTADO, y el acotado importa mas que el positivo. El hardware reproduce la simulacion ideal con un desvio maximo de 3.4 puntos, las 7 de 7 predicciones pre-declaradas sobre el techo se cumplieron, el control barajado se separa del positivo por 28.4 puntos, y el mismo circuito repetido da la MISMA masa (0.0001 de diferencia). Eso dice que el circuito corre fiel en hardware. NO dice nada sobre encontrar bolsillos.",
+   "outcome": "La caminata cuantica corre fielmente en hardware real sobre grafos de 8 a 12 nodos. La fraccion de disparos fisicamente validos NO es reproducible entre dias: la replica del circuito de julio dio 0.5055 contra 0.614 de la corrida original, 10.8 puntos menos.",
+   "cruce_ventaja_cuantica": "0",
+   "significancia_vs_azar": "no aplica: no hay hipotesis contra el azar en esta bateria. Las comparaciones son contra la simulacion ideal, contra el reparto uniforme y contra si misma."
+  },
+  "como": {
+   "convenciones_heredadas_no_inventadas": {
+    "valido": "one-hot: exactamente un 1. Es la definicion de RQ-POC-QPU-001 y de resultados/RESUMEN-QPU.md.",
+    "orden_de_bits": "format(k,'0Nb')[::-1] — qubit i = bit i. Linea 94 de poc_ibm.py, archivada como poc_ibm@db044b45.py.",
+    "nodos_del_bolsillo": "de voyage2_manifest.json, comprometido antes de enviar."
+   },
+   "compromiso_previo": {
+    "sello": "RQ-REPORT-CLEV-METHOD-001",
+    "que_congelo": "los 7 job_id y sus roles, antes de que existiera ningun resultado",
+    "por_que_importa": "impide elegir despues cuales trabajos contar. Es el compromiso ciego aplicado a hardware."
+   },
+   "crudos_por_hash": {
+    "d9t16s7tfhrs73dtb550": "sha256:7024c68ee46de6ff50db318931232a59cf98736274d8843919bd862cb7be2718",
+    "d9t16s8pdb6s73e6jh9g": "sha256:d9a1fd950bd5bda8f343037e995fd5044882f8c1450363397de7a2052a53663c",
+    "d9t16sgpdb6s73e6jha0": "sha256:72181e09af569c805f3c78e05087ce6034641979ecad8651587cfa0f7cc2642e",
+    "d9t16svpemts73cu9fhg": "sha256:d91deabe3f77c9114216fab73fc3e59fa83e1929e6f209b3765644b65ee6e296",
+    "d9t16t7tfhrs73dtb580": "sha256:2a3c1c1699fde936167dfcb6fe49a43afdec78c1f4372a2bc459cf64869e5aa7",
+    "d9t16tftfhrs73dtb58g": "sha256:a13c6213f6baed3cc9bb0e0498a5517716bcf2d09e0e425a6ad81253a3d8cd1d",
+    "d9t16tfpemts73cu9fig": "sha256:1f8a7c0c71139bf2de0660e152e88c82d4de1cb314ced6638ee2c196de6b3f01"
+   },
+   "harness_sha256": {
+    "analyze_battery.py": "sha256:4a69fb7177127d04865e53bcf8fb8d0a3fb0560f177e46305836e1061cbe149c",
+    "battery_result.json": "sha256:a6d71e668e06b9357c505b27de08563201d899512046642556405173ca9e2d3a",
+    "voyage2_manifest.json": "sha256:0da7b8cd766e4de9a237e0184a7ae18f4b30f32cb256c6ab06a81b4d1df61794"
+   },
+   "bitacora": "evidence-staging/battery_log.jsonl — abierta al empezar, una linea por circuito ANTES de medirlo"
+  },
+  "cuando": {
+   "enviado_utc": "2026-08-10T18:07:50Z",
+   "recogido_utc": "2026-08-11T19:12:31Z",
+   "archived_at": "2026-08-11T19:30:00Z"
+  },
+  "donde": {
+   "backend": "ibm_kingston",
+   "compute": "IBM Quantum (hardware real)",
+   "analisis": "Mac local (sesion laboratorio)"
+  },
+  "porque": {
+   "question": "¿la caminata corre fiel en hardware real, y cuanto se mueve el numero cuando no cambia nada?",
+   "lo_que_esto_NO_dice": {
+    "el_corredor_se_construye_SABIENDO_donde_esta_el_bolsillo": "`poc_corridor.corridor_subgraph` traza el camino mas corto de la fuente al bolsillo ALOSTERICO CONOCIDO (`d['allo']`) y se queda con esos nodos mas vecinos. El sub-grafo de 8 a 12 nodos esta construido desde la respuesta. Por eso esta bateria NO dice nada sobre encontrar bolsillos: mide si la caminata corre fiel en hardware sobre un grafo chico, con el bolsillo puesto a proposito en el otro extremo del camino.",
+    "el_techo_clasico_es_la_uniforme": "`classical_ceiling` es |bolsillo|/nq, es decir el limite de la difusion clasica a tiempo largo — comprobado igual en los 7 salvo redondeo. Superarlo NO es un cruce: es ganarle al reparto uniforme, que es exactamente el rival que la justificacion del metrico declara SIN informacion. El mejor clasico para esta tarea (GNM, betweenness, closeness, difusion a tiempo finito) no participa en esta comparacion.",
+    "cruce_ventaja_cuantica": "0",
+    "n_por_circuito": "1. La unica barra de error del experimento es la repeticion."
+   },
+   "el_hallazgo_que_menos_esperabamos": "el mismo circuito repetido da la MISMA masa en el bolsillo (0.0001 de diferencia) pero fracciones de validez que difieren en 3.6 puntos. La fisica que medimos es estable; el ruido que la envuelve no. Son dos numeros con vidas distintas y hasta hoy los citabamos juntos.",
+   "consecuencia": "el 61,4 % de julio no es una constante del backend: es una foto de ese dia. Cualquier cifra de validez que publiquemos tiene que ir con su fecha, o no ir."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje y publicacion del notario."
+  }
+ }
+}

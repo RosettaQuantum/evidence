@@ -1,0 +1,311 @@
+{
+ "LO_QUE_ESTO_NO_DICE": {
+  "el_corredor_se_construye_SABIENDO_donde_esta_el_bolsillo": "`poc_corridor.corridor_subgraph` traza el camino mas corto de la fuente al bolsillo ALOSTERICO CONOCIDO (`d['allo']`) y se queda con esos nodos mas vecinos. El sub-grafo de 8 a 12 nodos esta construido desde la respuesta. Por eso esta bateria NO dice nada sobre encontrar bolsillos: mide si la caminata corre fiel en hardware sobre un grafo chico, con el bolsillo puesto a proposito en el otro extremo del camino.",
+  "el_techo_clasico_es_la_uniforme": "`classical_ceiling` es |bolsillo|/nq, es decir el limite de la difusion clasica a tiempo largo — comprobado igual en los 7 salvo redondeo. Superarlo NO es un cruce: es ganarle al reparto uniforme, que es exactamente el rival que la justificacion del metrico declara SIN informacion. El mejor clasico para esta tarea (GNM, betweenness, closeness, difusion a tiempo finito) no participa en esta comparacion.",
+  "cruce_ventaja_cuantica": "0",
+  "n_por_circuito": "1. La unica barra de error del experimento es la repeticion."
+ },
+ "_doc": "Bateria del Viaje 2 en ibm_kingston. Convenciones (one-hot valido, orden de bits, masa condicionada a validos) heredadas de la corrida original, no inventadas aqui. Los job_id y los roles estaban sellados antes de existir los resultados.",
+ "denominador": {
+  "circuitos_declarados": 7,
+  "medidos": 7,
+  "sin_archivo": 0,
+  "cuales_faltan": []
+ },
+ "shots_totales": 26000,
+ "todos_los_shots_calzan": true,
+ "rango_frac_valida": [
+  0.3387,
+  0.6402
+ ],
+ "predicciones_pre-declaradas_que_se_cumplieron": "7 de 7",
+ "desvio_vs_ideal": {
+  "maximo_absoluto": 0.034,
+  "mediano": 0.0199
+ },
+ "circuitos": [
+  {
+   "job_id": "d9t16s7tfhrs73dtb550",
+   "role": "control-positivo",
+   "protein": "KRAS_G12C",
+   "shots_declarados": 4000,
+   "shots_recibidos": 4000,
+   "calzan_los_shots": true,
+   "pocket_nodes": [
+    0,
+    6,
+    7
+   ],
+   "ideal_pocket_mass": 0.5736,
+   "classical_ceiling": 0.375,
+   "techo_es_la_uniforme": true,
+   "supera_el_techo_MEDIDO": true,
+   "supera_el_techo_PREDICHO": true,
+   "la_prediccion_se_cumplio": true,
+   "desvio_vs_ideal": -0.0053,
+   "shots": 4000,
+   "validos": 2168,
+   "frac_valida": 0.542,
+   "masa_bolsillo_entre_validos": 0.5683,
+   "n_nodos": 8,
+   "distribucion_por_nodo": [
+    710,
+    503,
+    176,
+    25,
+    40,
+    192,
+    347,
+    175
+   ]
+  },
+  {
+   "job_id": "d9t16s8pdb6s73e6jh9g",
+   "role": "control-secundario",
+   "protein": "PFKP_FBP",
+   "shots_declarados": 4000,
+   "shots_recibidos": 4000,
+   "calzan_los_shots": true,
+   "pocket_nodes": [
+    6
+   ],
+   "ideal_pocket_mass": 0.2724,
+   "classical_ceiling": 0.125,
+   "techo_es_la_uniforme": true,
+   "supera_el_techo_MEDIDO": true,
+   "supera_el_techo_PREDICHO": true,
+   "la_prediccion_se_cumplio": true,
+   "desvio_vs_ideal": -0.034,
+   "shots": 4000,
+   "validos": 1355,
+   "frac_valida": 0.3387,
+   "masa_bolsillo_entre_validos": 0.2384,
+   "n_nodos": 8,
+   "distribucion_por_nodo": [
+    41,
+    46,
+    83,
+    137,
+    112,
+    302,
+    323,
+    311
+   ]
+  },
+  {
+   "job_id": "d9t16sgpdb6s73e6jha0",
+   "role": "exploracion-largo",
+   "protein": "HK1_G6P",
+   "shots_declarados": 4000,
+   "shots_recibidos": 4000,
+   "calzan_los_shots": true,
+   "pocket_nodes": [
+    1
+   ],
+   "ideal_pocket_mass": 0.4922,
+   "classical_ceiling": 0.1,
+   "techo_es_la_uniforme": true,
+   "supera_el_techo_MEDIDO": true,
+   "supera_el_techo_PREDICHO": true,
+   "la_prediccion_se_cumplio": true,
+   "desvio_vs_ideal": -0.0199,
+   "shots": 4000,
+   "validos": 1916,
+   "frac_valida": 0.479,
+   "masa_bolsillo_entre_validos": 0.4723,
+   "n_nodos": 10,
+   "distribucion_por_nodo": [
+    13,
+    905,
+    35,
+    138,
+    29,
+    30,
+    26,
+    526,
+    39,
+    175
+   ]
+  },
+  {
+   "job_id": "d9t16svpemts73cu9fhg",
+   "role": "repeticion",
+   "protein": "KRAS_G12C",
+   "shots_declarados": 4000,
+   "shots_recibidos": 4000,
+   "calzan_los_shots": true,
+   "pocket_nodes": [
+    0,
+    6,
+    7
+   ],
+   "ideal_pocket_mass": 0.5736,
+   "classical_ceiling": 0.375,
+   "techo_es_la_uniforme": true,
+   "supera_el_techo_MEDIDO": true,
+   "supera_el_techo_PREDICHO": true,
+   "la_prediccion_se_cumplio": true,
+   "desvio_vs_ideal": -0.0054,
+   "shots": 4000,
+   "validos": 2022,
+   "frac_valida": 0.5055,
+   "masa_bolsillo_entre_validos": 0.5682,
+   "n_nodos": 8,
+   "distribucion_por_nodo": [
+    665,
+    465,
+    202,
+    25,
+    41,
+    140,
+    321,
+    163
+   ]
+  },
+  {
+   "job_id": "d9t16t7tfhrs73dtb580",
+   "role": "replica-corrida-1",
+   "protein": "KRAS_G12C",
+   "shots_declarados": 2000,
+   "shots_recibidos": 2000,
+   "calzan_los_shots": true,
+   "pocket_nodes": [
+    0,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11
+   ],
+   "ideal_pocket_mass": 0.1874,
+   "classical_ceiling": 0.6667,
+   "techo_es_la_uniforme": true,
+   "supera_el_techo_MEDIDO": false,
+   "supera_el_techo_PREDICHO": false,
+   "la_prediccion_se_cumplio": true,
+   "desvio_vs_ideal": 0.0302,
+   "shots": 2000,
+   "validos": 1011,
+   "frac_valida": 0.5055,
+   "masa_bolsillo_entre_validos": 0.2176,
+   "n_nodos": 12,
+   "distribucion_por_nodo": [
+    17,
+    51,
+    515,
+    16,
+    37,
+    2,
+    43,
+    41,
+    27,
+    209,
+    5,
+    48
+   ]
+  },
+  {
+   "job_id": "d9t16tftfhrs73dtb58g",
+   "role": "transporte-abl1",
+   "protein": "ABL1_1OPL",
+   "shots_declarados": 4000,
+   "shots_recibidos": 4000,
+   "calzan_los_shots": true,
+   "pocket_nodes": [
+    7
+   ],
+   "ideal_pocket_mass": 0.2732,
+   "classical_ceiling": 0.125,
+   "techo_es_la_uniforme": true,
+   "supera_el_techo_MEDIDO": true,
+   "supera_el_techo_PREDICHO": true,
+   "la_prediccion_se_cumplio": true,
+   "desvio_vs_ideal": 0.004,
+   "shots": 4000,
+   "validos": 2561,
+   "frac_valida": 0.6402,
+   "masa_bolsillo_entre_validos": 0.2772,
+   "n_nodos": 8,
+   "distribucion_por_nodo": [
+    337,
+    769,
+    257,
+    76,
+    205,
+    126,
+    81,
+    710
+   ]
+  },
+  {
+   "job_id": "d9t16tfpemts73cu9fig",
+   "role": "control-negativo",
+   "protein": "KRAS_G12C",
+   "shots_declarados": 4000,
+   "shots_recibidos": 4000,
+   "calzan_los_shots": true,
+   "pocket_nodes": [
+    0,
+    6,
+    7
+   ],
+   "ideal_pocket_mass": 0.2633,
+   "classical_ceiling": 0.375,
+   "techo_es_la_uniforme": true,
+   "supera_el_techo_MEDIDO": false,
+   "supera_el_techo_PREDICHO": false,
+   "la_prediccion_se_cumplio": true,
+   "desvio_vs_ideal": 0.0208,
+   "shots": 4000,
+   "validos": 2105,
+   "frac_valida": 0.5262,
+   "masa_bolsillo_entre_validos": 0.2841,
+   "n_nodos": 8,
+   "distribucion_por_nodo": [
+    282,
+    941,
+    197,
+    70,
+    227,
+    72,
+    245,
+    71
+   ]
+  }
+ ],
+ "comparaciones": {
+  "nulo_vs_control": {
+   "que_compara": "control NEGATIVO (barajado) contra el control POSITIVO, misma proteina y mismos disparos",
+   "masa_control_positivo": 0.5683,
+   "masa_control_negativo": 0.2841,
+   "delta": 0.2842,
+   "lectura": "si el barajado da una masa parecida, el circuito no esta midiendo la estructura de la red sino algo que sobrevive a destruirla"
+  },
+  "repeticion_vs_original": {
+   "que_compara": "el MISMO circuito corrido dos veces en el mismo backend",
+   "masa_primera": 0.5683,
+   "masa_repeticion": 0.5682,
+   "delta_masa": 0.0001,
+   "frac_valida_primera": 0.542,
+   "frac_valida_repeticion": 0.5055,
+   "delta_frac_valida": 0.0365,
+   "lectura": "es la barra de error que no teniamos: cuanto se mueve el numero sin que cambie nada del experimento"
+  },
+  "replica_vs_RQ-POC-QPU-001": {
+   "que_compara": "la replica del circuito de julio contra la corrida original",
+   "frac_valida_replica": 0.5055,
+   "frac_valida_original": 0.614,
+   "delta": -0.1085,
+   "original": {
+    "job_id": "d9mu2bmij12s73ft86t0",
+    "validos": 1228,
+    "shots": 2000,
+    "frac_valida": 0.614,
+    "fuente": "RQ-POC-QPU-001 / resultados/RESUMEN-QPU.md"
+   },
+   "lectura": "la reproducibilidad entre dias en el mismo hardware. Una diferencia grande dice que el 61,4 % de julio era una foto, no una constante"
+  }
+ }
+}
