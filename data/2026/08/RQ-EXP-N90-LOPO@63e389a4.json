@@ -1,0 +1,3723 @@
+{
+ "exp_id": "RQ-EXP-N90-LOPO",
+ "note": "N=90 deja-una-fuera sin fuga: cada proteina se puntua con pesos entrenados en las otras 89. La lista de proteinas es _train90.json, la del pre-registro, y no se toca aqui.",
+ "n_proteins": 90,
+ "proteins": [
+  "KRAS_G12C",
+  "BCR_ABL1",
+  "CARDIAC_MYOSIN",
+  "SHP2_PTPN11",
+  "PTP1B",
+  "IDH1_R132H",
+  "IDH2",
+  "MEK1",
+  "AKT1",
+  "PKM2",
+  "PDK1_PDPK1",
+  "CASP3",
+  "HIV1_RT",
+  "P38A_MAPK",
+  "GCK_GLUCOKINASE",
+  "PYGL_GLYCOGEN_PHOS",
+  "PKLR_PYRUVATE_K",
+  "CASP7_CASPASE7",
+  "SIRT1_STAC",
+  "ME2_MALIC",
+  "DHODH_TUNNEL",
+  "PFKP_FBP",
+  "FBP1_AMPSITE",
+  "GLUD1_GW5074",
+  "HK1_G6P",
+  "G6PD_STRUCT",
+  "PYGM_IMP",
+  "ESR1_ALLO",
+  "SLC6A4_ALLO",
+  "PDE4D_ALLO",
+  "NTRK1_ALLO",
+  "PARP1_ALLO",
+  "FFAR1_ALLO",
+  "RIPK2_ALLO",
+  "PAK1_ALLO",
+  "PANK3_ALLO",
+  "FLT3_ALLO",
+  "PTPRZ1_ALLO",
+  "BRAF_ALLO",
+  "ACACB_ALLO",
+  "SNRNP200_ALLO",
+  "ENPP2_ALLO",
+  "EGFR_ALLO",
+  "ADRB2_ALLO",
+  "PTGS2_ALLO",
+  "WNK1_ALLO",
+  "PARP14_ALLO",
+  "KIF18A_ALLO",
+  "CRHR1_ALLO",
+  "SLC1A3_ALLO",
+  "PRKAG1_ALLO",
+  "KIF11_ALLO",
+  "FDPS_ALLO",
+  "USP7_ALLO",
+  "SAMHD1_ALLO",
+  "LIMK2_ALLO",
+  "NLN_ALLO",
+  "VCP_ALLO",
+  "ADCY10_ALLO",
+  "FKBP1A_ALLO",
+  "GRIA2_ALLO",
+  "RET_ALLO",
+  "TRPV1_ALLO",
+  "ABL2_ALLO",
+  "HRAS_ALLO",
+  "ITK_ALLO",
+  "MAT2A_ALLO",
+  "EIF4E_ALLO",
+  "CHKA_ALLO",
+  "MAPK7_ALLO",
+  "RRM1_ALLO",
+  "MAP2K2_ALLO",
+  "PANK1_ALLO",
+  "GNE_ALLO",
+  "F7_ALLO",
+  "PDE10A_ALLO",
+  "SIRT6_ALLO",
+  "IDH3A_ALLO",
+  "PTPN5_ALLO",
+  "AURKA_ALLO",
+  "PTK2_ALLO",
+  "PRMT3_ALLO",
+  "NT5C2_ALLO",
+  "IGF1R_ALLO",
+  "ALB_ALLO",
+  "PYGB_ALLO",
+  "GMDS_ALLO",
+  "PRKAB2_ALLO",
+  "GRIN2A_ALLO",
+  "PDK2_ALLO"
+ ],
+ "config": {
+  "glifo_feats": [
+   "uni_binding_site",
+   "uni_active_site",
+   "uni_domain",
+   "uni_ptm",
+   "uni_motif",
+   "clinvar_density",
+   "coordination",
+   "degree",
+   "closeness_to_active",
+   "conservation",
+   "gnm_msf",
+   "anm_msf"
+  ],
+  "feat_cols": [
+   "degree",
+   "closeness_to_active",
+   "coordination",
+   "uni_binding_site",
+   "uni_active_site",
+   "uni_domain",
+   "uni_ptm",
+   "uni_motif",
+   "clinvar_density",
+   "conservation",
+   "gnm_msf",
+   "anm_msf",
+   "diffusion",
+   "gnm",
+   "betweenness"
+  ],
+  "arms": [
+   "A",
+   "B",
+   "C"
+  ],
+  "nperm": 2000,
+  "seed": 20260717,
+  "window": [
+   0.5,
+   8.0
+  ]
+ },
+ "fisher_p": {
+  "armA_manager": 0.1036,
+  "armB_ml": 8.33e-09,
+  "armC_stacked": 1.28e-07
+ },
+ "n_sig_p05": {
+  "armA": 2,
+  "armB": 10,
+  "armC": 11
+ },
+ "mean_pct": {
+  "armA": 60.5,
+  "armB": 66.6,
+  "armC": 64.2
+ },
+ "per_protein": [
+  {
+   "name": "KRAS_G12C",
+   "n": 169,
+   "k": 14,
+   "A_pick": "diffusion",
+   "A_pct": 53.4,
+   "A_p": 0.423,
+   "A_n_ge": 847,
+   "A_nperm": 2000,
+   "B_pct": 35.5,
+   "B_p": 0.696,
+   "B_n_ge": 1392,
+   "B_nperm": 2000,
+   "C_pct": 63.3,
+   "C_p": 0.243,
+   "C_n_ge": 486,
+   "C_nperm": 2000
+  },
+  {
+   "name": "BCR_ABL1",
+   "n": 451,
+   "k": 20,
+   "A_pick": "diffusion",
+   "A_pct": 60.6,
+   "A_p": 0.388,
+   "A_n_ge": 775,
+   "A_nperm": 2000,
+   "B_pct": 53.3,
+   "B_p": 0.417,
+   "B_n_ge": 834,
+   "B_nperm": 2000,
+   "C_pct": 59.5,
+   "C_p": 0.384,
+   "C_n_ge": 767,
+   "C_nperm": 2000
+  },
+  {
+   "name": "CARDIAC_MYOSIN",
+   "n": 954,
+   "k": 15,
+   "A_pick": "diffusion",
+   "A_pct": 58.3,
+   "A_p": 0.434,
+   "A_n_ge": 868,
+   "A_nperm": 2000,
+   "B_pct": 60.4,
+   "B_p": 0.42,
+   "B_n_ge": 840,
+   "B_nperm": 2000,
+   "C_pct": 56.9,
+   "C_p": 0.373,
+   "C_n_ge": 747,
+   "C_nperm": 2000
+  },
+  {
+   "name": "SHP2_PTPN11",
+   "n": 491,
+   "k": 17,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 41.7,
+   "A_p": 0.652,
+   "A_n_ge": 1304,
+   "A_nperm": 2000,
+   "B_pct": 70.8,
+   "B_p": 0.263,
+   "B_n_ge": 525,
+   "B_nperm": 2000,
+   "C_pct": 86.0,
+   "C_p": 0.039,
+   "C_n_ge": 78,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PTP1B",
+   "n": 278,
+   "k": 14,
+   "A_pick": "diffusion",
+   "A_pct": 28.5,
+   "A_p": 0.769,
+   "A_n_ge": 1539,
+   "A_nperm": 2000,
+   "B_pct": 37.1,
+   "B_p": 0.73,
+   "B_n_ge": 1459,
+   "B_nperm": 2000,
+   "C_pct": 37.7,
+   "C_p": 0.774,
+   "C_n_ge": 1549,
+   "C_nperm": 2000
+  },
+  {
+   "name": "IDH1_R132H",
+   "n": 407,
+   "k": 25,
+   "A_pick": "diffusion",
+   "A_pct": 61.3,
+   "A_p": 0.382,
+   "A_n_ge": 764,
+   "A_nperm": 2000,
+   "B_pct": 57.6,
+   "B_p": 0.442,
+   "B_n_ge": 884,
+   "B_nperm": 2000,
+   "C_pct": 77.7,
+   "C_p": 0.092,
+   "C_n_ge": 184,
+   "C_nperm": 2000
+  },
+  {
+   "name": "IDH2",
+   "n": 413,
+   "k": 14,
+   "A_pick": "diffusion",
+   "A_pct": 55.9,
+   "A_p": 0.478,
+   "A_n_ge": 956,
+   "A_nperm": 2000,
+   "B_pct": 60.7,
+   "B_p": 0.38,
+   "B_n_ge": 760,
+   "B_nperm": 2000,
+   "C_pct": 70.0,
+   "C_p": 0.232,
+   "C_n_ge": 463,
+   "C_nperm": 2000
+  },
+  {
+   "name": "MEK1",
+   "n": 312,
+   "k": 17,
+   "A_pick": "gnm",
+   "A_pct": 54.3,
+   "A_p": 0.398,
+   "A_n_ge": 795,
+   "A_nperm": 2000,
+   "B_pct": 76.7,
+   "B_p": 0.108,
+   "B_n_ge": 216,
+   "B_nperm": 2000,
+   "C_pct": 74.8,
+   "C_p": 0.117,
+   "C_n_ge": 233,
+   "C_nperm": 2000
+  },
+  {
+   "name": "AKT1",
+   "n": 319,
+   "k": 13,
+   "A_pick": "diffusion",
+   "A_pct": 91.8,
+   "A_p": 0.013,
+   "A_n_ge": 26,
+   "A_nperm": 2000,
+   "B_pct": 86.0,
+   "B_p": 0.025,
+   "B_n_ge": 51,
+   "B_nperm": 2000,
+   "C_pct": 79.5,
+   "C_p": 0.108,
+   "C_n_ge": 217,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PKM2",
+   "n": 512,
+   "k": 13,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 64.0,
+   "A_p": 0.334,
+   "A_n_ge": 668,
+   "A_nperm": 2000,
+   "B_pct": 76.1,
+   "B_p": 0.123,
+   "B_n_ge": 246,
+   "B_nperm": 2000,
+   "C_pct": 43.9,
+   "C_p": 0.615,
+   "C_n_ge": 1230,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PDK1_PDPK1",
+   "n": 285,
+   "k": 11,
+   "A_pick": "diffusion",
+   "A_pct": 32.9,
+   "A_p": 0.71,
+   "A_n_ge": 1420,
+   "A_nperm": 2000,
+   "B_pct": 33.6,
+   "B_p": 0.746,
+   "B_n_ge": 1492,
+   "B_nperm": 2000,
+   "C_pct": 45.1,
+   "C_p": 0.627,
+   "C_n_ge": 1255,
+   "C_nperm": 2000
+  },
+  {
+   "name": "CASP3",
+   "n": 245,
+   "k": 11,
+   "A_pick": "ctqw_glifo_fixed",
+   "A_pct": 55.7,
+   "A_p": 0.417,
+   "A_n_ge": 834,
+   "A_nperm": 2000,
+   "B_pct": 61.0,
+   "B_p": 0.402,
+   "B_n_ge": 804,
+   "B_nperm": 2000,
+   "C_pct": 56.5,
+   "C_p": 0.384,
+   "C_n_ge": 768,
+   "C_nperm": 2000
+  },
+  {
+   "name": "HIV1_RT",
+   "n": 556,
+   "k": 16,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 85.2,
+   "A_p": 0.163,
+   "A_n_ge": 326,
+   "A_nperm": 2000,
+   "B_pct": 85.7,
+   "B_p": 0.081,
+   "B_n_ge": 161,
+   "B_nperm": 2000,
+   "C_pct": 57.8,
+   "C_p": 0.425,
+   "C_n_ge": 850,
+   "C_nperm": 2000
+  },
+  {
+   "name": "P38A_MAPK",
+   "n": 351,
+   "k": 22,
+   "A_pick": "diffusion",
+   "A_pct": 62.8,
+   "A_p": 0.428,
+   "A_n_ge": 857,
+   "A_nperm": 2000,
+   "B_pct": 75.5,
+   "B_p": 0.127,
+   "B_n_ge": 253,
+   "B_nperm": 2000,
+   "C_pct": 81.4,
+   "C_p": 0.042,
+   "C_n_ge": 84,
+   "C_nperm": 2000
+  },
+  {
+   "name": "GCK_GLUCOKINASE",
+   "n": 447,
+   "k": 23,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 61.2,
+   "A_p": 0.422,
+   "A_n_ge": 844,
+   "A_nperm": 2000,
+   "B_pct": 43.7,
+   "B_p": 0.637,
+   "B_n_ge": 1275,
+   "B_nperm": 2000,
+   "C_pct": 52.5,
+   "C_p": 0.544,
+   "C_n_ge": 1088,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PYGL_GLYCOGEN_PHOS",
+   "n": 787,
+   "k": 13,
+   "A_pick": "gnm",
+   "A_pct": 49.4,
+   "A_p": 0.516,
+   "A_n_ge": 1033,
+   "A_nperm": 2000,
+   "B_pct": 66.6,
+   "B_p": 0.222,
+   "B_n_ge": 443,
+   "B_nperm": 2000,
+   "C_pct": 52.2,
+   "C_p": 0.495,
+   "C_n_ge": 991,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PKLR_PYRUVATE_K",
+   "n": 522,
+   "k": 19,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 65.5,
+   "A_p": 0.353,
+   "A_n_ge": 707,
+   "A_nperm": 2000,
+   "B_pct": 78.8,
+   "B_p": 0.086,
+   "B_n_ge": 171,
+   "B_nperm": 2000,
+   "C_pct": 42.1,
+   "C_p": 0.659,
+   "C_n_ge": 1318,
+   "C_nperm": 2000
+  },
+  {
+   "name": "CASP7_CASPASE7",
+   "n": 208,
+   "k": 14,
+   "A_pick": "diffusion",
+   "A_pct": 66.2,
+   "A_p": 0.356,
+   "A_n_ge": 712,
+   "A_nperm": 2000,
+   "B_pct": 72.8,
+   "B_p": 0.188,
+   "B_n_ge": 376,
+   "B_nperm": 2000,
+   "C_pct": 61.2,
+   "C_p": 0.331,
+   "C_n_ge": 661,
+   "C_nperm": 2000
+  },
+  {
+   "name": "SIRT1_STAC",
+   "n": 335,
+   "k": 12,
+   "A_pick": "gnm",
+   "A_pct": 90.2,
+   "A_p": 0.082,
+   "A_n_ge": 164,
+   "A_nperm": 2000,
+   "B_pct": 9.5,
+   "B_p": 0.938,
+   "B_n_ge": 1876,
+   "B_nperm": 2000,
+   "C_pct": 8.2,
+   "C_p": 0.951,
+   "C_n_ge": 1901,
+   "C_nperm": 2000
+  },
+  {
+   "name": "ME2_MALIC",
+   "n": 552,
+   "k": 9,
+   "A_pick": "diffusion",
+   "A_pct": 33.3,
+   "A_p": 0.715,
+   "A_n_ge": 1429,
+   "A_nperm": 2000,
+   "B_pct": 62.4,
+   "B_p": 0.255,
+   "B_n_ge": 509,
+   "B_nperm": 2000,
+   "C_pct": 40.7,
+   "C_p": 0.645,
+   "C_n_ge": 1291,
+   "C_nperm": 2000
+  },
+  {
+   "name": "DHODH_TUNNEL",
+   "n": 361,
+   "k": 18,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 37.3,
+   "A_p": 0.77,
+   "A_n_ge": 1540,
+   "A_nperm": 2000,
+   "B_pct": 70.6,
+   "B_p": 0.193,
+   "B_n_ge": 386,
+   "B_nperm": 2000,
+   "C_pct": 55.5,
+   "C_p": 0.432,
+   "C_n_ge": 864,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PFKP_FBP",
+   "n": 728,
+   "k": 16,
+   "A_pick": "gnm",
+   "A_pct": 48.6,
+   "A_p": 0.514,
+   "A_n_ge": 1029,
+   "A_nperm": 2000,
+   "B_pct": 85.7,
+   "B_p": 0.023,
+   "B_n_ge": 46,
+   "B_nperm": 2000,
+   "C_pct": 50.7,
+   "C_p": 0.526,
+   "C_n_ge": 1053,
+   "C_nperm": 2000
+  },
+  {
+   "name": "FBP1_AMPSITE",
+   "n": 328,
+   "k": 7,
+   "A_pick": "gnm",
+   "A_pct": 74.3,
+   "A_p": 0.202,
+   "A_n_ge": 404,
+   "A_nperm": 2000,
+   "B_pct": 16.3,
+   "B_p": 0.94,
+   "B_n_ge": 1879,
+   "B_nperm": 2000,
+   "C_pct": 16.5,
+   "C_p": 0.94,
+   "C_n_ge": 1879,
+   "C_nperm": 2000
+  },
+  {
+   "name": "GLUD1_GW5074",
+   "n": 502,
+   "k": 9,
+   "A_pick": "diffusion",
+   "A_pct": 37.1,
+   "A_p": 0.637,
+   "A_n_ge": 1274,
+   "A_nperm": 2000,
+   "B_pct": 36.2,
+   "B_p": 0.735,
+   "B_n_ge": 1469,
+   "B_nperm": 2000,
+   "C_pct": 32.5,
+   "C_p": 0.749,
+   "C_n_ge": 1498,
+   "C_nperm": 2000
+  },
+  {
+   "name": "HK1_G6P",
+   "n": 903,
+   "k": 15,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 43.6,
+   "A_p": 0.517,
+   "A_n_ge": 1034,
+   "A_nperm": 2000,
+   "B_pct": 75.9,
+   "B_p": 0.161,
+   "B_n_ge": 322,
+   "B_nperm": 2000,
+   "C_pct": 64.2,
+   "C_p": 0.334,
+   "C_n_ge": 667,
+   "C_nperm": 2000
+  },
+  {
+   "name": "G6PD_STRUCT",
+   "n": 489,
+   "k": 18,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 22.6,
+   "A_p": 0.826,
+   "A_n_ge": 1651,
+   "A_nperm": 2000,
+   "B_pct": 68.2,
+   "B_p": 0.262,
+   "B_n_ge": 524,
+   "B_nperm": 2000,
+   "C_pct": 60.0,
+   "C_p": 0.367,
+   "C_n_ge": 734,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PYGM_IMP",
+   "n": 823,
+   "k": 16,
+   "A_pick": "gnm",
+   "A_pct": 41.6,
+   "A_p": 0.61,
+   "A_n_ge": 1219,
+   "A_nperm": 2000,
+   "B_pct": 64.4,
+   "B_p": 0.252,
+   "B_n_ge": 503,
+   "B_nperm": 2000,
+   "C_pct": 40.1,
+   "C_p": 0.654,
+   "C_n_ge": 1309,
+   "C_nperm": 2000
+  },
+  {
+   "name": "ESR1_ALLO",
+   "n": 225,
+   "k": 19,
+   "A_pick": "diffusion",
+   "A_pct": 77.4,
+   "A_p": 0.139,
+   "A_n_ge": 277,
+   "A_nperm": 2000,
+   "B_pct": 69.3,
+   "B_p": 0.207,
+   "B_n_ge": 414,
+   "B_nperm": 2000,
+   "C_pct": 71.0,
+   "C_p": 0.149,
+   "C_n_ge": 298,
+   "C_nperm": 2000
+  },
+  {
+   "name": "SLC6A4_ALLO",
+   "n": 540,
+   "k": 14,
+   "A_pick": "gnm",
+   "A_pct": 49.5,
+   "A_p": 0.51,
+   "A_n_ge": 1020,
+   "A_nperm": 2000,
+   "B_pct": 91.1,
+   "B_p": 0.0005,
+   "B_n_ge": 0,
+   "B_nperm": 2000,
+   "C_pct": 92.9,
+   "C_p": 0.0005,
+   "C_n_ge": 0,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PDE4D_ALLO",
+   "n": 335,
+   "k": 14,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 49.5,
+   "A_p": 0.534,
+   "A_n_ge": 1069,
+   "A_nperm": 2000,
+   "B_pct": 62.1,
+   "B_p": 0.352,
+   "B_n_ge": 704,
+   "B_nperm": 2000,
+   "C_pct": 82.7,
+   "C_p": 0.021,
+   "C_n_ge": 43,
+   "C_nperm": 2000
+  },
+  {
+   "name": "NTRK1_ALLO",
+   "n": 302,
+   "k": 19,
+   "A_pick": "diffusion",
+   "A_pct": 77.0,
+   "A_p": 0.212,
+   "A_n_ge": 424,
+   "A_nperm": 2000,
+   "B_pct": 82.6,
+   "B_p": 0.063,
+   "B_n_ge": 126,
+   "B_nperm": 2000,
+   "C_pct": 86.0,
+   "C_p": 0.02,
+   "C_n_ge": 40,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PARP1_ALLO",
+   "n": 238,
+   "k": 7,
+   "A_pick": "diffusion",
+   "A_pct": 61.2,
+   "A_p": 0.357,
+   "A_n_ge": 714,
+   "A_nperm": 2000,
+   "B_pct": 57.9,
+   "B_p": 0.392,
+   "B_n_ge": 783,
+   "B_nperm": 2000,
+   "C_pct": 56.4,
+   "C_p": 0.357,
+   "C_n_ge": 714,
+   "C_nperm": 2000
+  },
+  {
+   "name": "FFAR1_ALLO",
+   "n": 411,
+   "k": 25,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 42.2,
+   "A_p": 0.485,
+   "A_n_ge": 971,
+   "A_nperm": 2000,
+   "B_pct": 49.3,
+   "B_p": 0.377,
+   "B_n_ge": 753,
+   "B_nperm": 2000,
+   "C_pct": 64.6,
+   "C_p": 0.297,
+   "C_n_ge": 594,
+   "C_nperm": 2000
+  },
+  {
+   "name": "RIPK2_ALLO",
+   "n": 279,
+   "k": 17,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 79.2,
+   "A_p": 0.196,
+   "A_n_ge": 391,
+   "A_nperm": 2000,
+   "B_pct": 84.7,
+   "B_p": 0.068,
+   "B_n_ge": 135,
+   "B_nperm": 2000,
+   "C_pct": 81.1,
+   "C_p": 0.065,
+   "C_n_ge": 129,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PAK1_ALLO",
+   "n": 280,
+   "k": 20,
+   "A_pick": "diffusion",
+   "A_pct": 73.5,
+   "A_p": 0.188,
+   "A_n_ge": 376,
+   "A_nperm": 2000,
+   "B_pct": 83.3,
+   "B_p": 0.022,
+   "B_n_ge": 45,
+   "B_nperm": 2000,
+   "C_pct": 73.8,
+   "C_p": 0.113,
+   "C_n_ge": 225,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PANK3_ALLO",
+   "n": 312,
+   "k": 12,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 49.0,
+   "A_p": 0.485,
+   "A_n_ge": 971,
+   "A_nperm": 2000,
+   "B_pct": 62.7,
+   "B_p": 0.297,
+   "B_n_ge": 594,
+   "B_nperm": 2000,
+   "C_pct": 44.8,
+   "C_p": 0.615,
+   "C_n_ge": 1230,
+   "C_nperm": 2000
+  },
+  {
+   "name": "FLT3_ALLO",
+   "n": 274,
+   "k": 18,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 76.4,
+   "A_p": 0.194,
+   "A_n_ge": 388,
+   "A_nperm": 2000,
+   "B_pct": 82.7,
+   "B_p": 0.088,
+   "B_n_ge": 177,
+   "B_nperm": 2000,
+   "C_pct": 84.6,
+   "C_p": 0.018,
+   "C_n_ge": 36,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PTPRZ1_ALLO",
+   "n": 282,
+   "k": 13,
+   "A_pick": "ctqw_glifo_fixed",
+   "A_pct": 66.7,
+   "A_p": 0.273,
+   "A_n_ge": 545,
+   "A_nperm": 2000,
+   "B_pct": 78.8,
+   "B_p": 0.126,
+   "B_n_ge": 251,
+   "B_nperm": 2000,
+   "C_pct": 76.3,
+   "C_p": 0.089,
+   "C_n_ge": 179,
+   "C_nperm": 2000
+  },
+  {
+   "name": "BRAF_ALLO",
+   "n": 266,
+   "k": 16,
+   "A_pick": "diffusion",
+   "A_pct": 82.8,
+   "A_p": 0.113,
+   "A_n_ge": 226,
+   "A_nperm": 2000,
+   "B_pct": 82.9,
+   "B_p": 0.117,
+   "B_n_ge": 233,
+   "B_nperm": 2000,
+   "C_pct": 83.3,
+   "C_p": 0.04,
+   "C_n_ge": 79,
+   "C_nperm": 2000
+  },
+  {
+   "name": "ACACB_ALLO",
+   "n": 482,
+   "k": 18,
+   "A_pick": "diffusion",
+   "A_pct": 38.8,
+   "A_p": 0.626,
+   "A_n_ge": 1253,
+   "A_nperm": 2000,
+   "B_pct": 46.5,
+   "B_p": 0.506,
+   "B_n_ge": 1013,
+   "B_nperm": 2000,
+   "C_pct": 65.2,
+   "C_p": 0.322,
+   "C_n_ge": 644,
+   "C_nperm": 2000
+  },
+  {
+   "name": "SNRNP200_ALLO",
+   "n": 1707,
+   "k": 20,
+   "A_pick": "diffusion",
+   "A_pct": 71.3,
+   "A_p": 0.28,
+   "A_n_ge": 560,
+   "A_nperm": 2000,
+   "B_pct": 85.4,
+   "B_p": 0.023,
+   "B_n_ge": 46,
+   "B_nperm": 2000,
+   "C_pct": 77.3,
+   "C_p": 0.133,
+   "C_n_ge": 265,
+   "C_nperm": 2000
+  },
+  {
+   "name": "ENPP2_ALLO",
+   "n": 774,
+   "k": 22,
+   "A_pick": "gnm",
+   "A_pct": 42.0,
+   "A_p": 0.563,
+   "A_n_ge": 1126,
+   "A_nperm": 2000,
+   "B_pct": 78.8,
+   "B_p": 0.081,
+   "B_n_ge": 162,
+   "B_nperm": 2000,
+   "C_pct": 68.2,
+   "C_p": 0.27,
+   "C_n_ge": 539,
+   "C_nperm": 2000
+  },
+  {
+   "name": "EGFR_ALLO",
+   "n": 300,
+   "k": 9,
+   "A_pick": "diffusion",
+   "A_pct": 84.2,
+   "A_p": 0.138,
+   "A_n_ge": 276,
+   "A_nperm": 2000,
+   "B_pct": 91.0,
+   "B_p": 0.006,
+   "B_n_ge": 13,
+   "B_nperm": 2000,
+   "C_pct": 71.7,
+   "C_p": 0.226,
+   "C_n_ge": 452,
+   "C_nperm": 2000
+  },
+  {
+   "name": "ADRB2_ALLO",
+   "n": 440,
+   "k": 21,
+   "A_pick": "diffusion",
+   "A_pct": 56.1,
+   "A_p": 0.472,
+   "A_n_ge": 945,
+   "A_nperm": 2000,
+   "B_pct": 63.5,
+   "B_p": 0.386,
+   "B_n_ge": 771,
+   "B_nperm": 2000,
+   "C_pct": 69.0,
+   "C_p": 0.265,
+   "C_n_ge": 530,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PTGS2_ALLO",
+   "n": 552,
+   "k": 11,
+   "A_pick": "gnm",
+   "A_pct": 45.1,
+   "A_p": 0.523,
+   "A_n_ge": 1046,
+   "A_nperm": 2000,
+   "B_pct": 83.2,
+   "B_p": 0.062,
+   "B_n_ge": 125,
+   "B_nperm": 2000,
+   "C_pct": 77.5,
+   "C_p": 0.146,
+   "C_n_ge": 292,
+   "C_nperm": 2000
+  },
+  {
+   "name": "WNK1_ALLO",
+   "n": 260,
+   "k": 10,
+   "A_pick": "diffusion",
+   "A_pct": 82.6,
+   "A_p": 0.117,
+   "A_n_ge": 233,
+   "A_nperm": 2000,
+   "B_pct": 76.8,
+   "B_p": 0.172,
+   "B_n_ge": 345,
+   "B_nperm": 2000,
+   "C_pct": 74.6,
+   "C_p": 0.21,
+   "C_n_ge": 420,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PARP14_ALLO",
+   "n": 189,
+   "k": 11,
+   "A_pick": "gnm",
+   "A_pct": 37.6,
+   "A_p": 0.695,
+   "A_n_ge": 1390,
+   "A_nperm": 2000,
+   "B_pct": 73.7,
+   "B_p": 0.154,
+   "B_n_ge": 308,
+   "B_nperm": 2000,
+   "C_pct": 89.3,
+   "C_p": 0.006,
+   "C_n_ge": 12,
+   "C_nperm": 2000
+  },
+  {
+   "name": "KIF18A_ALLO",
+   "n": 328,
+   "k": 14,
+   "A_pick": "diffusion",
+   "A_pct": 69.8,
+   "A_p": 0.313,
+   "A_n_ge": 626,
+   "A_nperm": 2000,
+   "B_pct": 68.9,
+   "B_p": 0.273,
+   "B_n_ge": 545,
+   "B_nperm": 2000,
+   "C_pct": 80.1,
+   "C_p": 0.071,
+   "C_n_ge": 142,
+   "C_nperm": 2000
+  },
+  {
+   "name": "CRHR1_ALLO",
+   "n": 407,
+   "k": 17,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 40.2,
+   "A_p": 0.553,
+   "A_n_ge": 1106,
+   "A_nperm": 2000,
+   "B_pct": 61.8,
+   "B_p": 0.365,
+   "B_n_ge": 730,
+   "B_nperm": 2000,
+   "C_pct": 73.7,
+   "C_p": 0.135,
+   "C_n_ge": 270,
+   "C_nperm": 2000
+  },
+  {
+   "name": "SLC1A3_ALLO",
+   "n": 390,
+   "k": 12,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 69.4,
+   "A_p": 0.296,
+   "A_n_ge": 592,
+   "A_nperm": 2000,
+   "B_pct": 55.0,
+   "B_p": 0.393,
+   "B_n_ge": 785,
+   "B_nperm": 2000,
+   "C_pct": 68.6,
+   "C_p": 0.22,
+   "C_n_ge": 440,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PRKAG1_ALLO",
+   "n": 301,
+   "k": 7,
+   "A_pick": "diffusion",
+   "A_pct": 79.9,
+   "A_p": 0.133,
+   "A_n_ge": 265,
+   "A_nperm": 2000,
+   "B_pct": 76.6,
+   "B_p": 0.108,
+   "B_n_ge": 217,
+   "B_nperm": 2000,
+   "C_pct": 81.0,
+   "C_p": 0.055,
+   "C_n_ge": 110,
+   "C_nperm": 2000
+  },
+  {
+   "name": "KIF11_ALLO",
+   "n": 309,
+   "k": 11,
+   "A_pick": "ctqw_glifo_fixed",
+   "A_pct": 40.0,
+   "A_p": 0.707,
+   "A_n_ge": 1414,
+   "A_nperm": 2000,
+   "B_pct": 81.2,
+   "B_p": 0.106,
+   "B_n_ge": 213,
+   "B_nperm": 2000,
+   "C_pct": 75.3,
+   "C_p": 0.125,
+   "C_n_ge": 250,
+   "C_nperm": 2000
+  },
+  {
+   "name": "FDPS_ALLO",
+   "n": 330,
+   "k": 12,
+   "A_pick": "ctqw_bare",
+   "A_pct": 51.5,
+   "A_p": 0.519,
+   "A_n_ge": 1039,
+   "A_nperm": 2000,
+   "B_pct": 79.8,
+   "B_p": 0.112,
+   "B_n_ge": 223,
+   "B_nperm": 2000,
+   "C_pct": 64.2,
+   "C_p": 0.266,
+   "C_n_ge": 532,
+   "C_nperm": 2000
+  },
+  {
+   "name": "USP7_ALLO",
+   "n": 357,
+   "k": 16,
+   "A_pick": "diffusion",
+   "A_pct": 77.1,
+   "A_p": 0.203,
+   "A_n_ge": 406,
+   "A_nperm": 2000,
+   "B_pct": 74.7,
+   "B_p": 0.195,
+   "B_n_ge": 390,
+   "B_nperm": 2000,
+   "C_pct": 72.7,
+   "C_p": 0.139,
+   "C_n_ge": 278,
+   "C_nperm": 2000
+  },
+  {
+   "name": "SAMHD1_ALLO",
+   "n": 480,
+   "k": 18,
+   "A_pick": "diffusion",
+   "A_pct": 73.1,
+   "A_p": 0.214,
+   "A_n_ge": 428,
+   "A_nperm": 2000,
+   "B_pct": 89.0,
+   "B_p": 0.022,
+   "B_n_ge": 44,
+   "B_nperm": 2000,
+   "C_pct": 64.5,
+   "C_p": 0.282,
+   "C_n_ge": 565,
+   "C_nperm": 2000
+  },
+  {
+   "name": "LIMK2_ALLO",
+   "n": 279,
+   "k": 16,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 79.1,
+   "A_p": 0.095,
+   "A_n_ge": 189,
+   "A_nperm": 2000,
+   "B_pct": 82.9,
+   "B_p": 0.108,
+   "B_n_ge": 217,
+   "B_nperm": 2000,
+   "C_pct": 78.2,
+   "C_p": 0.093,
+   "C_n_ge": 186,
+   "C_nperm": 2000
+  },
+  {
+   "name": "NLN_ALLO",
+   "n": 664,
+   "k": 21,
+   "A_pick": "diffusion",
+   "A_pct": 36.7,
+   "A_p": 0.656,
+   "A_n_ge": 1312,
+   "A_nperm": 2000,
+   "B_pct": 56.0,
+   "B_p": 0.424,
+   "B_n_ge": 849,
+   "B_nperm": 2000,
+   "C_pct": 79.0,
+   "C_p": 0.045,
+   "C_n_ge": 90,
+   "C_nperm": 2000
+  },
+  {
+   "name": "VCP_ALLO",
+   "n": 723,
+   "k": 17,
+   "A_pick": "diffusion",
+   "A_pct": 56.1,
+   "A_p": 0.454,
+   "A_n_ge": 908,
+   "A_nperm": 2000,
+   "B_pct": 53.1,
+   "B_p": 0.429,
+   "B_n_ge": 859,
+   "B_nperm": 2000,
+   "C_pct": 45.3,
+   "C_p": 0.655,
+   "C_n_ge": 1310,
+   "C_nperm": 2000
+  },
+  {
+   "name": "ADCY10_ALLO",
+   "n": 468,
+   "k": 5,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 80.6,
+   "A_p": 0.162,
+   "A_n_ge": 323,
+   "A_nperm": 2000,
+   "B_pct": 95.1,
+   "B_p": 0.011,
+   "B_n_ge": 22,
+   "B_nperm": 2000,
+   "C_pct": 96.2,
+   "C_p": 0.01,
+   "C_n_ge": 20,
+   "C_nperm": 2000
+  },
+  {
+   "name": "FKBP1A_ALLO",
+   "n": 107,
+   "k": 5,
+   "A_pick": "diffusion",
+   "A_pct": 71.2,
+   "A_p": 0.339,
+   "A_n_ge": 678,
+   "A_nperm": 2000,
+   "B_pct": 64.2,
+   "B_p": 0.272,
+   "B_n_ge": 543,
+   "B_nperm": 2000,
+   "C_pct": 61.5,
+   "C_p": 0.377,
+   "C_n_ge": 754,
+   "C_nperm": 2000
+  },
+  {
+   "name": "GRIA2_ALLO",
+   "n": 261,
+   "k": 11,
+   "A_pick": "gnm",
+   "A_pct": 53.5,
+   "A_p": 0.456,
+   "A_n_ge": 912,
+   "A_nperm": 2000,
+   "B_pct": 75.5,
+   "B_p": 0.133,
+   "B_n_ge": 265,
+   "B_nperm": 2000,
+   "C_pct": 77.8,
+   "C_p": 0.154,
+   "C_n_ge": 308,
+   "C_nperm": 2000
+  },
+  {
+   "name": "RET_ALLO",
+   "n": 280,
+   "k": 7,
+   "A_pick": "diffusion",
+   "A_pct": 83.5,
+   "A_p": 0.139,
+   "A_n_ge": 278,
+   "A_nperm": 2000,
+   "B_pct": 84.2,
+   "B_p": 0.1,
+   "B_n_ge": 200,
+   "B_nperm": 2000,
+   "C_pct": 87.5,
+   "C_p": 0.053,
+   "C_n_ge": 106,
+   "C_nperm": 2000
+  },
+  {
+   "name": "TRPV1_ALLO",
+   "n": 394,
+   "k": 17,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 65.4,
+   "A_p": 0.312,
+   "A_n_ge": 625,
+   "A_nperm": 2000,
+   "B_pct": 72.9,
+   "B_p": 0.255,
+   "B_n_ge": 510,
+   "B_nperm": 2000,
+   "C_pct": 79.6,
+   "C_p": 0.099,
+   "C_n_ge": 197,
+   "C_nperm": 2000
+  },
+  {
+   "name": "ABL2_ALLO",
+   "n": 271,
+   "k": 24,
+   "A_pick": "diffusion",
+   "A_pct": 46.5,
+   "A_p": 0.562,
+   "A_n_ge": 1125,
+   "A_nperm": 2000,
+   "B_pct": 58.1,
+   "B_p": 0.406,
+   "B_n_ge": 813,
+   "B_nperm": 2000,
+   "C_pct": 54.0,
+   "C_p": 0.437,
+   "C_n_ge": 874,
+   "C_nperm": 2000
+  },
+  {
+   "name": "HRAS_ALLO",
+   "n": 166,
+   "k": 9,
+   "A_pick": "gnm",
+   "A_pct": 59.0,
+   "A_p": 0.318,
+   "A_n_ge": 636,
+   "A_nperm": 2000,
+   "B_pct": 64.6,
+   "B_p": 0.324,
+   "B_n_ge": 647,
+   "B_nperm": 2000,
+   "C_pct": 55.4,
+   "C_p": 0.384,
+   "C_n_ge": 768,
+   "C_nperm": 2000
+  },
+  {
+   "name": "ITK_ALLO",
+   "n": 264,
+   "k": 25,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 73.7,
+   "A_p": 0.18,
+   "A_n_ge": 360,
+   "A_nperm": 2000,
+   "B_pct": 80.2,
+   "B_p": 0.197,
+   "B_n_ge": 394,
+   "B_nperm": 2000,
+   "C_pct": 68.9,
+   "C_p": 0.198,
+   "C_n_ge": 396,
+   "C_nperm": 2000
+  },
+  {
+   "name": "MAT2A_ALLO",
+   "n": 368,
+   "k": 17,
+   "A_pick": "gnm",
+   "A_pct": 44.9,
+   "A_p": 0.578,
+   "A_n_ge": 1156,
+   "A_nperm": 2000,
+   "B_pct": 53.5,
+   "B_p": 0.496,
+   "B_n_ge": 992,
+   "B_nperm": 2000,
+   "C_pct": 43.5,
+   "C_p": 0.711,
+   "C_n_ge": 1422,
+   "C_nperm": 2000
+  },
+  {
+   "name": "EIF4E_ALLO",
+   "n": 185,
+   "k": 11,
+   "A_pick": "diffusion",
+   "A_pct": 57.9,
+   "A_p": 0.441,
+   "A_n_ge": 881,
+   "A_nperm": 2000,
+   "B_pct": 54.9,
+   "B_p": 0.448,
+   "B_n_ge": 895,
+   "B_nperm": 2000,
+   "C_pct": 43.1,
+   "C_p": 0.682,
+   "C_n_ge": 1364,
+   "C_nperm": 2000
+  },
+  {
+   "name": "CHKA_ALLO",
+   "n": 354,
+   "k": 7,
+   "A_pick": "diffusion",
+   "A_pct": 51.1,
+   "A_p": 0.497,
+   "A_n_ge": 994,
+   "A_nperm": 2000,
+   "B_pct": 65.1,
+   "B_p": 0.277,
+   "B_n_ge": 554,
+   "B_nperm": 2000,
+   "C_pct": 75.3,
+   "C_p": 0.144,
+   "C_n_ge": 289,
+   "C_nperm": 2000
+  },
+  {
+   "name": "MAPK7_ALLO",
+   "n": 347,
+   "k": 9,
+   "A_pick": "diffusion",
+   "A_pct": 77.4,
+   "A_p": 0.198,
+   "A_n_ge": 396,
+   "A_nperm": 2000,
+   "B_pct": 80.6,
+   "B_p": 0.151,
+   "B_n_ge": 302,
+   "B_nperm": 2000,
+   "C_pct": 82.7,
+   "C_p": 0.089,
+   "C_n_ge": 179,
+   "C_nperm": 2000
+  },
+  {
+   "name": "RRM1_ALLO",
+   "n": 729,
+   "k": 20,
+   "A_pick": "gnm",
+   "A_pct": 85.0,
+   "A_p": 0.088,
+   "A_n_ge": 177,
+   "A_nperm": 2000,
+   "B_pct": 43.9,
+   "B_p": 0.622,
+   "B_n_ge": 1243,
+   "B_nperm": 2000,
+   "C_pct": 28.0,
+   "C_p": 0.896,
+   "C_n_ge": 1792,
+   "C_nperm": 2000
+  },
+  {
+   "name": "MAP2K2_ALLO",
+   "n": 303,
+   "k": 13,
+   "A_pick": "diffusion",
+   "A_pct": 82.5,
+   "A_p": 0.187,
+   "A_n_ge": 374,
+   "A_nperm": 2000,
+   "B_pct": 90.0,
+   "B_p": 0.033,
+   "B_n_ge": 65,
+   "B_nperm": 2000,
+   "C_pct": 82.3,
+   "C_p": 0.05,
+   "C_n_ge": 100,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PANK1_ALLO",
+   "n": 325,
+   "k": 16,
+   "A_pick": "diffusion",
+   "A_pct": 36.9,
+   "A_p": 0.648,
+   "A_n_ge": 1296,
+   "A_nperm": 2000,
+   "B_pct": 36.4,
+   "B_p": 0.696,
+   "B_n_ge": 1391,
+   "B_nperm": 2000,
+   "C_pct": 57.2,
+   "C_p": 0.45,
+   "C_n_ge": 900,
+   "C_nperm": 2000
+  },
+  {
+   "name": "GNE_ALLO",
+   "n": 384,
+   "k": 10,
+   "A_pick": "diffusion",
+   "A_pct": 78.2,
+   "A_p": 0.174,
+   "A_n_ge": 349,
+   "A_nperm": 2000,
+   "B_pct": 87.0,
+   "B_p": 0.009,
+   "B_n_ge": 18,
+   "B_nperm": 2000,
+   "C_pct": 72.0,
+   "C_p": 0.174,
+   "C_n_ge": 349,
+   "C_nperm": 2000
+  },
+  {
+   "name": "F7_ALLO",
+   "n": 254,
+   "k": 24,
+   "A_pick": "diffusion",
+   "A_pct": 66.4,
+   "A_p": 0.291,
+   "A_n_ge": 583,
+   "A_nperm": 2000,
+   "B_pct": 59.2,
+   "B_p": 0.362,
+   "B_n_ge": 724,
+   "B_nperm": 2000,
+   "C_pct": 52.4,
+   "C_p": 0.583,
+   "C_n_ge": 1165,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PDE10A_ALLO",
+   "n": 177,
+   "k": 9,
+   "A_pick": "diffusion",
+   "A_pct": 82.4,
+   "A_p": 0.097,
+   "A_n_ge": 193,
+   "A_nperm": 2000,
+   "B_pct": 72.9,
+   "B_p": 0.182,
+   "B_n_ge": 364,
+   "B_nperm": 2000,
+   "C_pct": 72.7,
+   "C_p": 0.185,
+   "C_n_ge": 370,
+   "C_nperm": 2000
+  },
+  {
+   "name": "SIRT6_ALLO",
+   "n": 297,
+   "k": 10,
+   "A_pick": "diffusion",
+   "A_pct": 62.3,
+   "A_p": 0.337,
+   "A_n_ge": 673,
+   "A_nperm": 2000,
+   "B_pct": 78.5,
+   "B_p": 0.108,
+   "B_n_ge": 217,
+   "B_nperm": 2000,
+   "C_pct": 58.3,
+   "C_p": 0.365,
+   "C_n_ge": 731,
+   "C_nperm": 2000
+  },
+  {
+   "name": "IDH3A_ALLO",
+   "n": 335,
+   "k": 11,
+   "A_pick": "diffusion",
+   "A_pct": 70.2,
+   "A_p": 0.281,
+   "A_n_ge": 563,
+   "A_nperm": 2000,
+   "B_pct": 61.9,
+   "B_p": 0.343,
+   "B_n_ge": 685,
+   "B_nperm": 2000,
+   "C_pct": 59.0,
+   "C_p": 0.311,
+   "C_n_ge": 622,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PTPN5_ALLO",
+   "n": 291,
+   "k": 11,
+   "A_pick": "diffusion",
+   "A_pct": 46.2,
+   "A_p": 0.61,
+   "A_n_ge": 1219,
+   "A_nperm": 2000,
+   "B_pct": 45.6,
+   "B_p": 0.568,
+   "B_n_ge": 1135,
+   "B_nperm": 2000,
+   "C_pct": 64.0,
+   "C_p": 0.333,
+   "C_n_ge": 665,
+   "C_nperm": 2000
+  },
+  {
+   "name": "AURKA_ALLO",
+   "n": 259,
+   "k": 10,
+   "A_pick": "diffusion",
+   "A_pct": 73.4,
+   "A_p": 0.236,
+   "A_n_ge": 472,
+   "A_nperm": 2000,
+   "B_pct": 74.2,
+   "B_p": 0.203,
+   "B_n_ge": 406,
+   "B_nperm": 2000,
+   "C_pct": 54.3,
+   "C_p": 0.426,
+   "C_n_ge": 852,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PTK2_ALLO",
+   "n": 255,
+   "k": 17,
+   "A_pick": "diffusion",
+   "A_pct": 69.5,
+   "A_p": 0.306,
+   "A_n_ge": 612,
+   "A_nperm": 2000,
+   "B_pct": 70.6,
+   "B_p": 0.314,
+   "B_n_ge": 628,
+   "B_nperm": 2000,
+   "C_pct": 79.1,
+   "C_p": 0.107,
+   "C_n_ge": 214,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PRMT3_ALLO",
+   "n": 300,
+   "k": 12,
+   "A_pick": "diffusion",
+   "A_pct": 24.5,
+   "A_p": 0.745,
+   "A_n_ge": 1489,
+   "A_nperm": 2000,
+   "B_pct": 27.3,
+   "B_p": 0.695,
+   "B_n_ge": 1390,
+   "B_nperm": 2000,
+   "C_pct": 48.9,
+   "C_p": 0.594,
+   "C_n_ge": 1187,
+   "C_nperm": 2000
+  },
+  {
+   "name": "NT5C2_ALLO",
+   "n": 469,
+   "k": 12,
+   "A_pick": "diffusion",
+   "A_pct": 57.9,
+   "A_p": 0.465,
+   "A_n_ge": 929,
+   "A_nperm": 2000,
+   "B_pct": 83.1,
+   "B_p": 0.087,
+   "B_n_ge": 175,
+   "B_nperm": 2000,
+   "C_pct": 64.5,
+   "C_p": 0.327,
+   "C_n_ge": 654,
+   "C_nperm": 2000
+  },
+  {
+   "name": "IGF1R_ALLO",
+   "n": 292,
+   "k": 35,
+   "A_pick": "diffusion",
+   "A_pct": 47.1,
+   "A_p": 0.495,
+   "A_n_ge": 990,
+   "A_nperm": 2000,
+   "B_pct": 53.7,
+   "B_p": 0.412,
+   "B_n_ge": 825,
+   "B_nperm": 2000,
+   "C_pct": 61.1,
+   "C_p": 0.306,
+   "C_n_ge": 612,
+   "C_nperm": 2000
+  },
+  {
+   "name": "ALB_ALLO",
+   "n": 578,
+   "k": 12,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 73.3,
+   "A_p": 0.274,
+   "A_n_ge": 547,
+   "A_nperm": 2000,
+   "B_pct": 79.8,
+   "B_p": 0.144,
+   "B_n_ge": 288,
+   "B_nperm": 2000,
+   "C_pct": 77.6,
+   "C_p": 0.14,
+   "C_n_ge": 280,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PYGB_ALLO",
+   "n": 806,
+   "k": 5,
+   "A_pick": "diffusion",
+   "A_pct": 77.0,
+   "A_p": 0.222,
+   "A_n_ge": 444,
+   "A_nperm": 2000,
+   "B_pct": 73.7,
+   "B_p": 0.212,
+   "B_n_ge": 424,
+   "B_nperm": 2000,
+   "C_pct": 39.0,
+   "C_p": 0.637,
+   "C_n_ge": 1274,
+   "C_nperm": 2000
+  },
+  {
+   "name": "GMDS_ALLO",
+   "n": 351,
+   "k": 16,
+   "A_pick": "ctqw_glifo_learned",
+   "A_pct": 46.1,
+   "A_p": 0.603,
+   "A_n_ge": 1205,
+   "A_nperm": 2000,
+   "B_pct": 47.4,
+   "B_p": 0.543,
+   "B_n_ge": 1087,
+   "B_nperm": 2000,
+   "C_pct": 57.1,
+   "C_p": 0.351,
+   "C_n_ge": 702,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PRKAB2_ALLO",
+   "n": 294,
+   "k": 8,
+   "A_pick": "diffusion",
+   "A_pct": 86.0,
+   "A_p": 0.048,
+   "A_n_ge": 96,
+   "A_nperm": 2000,
+   "B_pct": 69.3,
+   "B_p": 0.212,
+   "B_n_ge": 424,
+   "B_nperm": 2000,
+   "C_pct": 83.4,
+   "C_p": 0.034,
+   "C_n_ge": 67,
+   "C_nperm": 2000
+  },
+  {
+   "name": "GRIN2A_ALLO",
+   "n": 281,
+   "k": 11,
+   "A_pick": "ctqw_bare",
+   "A_pct": 64.9,
+   "A_p": 0.294,
+   "A_n_ge": 589,
+   "A_nperm": 2000,
+   "B_pct": 59.0,
+   "B_p": 0.414,
+   "B_n_ge": 828,
+   "B_nperm": 2000,
+   "C_pct": 42.5,
+   "C_p": 0.654,
+   "C_n_ge": 1309,
+   "C_nperm": 2000
+  },
+  {
+   "name": "PDK2_ALLO",
+   "n": 358,
+   "k": 16,
+   "A_pick": "diffusion",
+   "A_pct": 56.8,
+   "A_p": 0.42,
+   "A_n_ge": 841,
+   "A_nperm": 2000,
+   "B_pct": 47.8,
+   "B_p": 0.463,
+   "B_n_ge": 925,
+   "B_nperm": 2000,
+   "C_pct": 64.0,
+   "C_p": 0.248,
+   "C_n_ge": 497,
+   "C_nperm": 2000
+  }
+ ],
+ "mean_pct_by_method": {
+  "ctqw_bare": 53.9,
+  "ctqw_glifo_fixed": 55.3,
+  "ctqw_glifo_learned": 57.7,
+  "diffusion": 60.5,
+  "gnm": 46.4
+ },
+ "manager_choices": {
+  "ctqw_bare": 2,
+  "ctqw_glifo_fixed": 3,
+  "ctqw_glifo_learned": 21,
+  "diffusion": 50,
+  "gnm": 14
+ },
+ "ablations": {
+  "sin_conservacion": {
+   "fisher_p": 4.57e-09,
+   "n_sig": 10,
+   "dropped": [
+    "conservation"
+   ],
+   "per_protein": [
+    {
+     "name": "KRAS_G12C",
+     "pct": 35.5,
+     "p": 0.683,
+     "n_ge": 1367,
+     "nperm": 2000
+    },
+    {
+     "name": "BCR_ABL1",
+     "pct": 53.3,
+     "p": 0.417,
+     "n_ge": 834,
+     "nperm": 2000
+    },
+    {
+     "name": "CARDIAC_MYOSIN",
+     "pct": 60.4,
+     "p": 0.42,
+     "n_ge": 840,
+     "nperm": 2000
+    },
+    {
+     "name": "SHP2_PTPN11",
+     "pct": 70.9,
+     "p": 0.263,
+     "n_ge": 525,
+     "nperm": 2000
+    },
+    {
+     "name": "PTP1B",
+     "pct": 37.1,
+     "p": 0.73,
+     "n_ge": 1459,
+     "nperm": 2000
+    },
+    {
+     "name": "IDH1_R132H",
+     "pct": 57.6,
+     "p": 0.44,
+     "n_ge": 880,
+     "nperm": 2000
+    },
+    {
+     "name": "IDH2",
+     "pct": 60.8,
+     "p": 0.373,
+     "n_ge": 747,
+     "nperm": 2000
+    },
+    {
+     "name": "MEK1",
+     "pct": 76.7,
+     "p": 0.108,
+     "n_ge": 216,
+     "nperm": 2000
+    },
+    {
+     "name": "AKT1",
+     "pct": 86.0,
+     "p": 0.025,
+     "n_ge": 51,
+     "nperm": 2000
+    },
+    {
+     "name": "PKM2",
+     "pct": 76.0,
+     "p": 0.123,
+     "n_ge": 246,
+     "nperm": 2000
+    },
+    {
+     "name": "PDK1_PDPK1",
+     "pct": 33.7,
+     "p": 0.746,
+     "n_ge": 1492,
+     "nperm": 2000
+    },
+    {
+     "name": "CASP3",
+     "pct": 60.9,
+     "p": 0.402,
+     "n_ge": 804,
+     "nperm": 2000
+    },
+    {
+     "name": "HIV1_RT",
+     "pct": 85.7,
+     "p": 0.081,
+     "n_ge": 161,
+     "nperm": 2000
+    },
+    {
+     "name": "P38A_MAPK",
+     "pct": 75.5,
+     "p": 0.127,
+     "n_ge": 253,
+     "nperm": 2000
+    },
+    {
+     "name": "GCK_GLUCOKINASE",
+     "pct": 43.7,
+     "p": 0.637,
+     "n_ge": 1275,
+     "nperm": 2000
+    },
+    {
+     "name": "PYGL_GLYCOGEN_PHOS",
+     "pct": 66.7,
+     "p": 0.222,
+     "n_ge": 443,
+     "nperm": 2000
+    },
+    {
+     "name": "PKLR_PYRUVATE_K",
+     "pct": 78.9,
+     "p": 0.086,
+     "n_ge": 171,
+     "nperm": 2000
+    },
+    {
+     "name": "CASP7_CASPASE7",
+     "pct": 72.8,
+     "p": 0.182,
+     "n_ge": 365,
+     "nperm": 2000
+    },
+    {
+     "name": "SIRT1_STAC",
+     "pct": 9.6,
+     "p": 0.938,
+     "n_ge": 1876,
+     "nperm": 2000
+    },
+    {
+     "name": "ME2_MALIC",
+     "pct": 62.5,
+     "p": 0.258,
+     "n_ge": 515,
+     "nperm": 2000
+    },
+    {
+     "name": "DHODH_TUNNEL",
+     "pct": 70.7,
+     "p": 0.193,
+     "n_ge": 386,
+     "nperm": 2000
+    },
+    {
+     "name": "PFKP_FBP",
+     "pct": 85.9,
+     "p": 0.021,
+     "n_ge": 41,
+     "nperm": 2000
+    },
+    {
+     "name": "FBP1_AMPSITE",
+     "pct": 16.4,
+     "p": 0.94,
+     "n_ge": 1879,
+     "nperm": 2000
+    },
+    {
+     "name": "GLUD1_GW5074",
+     "pct": 36.1,
+     "p": 0.735,
+     "n_ge": 1469,
+     "nperm": 2000
+    },
+    {
+     "name": "HK1_G6P",
+     "pct": 75.9,
+     "p": 0.159,
+     "n_ge": 317,
+     "nperm": 2000
+    },
+    {
+     "name": "G6PD_STRUCT",
+     "pct": 68.3,
+     "p": 0.262,
+     "n_ge": 524,
+     "nperm": 2000
+    },
+    {
+     "name": "PYGM_IMP",
+     "pct": 64.6,
+     "p": 0.249,
+     "n_ge": 498,
+     "nperm": 2000
+    },
+    {
+     "name": "ESR1_ALLO",
+     "pct": 69.3,
+     "p": 0.207,
+     "n_ge": 414,
+     "nperm": 2000
+    },
+    {
+     "name": "SLC6A4_ALLO",
+     "pct": 91.1,
+     "p": 0.0005,
+     "n_ge": 0,
+     "nperm": 2000
+    },
+    {
+     "name": "PDE4D_ALLO",
+     "pct": 62.2,
+     "p": 0.345,
+     "n_ge": 691,
+     "nperm": 2000
+    },
+    {
+     "name": "NTRK1_ALLO",
+     "pct": 82.6,
+     "p": 0.063,
+     "n_ge": 126,
+     "nperm": 2000
+    },
+    {
+     "name": "PARP1_ALLO",
+     "pct": 57.9,
+     "p": 0.392,
+     "n_ge": 783,
+     "nperm": 2000
+    },
+    {
+     "name": "FFAR1_ALLO",
+     "pct": 57.7,
+     "p": 0.274,
+     "n_ge": 547,
+     "nperm": 2000
+    },
+    {
+     "name": "RIPK2_ALLO",
+     "pct": 84.8,
+     "p": 0.068,
+     "n_ge": 135,
+     "nperm": 2000
+    },
+    {
+     "name": "PAK1_ALLO",
+     "pct": 83.3,
+     "p": 0.017,
+     "n_ge": 33,
+     "nperm": 2000
+    },
+    {
+     "name": "PANK3_ALLO",
+     "pct": 62.8,
+     "p": 0.297,
+     "n_ge": 594,
+     "nperm": 2000
+    },
+    {
+     "name": "FLT3_ALLO",
+     "pct": 82.7,
+     "p": 0.088,
+     "n_ge": 177,
+     "nperm": 2000
+    },
+    {
+     "name": "PTPRZ1_ALLO",
+     "pct": 78.9,
+     "p": 0.126,
+     "n_ge": 251,
+     "nperm": 2000
+    },
+    {
+     "name": "BRAF_ALLO",
+     "pct": 82.9,
+     "p": 0.117,
+     "n_ge": 233,
+     "nperm": 2000
+    },
+    {
+     "name": "ACACB_ALLO",
+     "pct": 46.6,
+     "p": 0.506,
+     "n_ge": 1013,
+     "nperm": 2000
+    },
+    {
+     "name": "SNRNP200_ALLO",
+     "pct": 85.4,
+     "p": 0.023,
+     "n_ge": 46,
+     "nperm": 2000
+    },
+    {
+     "name": "ENPP2_ALLO",
+     "pct": 78.8,
+     "p": 0.081,
+     "n_ge": 162,
+     "nperm": 2000
+    },
+    {
+     "name": "EGFR_ALLO",
+     "pct": 91.0,
+     "p": 0.006,
+     "n_ge": 13,
+     "nperm": 2000
+    },
+    {
+     "name": "ADRB2_ALLO",
+     "pct": 64.4,
+     "p": 0.38,
+     "n_ge": 759,
+     "nperm": 2000
+    },
+    {
+     "name": "PTGS2_ALLO",
+     "pct": 83.2,
+     "p": 0.06,
+     "n_ge": 121,
+     "nperm": 2000
+    },
+    {
+     "name": "WNK1_ALLO",
+     "pct": 76.7,
+     "p": 0.172,
+     "n_ge": 345,
+     "nperm": 2000
+    },
+    {
+     "name": "PARP14_ALLO",
+     "pct": 74.0,
+     "p": 0.135,
+     "n_ge": 269,
+     "nperm": 2000
+    },
+    {
+     "name": "KIF18A_ALLO",
+     "pct": 68.8,
+     "p": 0.275,
+     "n_ge": 550,
+     "nperm": 2000
+    },
+    {
+     "name": "CRHR1_ALLO",
+     "pct": 64.1,
+     "p": 0.296,
+     "n_ge": 592,
+     "nperm": 2000
+    },
+    {
+     "name": "SLC1A3_ALLO",
+     "pct": 55.4,
+     "p": 0.389,
+     "n_ge": 778,
+     "nperm": 2000
+    },
+    {
+     "name": "PRKAG1_ALLO",
+     "pct": 76.8,
+     "p": 0.108,
+     "n_ge": 217,
+     "nperm": 2000
+    },
+    {
+     "name": "KIF11_ALLO",
+     "pct": 81.2,
+     "p": 0.106,
+     "n_ge": 213,
+     "nperm": 2000
+    },
+    {
+     "name": "FDPS_ALLO",
+     "pct": 79.7,
+     "p": 0.112,
+     "n_ge": 223,
+     "nperm": 2000
+    },
+    {
+     "name": "USP7_ALLO",
+     "pct": 74.7,
+     "p": 0.198,
+     "n_ge": 396,
+     "nperm": 2000
+    },
+    {
+     "name": "SAMHD1_ALLO",
+     "pct": 89.0,
+     "p": 0.022,
+     "n_ge": 44,
+     "nperm": 2000
+    },
+    {
+     "name": "LIMK2_ALLO",
+     "pct": 82.9,
+     "p": 0.108,
+     "n_ge": 217,
+     "nperm": 2000
+    },
+    {
+     "name": "NLN_ALLO",
+     "pct": 56.0,
+     "p": 0.426,
+     "n_ge": 853,
+     "nperm": 2000
+    },
+    {
+     "name": "VCP_ALLO",
+     "pct": 53.1,
+     "p": 0.429,
+     "n_ge": 859,
+     "nperm": 2000
+    },
+    {
+     "name": "ADCY10_ALLO",
+     "pct": 95.0,
+     "p": 0.011,
+     "n_ge": 22,
+     "nperm": 2000
+    },
+    {
+     "name": "FKBP1A_ALLO",
+     "pct": 64.2,
+     "p": 0.272,
+     "n_ge": 543,
+     "nperm": 2000
+    },
+    {
+     "name": "GRIA2_ALLO",
+     "pct": 75.5,
+     "p": 0.133,
+     "n_ge": 265,
+     "nperm": 2000
+    },
+    {
+     "name": "RET_ALLO",
+     "pct": 84.1,
+     "p": 0.1,
+     "n_ge": 200,
+     "nperm": 2000
+    },
+    {
+     "name": "TRPV1_ALLO",
+     "pct": 72.9,
+     "p": 0.255,
+     "n_ge": 510,
+     "nperm": 2000
+    },
+    {
+     "name": "ABL2_ALLO",
+     "pct": 58.2,
+     "p": 0.406,
+     "n_ge": 813,
+     "nperm": 2000
+    },
+    {
+     "name": "HRAS_ALLO",
+     "pct": 64.8,
+     "p": 0.316,
+     "n_ge": 632,
+     "nperm": 2000
+    },
+    {
+     "name": "ITK_ALLO",
+     "pct": 80.2,
+     "p": 0.197,
+     "n_ge": 394,
+     "nperm": 2000
+    },
+    {
+     "name": "MAT2A_ALLO",
+     "pct": 53.7,
+     "p": 0.492,
+     "n_ge": 984,
+     "nperm": 2000
+    },
+    {
+     "name": "EIF4E_ALLO",
+     "pct": 54.9,
+     "p": 0.448,
+     "n_ge": 895,
+     "nperm": 2000
+    },
+    {
+     "name": "CHKA_ALLO",
+     "pct": 65.0,
+     "p": 0.279,
+     "n_ge": 557,
+     "nperm": 2000
+    },
+    {
+     "name": "MAPK7_ALLO",
+     "pct": 80.6,
+     "p": 0.151,
+     "n_ge": 302,
+     "nperm": 2000
+    },
+    {
+     "name": "RRM1_ALLO",
+     "pct": 44.0,
+     "p": 0.617,
+     "n_ge": 1233,
+     "nperm": 2000
+    },
+    {
+     "name": "MAP2K2_ALLO",
+     "pct": 90.1,
+     "p": 0.033,
+     "n_ge": 65,
+     "nperm": 2000
+    },
+    {
+     "name": "PANK1_ALLO",
+     "pct": 36.4,
+     "p": 0.696,
+     "n_ge": 1391,
+     "nperm": 2000
+    },
+    {
+     "name": "GNE_ALLO",
+     "pct": 87.0,
+     "p": 0.009,
+     "n_ge": 18,
+     "nperm": 2000
+    },
+    {
+     "name": "F7_ALLO",
+     "pct": 59.2,
+     "p": 0.362,
+     "n_ge": 724,
+     "nperm": 2000
+    },
+    {
+     "name": "PDE10A_ALLO",
+     "pct": 72.8,
+     "p": 0.182,
+     "n_ge": 364,
+     "nperm": 2000
+    },
+    {
+     "name": "SIRT6_ALLO",
+     "pct": 78.5,
+     "p": 0.108,
+     "n_ge": 217,
+     "nperm": 2000
+    },
+    {
+     "name": "IDH3A_ALLO",
+     "pct": 63.0,
+     "p": 0.317,
+     "n_ge": 633,
+     "nperm": 2000
+    },
+    {
+     "name": "PTPN5_ALLO",
+     "pct": 45.6,
+     "p": 0.568,
+     "n_ge": 1135,
+     "nperm": 2000
+    },
+    {
+     "name": "AURKA_ALLO",
+     "pct": 74.2,
+     "p": 0.203,
+     "n_ge": 406,
+     "nperm": 2000
+    },
+    {
+     "name": "PTK2_ALLO",
+     "pct": 70.6,
+     "p": 0.314,
+     "n_ge": 628,
+     "nperm": 2000
+    },
+    {
+     "name": "PRMT3_ALLO",
+     "pct": 27.3,
+     "p": 0.695,
+     "n_ge": 1390,
+     "nperm": 2000
+    },
+    {
+     "name": "NT5C2_ALLO",
+     "pct": 83.1,
+     "p": 0.087,
+     "n_ge": 175,
+     "nperm": 2000
+    },
+    {
+     "name": "IGF1R_ALLO",
+     "pct": 53.7,
+     "p": 0.412,
+     "n_ge": 825,
+     "nperm": 2000
+    },
+    {
+     "name": "ALB_ALLO",
+     "pct": 79.7,
+     "p": 0.144,
+     "n_ge": 288,
+     "nperm": 2000
+    },
+    {
+     "name": "PYGB_ALLO",
+     "pct": 73.9,
+     "p": 0.21,
+     "n_ge": 421,
+     "nperm": 2000
+    },
+    {
+     "name": "GMDS_ALLO",
+     "pct": 47.5,
+     "p": 0.543,
+     "n_ge": 1087,
+     "nperm": 2000
+    },
+    {
+     "name": "PRKAB2_ALLO",
+     "pct": 69.4,
+     "p": 0.203,
+     "n_ge": 405,
+     "nperm": 2000
+    },
+    {
+     "name": "GRIN2A_ALLO",
+     "pct": 58.9,
+     "p": 0.414,
+     "n_ge": 828,
+     "nperm": 2000
+    },
+    {
+     "name": "PDK2_ALLO",
+     "pct": 47.8,
+     "p": 0.463,
+     "n_ge": 925,
+     "nperm": 2000
+    }
+   ]
+  },
+  "sin_estructura_uniprot": {
+   "fisher_p": 6.49e-06,
+   "n_sig": 8,
+   "dropped": [
+    "uni_active_site",
+    "uni_binding_site",
+    "uni_domain",
+    "uni_motif",
+    "uni_ptm"
+   ],
+   "per_protein": [
+    {
+     "name": "KRAS_G12C",
+     "pct": 36.8,
+     "p": 0.665,
+     "n_ge": 1331,
+     "nperm": 2000
+    },
+    {
+     "name": "BCR_ABL1",
+     "pct": 53.2,
+     "p": 0.432,
+     "n_ge": 865,
+     "nperm": 2000
+    },
+    {
+     "name": "CARDIAC_MYOSIN",
+     "pct": 58.2,
+     "p": 0.454,
+     "n_ge": 908,
+     "nperm": 2000
+    },
+    {
+     "name": "SHP2_PTPN11",
+     "pct": 74.6,
+     "p": 0.212,
+     "n_ge": 425,
+     "nperm": 2000
+    },
+    {
+     "name": "PTP1B",
+     "pct": 38.7,
+     "p": 0.71,
+     "n_ge": 1420,
+     "nperm": 2000
+    },
+    {
+     "name": "IDH1_R132H",
+     "pct": 61.4,
+     "p": 0.362,
+     "n_ge": 725,
+     "nperm": 2000
+    },
+    {
+     "name": "IDH2",
+     "pct": 61.2,
+     "p": 0.361,
+     "n_ge": 722,
+     "nperm": 2000
+    },
+    {
+     "name": "MEK1",
+     "pct": 54.1,
+     "p": 0.476,
+     "n_ge": 953,
+     "nperm": 2000
+    },
+    {
+     "name": "AKT1",
+     "pct": 88.8,
+     "p": 0.021,
+     "n_ge": 42,
+     "nperm": 2000
+    },
+    {
+     "name": "PKM2",
+     "pct": 35.2,
+     "p": 0.654,
+     "n_ge": 1308,
+     "nperm": 2000
+    },
+    {
+     "name": "PDK1_PDPK1",
+     "pct": 33.5,
+     "p": 0.778,
+     "n_ge": 1557,
+     "nperm": 2000
+    },
+    {
+     "name": "CASP3",
+     "pct": 60.2,
+     "p": 0.41,
+     "n_ge": 820,
+     "nperm": 2000
+    },
+    {
+     "name": "HIV1_RT",
+     "pct": 86.3,
+     "p": 0.072,
+     "n_ge": 145,
+     "nperm": 2000
+    },
+    {
+     "name": "P38A_MAPK",
+     "pct": 69.9,
+     "p": 0.283,
+     "n_ge": 567,
+     "nperm": 2000
+    },
+    {
+     "name": "GCK_GLUCOKINASE",
+     "pct": 46.3,
+     "p": 0.578,
+     "n_ge": 1155,
+     "nperm": 2000
+    },
+    {
+     "name": "PYGL_GLYCOGEN_PHOS",
+     "pct": 64.8,
+     "p": 0.287,
+     "n_ge": 574,
+     "nperm": 2000
+    },
+    {
+     "name": "PKLR_PYRUVATE_K",
+     "pct": 36.2,
+     "p": 0.642,
+     "n_ge": 1284,
+     "nperm": 2000
+    },
+    {
+     "name": "CASP7_CASPASE7",
+     "pct": 72.0,
+     "p": 0.218,
+     "n_ge": 436,
+     "nperm": 2000
+    },
+    {
+     "name": "SIRT1_STAC",
+     "pct": 12.1,
+     "p": 0.938,
+     "n_ge": 1876,
+     "nperm": 2000
+    },
+    {
+     "name": "ME2_MALIC",
+     "pct": 48.6,
+     "p": 0.446,
+     "n_ge": 891,
+     "nperm": 2000
+    },
+    {
+     "name": "DHODH_TUNNEL",
+     "pct": 69.5,
+     "p": 0.196,
+     "n_ge": 391,
+     "nperm": 2000
+    },
+    {
+     "name": "PFKP_FBP",
+     "pct": 35.5,
+     "p": 0.588,
+     "n_ge": 1175,
+     "nperm": 2000
+    },
+    {
+     "name": "FBP1_AMPSITE",
+     "pct": 16.4,
+     "p": 0.923,
+     "n_ge": 1846,
+     "nperm": 2000
+    },
+    {
+     "name": "GLUD1_GW5074",
+     "pct": 35.5,
+     "p": 0.726,
+     "n_ge": 1452,
+     "nperm": 2000
+    },
+    {
+     "name": "HK1_G6P",
+     "pct": 50.0,
+     "p": 0.394,
+     "n_ge": 788,
+     "nperm": 2000
+    },
+    {
+     "name": "G6PD_STRUCT",
+     "pct": 37.8,
+     "p": 0.62,
+     "n_ge": 1239,
+     "nperm": 2000
+    },
+    {
+     "name": "PYGM_IMP",
+     "pct": 42.6,
+     "p": 0.593,
+     "n_ge": 1185,
+     "nperm": 2000
+    },
+    {
+     "name": "ESR1_ALLO",
+     "pct": 69.8,
+     "p": 0.2,
+     "n_ge": 399,
+     "nperm": 2000
+    },
+    {
+     "name": "SLC6A4_ALLO",
+     "pct": 91.9,
+     "p": 0.0005,
+     "n_ge": 0,
+     "nperm": 2000
+    },
+    {
+     "name": "PDE4D_ALLO",
+     "pct": 66.8,
+     "p": 0.237,
+     "n_ge": 475,
+     "nperm": 2000
+    },
+    {
+     "name": "NTRK1_ALLO",
+     "pct": 82.4,
+     "p": 0.069,
+     "n_ge": 137,
+     "nperm": 2000
+    },
+    {
+     "name": "PARP1_ALLO",
+     "pct": 59.4,
+     "p": 0.387,
+     "n_ge": 774,
+     "nperm": 2000
+    },
+    {
+     "name": "FFAR1_ALLO",
+     "pct": 48.2,
+     "p": 0.409,
+     "n_ge": 818,
+     "nperm": 2000
+    },
+    {
+     "name": "RIPK2_ALLO",
+     "pct": 84.4,
+     "p": 0.073,
+     "n_ge": 147,
+     "nperm": 2000
+    },
+    {
+     "name": "PAK1_ALLO",
+     "pct": 83.2,
+     "p": 0.022,
+     "n_ge": 45,
+     "nperm": 2000
+    },
+    {
+     "name": "PANK3_ALLO",
+     "pct": 63.4,
+     "p": 0.291,
+     "n_ge": 582,
+     "nperm": 2000
+    },
+    {
+     "name": "FLT3_ALLO",
+     "pct": 82.5,
+     "p": 0.107,
+     "n_ge": 215,
+     "nperm": 2000
+    },
+    {
+     "name": "PTPRZ1_ALLO",
+     "pct": 79.7,
+     "p": 0.119,
+     "n_ge": 239,
+     "nperm": 2000
+    },
+    {
+     "name": "BRAF_ALLO",
+     "pct": 83.4,
+     "p": 0.133,
+     "n_ge": 265,
+     "nperm": 2000
+    },
+    {
+     "name": "ACACB_ALLO",
+     "pct": 47.4,
+     "p": 0.5,
+     "n_ge": 1000,
+     "nperm": 2000
+    },
+    {
+     "name": "SNRNP200_ALLO",
+     "pct": 84.2,
+     "p": 0.027,
+     "n_ge": 54,
+     "nperm": 2000
+    },
+    {
+     "name": "ENPP2_ALLO",
+     "pct": 78.5,
+     "p": 0.075,
+     "n_ge": 151,
+     "nperm": 2000
+    },
+    {
+     "name": "EGFR_ALLO",
+     "pct": 90.5,
+     "p": 0.006,
+     "n_ge": 13,
+     "nperm": 2000
+    },
+    {
+     "name": "ADRB2_ALLO",
+     "pct": 65.9,
+     "p": 0.347,
+     "n_ge": 694,
+     "nperm": 2000
+    },
+    {
+     "name": "PTGS2_ALLO",
+     "pct": 85.3,
+     "p": 0.028,
+     "n_ge": 55,
+     "nperm": 2000
+    },
+    {
+     "name": "WNK1_ALLO",
+     "pct": 76.1,
+     "p": 0.178,
+     "n_ge": 356,
+     "nperm": 2000
+    },
+    {
+     "name": "PARP14_ALLO",
+     "pct": 76.1,
+     "p": 0.117,
+     "n_ge": 235,
+     "nperm": 2000
+    },
+    {
+     "name": "KIF18A_ALLO",
+     "pct": 70.3,
+     "p": 0.269,
+     "n_ge": 538,
+     "nperm": 2000
+    },
+    {
+     "name": "CRHR1_ALLO",
+     "pct": 56.7,
+     "p": 0.423,
+     "n_ge": 846,
+     "nperm": 2000
+    },
+    {
+     "name": "SLC1A3_ALLO",
+     "pct": 56.2,
+     "p": 0.391,
+     "n_ge": 782,
+     "nperm": 2000
+    },
+    {
+     "name": "PRKAG1_ALLO",
+     "pct": 80.0,
+     "p": 0.087,
+     "n_ge": 175,
+     "nperm": 2000
+    },
+    {
+     "name": "KIF11_ALLO",
+     "pct": 81.2,
+     "p": 0.101,
+     "n_ge": 202,
+     "nperm": 2000
+    },
+    {
+     "name": "FDPS_ALLO",
+     "pct": 78.5,
+     "p": 0.122,
+     "n_ge": 245,
+     "nperm": 2000
+    },
+    {
+     "name": "USP7_ALLO",
+     "pct": 74.4,
+     "p": 0.195,
+     "n_ge": 390,
+     "nperm": 2000
+    },
+    {
+     "name": "SAMHD1_ALLO",
+     "pct": 74.2,
+     "p": 0.194,
+     "n_ge": 387,
+     "nperm": 2000
+    },
+    {
+     "name": "LIMK2_ALLO",
+     "pct": 83.8,
+     "p": 0.099,
+     "n_ge": 198,
+     "nperm": 2000
+    },
+    {
+     "name": "NLN_ALLO",
+     "pct": 58.2,
+     "p": 0.401,
+     "n_ge": 802,
+     "nperm": 2000
+    },
+    {
+     "name": "VCP_ALLO",
+     "pct": 54.6,
+     "p": 0.41,
+     "n_ge": 820,
+     "nperm": 2000
+    },
+    {
+     "name": "ADCY10_ALLO",
+     "pct": 94.4,
+     "p": 0.016,
+     "n_ge": 32,
+     "nperm": 2000
+    },
+    {
+     "name": "FKBP1A_ALLO",
+     "pct": 63.8,
+     "p": 0.272,
+     "n_ge": 544,
+     "nperm": 2000
+    },
+    {
+     "name": "GRIA2_ALLO",
+     "pct": 75.7,
+     "p": 0.139,
+     "n_ge": 278,
+     "nperm": 2000
+    },
+    {
+     "name": "RET_ALLO",
+     "pct": 84.4,
+     "p": 0.1,
+     "n_ge": 200,
+     "nperm": 2000
+    },
+    {
+     "name": "TRPV1_ALLO",
+     "pct": 73.7,
+     "p": 0.25,
+     "n_ge": 500,
+     "nperm": 2000
+    },
+    {
+     "name": "ABL2_ALLO",
+     "pct": 57.5,
+     "p": 0.42,
+     "n_ge": 840,
+     "nperm": 2000
+    },
+    {
+     "name": "HRAS_ALLO",
+     "pct": 69.7,
+     "p": 0.225,
+     "n_ge": 450,
+     "nperm": 2000
+    },
+    {
+     "name": "ITK_ALLO",
+     "pct": 80.2,
+     "p": 0.207,
+     "n_ge": 415,
+     "nperm": 2000
+    },
+    {
+     "name": "MAT2A_ALLO",
+     "pct": 52.5,
+     "p": 0.486,
+     "n_ge": 973,
+     "nperm": 2000
+    },
+    {
+     "name": "EIF4E_ALLO",
+     "pct": 55.0,
+     "p": 0.44,
+     "n_ge": 880,
+     "nperm": 2000
+    },
+    {
+     "name": "CHKA_ALLO",
+     "pct": 67.1,
+     "p": 0.254,
+     "n_ge": 507,
+     "nperm": 2000
+    },
+    {
+     "name": "MAPK7_ALLO",
+     "pct": 81.1,
+     "p": 0.145,
+     "n_ge": 290,
+     "nperm": 2000
+    },
+    {
+     "name": "RRM1_ALLO",
+     "pct": 16.3,
+     "p": 0.962,
+     "n_ge": 1923,
+     "nperm": 2000
+    },
+    {
+     "name": "MAP2K2_ALLO",
+     "pct": 90.1,
+     "p": 0.037,
+     "n_ge": 74,
+     "nperm": 2000
+    },
+    {
+     "name": "PANK1_ALLO",
+     "pct": 36.7,
+     "p": 0.688,
+     "n_ge": 1375,
+     "nperm": 2000
+    },
+    {
+     "name": "GNE_ALLO",
+     "pct": 77.9,
+     "p": 0.054,
+     "n_ge": 108,
+     "nperm": 2000
+    },
+    {
+     "name": "F7_ALLO",
+     "pct": 56.7,
+     "p": 0.407,
+     "n_ge": 815,
+     "nperm": 2000
+    },
+    {
+     "name": "PDE10A_ALLO",
+     "pct": 72.5,
+     "p": 0.188,
+     "n_ge": 375,
+     "nperm": 2000
+    },
+    {
+     "name": "SIRT6_ALLO",
+     "pct": 78.0,
+     "p": 0.13,
+     "n_ge": 260,
+     "nperm": 2000
+    },
+    {
+     "name": "IDH3A_ALLO",
+     "pct": 55.8,
+     "p": 0.42,
+     "n_ge": 840,
+     "nperm": 2000
+    },
+    {
+     "name": "PTPN5_ALLO",
+     "pct": 43.5,
+     "p": 0.598,
+     "n_ge": 1196,
+     "nperm": 2000
+    },
+    {
+     "name": "AURKA_ALLO",
+     "pct": 73.7,
+     "p": 0.209,
+     "n_ge": 418,
+     "nperm": 2000
+    },
+    {
+     "name": "PTK2_ALLO",
+     "pct": 70.9,
+     "p": 0.314,
+     "n_ge": 628,
+     "nperm": 2000
+    },
+    {
+     "name": "PRMT3_ALLO",
+     "pct": 27.9,
+     "p": 0.689,
+     "n_ge": 1378,
+     "nperm": 2000
+    },
+    {
+     "name": "NT5C2_ALLO",
+     "pct": 68.4,
+     "p": 0.23,
+     "n_ge": 459,
+     "nperm": 2000
+    },
+    {
+     "name": "IGF1R_ALLO",
+     "pct": 53.1,
+     "p": 0.414,
+     "n_ge": 829,
+     "nperm": 2000
+    },
+    {
+     "name": "ALB_ALLO",
+     "pct": 78.7,
+     "p": 0.159,
+     "n_ge": 317,
+     "nperm": 2000
+    },
+    {
+     "name": "PYGB_ALLO",
+     "pct": 73.9,
+     "p": 0.223,
+     "n_ge": 446,
+     "nperm": 2000
+    },
+    {
+     "name": "GMDS_ALLO",
+     "pct": 48.7,
+     "p": 0.52,
+     "n_ge": 1041,
+     "nperm": 2000
+    },
+    {
+     "name": "PRKAB2_ALLO",
+     "pct": 72.8,
+     "p": 0.174,
+     "n_ge": 349,
+     "nperm": 2000
+    },
+    {
+     "name": "GRIN2A_ALLO",
+     "pct": 58.0,
+     "p": 0.421,
+     "n_ge": 843,
+     "nperm": 2000
+    },
+    {
+     "name": "PDK2_ALLO",
+     "pct": 51.1,
+     "p": 0.434,
+     "n_ge": 868,
+     "nperm": 2000
+    }
+   ]
+  },
+  "solo_topologia": {
+   "fisher_p": 3.98e-05,
+   "n_sig": 6,
+   "dropped": [
+    "anm_msf",
+    "clinvar_density",
+    "conservation",
+    "gnm_msf",
+    "uni_active_site",
+    "uni_binding_site",
+    "uni_domain",
+    "uni_motif",
+    "uni_ptm"
+   ],
+   "per_protein": [
+    {
+     "name": "KRAS_G12C",
+     "pct": 43.5,
+     "p": 0.558,
+     "n_ge": 1116,
+     "nperm": 2000
+    },
+    {
+     "name": "BCR_ABL1",
+     "pct": 52.8,
+     "p": 0.474,
+     "n_ge": 949,
+     "nperm": 2000
+    },
+    {
+     "name": "CARDIAC_MYOSIN",
+     "pct": 66.7,
+     "p": 0.305,
+     "n_ge": 611,
+     "nperm": 2000
+    },
+    {
+     "name": "SHP2_PTPN11",
+     "pct": 69.5,
+     "p": 0.274,
+     "n_ge": 548,
+     "nperm": 2000
+    },
+    {
+     "name": "PTP1B",
+     "pct": 31.9,
+     "p": 0.776,
+     "n_ge": 1552,
+     "nperm": 2000
+    },
+    {
+     "name": "IDH1_R132H",
+     "pct": 58.9,
+     "p": 0.499,
+     "n_ge": 999,
+     "nperm": 2000
+    },
+    {
+     "name": "IDH2",
+     "pct": 55.2,
+     "p": 0.515,
+     "n_ge": 1031,
+     "nperm": 2000
+    },
+    {
+     "name": "MEK1",
+     "pct": 53.2,
+     "p": 0.497,
+     "n_ge": 994,
+     "nperm": 2000
+    },
+    {
+     "name": "AKT1",
+     "pct": 89.3,
+     "p": 0.023,
+     "n_ge": 46,
+     "nperm": 2000
+    },
+    {
+     "name": "PKM2",
+     "pct": 27.5,
+     "p": 0.706,
+     "n_ge": 1412,
+     "nperm": 2000
+    },
+    {
+     "name": "PDK1_PDPK1",
+     "pct": 31.9,
+     "p": 0.779,
+     "n_ge": 1559,
+     "nperm": 2000
+    },
+    {
+     "name": "CASP3",
+     "pct": 58.9,
+     "p": 0.412,
+     "n_ge": 824,
+     "nperm": 2000
+    },
+    {
+     "name": "HIV1_RT",
+     "pct": 86.5,
+     "p": 0.065,
+     "n_ge": 130,
+     "nperm": 2000
+    },
+    {
+     "name": "P38A_MAPK",
+     "pct": 67.6,
+     "p": 0.318,
+     "n_ge": 636,
+     "nperm": 2000
+    },
+    {
+     "name": "GCK_GLUCOKINASE",
+     "pct": 46.9,
+     "p": 0.585,
+     "n_ge": 1169,
+     "nperm": 2000
+    },
+    {
+     "name": "PYGL_GLYCOGEN_PHOS",
+     "pct": 59.9,
+     "p": 0.373,
+     "n_ge": 747,
+     "nperm": 2000
+    },
+    {
+     "name": "PKLR_PYRUVATE_K",
+     "pct": 30.8,
+     "p": 0.688,
+     "n_ge": 1376,
+     "nperm": 2000
+    },
+    {
+     "name": "CASP7_CASPASE7",
+     "pct": 69.4,
+     "p": 0.287,
+     "n_ge": 574,
+     "nperm": 2000
+    },
+    {
+     "name": "SIRT1_STAC",
+     "pct": 10.5,
+     "p": 0.934,
+     "n_ge": 1868,
+     "nperm": 2000
+    },
+    {
+     "name": "ME2_MALIC",
+     "pct": 42.3,
+     "p": 0.534,
+     "n_ge": 1068,
+     "nperm": 2000
+    },
+    {
+     "name": "DHODH_TUNNEL",
+     "pct": 62.9,
+     "p": 0.279,
+     "n_ge": 558,
+     "nperm": 2000
+    },
+    {
+     "name": "PFKP_FBP",
+     "pct": 30.6,
+     "p": 0.688,
+     "n_ge": 1376,
+     "nperm": 2000
+    },
+    {
+     "name": "FBP1_AMPSITE",
+     "pct": 20.4,
+     "p": 0.885,
+     "n_ge": 1771,
+     "nperm": 2000
+    },
+    {
+     "name": "GLUD1_GW5074",
+     "pct": 25.4,
+     "p": 0.796,
+     "n_ge": 1593,
+     "nperm": 2000
+    },
+    {
+     "name": "HK1_G6P",
+     "pct": 50.9,
+     "p": 0.424,
+     "n_ge": 848,
+     "nperm": 2000
+    },
+    {
+     "name": "G6PD_STRUCT",
+     "pct": 30.9,
+     "p": 0.658,
+     "n_ge": 1317,
+     "nperm": 2000
+    },
+    {
+     "name": "PYGM_IMP",
+     "pct": 39.5,
+     "p": 0.631,
+     "n_ge": 1262,
+     "nperm": 2000
+    },
+    {
+     "name": "ESR1_ALLO",
+     "pct": 72.0,
+     "p": 0.189,
+     "n_ge": 377,
+     "nperm": 2000
+    },
+    {
+     "name": "SLC6A4_ALLO",
+     "pct": 92.8,
+     "p": 0.0005,
+     "n_ge": 0,
+     "nperm": 2000
+    },
+    {
+     "name": "PDE4D_ALLO",
+     "pct": 67.4,
+     "p": 0.289,
+     "n_ge": 579,
+     "nperm": 2000
+    },
+    {
+     "name": "NTRK1_ALLO",
+     "pct": 81.8,
+     "p": 0.106,
+     "n_ge": 212,
+     "nperm": 2000
+    },
+    {
+     "name": "PARP1_ALLO",
+     "pct": 57.0,
+     "p": 0.408,
+     "n_ge": 817,
+     "nperm": 2000
+    },
+    {
+     "name": "FFAR1_ALLO",
+     "pct": 56.9,
+     "p": 0.353,
+     "n_ge": 706,
+     "nperm": 2000
+    },
+    {
+     "name": "RIPK2_ALLO",
+     "pct": 84.4,
+     "p": 0.084,
+     "n_ge": 168,
+     "nperm": 2000
+    },
+    {
+     "name": "PAK1_ALLO",
+     "pct": 81.0,
+     "p": 0.094,
+     "n_ge": 188,
+     "nperm": 2000
+    },
+    {
+     "name": "PANK3_ALLO",
+     "pct": 61.5,
+     "p": 0.337,
+     "n_ge": 673,
+     "nperm": 2000
+    },
+    {
+     "name": "FLT3_ALLO",
+     "pct": 81.0,
+     "p": 0.164,
+     "n_ge": 327,
+     "nperm": 2000
+    },
+    {
+     "name": "PTPRZ1_ALLO",
+     "pct": 78.0,
+     "p": 0.139,
+     "n_ge": 278,
+     "nperm": 2000
+    },
+    {
+     "name": "BRAF_ALLO",
+     "pct": 83.5,
+     "p": 0.128,
+     "n_ge": 256,
+     "nperm": 2000
+    },
+    {
+     "name": "ACACB_ALLO",
+     "pct": 44.6,
+     "p": 0.547,
+     "n_ge": 1094,
+     "nperm": 2000
+    },
+    {
+     "name": "SNRNP200_ALLO",
+     "pct": 79.4,
+     "p": 0.073,
+     "n_ge": 146,
+     "nperm": 2000
+    },
+    {
+     "name": "ENPP2_ALLO",
+     "pct": 78.4,
+     "p": 0.105,
+     "n_ge": 210,
+     "nperm": 2000
+    },
+    {
+     "name": "EGFR_ALLO",
+     "pct": 91.7,
+     "p": 0.006,
+     "n_ge": 13,
+     "nperm": 2000
+    },
+    {
+     "name": "ADRB2_ALLO",
+     "pct": 64.4,
+     "p": 0.378,
+     "n_ge": 755,
+     "nperm": 2000
+    },
+    {
+     "name": "PTGS2_ALLO",
+     "pct": 84.6,
+     "p": 0.038,
+     "n_ge": 76,
+     "nperm": 2000
+    },
+    {
+     "name": "WNK1_ALLO",
+     "pct": 77.9,
+     "p": 0.146,
+     "n_ge": 292,
+     "nperm": 2000
+    },
+    {
+     "name": "PARP14_ALLO",
+     "pct": 73.7,
+     "p": 0.157,
+     "n_ge": 313,
+     "nperm": 2000
+    },
+    {
+     "name": "KIF18A_ALLO",
+     "pct": 69.4,
+     "p": 0.268,
+     "n_ge": 536,
+     "nperm": 2000
+    },
+    {
+     "name": "CRHR1_ALLO",
+     "pct": 60.5,
+     "p": 0.397,
+     "n_ge": 793,
+     "nperm": 2000
+    },
+    {
+     "name": "SLC1A3_ALLO",
+     "pct": 58.5,
+     "p": 0.392,
+     "n_ge": 783,
+     "nperm": 2000
+    },
+    {
+     "name": "PRKAG1_ALLO",
+     "pct": 81.3,
+     "p": 0.098,
+     "n_ge": 195,
+     "nperm": 2000
+    },
+    {
+     "name": "KIF11_ALLO",
+     "pct": 80.3,
+     "p": 0.132,
+     "n_ge": 263,
+     "nperm": 2000
+    },
+    {
+     "name": "FDPS_ALLO",
+     "pct": 75.5,
+     "p": 0.176,
+     "n_ge": 353,
+     "nperm": 2000
+    },
+    {
+     "name": "USP7_ALLO",
+     "pct": 74.0,
+     "p": 0.22,
+     "n_ge": 439,
+     "nperm": 2000
+    },
+    {
+     "name": "SAMHD1_ALLO",
+     "pct": 73.3,
+     "p": 0.208,
+     "n_ge": 416,
+     "nperm": 2000
+    },
+    {
+     "name": "LIMK2_ALLO",
+     "pct": 86.5,
+     "p": 0.082,
+     "n_ge": 163,
+     "nperm": 2000
+    },
+    {
+     "name": "NLN_ALLO",
+     "pct": 59.9,
+     "p": 0.383,
+     "n_ge": 765,
+     "nperm": 2000
+    },
+    {
+     "name": "VCP_ALLO",
+     "pct": 52.4,
+     "p": 0.461,
+     "n_ge": 922,
+     "nperm": 2000
+    },
+    {
+     "name": "ADCY10_ALLO",
+     "pct": 95.5,
+     "p": 0.0005,
+     "n_ge": 0,
+     "nperm": 2000
+    },
+    {
+     "name": "FKBP1A_ALLO",
+     "pct": 64.5,
+     "p": 0.392,
+     "n_ge": 784,
+     "nperm": 2000
+    },
+    {
+     "name": "GRIA2_ALLO",
+     "pct": 74.9,
+     "p": 0.16,
+     "n_ge": 319,
+     "nperm": 2000
+    },
+    {
+     "name": "RET_ALLO",
+     "pct": 86.2,
+     "p": 0.096,
+     "n_ge": 191,
+     "nperm": 2000
+    },
+    {
+     "name": "TRPV1_ALLO",
+     "pct": 73.2,
+     "p": 0.242,
+     "n_ge": 485,
+     "nperm": 2000
+    },
+    {
+     "name": "ABL2_ALLO",
+     "pct": 50.6,
+     "p": 0.501,
+     "n_ge": 1002,
+     "nperm": 2000
+    },
+    {
+     "name": "HRAS_ALLO",
+     "pct": 65.7,
+     "p": 0.249,
+     "n_ge": 498,
+     "nperm": 2000
+    },
+    {
+     "name": "ITK_ALLO",
+     "pct": 80.0,
+     "p": 0.207,
+     "n_ge": 415,
+     "nperm": 2000
+    },
+    {
+     "name": "MAT2A_ALLO",
+     "pct": 51.1,
+     "p": 0.524,
+     "n_ge": 1048,
+     "nperm": 2000
+    },
+    {
+     "name": "EIF4E_ALLO",
+     "pct": 53.4,
+     "p": 0.435,
+     "n_ge": 871,
+     "nperm": 2000
+    },
+    {
+     "name": "CHKA_ALLO",
+     "pct": 65.9,
+     "p": 0.264,
+     "n_ge": 528,
+     "nperm": 2000
+    },
+    {
+     "name": "MAPK7_ALLO",
+     "pct": 77.4,
+     "p": 0.205,
+     "n_ge": 410,
+     "nperm": 2000
+    },
+    {
+     "name": "RRM1_ALLO",
+     "pct": 20.0,
+     "p": 0.936,
+     "n_ge": 1872,
+     "nperm": 2000
+    },
+    {
+     "name": "MAP2K2_ALLO",
+     "pct": 89.1,
+     "p": 0.043,
+     "n_ge": 86,
+     "nperm": 2000
+    },
+    {
+     "name": "PANK1_ALLO",
+     "pct": 37.4,
+     "p": 0.657,
+     "n_ge": 1315,
+     "nperm": 2000
+    },
+    {
+     "name": "GNE_ALLO",
+     "pct": 75.1,
+     "p": 0.134,
+     "n_ge": 268,
+     "nperm": 2000
+    },
+    {
+     "name": "F7_ALLO",
+     "pct": 65.8,
+     "p": 0.304,
+     "n_ge": 609,
+     "nperm": 2000
+    },
+    {
+     "name": "PDE10A_ALLO",
+     "pct": 78.1,
+     "p": 0.134,
+     "n_ge": 268,
+     "nperm": 2000
+    },
+    {
+     "name": "SIRT6_ALLO",
+     "pct": 75.5,
+     "p": 0.146,
+     "n_ge": 292,
+     "nperm": 2000
+    },
+    {
+     "name": "IDH3A_ALLO",
+     "pct": 63.9,
+     "p": 0.333,
+     "n_ge": 666,
+     "nperm": 2000
+    },
+    {
+     "name": "PTPN5_ALLO",
+     "pct": 42.8,
+     "p": 0.603,
+     "n_ge": 1206,
+     "nperm": 2000
+    },
+    {
+     "name": "AURKA_ALLO",
+     "pct": 74.0,
+     "p": 0.218,
+     "n_ge": 436,
+     "nperm": 2000
+    },
+    {
+     "name": "PTK2_ALLO",
+     "pct": 71.3,
+     "p": 0.32,
+     "n_ge": 640,
+     "nperm": 2000
+    },
+    {
+     "name": "PRMT3_ALLO",
+     "pct": 25.5,
+     "p": 0.71,
+     "n_ge": 1419,
+     "nperm": 2000
+    },
+    {
+     "name": "NT5C2_ALLO",
+     "pct": 65.0,
+     "p": 0.286,
+     "n_ge": 573,
+     "nperm": 2000
+    },
+    {
+     "name": "IGF1R_ALLO",
+     "pct": 52.5,
+     "p": 0.43,
+     "n_ge": 860,
+     "nperm": 2000
+    },
+    {
+     "name": "ALB_ALLO",
+     "pct": 81.8,
+     "p": 0.136,
+     "n_ge": 272,
+     "nperm": 2000
+    },
+    {
+     "name": "PYGB_ALLO",
+     "pct": 62.6,
+     "p": 0.327,
+     "n_ge": 654,
+     "nperm": 2000
+    },
+    {
+     "name": "GMDS_ALLO",
+     "pct": 52.9,
+     "p": 0.481,
+     "n_ge": 962,
+     "nperm": 2000
+    },
+    {
+     "name": "PRKAB2_ALLO",
+     "pct": 85.1,
+     "p": 0.061,
+     "n_ge": 123,
+     "nperm": 2000
+    },
+    {
+     "name": "GRIN2A_ALLO",
+     "pct": 57.3,
+     "p": 0.441,
+     "n_ge": 881,
+     "nperm": 2000
+    },
+    {
+     "name": "PDK2_ALLO",
+     "pct": 51.4,
+     "p": 0.43,
+     "n_ge": 860,
+     "nperm": 2000
+    }
+   ]
+  }
+ }
+}
