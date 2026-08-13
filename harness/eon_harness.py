@@ -54,14 +54,21 @@ _N_BUS = _N_LINE = None      # los llena el censo, y el resultado los estampa
 def _censo_de_la_red(net, declarada):
     global _N_BUS, _N_LINE
     n_bus, n_line = int(len(net.bus)), int(len(net.line))
-    esperado = {"case14": (14, 20), "case30": (30, 41), "case118": (118, 186)}
-    if declarada in esperado:
-        eb, el = esperado[declarada]
-        if n_bus != eb:
-            raise SystemExit(
-                "ABORTA: se declaro %s pero la red cargada tiene %d buses (se esperaban %d).\n"
-                "El sello habria dicho una red y medido otra — que es exactamente el defecto\n"
-                "que este guardia existe para impedir." % (declarada, n_bus, eb))
+    # La referencia se CARGA, no se recuerda. La primera version de este guardia traia
+    # una tabla escrita de memoria —decia que case14 tenia 20 lineas y tiene 15— y como
+    # solo comparaba buses, la cifra equivocada nunca gritó. Un guardia con un numero
+    # inventado adentro es el guardia del proximo defecto.
+    try:
+        ref = getattr(nw, declarada)()
+        rb, rl = int(len(ref.bus)), int(len(ref.line))
+    except AttributeError:
+        print("censo: '%s' no es una red del catalogo de pandapower; se mide igual" % declarada)
+        rb = rl = None
+    if rb is not None and (n_bus, n_line) != (rb, rl):
+        raise SystemExit(
+            "ABORTA: se declaro %s —que tiene %d buses y %d lineas— pero la red cargada\n"
+            "tiene %d y %d. El sello habria dicho una red y medido otra, que es exactamente\n"
+            "el defecto que este guardia existe para impedir." % (declarada, rb, rl, n_bus, n_line))
     print("censo de la red: %s -> %d buses, %d lineas" % (declarada, n_bus, n_line))
     _N_BUS, _N_LINE = n_bus, n_line
     return n_bus, n_line
