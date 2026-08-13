@@ -1,0 +1,131 @@
+# RQ-0019 — Ruteo de flota minera. El rival es OR-Tools, que es lo que se usa hoy.
+#
+# POR QUE EXISTE
+# --------------
+# La receta RQ-0019 esta publicada en /v1/state desde el 2026-07-20 con estado «in test»
+# y CERO corridas selladas detras. Su propio sello lo dice —«recipe card only, no compute
+# yet»— pero en la vitrina publica se ve como las otras tres. Una receta declarada y vacia
+# es una promesa sin respaldo en el unico lugar donde un cliente mira.
+#
+# EL CRITERIO, escrito antes del primer numero
+# --------------------------------------------
+# El retador tiene que SUPERAR a OR-Tools sobre la misma instancia y el mismo presupuesto
+# de segundos. Empatar no es ganar, y perder se publica igual. Nadie paga por saber que
+# algo no mejora — pero tampoco se puede vender una mejora que no ocurrio.
+
+name: Experimento VRP (ruteo de flota minera)
+
+on:
+  workflow_dispatch:
+    inputs:
+      nodos:
+        description: 'frentes + depósito (vacío = 10)'
+        required: false
+        type: string
+      camiones:
+        description: 'camiones de la flota (vacío = 3)'
+        required: false
+        type: string
+      capacidad:
+        description: 'toneladas por camión (vacío = 40)'
+        required: false
+        type: string
+      presupuesto:
+        description: 'segundos por brazo (vacío = 20)'
+        required: false
+        type: string
+      seed:
+        description: 'semilla (vacío = 42)'
+        required: false
+        type: string
+
+jobs:
+  correr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar el entorno
+        run: pip install --quiet numpy ortools pennylane
+
+      - name: Comprobar que la instancia tiene solución ANTES de gastar tiempo
+        # Sin esto, una instancia imposible hace 'fallar' a los tres brazos por igual y el
+        # resultado se lee como empate, cuando en realidad no habia problema que resolver.
+        env:
+          RQ_NODOS: ${{ inputs.nodos }}
+          RQ_CAMIONES: ${{ inputs.camiones }}
+          RQ_CAPACIDAD: ${{ inputs.capacidad }}
+          RQ_SEED: ${{ inputs.seed }}
+        run: |
+          cd harness
+          RQ_NODOS="${RQ_NODOS:-10}" RQ_CAMIONES="${RQ_CAMIONES:-3}" \
+          RQ_CAPACIDAD="${RQ_CAPACIDAD:-40}" RQ_SEED="${RQ_SEED:-42}" \
+          python3 -c "
+          import vrp_harness as V
+          coords, demanda, D = V.construir_instancia()
+          t, f = V.factible(demanda)
+          print('instancia factible: demanda %.1f t sobre flota %.1f t (%.0f%%)' % (t, f, 100*t/f))
+          "
+
+      - name: Correr los tres brazos
+        # SIN tragar fallos. Un experimento que falla, falla.
+        env:
+          RQ_NODOS: ${{ inputs.nodos }}
+          RQ_CAMIONES: ${{ inputs.camiones }}
+          RQ_CAPACIDAD: ${{ inputs.capacidad }}
+          RQ_BUDGET: ${{ inputs.presupuesto }}
+          RQ_SEED: ${{ inputs.seed }}
+          RQ_OUT: resultado_vrp.json
+        run: |
+          cd harness
+          RQ_NODOS="${RQ_NODOS:-10}" RQ_CAMIONES="${RQ_CAMIONES:-3}" \
+          RQ_CAPACIDAD="${RQ_CAPACIDAD:-40}" RQ_BUDGET="${RQ_BUDGET:-20}" \
+          RQ_SEED="${RQ_SEED:-42}" python3 vrp_harness.py
+
+      - name: Comprobar que el resultado se sostiene
+        # Los tres guardias que este track necesita, en el orden que costo aprender:
+        #   1. que el resultado exista y declare su instancia;
+        #   2. que el brazo clasico —el rival— haya producido un plan; sin rival no hay
+        #      comparacion, y un cuantico «ganando» sin rival seria el peor titular posible;
+        #   3. que el veredicto no se contradiga con los numeros que lo acompanan.
+        run: |
+          cd harness
+          python3 - <<'FIN'
+          import json, sys
+          d = json.load(open("resultado_vrp.json"))
+          p, v = d["params"], d["verdict"]
+          print("instancia: %s" % d["instance"])
+          print("frentes %d · camiones %d · uso de flota %s%%"
+                % (p["n_frentes"], p["n_camiones"], p["uso_de_flota_pct"]))
+          for b in ("exacto", "clasico", "cuantico"):
+              x = d[b]
+              print("  %-9s valor=%-12s tiempo=%-8ss %s"
+                    % (b, x.get("value"), x.get("runtime_s"), x.get("estado")))
+          print("veredicto: %s" % v["resultado"])
+
+          if d["clasico"].get("value") is None:
+              sys.exit("::error::OR-Tools no produjo plan. Sin el rival no hay comparacion, "
+                       "y cualquier veredicto seria sobre nada.")
+          cu, cl = d["cuantico"].get("value"), d["clasico"]["value"]
+          gano = v["resultado"].startswith("quantum win")
+          if gano and not (cu is not None and cu < cl):
+              sys.exit("::error::el veredicto dice que el cuantico gano y los numeros dicen "
+                       "%s vs %s. Se detiene: un veredicto que no calza con su propio dato "
+                       "es peor que no tener veredicto." % (cu, cl))
+          if not gano and cu is not None and cu < cl:
+              sys.exit("::error::el cuantico es MEJOR (%s < %s) y el veredicto no lo dice. "
+                       "El sesgo tambien cuenta cuando va en nuestra contra." % (cu, cl))
+          print("OK: el veredicto calza con los numeros.")
+          FIN
+
+      - name: Guardar el resultado
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultado-vrp
+          path: harness/resultado_vrp.json
+          if-no-files-found: error
