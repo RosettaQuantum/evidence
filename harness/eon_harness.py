@@ -104,8 +104,31 @@ pp.rundcpp(base)
 load_pct = base.res_line.loading_percent.values
 C0 = total_congestion(base)
 # corredores mas cargados -> refuerzo paralelo (duplicar linea)
-N_PAR = int(os.environ.get("RQ_NPAR", 10))
-N_NEW = int(os.environ.get("RQ_NNEW", 4))
+# LOS CANDIDATOS ESCALAN CON LA RED, y por que importa (2026-08-13):
+# hasta hoy N_PAR=10 y N_NEW=4 eran fijos, asi que K valia 14 en case14 Y en case118.
+# Cuatro corridas sobre redes de 14 a 118 buses resolvian EL MISMO problema de 14
+# variables binarias: la red crecia y el problema no. Comparar sus tiempos y llamarlo
+# escalamiento era medir variacion entre instancias y ponerle otro nombre.
+#
+# EL TECHO ES DURO Y ES EXPONENCIAL. El simulador usa un qubit por candidato:
+#   14 candidatos -> 0,2 MB de vector de estado
+#   26            -> 1 GB
+#   28            -> 4 GB   (al limite)
+#   34            -> 256 GB (imposible en CPU)
+# Por eso el tope por defecto es 26: es el ultimo punto donde la curva se puede
+# producir en simulacion. Subir de ahi exige hardware real, que cuesta y necesita OK.
+TOPE_CAND = int(os.environ.get("RQ_TOPE_CAND", 26))
+FRAC_PAR = float(os.environ.get("RQ_FRAC_PAR", 0.12))   # % de lineas a reforzar
+FRAC_NEW = float(os.environ.get("RQ_FRAC_NEW", 0.04))   # % de lineas nuevas
+_n_lineas = len(base.line)
+N_PAR = int(os.environ.get("RQ_NPAR", 0)) or max(6, int(round(FRAC_PAR * _n_lineas)))
+N_NEW = int(os.environ.get("RQ_NNEW", 0)) or max(2, int(round(FRAC_NEW * _n_lineas)))
+if N_PAR + N_NEW > TOPE_CAND:                            # el tope manda, y se dice
+    escala = TOPE_CAND / float(N_PAR + N_NEW)
+    N_PAR, N_NEW = max(4, int(N_PAR * escala)), max(2, int(N_NEW * escala))
+    print("candidatos recortados al tope simulable: %d + %d = %d (tope %d)"
+          % (N_PAR, N_NEW, N_PAR + N_NEW, TOPE_CAND))
+print("candidatos: %d paralelos + %d nuevos sobre %d lineas" % (N_PAR, N_NEW, _n_lineas))
 order = np.argsort(-load_pct)
 cand = []  # cada candidato: ("parallel", line_idx) o ("new", from_bus, to_bus)
 for li in order[:N_PAR]:
@@ -168,11 +191,24 @@ def qubo_val(x):
     x = np.asarray(x, float); return float(x @ Q @ x + c_lin @ x + CONST)
 
 # --- 1. optimo exacto (arbitro) ---
-t0 = time.time(); best=None; bx=None
-for bits in itertools.product([0,1], repeat=K):
-    v = qubo_val(bits)
-    if best is None or v < best: best, bx = v, bits
-exact = {"value": best, "x": list(bx), "runtime_s": round(time.time()-t0,3), "n_selected": int(sum(bx))}
+# La fuerza bruta es 2^K y muere al mismo tiempo que el simulador. Se conserva como
+# CONTROL CRUZADO mientras quepa, y por encima del tope el arbitro pasa a ser el
+# `status: OPTIMAL` de CP-SAT — que NO es una heuristica: es una prueba de optimalidad.
+# En las cuatro corridas de hoy coincidieron hasta el ultimo decimal, y esa coincidencia
+# es la que autoriza a jubilar la fuerza bruta sin perder rigor.
+TOPE_FUERZA_BRUTA = int(os.environ.get("RQ_TOPE_FB", 22))
+t0 = time.time()
+if K <= TOPE_FUERZA_BRUTA:
+    best=None; bx=None
+    for bits in itertools.product([0,1], repeat=K):
+        v = qubo_val(bits)
+        if best is None or v < best: best, bx = v, bits
+    exact = {"value": best, "x": list(bx), "runtime_s": round(time.time()-t0,3),
+             "n_selected": int(sum(bx)), "arbitro": "fuerza bruta 2^%d" % K}
+else:
+    exact = {"value": None, "x": None, "runtime_s": 0.0, "n_selected": None,
+             "arbitro": "no corrida: 2^%d no cabe (tope %d). El arbitro es el OPTIMAL de CP-SAT."
+                        % (K, TOPE_FUERZA_BRUTA)}
 
 # --- 2. clasico CP-SAT ---
 from ortools.sat.python import cp_model
@@ -239,11 +275,16 @@ def ac_validate(sel):
 sel_c=[i for i,b in enumerate(cx) if b]
 ac_base=ac_validate([]); ac_built=ac_validate(sel_c)
 
+_ref_cpsat = classical["value"] if str(classical.get("status","")).upper().startswith("OPTIMAL") else None
+
 def gap(v):
-    d=abs(exact["value"]) if abs(exact["value"])>1e-9 else 1.0
-    return round(100*(v-exact["value"])/d,4)
+    ref = exact["value"] if exact["value"] is not None else _ref_cpsat
+    if ref is None or v is None:
+        return None                    # sin arbitro no hay brecha, y se dice
+    d = abs(ref) if abs(ref) > 1e-9 else 1.0
+    return round(100*(v-ref)/d, 4)
 verdict={"protocol":"juez-v1: misma instancia + mismo presupuesto ambos lados; optimo exacto DC como arbitro; modelo de congestion 2do-orden DC validado en AC",
-    "exact_optimum":exact["value"],"classical_gap_pct":gap(classical["value"]),"quantum_gap_pct":gap(quantum["value"]),
+    "exact_optimum":exact["value"],"arbitro":exact.get("arbitro"),"arbitro_efectivo":("fuerza bruta" if exact["value"] is not None else ("CP-SAT OPTIMAL" if _ref_cpsat is not None else "NINGUNO — la brecha no se puede medir")),"classical_gap_pct":gap(classical["value"]),"quantum_gap_pct":gap(quantum["value"]),
     "outcome":"not yet — classical wins" if quantum["value"]>classical["value"] else ("quantum win (this instance)" if quantum["value"]<classical["value"] else "tie")}
 
 if _N_BUS is None:
@@ -261,5 +302,5 @@ result={"track":"E.ON grid-expansion","instance":f"{GRID}_stress{LOAD_SCALE}_K{K
 out=os.environ.get("RQ_OUT","result_eon.json")
 json.dump(result,open(out,"w"),indent=2)
 print(json.dumps(verdict,indent=1))
-print("C0(DC)=",round(C0,2),"| exact sel=",exact["n_selected"],"| classical=",classical["value"],classical["runtime_s"],"s | quantum=",round(quantum["value"],4),quantum["runtime_s"],"s")
+print("C0(DC)=",round(C0,2),"| K=",K,"| arbitro:",verdict.get("arbitro_efectivo"),"| exact sel=",exact["n_selected"],"| classical=",classical["value"],classical["runtime_s"],"s | quantum=",round(quantum["value"],4),quantum["runtime_s"],"s")
 print("AC base overload=",ac_base.get("ac_total_overload"),"-> built=",ac_built.get("ac_total_overload"),"(max load% ",ac_built.get("max_loading_pct"),")")
