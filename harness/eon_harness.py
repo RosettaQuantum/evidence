@@ -24,10 +24,26 @@ SEED = int(os.environ.get("RQ_SEED", 42))
 LOAD_SCALE = float(os.environ.get("RQ_LOADSCALE", 2.6))   # estres para inducir congestion
 K_BUDGET = int(os.environ.get("RQ_BUDGET", 5))            # lineas a construir (cardinalidad objetivo)
 LAMBDA_COST = float(os.environ.get("RQ_LAMBDA", 0.02))    # peso del costo de build
-TIME_BUDGET_S = 120.0
-QAOA_LAYERS = 2
-QAOA_STEPS = 120
-QAOA_SHOTS = 2000
+# EL PRESUPUESTO DEL BRAZO CUANTICO, Y POR QUE AHORA ESCALA
+# ----------------------------------------------------------
+# Hasta el 2026-08-13 estos cuatro numeros eran constantes. Medido ese dia: con K=20 el
+# optimizador alcanzo a dar **6 pasos de 120** antes de que el reloj lo cortara, y con
+# K=16 dio 83. Su brecha (4,41 % y 2,44 %) se publico como si midiera al algoritmo, y
+# mide nuestro presupuesto: un circuito casi sin optimizar.
+#
+# Peor todavia, en la misma direccion: las capas estaban fijas en 2 para todo tamaño, o
+# sea que a K creciente se le pedia expresar un problema mas grande con la misma
+# capacidad de expresion. Las dos cosas empujan la brecha hacia arriba y ninguna es una
+# propiedad del metodo.
+#
+# Ahora los cuatro se pueden fijar por entorno, y el DEFECTO escala con el problema en
+# vez de quedarse quieto. El artefacto declara los valores usados, asi que una corrida
+# nunca se puede volver a leer sin saber con cuanto presupuesto corrio.
+TIME_BUDGET_S = float(os.environ.get("RQ_TIME_BUDGET", 120.0))
+# Una capa por cada 4 variables, minimo 2: crece con el problema en vez de ignorarlo.
+QAOA_LAYERS = int(os.environ.get("RQ_LAYERS", 0)) or None    # se fija tras conocer K
+QAOA_STEPS = int(os.environ.get("RQ_STEPS", 120))
+QAOA_SHOTS = int(os.environ.get("RQ_SHOTS", 2000))
 rng = np.random.default_rng(SEED)
 
 TIGHTEN = float(os.environ.get("RQ_TIGHTEN", 0.5))   # feeder sub-dimensionado: ratings apretados
@@ -139,6 +155,13 @@ else:
     K_OBJETIVO = min(TOPE_CAND, max(8, int(round(0.20 * _n_lineas))))
 N_NEW = max(2, K_OBJETIVO // 4)                  # 1 de cada 4 es linea nueva
 N_PAR = min(K_OBJETIVO - N_NEW, _n_lineas)       # el resto refuerza lo mas cargado
+
+# Las capas del circuito, AHORA derivadas del tamaño del problema. Fijas en 2 producian
+# un ansatz con la misma capacidad de expresion para 8 y para 20 variables.
+if QAOA_LAYERS is None:
+    QAOA_LAYERS = max(2, K_OBJETIVO // 4)
+print("[qaoa] capas=%d · pasos=%d · reloj=%.0fs · disparos=%d"
+      % (QAOA_LAYERS, QAOA_STEPS, TIME_BUDGET_S, QAOA_SHOTS))
 print("candidatos: %d paralelos + %d nuevos = %d sobre una red de %d lineas"
       % (N_PAR, N_NEW, N_PAR + N_NEW, _n_lineas))
 order = np.argsort(-load_pct)
@@ -271,8 +294,17 @@ devs=qml.device("default.qubit",wires=K,shots=QAOA_SHOTS,seed=SEED)
 def samp(p): circ(p); return qml.sample(wires=range(K))
 S=np.array(samp(params)); vals=[qubo_val(s) for s in S]; qi=int(np.argmin(vals))
 qx=[int(b) for b in S[qi]]
+# El artefacto declara si el optimizador AGOTO su presupuesto o lo corto el reloj. Sin
+# este campo, una brecha grande por falta de tiempo se lee como una brecha grande del
+# metodo — que fue exactamente lo que paso con K=16 y K=20 el 2026-08-13.
 quantum={"framework":"PennyLane","backend":"default.qubit (CPU sim)","layers":QAOA_LAYERS,
-    "optimizer":f"Adam, {steps} steps","shots":QAOA_SHOTS,"value":qubo_val(qx),"x":qx,
+    "optimizer":f"Adam, {steps} steps","shots":QAOA_SHOTS,
+    "pasos_dados":steps,"pasos_de_presupuesto":QAOA_STEPS,
+    "reloj_s":TIME_BUDGET_S,
+    "truncado_por_reloj":bool(steps < QAOA_STEPS),
+    "advertencia":(None if steps >= QAOA_STEPS else
+        f"el optimizador dio {steps} de {QAOA_STEPS} pasos: el reloj lo corto. Esta "
+        f"brecha mide el presupuesto, no el metodo."),"value":qubo_val(qx),"x":qx,
     "runtime_s":round(time.time()-t0,3),"n_selected":int(sum(qx))}
 
 # --- validacion en AC real del set ganador (clasico) ---

@@ -45,18 +45,45 @@ def bitcoin_blocks(ots_path):
     return sorted(set(int(b) for b in re.findall(r"BitcoinBlockHeaderAttestation\((\d+)\)", info)))
 
 
+# El alcance se DECLARA y se cuenta, no se codifica en un mes y un prefijo.
+#
+# La version anterior era `runs/2026/07/*EXP-0033-*.json`: mes fijo y una sola convencion
+# de identificador. El 2026-08-13 se sellaron ocho corridas nuevas de este mismo track
+# —en `runs/2026/08/` y con identificadores `RQ-EXP-EON-*`— y este generador siguio
+# escribiendo «9 run(s)» sin saltarse ni una linea de aviso. El CSV es el resumen PUBLICO
+# del track: decia nueve sobre un track de diecisiete. Es la §5 bis en su forma pura —
+# cubrir menos de lo declarado y salir en verde.
+PATRONES = ["runs/**/*EXP-0033-*.json",        # los nueve de julio
+            "runs/**/*RQ-EXP-EON-*.json"]      # la convencion nueva, desde agosto
+candidatos = sorted({p for g in PATRONES for p in glob.glob(g, recursive=True)
+                     if not p.endswith(".ots")})
+if not candidatos:
+    raise SystemExit("ABORTA: ningun archivo del track E.ON. Un CSV vacio se lee como "
+                     "«no hay corridas», no como «no las encontre».")
+
 rows = []
-for path in sorted(glob.glob("runs/2026/07/*EXP-0033-*.json")):
+omitidos = []
+for path in candidatos:
     doc = json.load(open(path))
     meta, q = doc["meta"], doc["w6"]["que"]
     convention, _ = identify(doc)
     if convention is None:
+        omitidos.append(path)
         print(f"  OMITIDO (sello no verifica): {path}")
         continue
-    ip = (doc["w6"].get("como", {}) or {}).get("instance_params", {}) or {}
+    ip, fuente = parametros(doc)
     fn = re.search(r"case(\d+)", os.path.basename(path))
     filename_claim = f"IEEE case{fn.group(1)}" if fn else ""
     internal = str(ip.get("grid", ""))
+    # Sin nombre de red en el archivo NO hay dos etiquetas que comparar, y «no hay dos»
+    # no es «no calzan». La version anterior de esta linea marcaba NO CALZA sobre los
+    # sellos v3 —cuyo censo vive en otra rama— y sobre las corridas cuyo nombre no lleva
+    # la red: cuatro falsos positivos en el CSV publico. Un falso positivo retiene
+    # trabajo bueno, que es peor que dejar pasar un caso (CLAUDE.md Rosetta §2).
+    if not filename_claim or not internal:
+        acuerdo = "n/a"
+    else:
+        acuerdo = "yes" if filename_claim == internal else "NO"
     rows.append({
         "file_id": meta["file_id"],
         "archived_at": fecha_de(doc),
@@ -82,7 +109,11 @@ with open(OUT, "w", newline="") as f:
     w.writerows(rows)
 
 bad = [r for r in rows if r["labels_agree"] == "NO"]
-print(f"escrito {OUT} con {len(rows)} run(s); {len(bad)} con etiqueta en desacuerdo")
+# El DENOMINADOR, siempre: vistos / escritos / omitidos. «9 run(s)» a secas fue lo que
+# dejo pasar ocho corridas sin que nadie lo notara (§5 bis regla 1).
+print(f"escrito {OUT}: {len(candidatos)} archivo(s) del track vistos · {len(rows)} "
+      f"escrito(s) · {len(omitidos)} omitido(s) por sello que no verifica · "
+      f"{len(bad)} con etiqueta en desacuerdo")
 for r in rows:
     mark = "  <-- NO CALZA" if r["labels_agree"] == "NO" else ""
     print(f"  {r['file_id']}  nombre:{r['grid_per_filename']:<13} interno:{r['grid_per_internal_params']:<13}{mark}")

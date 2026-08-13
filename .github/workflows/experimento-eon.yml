@@ -34,6 +34,18 @@ on:
         description: 'tamaño del problema de decisión: nº de líneas candidatas (vacío = escala con la red, tope 22)'
         required: false
         type: string
+      pasos:
+        description: 'pasos del optimizador cuántico (vacío = 120)'
+        required: false
+        type: string
+      reloj:
+        description: 'segundos de reloj para el brazo cuántico (vacío = 120). Súbelo si el optimizador se trunca.'
+        required: false
+        type: string
+      capas:
+        description: 'capas del circuito (vacío = escala con el problema: K/4, mínimo 2)'
+        required: false
+        type: string
 
 jobs:
   correr:
@@ -76,10 +88,14 @@ jobs:
           RQ_LOADSCALE: ${{ inputs.load_scale }}
           RQ_SEED: ${{ inputs.seed }}
           RQ_CAND: ${{ inputs.candidatos }}
+          RQ_STEPS: ${{ inputs.pasos }}
+          RQ_TIME_BUDGET: ${{ inputs.reloj }}
+          RQ_LAYERS: ${{ inputs.capas }}
           RQ_OUT: resultado_eon.json
         run: |
           cd harness
           RQ_LOADSCALE="${RQ_LOADSCALE:-2.6}" RQ_SEED="${RQ_SEED:-42}" \
+          RQ_STEPS="${RQ_STEPS:-120}" RQ_TIME_BUDGET="${RQ_TIME_BUDGET:-120}" \
             python3 eon_harness.py
 
       - name: Comprobar que el resultado dice qué red corrió
@@ -116,6 +132,21 @@ jobs:
               sys.exit("::error::la instancia '%s' no menciona la red pedida '%s'. "
                        "Es exactamente como el nombre de archivo empezo a mentir."
                        % (d.get("instance"), red))
+          # EL GUARDIA QUE FALTABA, y costo dos puntos de una curva publicada:
+          # si el reloj corto al optimizador, la brecha mide el presupuesto y no el
+          # metodo. Antes ese hecho no salia por ninguna parte y la cifra se leia como
+          # si el brazo cuantico hubiera dado lo mejor de si.
+          q = d.get("quantum") or d.get("cuantico") or {}
+          if q.get("truncado_por_reloj"):
+              print("::warning::OPTIMIZADOR TRUNCADO — %s. La brecha de esta corrida "
+                    "mide el presupuesto, no el metodo." % q.get("advertencia"))
+          elif q.get("pasos_dados") is not None:
+              print("optimizador: %s de %s pasos, presupuesto agotado limpio."
+                    % (q["pasos_dados"], q["pasos_de_presupuesto"]))
+          else:
+              sys.exit("::error::el resultado no declara si el optimizador se trunco. "
+                       "Sin ese campo una brecha por falta de tiempo se lee como una "
+                       "brecha del metodo — que es el defecto del 2026-08-13.")
           print("OK: la red declarada, la medida y la pedida son la misma.")
           FIN
 
@@ -123,7 +154,10 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: resultado-eon-${{ inputs.grid }}
+          # El nombre lleva la red Y el tamaño del problema. Con sólo la red, cuatro
+          # corridas sobre la misma red con distinto K colisionan y se pisan: quedaría
+          # un solo artefacto donde debía haber cuatro, sin que nada avise.
+          name: resultado-eon-${{ inputs.grid }}-K${{ inputs.candidatos }}-p${{ inputs.pasos }}
           path: harness/resultado_eon.json
           # `error` y no `warn`: un artefacto vacío es indistinguible de uno perdido.
           if-no-files-found: error
