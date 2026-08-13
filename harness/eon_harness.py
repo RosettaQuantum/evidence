@@ -33,14 +33,52 @@ rng = np.random.default_rng(SEED)
 TIGHTEN = float(os.environ.get("RQ_TIGHTEN", 0.5))   # feeder sub-dimensionado: ratings apretados
 _RATINGS = None   # se fija una vez desde el caso base estresado (mismo para todas las variantes)
 
+GRID = os.environ.get("RQ_GRID", "case14")
+_GRIDFN = getattr(nw, GRID)
+
+# ---------------------------------------------------------------- EL GUARDIA
+# POR QUE EXISTE, con nombre y fecha:
+# Hasta el 2026-08-13 este archivo cargaba la red desde RQ_GRID y despues estampaba
+# dos literales: `instance="case14_..."` y `params.grid="IEEE case14"`. Corriendo
+# case118 el sello decia case14, y NADIE se enteraba porque ningun campo registraba
+# el tamano real de la red. Nueve sellos salieron asi, y la propuesta de julio
+# heredo la afirmacion del NOMBRE DEL ARCHIVO: "medido sobre case14 -> case30 ->
+# case118, todas selladas". Las nueve eran case14.
+#
+# El instrumento no podia registrar lo que decia medir. Por eso el arreglo no es
+# cambiar los literales por variables —eso ya seria correcto y seguiria siendo
+# indemostrable— sino MEDIR la red cargada y comprobar que calza con la declarada.
+_N_BUS = _N_LINE = None      # los llena el censo, y el resultado los estampa
+
+
+def _censo_de_la_red(net, declarada):
+    global _N_BUS, _N_LINE
+    n_bus, n_line = int(len(net.bus)), int(len(net.line))
+    esperado = {"case14": (14, 20), "case30": (30, 41), "case118": (118, 186)}
+    if declarada in esperado:
+        eb, el = esperado[declarada]
+        if n_bus != eb:
+            raise SystemExit(
+                "ABORTA: se declaro %s pero la red cargada tiene %d buses (se esperaban %d).\n"
+                "El sello habria dicho una red y medido otra — que es exactamente el defecto\n"
+                "que este guardia existe para impedir." % (declarada, n_bus, eb))
+    print("censo de la red: %s -> %d buses, %d lineas" % (declarada, n_bus, n_line))
+    _N_BUS, _N_LINE = n_bus, n_line
+    return n_bus, n_line
+
+
 def build_base():
-    net = nw.case14()
+    net = _GRIDFN()
     net.load["p_mw"] *= LOAD_SCALE
     net.load["q_mvar"] *= LOAD_SCALE
     global _RATINGS
     if _RATINGS is None:
         pp.rundcpp(net)
-        _RATINGS = net.res_line.i_ka.values * TIGHTEN
+        ik = net.res_line.i_ka.values
+        # piso al rating para evitar lineas con flujo ~0 -> carga infinita
+        floor = 0.15 * float(np.nanmax(ik))
+        _RATINGS = np.maximum(ik, floor) * TIGHTEN
+        _censo_de_la_red(net, GRID)
     net.line["max_i_ka"] = _RATINGS
     return net
 
@@ -59,15 +97,17 @@ pp.rundcpp(base)
 load_pct = base.res_line.loading_percent.values
 C0 = total_congestion(base)
 # corredores mas cargados -> refuerzo paralelo (duplicar linea)
+N_PAR = int(os.environ.get("RQ_NPAR", 10))
+N_NEW = int(os.environ.get("RQ_NNEW", 4))
 order = np.argsort(-load_pct)
 cand = []  # cada candidato: ("parallel", line_idx) o ("new", from_bus, to_bus)
-for li in order[:10]:
+for li in order[:N_PAR]:
     cand.append(("parallel", int(li)))
 # nuevas lineas entre buses no adyacentes (elegidas con semilla, plausibles)
 buses = list(base.bus.index)
 existing = set(tuple(sorted((int(r.from_bus), int(r.to_bus)))) for _, r in base.line.iterrows())
 tries = 0
-while len([c for c in cand if c[0]=="new"]) < 4 and tries < 200:
+while len([c for c in cand if c[0]=="new"]) < N_NEW and tries < 400:
     a, b = rng.choice(buses, 2, replace=False)
     key = tuple(sorted((int(a), int(b))))
     if key not in existing and a != b:
@@ -199,14 +239,19 @@ verdict={"protocol":"juez-v1: misma instancia + mismo presupuesto ambos lados; o
     "exact_optimum":exact["value"],"classical_gap_pct":gap(classical["value"]),"quantum_gap_pct":gap(quantum["value"]),
     "outcome":"not yet — classical wins" if quantum["value"]>classical["value"] else ("quantum win (this instance)" if quantum["value"]<classical["value"] else "tie")}
 
-result={"track":"E.ON grid-expansion","instance":f"case14_stress{LOAD_SCALE}_K{K}_seed{SEED}",
-    "params":{"grid":"IEEE case14","load_scale":LOAD_SCALE,"n_candidates":K,"k_budget":K_BUDGET,"lambda_cost":LAMBDA_COST,"seed":SEED,"time_budget_s":TIME_BUDGET_S},
+if _N_BUS is None:
+    raise SystemExit("ABORTA: el censo de la red nunca corrio, asi que el sello no\n"
+                     "puede declarar cuantos buses tenia. Un campo ausente es mejor que\n"
+                     "uno inventado, pero un sello a medias no se publica.")
+
+result={"track":"E.ON grid-expansion","instance":f"{GRID}_stress{LOAD_SCALE}_K{K}_seed{SEED}",
+    "params":{"grid":f"IEEE {GRID}","n_buses":_N_BUS,"n_lines":_N_LINE,"load_scale":LOAD_SCALE,"n_candidates":K,"k_budget":K_BUDGET,"lambda_cost":LAMBDA_COST,"seed":SEED,"time_budget_s":TIME_BUDGET_S},
     "grid_physics":{"base_congestion_dc":round(C0,3),"congestion_model":"2nd-order DC superposition (measured r_i, q_ij via pandapower rundcpp)","measure_runtime_s":measure_s,
         "candidates":[{"type":c[0],"detail":c[1:] } for c in cand],
         "ac_validation":{"base":ac_base,"classical_build":ac_built,"built_lines":sel_c}},
     "exact":exact,"classical":classical,"quantum":quantum,"verdict":verdict,
     "lib_versions":{"pennylane":qml.__version__,"numpy":np.__version__,"python":platform.python_version(),"pandapower":pp.__version__}}
-out=os.environ.get("RQ_OUT","/home/claude/rosettaq/runs/result_eon.json")
+out=os.environ.get("RQ_OUT","result_eon.json")
 json.dump(result,open(out,"w"),indent=2)
 print(json.dumps(verdict,indent=1))
 print("C0(DC)=",round(C0,2),"| exact sel=",exact["n_selected"],"| classical=",classical["value"],classical["runtime_s"],"s | quantum=",round(quantum["value"],4),quantum["runtime_s"],"s")
