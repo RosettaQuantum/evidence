@@ -30,11 +30,15 @@ on:
         description: 'semilla (vacío = 42)'
         required: false
         type: string
+      candidatos:
+        description: 'tamaño del problema de decisión: nº de líneas candidatas (vacío = escala con la red, tope 22)'
+        required: false
+        type: string
 
 jobs:
   correr:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -71,6 +75,7 @@ jobs:
           RQ_GRID: ${{ inputs.grid }}
           RQ_LOADSCALE: ${{ inputs.load_scale }}
           RQ_SEED: ${{ inputs.seed }}
+          RQ_CAND: ${{ inputs.candidatos }}
           RQ_OUT: resultado_eon.json
         run: |
           cd harness

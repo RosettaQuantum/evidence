@@ -117,18 +117,30 @@ C0 = total_congestion(base)
 #   34            -> 256 GB (imposible en CPU)
 # Por eso el tope por defecto es 26: es el ultimo punto donde la curva se puede
 # producir en simulacion. Subir de ahi exige hardware real, que cuesta y necesita OK.
-TOPE_CAND = int(os.environ.get("RQ_TOPE_CAND", 26))
-FRAC_PAR = float(os.environ.get("RQ_FRAC_PAR", 0.12))   # % de lineas a reforzar
-FRAC_NEW = float(os.environ.get("RQ_FRAC_NEW", 0.04))   # % de lineas nuevas
+# RQ_CAND fija el tamano del problema de decision, EXPLICITAMENTE. Es el parametro
+# que faltaba: mi primer intento lo derivaba de fracciones de lineas y el piso minimo
+# dominaba en redes chicas — cuatro redes de 14 a 118 buses dieron 8, 8 y 11 candidatos,
+# o sea casi el mismo problema otra vez. Para que exista una curva de escalamiento, el
+# numero de variables tiene que poder elegirse.
+#
+# EL TECHO ES EXPONENCIAL Y DOBLE: el simulador usa un qubit por candidato y la fuerza
+# bruta es 2^K. 26 candidatos son 1 GB de vector de estado; y medido en CI, 26 no
+# termina en 90 minutos. Por eso el tope por defecto es 22: el ultimo que cabe en
+# memoria Y en reloj.
 _n_lineas = len(base.line)
-N_PAR = int(os.environ.get("RQ_NPAR", 0)) or max(6, int(round(FRAC_PAR * _n_lineas)))
-N_NEW = int(os.environ.get("RQ_NNEW", 0)) or max(2, int(round(FRAC_NEW * _n_lineas)))
-if N_PAR + N_NEW > TOPE_CAND:                            # el tope manda, y se dice
-    escala = TOPE_CAND / float(N_PAR + N_NEW)
-    N_PAR, N_NEW = max(4, int(N_PAR * escala)), max(2, int(N_NEW * escala))
-    print("candidatos recortados al tope simulable: %d + %d = %d (tope %d)"
-          % (N_PAR, N_NEW, N_PAR + N_NEW, TOPE_CAND))
-print("candidatos: %d paralelos + %d nuevos sobre %d lineas" % (N_PAR, N_NEW, _n_lineas))
+TOPE_CAND = int(os.environ.get("RQ_TOPE_CAND", 22))
+_pedido = int(os.environ.get("RQ_CAND", 0))
+if _pedido:
+    K_OBJETIVO = min(_pedido, TOPE_CAND, _n_lineas + 6)
+    if K_OBJETIVO < _pedido:
+        print("candidatos recortados de %d a %d (tope %d, lineas %d)"
+              % (_pedido, K_OBJETIVO, TOPE_CAND, _n_lineas))
+else:
+    K_OBJETIVO = min(TOPE_CAND, max(8, int(round(0.20 * _n_lineas))))
+N_NEW = max(2, K_OBJETIVO // 4)                  # 1 de cada 4 es linea nueva
+N_PAR = min(K_OBJETIVO - N_NEW, _n_lineas)       # el resto refuerza lo mas cargado
+print("candidatos: %d paralelos + %d nuevos = %d sobre una red de %d lineas"
+      % (N_PAR, N_NEW, N_PAR + N_NEW, _n_lineas))
 order = np.argsort(-load_pct)
 cand = []  # cada candidato: ("parallel", line_idx) o ("new", from_bus, to_bus)
 for li in order[:N_PAR]:
