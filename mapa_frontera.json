@@ -6,21 +6,21 @@
  "muro_memoria": 30,
  "nota_del_muro": "22 es el ultimo tamaño que cabe en memoria Y termina en el reloj de CI, medido el 2026-08-13. Por encima hay que ir a hardware real, que cuesta.",
  "denominador": {
-  "corridas_leidas": 60,
-  "puntos_en_el_mapa": 29,
+  "corridas_leidas": 68,
+  "puntos_en_el_mapa": 37,
   "descartadas": 31
  },
  "no_cubre": "Alosteria (RQ-0007): su metrica es un percentil de ranking, no una brecha de optimalidad. Mezclarla daria un plano cuyos ejes significan cosas distintas segun el punto. Se declara aparte en vez de forzarla.",
  "clases": {
   "Grid optimization": {
-   "n_puntos": 9,
+   "n_puntos": 17,
    "rango_variables": [
-    14,
-    16
+    8,
+    20
    ],
-   "brecha_min_pct": 0.005,
-   "brecha_max_pct": 4.1993,
-   "algun_empate": false,
+   "brecha_min_pct": 0.0,
+   "brecha_max_pct": 5.0138,
+   "algun_empate": true,
    "alguna_victoria": false
   },
   "Portfolio optimization": {
@@ -37,6 +37,34 @@
  },
  "puntos": [
   {
+   "id": "RQ-EXP-EON-K08-002",
+   "clase": "Grid optimization",
+   "instancia": "eon_case14_K8@be5126af.json",
+   "variables": 8,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 0.0,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
+  },
+  {
+   "id": "RQ-EXP-EON-K12-002",
+   "clase": "Grid optimization",
+   "instancia": "eon_case30_K12@dbe1e2f3.json",
+   "variables": 12,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 0.1355,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
+  },
+  {
    "id": "EXP-0033-001",
    "clase": "Grid optimization",
    "instancia": "case14_stress3.0_K14_seed42",
@@ -45,7 +73,10 @@
    "brecha_cuantica_pct": 3.2048,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0033-003",
@@ -56,7 +87,10 @@
    "brecha_cuantica_pct": 1.0361,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0033-002",
@@ -67,7 +101,66 @@
    "brecha_cuantica_pct": 0.005,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
+  },
+  {
+   "id": "RQ-EXP-EON-CASE30-001",
+   "clase": "Grid optimization",
+   "instancia": "eon_case30@ee943d5c.json",
+   "variables": 14,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 0.4735,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
+  },
+  {
+   "id": "RQ-EXP-EON-CASE118-001",
+   "clase": "Grid optimization",
+   "instancia": "eon_case118@a3340c06.json",
+   "variables": 14,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 1.0227,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
+  },
+  {
+   "id": "RQ-EXP-EON-CASE14-001",
+   "clase": "Grid optimization",
+   "instancia": "eon_case14@eb25fbf5.json",
+   "variables": 14,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 5.0138,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
+  },
+  {
+   "id": "RQ-EXP-EON-CASE57-001",
+   "clase": "Grid optimization",
+   "instancia": "eon_case57@c21f2528.json",
+   "variables": 14,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 1.7591,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0033-008",
@@ -78,7 +171,10 @@
    "brecha_cuantica_pct": 1.4472,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0033-004",
@@ -89,7 +185,10 @@
    "brecha_cuantica_pct": 1.0371,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0033-007",
@@ -100,7 +199,10 @@
    "brecha_cuantica_pct": 3.1067,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0033-009",
@@ -111,7 +213,10 @@
    "brecha_cuantica_pct": 4.1993,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0033-006",
@@ -122,7 +227,10 @@
    "brecha_cuantica_pct": 0.9884,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0033-005",
@@ -133,7 +241,38 @@
    "brecha_cuantica_pct": 1.0329,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
+  },
+  {
+   "id": "RQ-EXP-EON-K16-002",
+   "clase": "Grid optimization",
+   "instancia": "eon_case57_K16@7b68e206.json",
+   "variables": 16,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 2.4448,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
+  },
+  {
+   "id": "RQ-EXP-EON-K20-002",
+   "clase": "Grid optimization",
+   "instancia": "eon_case118_K20@d83f21ff.json",
+   "variables": 20,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 4.4144,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-011",
@@ -144,7 +283,10 @@
    "brecha_cuantica_pct": 73.4321,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-009",
@@ -155,7 +297,10 @@
    "brecha_cuantica_pct": 39.8484,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-005",
@@ -166,7 +311,10 @@
    "brecha_cuantica_pct": 23.3915,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-010",
@@ -177,7 +325,10 @@
    "brecha_cuantica_pct": 22.0159,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-012",
@@ -188,7 +339,10 @@
    "brecha_cuantica_pct": 86.5439,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-003",
@@ -199,7 +353,10 @@
    "brecha_cuantica_pct": 53.7138,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-001",
@@ -210,7 +367,10 @@
    "brecha_cuantica_pct": 42.8071,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-004",
@@ -221,7 +381,10 @@
    "brecha_cuantica_pct": 43.7205,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-015",
@@ -232,7 +395,10 @@
    "brecha_cuantica_pct": 12.2897,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-008",
@@ -243,7 +409,10 @@
    "brecha_cuantica_pct": 31.0202,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-014",
@@ -254,7 +423,10 @@
    "brecha_cuantica_pct": 32.7237,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-016",
@@ -265,7 +437,10 @@
    "brecha_cuantica_pct": 9.5986,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-013",
@@ -276,7 +451,10 @@
    "brecha_cuantica_pct": 31.1957,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-007",
@@ -287,7 +465,10 @@
    "brecha_cuantica_pct": 21.2844,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-002",
@@ -298,7 +479,10 @@
    "brecha_cuantica_pct": 20.7363,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-006",
@@ -309,7 +493,10 @@
    "brecha_cuantica_pct": 42.3281,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-017",
@@ -320,7 +507,10 @@
    "brecha_cuantica_pct": 24.2505,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-020",
@@ -331,7 +521,10 @@
    "brecha_cuantica_pct": 38.8097,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-018",
@@ -342,7 +535,10 @@
    "brecha_cuantica_pct": 58.4842,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   },
   {
    "id": "EXP-0012-019",
@@ -353,7 +549,10 @@
    "brecha_cuantica_pct": 42.9212,
    "brecha_clasica_pct": 0.0,
    "arbitro": "optimo exacto declarado",
-   "cabe_en_simulacion": true
+   "cabe_en_simulacion": true,
+   "pasos_dados": null,
+   "pasos_de_presupuesto": null,
+   "truncado": null
   }
  ],
  "descartadas": [

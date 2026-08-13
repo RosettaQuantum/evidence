@@ -50,6 +50,21 @@ API = "https://rosettaquantum.com/v1"
 MURO_SIMULACION = 22
 MURO_MEMORIA = 30          # ~16 GB de vector de estado; por encima, imposible en CPU
 
+# UNA CLASE, UN NOMBRE. Los sellos de julio dicen «Grid optimization» y los de agosto
+# traen la red en otra rama; leidos tal cual, el mismo problema —expansion de red
+# electrica de E.ON— salia partido en dos clases de 9 y 8 puntos. Para un cliente eso
+# es peor que un error de etiqueta: dos nubes chicas dicen «poco medido» donde una nube
+# de 17 dice «esto lo tenemos recorrido».
+#
+# Se unifica SOLO lo que es el mismo problema. Portafolio y red no se mezclan aunque
+# ambas sean optimizacion combinatoria: sus brechas viven en ordenes distintos y
+# juntarlas produciria un promedio que no describe a ninguna.
+SINONIMOS = {
+    "optimizacion de red electrica": "Grid optimization",
+    "optimización de red eléctrica": "Grid optimization",
+    "grid expansion": "Grid optimization",
+}
+
 
 def _hondo(o, claves):
     """Busca una clave a cualquier profundidad. Devuelve el primer valor no nulo."""
@@ -68,6 +83,36 @@ def _hondo(o, claves):
     return None
 
 
+def _esquema_v3(doc):
+    """Los campos del sello nuevo, leidos por RUTA EXPLICITA. Nunca a ciegas.
+
+    POR QUE POR RUTA Y NO CON _hondo(): en el sello v3 hay DOS campos llamados
+    `gap_pct` —uno bajo `clasico_CP_SAT` y otro bajo `cuantico_QAOA`— y el del clasico
+    aparece primero. Una busqueda a ciegas devuelve 0,0 y lo pinta como brecha cuantica:
+    un empate falso, en el eje que es el producto entero. El valor existiria, seria
+    correcto, y estaria respondiendo a otra pregunta (CLAUDE.md Rosetta §5 quater, la
+    sexta forma).
+    """
+    q = ((doc.get("w6") or {}).get("que") or {})
+    tam = ((q.get("el_tamano_del_problema") or {}).get("variables_binarias"))
+    res = q.get("resultado") or {}
+    cu = res.get("cuantico_QAOA") or {}
+    cl = res.get("clasico_CP_SAT") or {}
+    return {
+        "variables": tam,
+        "gq": cu.get("gap_pct"),
+        "gc": cl.get("gap_pct"),
+        "arbitro": ("CP-SAT %s" % cl["status"]) if cl.get("status") else None,
+        "clase": (q.get("censo_de_la_red") or {}).get("grid"),
+        "instancia": (q.get("artefacto") or {}).get("archivo"),
+        # Lo que este esquema TODAVIA no registra, y el mapa no puede inventar: si el
+        # optimizador agoto su presupuesto o lo corto el reloj. Sin eso, un punto alto
+        # por falta de tiempo es indistinguible de un punto alto por el metodo.
+        "pasos": ((cu.get("optimizador") or {}) or {}).get("pasos_dados"),
+        "tope_pasos": ((cu.get("optimizador") or {}) or {}).get("pasos_de_presupuesto"),
+    }
+
+
 def extraer(doc, fid):
     """Un punto del mapa, o None con su razon. Nunca inventa el tamaño ni la brecha."""
     clase = _hondo(doc, {"problem_class", "clase_de_problema"})
@@ -75,12 +120,22 @@ def extraer(doc, fid):
     gaps = _hondo(doc, {"quality_gaps_pct"})
     params = _hondo(doc, {"instance_params", "params"}) or {}
 
-    # --- el tamaño, por orden de confianza: declarado > derivado > ausente
+    # El sello v3 guarda tamaño y brechas en otra rama. Leerlo PRIMERO y por ruta.
+    # Sin esto el mapa descartaba las ocho corridas selladas del 13-ago —incluido el
+    # unico empate del archivo— con el motivo «sin tamaño: ningun campo declara cuantas
+    # variables tenia». El campo estaba; el lector miraba donde ya no vive. Un descarte
+    # con un motivo falso es peor que un error: se lee como si el dato no existiera.
+    v3 = _esquema_v3(doc)
+
+    # --- el tamaño, por orden de confianza: v3 > declarado > derivado > ausente
     tam, fuente_tam = None, None
-    for k in ("n_candidates", "n_assets", "n_variables", "n_qubits"):
-        if isinstance(params, dict) and params.get(k):
-            tam, fuente_tam = int(params[k]), "declarado:%s" % k
-            break
+    if v3["variables"]:
+        tam, fuente_tam = int(v3["variables"]), "v3:el_tamano_del_problema.variables_binarias"
+    if tam is None:
+        for k in ("n_candidates", "n_assets", "n_variables", "n_qubits"):
+            if isinstance(params, dict) and params.get(k):
+                tam, fuente_tam = int(params[k]), "declarado:%s" % k
+                break
     if tam is None:
         x = _hondo(doc, {"x"})                       # el vector solucion tiene una entrada por variable
         if isinstance(x, list) and x and all(isinstance(v, (int, float)) for v in x):
@@ -88,19 +143,27 @@ def extraer(doc, fid):
 
     # --- la brecha
     gq = gc = None
-    if isinstance(gaps, dict):
+    if v3["gq"] is not None:
+        gq, gc = v3["gq"], v3["gc"]
+    if gq is None and isinstance(gaps, dict):
         gq, gc = gaps.get("quantum"), gaps.get("classical")
     if gq is None:
         gq = _hondo(doc, {"quantum_gap_pct"})
         gc = _hondo(doc, {"classical_gap_pct"})
+    if clase is None and v3["clase"]:
+        clase = "Grid optimization"
+    if inst is None:
+        inst = v3["instancia"]
+    clase = SINONIMOS.get((clase or "").strip().lower(), clase)
 
     if tam is None:
         return None, "sin tamaño: ningun campo declara cuantas variables tenia"
     if gq is None:
         return None, "sin brecha cuantica medida"
 
-    arbitro = _hondo(doc, {"arbitro_efectivo", "arbitro"}) or (
-        "optimo exacto declarado" if _hondo(doc, {"exact_optimum"}) is not None else None)
+    arbitro = (v3["arbitro"] or _hondo(doc, {"arbitro_efectivo", "arbitro"}) or
+               ("optimo exacto declarado" if _hondo(doc, {"exact_optimum"}) is not None
+                else None))
 
     return {
         "id": fid, "clase": clase or "sin declarar", "instancia": inst,
@@ -109,6 +172,13 @@ def extraer(doc, fid):
         "brecha_clasica_pct": round(float(gc), 4) if gc is not None else None,
         "arbitro": arbitro,
         "cabe_en_simulacion": tam <= MURO_SIMULACION,
+        # Si el sello lo declara, el punto viaja sabiendo si el optimizador agoto su
+        # presupuesto. Si NO lo declara, viaja como None — que significa «no se sabe»,
+        # no «no se trunco». Un None leido como False pintaria como medicion limpia un
+        # punto que quizas se corto por reloj.
+        "pasos_dados": v3["pasos"], "pasos_de_presupuesto": v3["tope_pasos"],
+        "truncado": (None if v3["pasos"] is None or v3["tope_pasos"] is None
+                     else v3["pasos"] < v3["tope_pasos"]),
     }, None
 
 
