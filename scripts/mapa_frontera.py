@@ -113,8 +113,24 @@ def _esquema_v3(doc):
     }
 
 
+def _desenvolver(doc):
+    """La API entrega el sello DENTRO de `archivo_sellado`; el archivo local lo entrega
+    plano. Es el mismo documento con un sobre distinto.
+
+    Sin esto, el modo --api descartaba las ocho corridas nuevas con «sin tamaño»: el
+    lector buscaba `w6` en la raiz y ahi vive el sobre, no el sello. El mapa desde la
+    API salia con 28 puntos y desde el archivo con 37, y **ninguna de las dos cifras
+    avisaba de la otra** — que es exactamente lo que un tercero habria visto al
+    reconstruirlo, concluyendo que el archivo es mas chico de lo que es.
+    """
+    if isinstance(doc, dict) and "w6" not in doc and isinstance(doc.get("archivo_sellado"), dict):
+        return doc["archivo_sellado"]
+    return doc
+
+
 def extraer(doc, fid):
     """Un punto del mapa, o None con su razon. Nunca inventa el tamaño ni la brecha."""
+    doc = _desenvolver(doc)
     clase = _hondo(doc, {"problem_class", "clase_de_problema"})
     inst = _hondo(doc, {"instance", "instancia"})
     gaps = _hondo(doc, {"quality_gaps_pct"})
@@ -194,16 +210,42 @@ def desde_archivo():
     return docs
 
 
+# EL AGENTE DE USUARIO, Y POR QUE ESTA LINEA VALE UN COMENTARIO LARGO
+# --------------------------------------------------------------------
+# Medido el 2026-08-13: rosettaquantum.com devuelve 403 al agente por defecto de
+# urllib (`Python-urllib/3.x`) y 200 a cualquier otro, incluido `curl`. O sea que
+# **este mismo modo `--api` nunca funciono contra produccion** — y es el modo que
+# existe precisamente para demostrar que un tercero puede reconstruir el mapa desde
+# la API publica, sin nuestro repositorio.
+#
+# Poner una cabecera aca lo desbloquea para NOSOTROS y no arregla el problema: un
+# comprador que abra Python —el lenguaje en el que estan escritas nuestras propias
+# herramientas de verificacion— sigue recibiendo 403 siguiendo nuestras instrucciones.
+# El arreglo de verdad es en la regla del borde; esto es la venda mientras tanto, y se
+# deja anotado para que nadie confunda una con otra.
+AGENTE = "RosettaQuantum-mapa-frontera/1.0 (+https://rosettaquantum.com)"
+
+
+def _traer(url):
+    req = urllib.request.Request(url, headers={"User-Agent": AGENTE})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)
+
+
 def desde_api():
-    with urllib.request.urlopen("%s/runs?limit=1000" % API, timeout=30) as r:
-        ids = [it["id"] for it in json.load(r)["items"]]
-    docs = []
+    ids = [it["id"] for it in _traer("%s/runs?limit=1000" % API)["items"]]
+    docs, fallidos = [], []
     for i in ids:
         try:
-            with urllib.request.urlopen("%s/archive/%s" % (API, i), timeout=30) as r:
-                docs.append((json.load(r), i))
+            docs.append((_traer("%s/archive/%s" % (API, i)), i))
         except Exception as e:
+            fallidos.append(i)
             print("  no se pudo traer %s: %s" % (i, str(e)[:60]))
+    # El denominador tambien aca: «37 puntos» sobre 68 corridas leidas no es lo mismo
+    # que sobre 68 pedidas y 12 caidas. Sin esta linea, una API a medias produce un
+    # mapa mas chico que se lee como un archivo mas chico.
+    print("  API: %d corridas pedidas · %d traidas · %d fallidas"
+          % (len(ids), len(docs), len(fallidos)))
     return docs
 
 
