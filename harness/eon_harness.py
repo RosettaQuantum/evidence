@@ -39,11 +39,26 @@ LAMBDA_COST = float(os.environ.get("RQ_LAMBDA", 0.02))    # peso del costo de bu
 # Ahora los cuatro se pueden fijar por entorno, y el DEFECTO escala con el problema en
 # vez de quedarse quieto. El artefacto declara los valores usados, asi que una corrida
 # nunca se puede volver a leer sin saber con cuanto presupuesto corrio.
-TIME_BUDGET_S = float(os.environ.get("RQ_TIME_BUDGET", 120.0))
+def _env(nombre, defecto, tipo=int):
+    """Lee una variable de entorno tratando la CADENA VACIA como ausente.
+
+    GitHub Actions pasa "" —no la ausencia— cuando un input opcional se deja en blanco,
+    y `os.environ.get(x, 120)` devuelve "" en ese caso, no 120. Las cuatro corridas del
+    2026-08-13T19:37 murieron asi, en 45 segundos y con el mensaje mas inutil posible:
+    `invalid literal for int() with base 10: ''`. El defecto se arregla una vez y para
+    los cuatro parametros, no solo para el que fallo — los otros tres sobrevivian por un
+    valor por defecto puesto en el shell del flujo, que es una red que no se ve y que la
+    proxima persona no va a saber que existe.
+    """
+    v = os.environ.get(nombre, "")
+    return tipo(v) if str(v).strip() else defecto
+
+
+TIME_BUDGET_S = _env("RQ_TIME_BUDGET", 120.0, float)
 # Una capa por cada 4 variables, minimo 2: crece con el problema en vez de ignorarlo.
-QAOA_LAYERS = int(os.environ.get("RQ_LAYERS", 0)) or None    # se fija tras conocer K
-QAOA_STEPS = int(os.environ.get("RQ_STEPS", 120))
-QAOA_SHOTS = int(os.environ.get("RQ_SHOTS", 2000))
+QAOA_LAYERS = _env("RQ_LAYERS", None)        # None = se deriva de K mas abajo
+QAOA_STEPS = _env("RQ_STEPS", 120)
+QAOA_SHOTS = _env("RQ_SHOTS", 2000)
 rng = np.random.default_rng(SEED)
 
 TIGHTEN = float(os.environ.get("RQ_TIGHTEN", 0.5))   # feeder sub-dimensionado: ratings apretados
