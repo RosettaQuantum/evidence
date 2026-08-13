@@ -1,0 +1,124 @@
+# La corrida de E.ON — expansión de red eléctrica — vive aquí y no en un Mac.
+#
+# POR QUÉ EXISTE ESTE ARCHIVO
+# ---------------------------
+# Hasta el 2026-08-13 no había ninguno. Las nueve corridas selladas de E.ON las
+# produjo código que NO está en este repositorio, en una máquina que ya no existe, y
+# el resultado se escribía en `/home/claude/rosettaq/runs/` — la ruta de un contenedor
+# ajeno. Eso hace dos cosas malas a la vez: nadie puede repetirlas, y nadie puede leer
+# lo que las produjo.
+#
+# La lección la pagamos en el otro track: un experimento que sólo corre en una máquina
+# no es reproducible, y el producto de esta casa es evidencia que un tercero pueda
+# rehacer. Aquí el entorno se declara y se reconstruye desde cero en cada corrida.
+
+name: Experimento E.ON (expansión de red)
+
+on:
+  workflow_dispatch:
+    inputs:
+      grid:
+        description: 'red IEEE: case14 · case30 · case57 · case118'
+        required: true
+        default: 'case14'
+        type: string
+      load_scale:
+        description: 'factor de estrés de la carga (vacío = 2.6)'
+        required: false
+        type: string
+      seed:
+        description: 'semilla (vacío = 42)'
+        required: false
+        type: string
+
+jobs:
+  correr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar el entorno
+        run: pip install --quiet numpy pandapower ortools pennylane
+
+      - name: Comprobar que la red declarada EXISTE antes de gastar tiempo
+        # El guardia del harness compara la red cargada contra la declarada y aborta si
+        # no calzan. Este paso comprueba algo anterior y más tonto: que el nombre pedido
+        # sea una red real de pandapower. Sin esto, un nombre mal escrito falla recién
+        # después de instalar todo, y el mensaje no dice que el nombre era el problema.
+        env:
+          RED: ${{ inputs.grid }}
+        run: |
+          python3 - <<'FIN'
+          import os, sys
+          import pandapower.networks as nw
+          red = os.environ["RED"].strip()
+          if not hasattr(nw, red):
+              sys.exit("::error::'%s' no es una red de pandapower. "
+                       "Las del catálogo del desafío son case14, case30, case57, case118." % red)
+          net = getattr(nw, red)()
+          print("%s existe: %d buses, %d lineas" % (red, len(net.bus), len(net.line)))
+          FIN
+
+      - name: Correr el experimento
+        # SIN `|| echo warning`. Un experimento que falla tiene que fallar — la primera
+        # versión del flujo del otro track se tragaba el error en un aviso y produjo una
+        # corrida entera en verde sin correr nada.
+        env:
+          RQ_GRID: ${{ inputs.grid }}
+          RQ_LOADSCALE: ${{ inputs.load_scale }}
+          RQ_SEED: ${{ inputs.seed }}
+          RQ_OUT: resultado_eon.json
+        run: |
+          cd harness
+          RQ_LOADSCALE="${RQ_LOADSCALE:-2.6}" RQ_SEED="${RQ_SEED:-42}" \
+            python3 eon_harness.py
+
+      - name: Comprobar que el resultado dice qué red corrió
+        # El guardia que le faltaba a este track y que costó nueve sellos: que el
+        # artefacto declare la red MEDIDA, no la que alguien escribió en el nombre del
+        # archivo. Si `n_buses` no está, o no calza con la red pedida, se detiene aquí y
+        # no se publica un resultado que después habría que retractar.
+        env:
+          RED: ${{ inputs.grid }}
+        run: |
+          cd harness
+          python3 - <<'FIN'
+          import json, os, sys
+          import pandapower.networks as nw
+          d = json.load(open("resultado_eon.json"))
+          p = d.get("params", {})
+          red = os.environ["RED"].strip()
+          real = getattr(nw, red)()
+          esperado_bus, esperado_line = len(real.bus), len(real.line)
+
+          print("declara: %s · %s buses · %s lineas" % (
+              p.get("grid"), p.get("n_buses"), p.get("n_lines")))
+          print("instancia: %s" % d.get("instance"))
+
+          if p.get("n_buses") is None or p.get("n_lines") is None:
+              sys.exit("::error::el resultado no declara n_buses/n_lines. Sin eso el "
+                       "sello no puede probar que red corrio — que es el defecto que "
+                       "produjo los nueve sellos de julio.")
+          if p["n_buses"] != esperado_bus or p["n_lines"] != esperado_line:
+              sys.exit("::error::el resultado declara %s buses y %s lineas, y %s tiene "
+                       "%d y %d. Se detiene: el sello diria una red y habria medido otra."
+                       % (p["n_buses"], p["n_lines"], red, esperado_bus, esperado_line))
+          if red not in str(d.get("instance", "")):
+              sys.exit("::error::la instancia '%s' no menciona la red pedida '%s'. "
+                       "Es exactamente como el nombre de archivo empezo a mentir."
+                       % (d.get("instance"), red))
+          print("OK: la red declarada, la medida y la pedida son la misma.")
+          FIN
+
+      - name: Guardar el resultado
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultado-eon-${{ inputs.grid }}
+          path: harness/resultado_eon.json
+          # `error` y no `warn`: un artefacto vacío es indistinguible de uno perdido.
+          if-no-files-found: error
