@@ -38,6 +38,15 @@ on:
         description: 'semilla (vacío = 42)'
         required: false
         type: string
+      barrido:
+        description: 'barrer la pista completa en vez de una instancia: si / no'
+        required: false
+        default: 'no'
+        type: string
+      frentes_barrido:
+        description: 'tamaños a barrer (vacío = 6,8,10,12,15,20)'
+        required: false
+        type: string
 
 jobs:
   correr:
@@ -128,4 +137,27 @@ jobs:
         with:
           name: resultado-vrp
           path: harness/resultado_vrp.json
+          if-no-files-found: error
+
+      - name: Barrer la pista — dónde se puede ganar
+        # La telemetria del auto: no corre una vuelta, mide la pista entera. Acumula en
+        # barrido_vrp.csv, asi que cada corrida agrega vueltas al historial en vez de
+        # pisarlo. La grilla siguiente se elige mirando la anterior.
+        if: inputs.barrido == 'si'
+        env:
+          RQ_FRENTES: ${{ inputs.frentes_barrido }}
+          RQ_BUDGET: ${{ inputs.presupuesto }}
+        run: |
+          cd harness
+          RQ_FRENTES="${RQ_FRENTES:-6,8,10,12,15,20}" RQ_BUDGET="${RQ_BUDGET:-10}" \
+            python3 barrido_vrp.py
+
+      - name: Guardar la telemetría
+        if: inputs.barrido == 'si'
+        uses: actions/upload-artifact@v4
+        with:
+          name: barrido-vrp
+          path: |
+            harness/barrido_vrp.csv
+            harness/barrido_vrp.json
           if-no-files-found: error
