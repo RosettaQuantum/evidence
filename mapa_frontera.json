@@ -1,0 +1,485 @@
+{
+ "que_es": "Brecha del brazo cuantico respecto del mejor clasico, por clase de problema y tamaño del problema de decision. Cada punto es una corrida sellada y verificable.",
+ "eje_x": "variables binarias del problema (= qubits en nuestro encoding)",
+ "eje_y": "brecha % del cuantico respecto del optimo exacto; 0 = lo empata",
+ "muro_simulacion": 22,
+ "muro_memoria": 30,
+ "nota_del_muro": "22 es el ultimo tamaño que cabe en memoria Y termina en el reloj de CI, medido el 2026-08-13. Por encima hay que ir a hardware real, que cuesta.",
+ "denominador": {
+  "corridas_leidas": 60,
+  "puntos_en_el_mapa": 29,
+  "descartadas": 31
+ },
+ "no_cubre": "Alosteria (RQ-0007): su metrica es un percentil de ranking, no una brecha de optimalidad. Mezclarla daria un plano cuyos ejes significan cosas distintas segun el punto. Se declara aparte en vez de forzarla.",
+ "clases": {
+  "Grid optimization": {
+   "n_puntos": 9,
+   "rango_variables": [
+    14,
+    16
+   ],
+   "brecha_min_pct": 0.005,
+   "brecha_max_pct": 4.1993,
+   "algun_empate": false,
+   "alguna_victoria": false
+  },
+  "Portfolio optimization": {
+   "n_puntos": 20,
+   "rango_variables": [
+    12,
+    20
+   ],
+   "brecha_min_pct": 9.5986,
+   "brecha_max_pct": 86.5439,
+   "algun_empate": false,
+   "alguna_victoria": false
+  }
+ },
+ "puntos": [
+  {
+   "id": "EXP-0033-001",
+   "clase": "Grid optimization",
+   "instancia": "case14_stress3.0_K14_seed42",
+   "variables": 14,
+   "fuente_del_tamaño": "declarado:n_candidates",
+   "brecha_cuantica_pct": 3.2048,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0033-003",
+   "clase": "Grid optimization",
+   "instancia": "case14_stress3.0_K14_seed44",
+   "variables": 14,
+   "fuente_del_tamaño": "declarado:n_candidates",
+   "brecha_cuantica_pct": 1.0361,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0033-002",
+   "clase": "Grid optimization",
+   "instancia": "case14_stress3.0_K14_seed43",
+   "variables": 14,
+   "fuente_del_tamaño": "declarado:n_candidates",
+   "brecha_cuantica_pct": 0.005,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0033-008",
+   "clase": "Grid optimization",
+   "instancia": "case14_stress2.2_K16_seed46",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_candidates",
+   "brecha_cuantica_pct": 1.4472,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0033-004",
+   "clase": "Grid optimization",
+   "instancia": "case14_stress2.2_K16_seed42",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_candidates",
+   "brecha_cuantica_pct": 1.0371,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0033-007",
+   "clase": "Grid optimization",
+   "instancia": "case14_stress2.2_K16_seed45",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_candidates",
+   "brecha_cuantica_pct": 3.1067,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0033-009",
+   "clase": "Grid optimization",
+   "instancia": "case14_stress1.8_K16_seed42",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_candidates",
+   "brecha_cuantica_pct": 4.1993,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0033-006",
+   "clase": "Grid optimization",
+   "instancia": "case14_stress2.2_K16_seed44",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_candidates",
+   "brecha_cuantica_pct": 0.9884,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0033-005",
+   "clase": "Grid optimization",
+   "instancia": "case14_stress2.2_K16_seed43",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_candidates",
+   "brecha_cuantica_pct": 1.0329,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-011",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_12_assets_seed48",
+   "variables": 12,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 73.4321,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-009",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_12_assets_seed46",
+   "variables": 12,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 39.8484,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-005",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_12_assets_seed45",
+   "variables": 12,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 23.3915,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-010",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_12_assets_seed47",
+   "variables": 12,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 22.0159,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-012",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_12_assets_seed49",
+   "variables": 12,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 86.5439,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-003",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_12_assets_seed43",
+   "variables": 12,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 53.7138,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-001",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_12_assets_seed42",
+   "variables": 12,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 42.8071,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-004",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_12_assets_seed44",
+   "variables": 12,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 43.7205,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-015",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_16_assets_seed48",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 12.2897,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-008",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_16_assets_seed45",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 31.0202,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-014",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_16_assets_seed47",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 32.7237,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-016",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_16_assets_seed49",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 9.5986,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-013",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_16_assets_seed46",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 31.1957,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-007",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_16_assets_seed44",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 21.2844,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-002",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_16_assets_seed42",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 20.7363,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-006",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_16_assets_seed43",
+   "variables": 16,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 42.3281,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-017",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_20_assets_seed42",
+   "variables": 20,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 24.2505,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-020",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_20_assets_seed45",
+   "variables": 20,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 38.8097,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-018",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_20_assets_seed43",
+   "variables": 20,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 58.4842,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  },
+  {
+   "id": "EXP-0012-019",
+   "clase": "Portfolio optimization",
+   "instancia": "portfolio_20_assets_seed44",
+   "variables": 20,
+   "fuente_del_tamaño": "declarado:n_assets",
+   "brecha_cuantica_pct": 42.9212,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "optimo exacto declarado",
+   "cabe_en_simulacion": true
+  }
+ ],
+ "descartadas": [
+  {
+   "id": "EXP-0007-009",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0008-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0009-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-015",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-020",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-002",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-017",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-003",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-012",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-011",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-006",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-008",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-016",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-019",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-007",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-004",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-013",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-010",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-005",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-014",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "EXP-0007-018",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-QPU-VOYAGE2-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-HOLDOUT-K3",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-N90-LOPO-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-CLEV-BLIND-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-N90-LOPO-003",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-QMARGIN-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-COARSE-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-N90-LOPO-002",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-POC-QPU-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  }
+ ]
+}

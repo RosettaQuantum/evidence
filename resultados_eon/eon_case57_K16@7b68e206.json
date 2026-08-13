@@ -1,0 +1,231 @@
+{
+  "track": "E.ON grid-expansion",
+  "instance": "case57_stress2.6_K16_seed42",
+  "params": {
+    "grid": "IEEE case57",
+    "n_buses": 57,
+    "n_lines": 63,
+    "load_scale": 2.6,
+    "n_candidates": 16,
+    "k_budget": 5,
+    "lambda_cost": 0.02,
+    "seed": 42,
+    "time_budget_s": 120.0
+  },
+  "grid_physics": {
+    "base_congestion_dc": 2179.792,
+    "congestion_model": "2nd-order DC superposition (measured r_i, q_ij via pandapower rundcpp)",
+    "measure_runtime_s": 38.42,
+    "candidates": [
+      {
+        "type": "parallel",
+        "detail": [
+          0
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          1
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          2
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          3
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          4
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          13
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          14
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          11
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          15
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          12
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          24
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          23
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          4,
+          44
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          24,
+          56
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          39,
+          4
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          5,
+          30
+        ]
+      }
+    ],
+    "ac_validation": {
+      "base": {
+        "converged": false,
+        "error": "Power Flow nr did not converge after 10 iterations!"
+      },
+      "classical_build": {
+        "converged": false,
+        "error": "Power Flow nr did not converge after 10 iterations!"
+      },
+      "built_lines": [
+        4,
+        5,
+        8,
+        10,
+        11
+      ]
+    }
+  },
+  "exact": {
+    "value": 3852.056213886648,
+    "x": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "runtime_s": 0.237,
+    "n_selected": 5,
+    "arbitro": "fuerza bruta 2^16"
+  },
+  "classical": {
+    "solver": "OR-Tools CP-SAT",
+    "status": "OPTIMAL",
+    "value": 3852.056213886648,
+    "x": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "runtime_s": 0.678,
+    "n_selected": 5
+  },
+  "quantum": {
+    "framework": "PennyLane",
+    "backend": "default.qubit (CPU sim)",
+    "layers": 2,
+    "optimizer": "Adam, 83 steps",
+    "shots": 2000,
+    "value": 3946.229828007843,
+    "x": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    "runtime_s": 97.18,
+    "n_selected": 5
+  },
+  "verdict": {
+    "protocol": "juez-v1: misma instancia + mismo presupuesto ambos lados; optimo exacto DC como arbitro; modelo de congestion 2do-orden DC validado en AC",
+    "exact_optimum": 3852.056213886648,
+    "arbitro": "fuerza bruta 2^16",
+    "arbitro_efectivo": "fuerza bruta",
+    "classical_gap_pct": 0.0,
+    "quantum_gap_pct": 2.4448,
+    "outcome": "not yet \u2014 classical wins"
+  },
+  "lib_versions": {
+    "pennylane": "0.45.1",
+    "numpy": "2.4.6",
+    "python": "3.12.13",
+    "pandapower": "3.5.4"
+  }
+}

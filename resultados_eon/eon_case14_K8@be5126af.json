@@ -1,0 +1,159 @@
+{
+  "track": "E.ON grid-expansion",
+  "instance": "case14_stress2.6_K8_seed42",
+  "params": {
+    "grid": "IEEE case14",
+    "n_buses": 14,
+    "n_lines": 15,
+    "load_scale": 2.6,
+    "n_candidates": 8,
+    "k_budget": 5,
+    "lambda_cost": 0.02,
+    "seed": 42,
+    "time_budget_s": 120.0
+  },
+  "grid_physics": {
+    "base_congestion_dc": 717.047,
+    "congestion_model": "2nd-order DC superposition (measured r_i, q_ij via pandapower rundcpp)",
+    "measure_runtime_s": 13.6,
+    "candidates": [
+      {
+        "type": "parallel",
+        "detail": [
+          7
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          10
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          14
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          12
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          11
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          8
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          1,
+          10
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          5,
+          6
+        ]
+      }
+    ],
+    "ac_validation": {
+      "base": {
+        "converged": true,
+        "ac_total_overload": 1397.062,
+        "max_loading_pct": 517.4
+      },
+      "classical_build": {
+        "converged": true,
+        "ac_total_overload": 1256.897,
+        "max_loading_pct": 385.2
+      },
+      "built_lines": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  "exact": {
+    "value": 1487.1037595186936,
+    "x": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "runtime_s": 0.001,
+    "n_selected": 5,
+    "arbitro": "fuerza bruta 2^8"
+  },
+  "classical": {
+    "solver": "OR-Tools CP-SAT",
+    "status": "OPTIMAL",
+    "value": 1487.1037595186936,
+    "x": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "runtime_s": 0.01,
+    "n_selected": 5
+  },
+  "quantum": {
+    "framework": "PennyLane",
+    "backend": "default.qubit (CPU sim)",
+    "layers": 2,
+    "optimizer": "Adam, 120 steps",
+    "shots": 2000,
+    "value": 1487.1037595186936,
+    "x": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "runtime_s": 15.687,
+    "n_selected": 5
+  },
+  "verdict": {
+    "protocol": "juez-v1: misma instancia + mismo presupuesto ambos lados; optimo exacto DC como arbitro; modelo de congestion 2do-orden DC validado en AC",
+    "exact_optimum": 1487.1037595186936,
+    "arbitro": "fuerza bruta 2^8",
+    "arbitro_efectivo": "fuerza bruta",
+    "classical_gap_pct": 0.0,
+    "quantum_gap_pct": 0.0,
+    "outcome": "tie"
+  },
+  "lib_versions": {
+    "pennylane": "0.45.1",
+    "numpy": "2.4.6",
+    "python": "3.12.13",
+    "pandapower": "3.5.4"
+  }
+}
