@@ -1,0 +1,226 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-EON-C-K12-003__20260813T2100Z__red-fija-case118-K12-conv400--clasico-gana.json",
+  "file_id": "RQ-EXP-EON-C-K12-003",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Track E.ON, expansion de red: QAOA (PennyLane, simulador CPU) contra CP-SAT, con el optimo exacto DC como arbitro. Corrida sobre IEEE case118. El censo de la red va DENTRO del sello porque su ausencia es lo que produjo el defecto de julio. Sellado por el laboratorio; el anclaje es del notario.",
+  "el_defecto_de_julio_que_este_sello_cierra": {
+   "que_paso": "la propuesta de Fase 1 afirmaba haber medido case14 -> case30 -> case118 (escala utility). Las nueve corridas selladas corrieron case14. El harness estampaba `grid` como LITERAL y ningun campo registraba el tamano de la red: el instrumento no podia registrar lo que decia medir.",
+   "el_arreglo": "`eon_harness._censo_de_la_red` mide la red cargada (buses y lineas), la compara contra la referencia CARGADA de pandapower —no recordada— y aborta si no calzan; y aborta tambien si el censo nunca corrio, porque un sello a medias no se publica.",
+   "un_detalle_del_arreglo_que_vale_contar": "la primera version del guardia traia una tabla de memoria que decia que case14 tenia 20 lineas (tiene 15) y solo comparaba buses, asi que la cifra inventada nunca habria gritado. Un guardia con un numero inventado adentro es el guardia del proximo defecto."
+  },
+  "la_relacion_con_los_NUEVE_de_julio": {
+   "no_se_tocan": "estan anclados y publicados. Publicado es publicado: las correcciones son archivos nuevos que declaran a quien corrigen.",
+   "LA_FRASE_QUE_NO_SE_PUEDE_ESCRIBIR": "«el sello nunca mintio». Es falsa y un tercero la desmiente abriendo el archivo que nosotros mismos le senalamos — la §1 ter de CLAUDE.md.",
+   "la_frase_correcta": "los CAMPOS DE MAQUINA nunca mintieron; la PROSA dentro del sello si. Los 9 sellos declaran `instance: case14_...` e `instance_params.grid: IEEE case14`. Pero 6 de los 9 traen `scope_note`, `question` o `hypothesis` diciendo case30 o case118, DENTRO del payload sellado — no en el nombre del archivo.",
+   "el_caso_mas_duro": "EXP-0033-009 lleva en su `scope_note` «ESCALA UTILITY: IEEE case118 (118 buses, 173 lineas)» — dos cifras TIPEADAS a mano para una red que nunca se cargo — mientras su propio `instance_params.grid` dice «IEEE case14». El sello se contradice a si mismo.",
+   "por_que_esto_es_un_defecto_de_registro_y_no_un_fraude": "porque el registro honesto estuvo ahi todo el tiempo, en el mismo archivo, contradiciendo a la prosa. Nadie borro nada ni ajusto un numero: se escribio una intencion donde iba una medicion. La diferencia importa y por eso se declara con el conteo delante, no con un adjetivo.",
+   "los_nueve": [
+    {
+     "file_id": "EXP-0033-001",
+     "content_hash": "sha256:4daa59473badec9f136051f98dcb77aacc3aa8cb0adb48648340b40628421746",
+     "el_nombre_del_archivo_dice": "case14",
+     "el_campo_de_maquina_dice": "case14_stress3.0_K14_seed42",
+     "instance_params_grid": "IEEE case14",
+     "la_prosa_del_sello_menciona": [
+      "solo case14"
+     ]
+    },
+    {
+     "file_id": "EXP-0033-002",
+     "content_hash": "sha256:977e3b97ea55e589746ebafa46adf552b954a2dc710dddf88a0162be4ffabc14",
+     "el_nombre_del_archivo_dice": "case14",
+     "el_campo_de_maquina_dice": "case14_stress3.0_K14_seed43",
+     "instance_params_grid": "IEEE case14",
+     "la_prosa_del_sello_menciona": [
+      "solo case14"
+     ]
+    },
+    {
+     "file_id": "EXP-0033-003",
+     "content_hash": "sha256:b7b62a0285caa64aba910c2a35d37a56e1dc8210b842a2bb322ca92dafdcf0b8",
+     "el_nombre_del_archivo_dice": "case14",
+     "el_campo_de_maquina_dice": "case14_stress3.0_K14_seed44",
+     "instance_params_grid": "IEEE case14",
+     "la_prosa_del_sello_menciona": [
+      "solo case14"
+     ]
+    },
+    {
+     "file_id": "EXP-0033-004",
+     "content_hash": "sha256:881c128ab5b184d29ec7530214040a44fd1659a82a544c3b94f6a42bd08c349a",
+     "el_nombre_del_archivo_dice": "case30",
+     "el_campo_de_maquina_dice": "case14_stress2.2_K16_seed42",
+     "instance_params_grid": "IEEE case14",
+     "la_prosa_del_sello_menciona": [
+      "case30"
+     ]
+    },
+    {
+     "file_id": "EXP-0033-005",
+     "content_hash": "sha256:acd3b2ac8d5c25b41c15dd81e39ee20a53b4063294e3017cbe69db852ff15d31",
+     "el_nombre_del_archivo_dice": "case30",
+     "el_campo_de_maquina_dice": "case14_stress2.2_K16_seed43",
+     "instance_params_grid": "IEEE case14",
+     "la_prosa_del_sello_menciona": [
+      "case30"
+     ]
+    },
+    {
+     "file_id": "EXP-0033-006",
+     "content_hash": "sha256:0d42d3acd62042c3a37a90b6ecb4e63bdd73b3932319ad8195afc8e70a4baac2",
+     "el_nombre_del_archivo_dice": "case30",
+     "el_campo_de_maquina_dice": "case14_stress2.2_K16_seed44",
+     "instance_params_grid": "IEEE case14",
+     "la_prosa_del_sello_menciona": [
+      "case118",
+      "case30"
+     ]
+    },
+    {
+     "file_id": "EXP-0033-007",
+     "content_hash": "sha256:00c1812593489f32168f27cd70a7e5c8ef676774670b2f4c7b4d0fa8f4026856",
+     "el_nombre_del_archivo_dice": "case30",
+     "el_campo_de_maquina_dice": "case14_stress2.2_K16_seed45",
+     "instance_params_grid": "IEEE case14",
+     "la_prosa_del_sello_menciona": [
+      "case118",
+      "case30"
+     ]
+    },
+    {
+     "file_id": "EXP-0033-008",
+     "content_hash": "sha256:545b2390e27e82e17a7d7e8f9b810f2666ccf2fc4afe2893dfecb56399c93eef",
+     "el_nombre_del_archivo_dice": "case30",
+     "el_campo_de_maquina_dice": "case14_stress2.2_K16_seed46",
+     "instance_params_grid": "IEEE case14",
+     "la_prosa_del_sello_menciona": [
+      "case118",
+      "case30"
+     ]
+    },
+    {
+     "file_id": "EXP-0033-009",
+     "content_hash": "sha256:f7a0b53734228357c11881dc9cb4c180b163f5c2bcce420b694f21cf1a612112",
+     "el_nombre_del_archivo_dice": "case118",
+     "el_campo_de_maquina_dice": "case14_stress1.8_K16_seed42",
+     "instance_params_grid": "IEEE case14",
+     "la_prosa_del_sello_menciona": [
+      "case118"
+     ]
+    }
+   ],
+   "con_prosa_que_menciona_otra_red": [
+    "EXP-0033-004",
+    "EXP-0033-005",
+    "EXP-0033-006",
+    "EXP-0033-007",
+    "EXP-0033-008",
+    "EXP-0033-009"
+   ]
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-13T21:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "eon_harness.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:804701105653c5203b2c04eb4bf1be8a88c2ae0368f89d6e220f6536ba59ab76",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:3477cad0118e1906e299453498dbba87df21cd4673097e62839e3e62a207ad76"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "eon_case118_K12_conv400capas3@82964bcb.json",
+    "sha256": "sha256:82964bcb5967d3bdab1e756940a02ccb525ca22b1d5cfc56620c80e03a32046b"
+   },
+   "censo_de_la_red": {
+    "grid": "IEEE case118",
+    "n_buses": 118,
+    "n_lines": 173,
+    "de_donde_sale": "lo mide el harness sobre la red cargada y aborta si no calza con la referencia de pandapower.",
+    "lo_que_el_laboratorio_NO_pudo_re-verificar": "pandapower no esta instalado en esta sesion, asi que el censo NO se recomputo contra la libreria. Lo que si se hizo fue leer el guardia (`_censo_de_la_red`) y comprobar que carga la referencia en vez de recordarla, y que aborta en los dos caminos. Se declara en vez de darlo por bueno."
+   },
+   "el_tamano_del_problema": {
+    "variables_binarias": 12,
+    "k_budget": 5,
+    "espacio_de_busqueda": 4096,
+    "disparos_por_estado": 0.4883,
+    "CUIDADO_CON_EL_EMPATE": "los 2000 disparos cubren 0.4883 del espacio de 4096 estados: el resultado ya no se explica por agotamiento.",
+    "subconjuntos_de_tamano_K": 792,
+    "por_que_se_declara": "el numero que manda NO es el tamano de la red sino `n_candidates`: una variable binaria y un qubit por candidato. En la PRIMERA serie valia 14 en las cuatro, asi que la red crecia 8,4 veces y el problema no crecia nunca — su brecha no monotona era variacion entre instancias, no una tendencia. Todo esto se DERIVA del artefacto: es el defecto de julio en otro campo."
+   },
+   "resultado": {
+    "optimo_exacto_DC": 1820.4092359167626,
+    "clasico_CP_SAT": {
+     "valor": 1820.4092359167626,
+     "status": "OPTIMAL",
+     "segundos": 0.042,
+     "gap_pct": 0.0
+    },
+    "cuantico_QAOA": {
+     "valor": 1828.7847769613618,
+     "backend": "default.qubit (CPU sim)",
+     "capas": 3,
+     "segundos": 196.213,
+     "gap_pct": 0.4601,
+     "optimizador": {
+      "pasos_dados": 400,
+      "pasos_de_presupuesto": 400,
+      "reloj_s": 2400.0,
+      "truncado_por_reloj": false,
+      "advertencia": null,
+      "si_falta": null
+     }
+    },
+    "cuantas_veces_mas_lento_el_cuantico": 4671.7,
+    "cuanto_peor_en_valor_pct": 0.4601
+   },
+   "outcome": "not yet — classical wins",
+   "cruce_ventaja_cuantica": "0"
+  },
+  "como": {
+   "protocolo_declarado_por_el_artefacto": "juez-v1: misma instancia + mismo presupuesto ambos lados; optimo exacto DC como arbitro; modelo de congestion 2do-orden DC validado en AC",
+   "validacion_AC": {
+    "base_convergio": false,
+    "construccion_clasica_convergio": false,
+    "error": "Power Flow nr did not converge after 10 iterations!"
+   },
+   "ADVERTENCIA_SOBRE_EL_PROTOCOLO": "el artefacto trae «modelo de congestion 2do-orden DC validado en AC» como LITERAL, y en esta corrida el flujo AC NO convergio (Power Flow nr did not converge after 10 iterations!). Para esta corrida esa clausula del protocolo se RETIRA: el modelo DC no quedo validado en AC. Es la misma forma del defecto que origino este arreglo — una afirmacion escrita como constante en vez de derivada de lo que paso — sobrevivida en la linea de al lado.",
+   "juez": "mismo presupuesto de tiempo a los dos lados; el optimo exacto DC es el arbitro, no uno de los competidores.",
+   "harness": {
+    "archivo": "evidence/harness/eon_harness.py",
+    "sha256": "sha256:804701105653c5203b2c04eb4bf1be8a88c2ae0368f89d6e220f6536ba59ab76"
+   },
+   "versiones": {
+    "pennylane": "0.45.1",
+    "numpy": "2.4.6",
+    "python": "3.12.13",
+    "pandapower": "3.5.4"
+   }
+  },
+  "cuando": {
+   "archived_at": "2026-08-13T12:00:00Z"
+  },
+  "donde": {
+   "compute": "CI de evidence (workflow experimento-eon)",
+   "verificacion": "Mac local (sesion laboratorio)"
+  },
+  "porque": {
+   "question": "¿el QAOA mejora lo que el cliente usa hoy en expansion de red?",
+   "el_rival_es_lo_que_el_cliente_USA": "CP-SAT, no un baseline debil. En esta corrida acierta el optimo exacto en 0.042 s.",
+   "respuesta": "not yet — classical wins",
+   "por_que_se_publica_un_negativo": "el trato era publicar gane o pierda."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; el anclaje y la publicacion son del notario."
+  }
+ }
+}
