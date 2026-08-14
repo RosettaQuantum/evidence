@@ -150,6 +150,32 @@ jobs:
           print("OK: la red declarada, la medida y la pedida son la misma.")
           FIN
 
+      - name: Archivar el harness con su hash en el nombre
+        # POR QUE ESTE PASO EXISTE (2026-08-13, el mismo dia que lo causamos):
+        # el sello declara el sha256 del harness que produjo la corrida, y le dice al
+        # lector «baja el archivo y comprueba el hash». Pero `harness/eon_harness.py` es
+        # un archivo vivo: en cuanto alguien lo edita —yo lo edite hoy tres veces— las
+        # corridas ya selladas apuntan a una version que ya no existe en el repositorio,
+        # y la promesa se rompe sin que nada falle. La auditoria de procedencia lo
+        # atrapo, pero DESPUES de anclar.
+        #
+        # Con este paso el instrumento se archiva por hash en el momento de correr, asi
+        # que la version citada por el sello esta publicada antes de que el sello exista.
+        # El archivo vivo puede seguir cambiando; la copia versionada no se sobreescribe
+        # nunca — cada sello resuelve a su propio archivo.
+        run: |
+          H=$(python3 -c "import hashlib;print(hashlib.sha256(open('harness/eon_harness.py','rb').read()).hexdigest()[:8])")
+          mkdir -p code
+          cp harness/eon_harness.py "code/eon_harness@$H.py"
+          echo "archivado code/eon_harness@$H.py"
+
+      - name: Guardar el harness archivado
+        uses: actions/upload-artifact@v4
+        with:
+          name: harness-eon-${{ inputs.grid }}-K${{ inputs.candidatos }}
+          path: code/eon_harness@*.py
+          if-no-files-found: error
+
       - name: Guardar el resultado
         if: always()
         uses: actions/upload-artifact@v4
