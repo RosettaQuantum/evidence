@@ -191,7 +191,37 @@ def _una(doc, etiqueta):
     return False
 
 
+def _por_id(ident):
+    """Baja los BYTES SELLADOS de un id, no el JSON re-serializado.
+
+    Defecto real, encontrado por la sesion web el 2026-08-14: esta funcion pedia
+    `/v1/archive/<id>`, que entrega el documento re-parseado, y contestaba NO CALZA sobre
+    sellos v1 y v2 perfectamente validos. El modo --todo ya bajaba del espejo; el modo de
+    un solo id no. **La misma herramienta daba dos veredictos distintos segun como se la
+    invocara**, que es exactamente lo que un verificador no puede hacer.
+
+    Ahora usa `/v1/archive/<id>/raw`, que sirve los bytes originales.
+    """
+    try:
+        return _traer("%s/archive/%s/raw" % (API, ident))
+    except Exception:
+        # Si /raw no esta, se cae al espejo antes que al endpoint que re-serializa.
+        item = None
+        for x in _traer("%s/runs?limit=1000" % API)["items"]:
+            if x["id"] == ident:
+                item = x
+                break
+        if item:
+            doc, _ = _bytes_originales(item)
+            if doc:
+                return doc
+        raise SystemExit("no pude obtener los bytes sellados de %s. NO verifico contra el "
+                         "endpoint que re-serializa: daria un NO CALZA falso." % ident)
+
+
 if __name__ == "__main__":
+    if "--help" in sys.argv or "-h" in sys.argv:
+        print(__doc__); sys.exit(0)
     args = [a for a in sys.argv[1:] if a != "--todo"]
     if "--todo" in sys.argv:
         items = _traer("%s/runs?limit=1000" % API)["items"]
@@ -212,9 +242,9 @@ if __name__ == "__main__":
 
     bien = True
     for a in args:
-        doc = _desenvolver(json.load(open(a)) if a.endswith(".json") and "/" in a or
-                           a.endswith(".json") and __import__("os").path.exists(a)
-                           else _traer("%s/archive/%s" % (API, a)))
+        import os as _os
+        doc = (_desenvolver(json.load(open(a))) if a.endswith(".json") and _os.path.exists(a)
+               else _desenvolver(_por_id(a)))
         bien &= _una(doc, a)
     sys.exit(0 if bien else 1)
 '''
