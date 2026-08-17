@@ -132,14 +132,18 @@ else:
         print("   OJO:", r.stderr[:200])
 
 # ---- 5. resumenes derivados --------------------------------------------------
-paso(5, "regenerar los CSV desde los sellos")
-for s in ("scripts/make_cleveland_csv.py", "scripts/make_eon_csv.py"):
-    if os.path.exists(s):
-        if DRY:
-            print(f"   (dry) {s}")
-        else:
-            r = sh([sys.executable, s])
-            print("   " + (r.stdout.strip().splitlines() or ["sin salida"])[0])
+paso(5, "regenerar TODO lo derivado")
+# La lista de derivaciones NO vive aqui. Vive en scripts/derivar.py y este paso la
+# invoca. Antes estaban escritas a mano los dos CSV, y por eso el mapa de frontera y el
+# estado del Terminal quedaron fuera de la regeneracion durante todo su primer dia de
+# vida: el mapa publicado descartaba ocho corridas selladas con un motivo falso y nadie
+# se entero. Una lista que vive en dos lugares ya divergio (§5 bis regla 3).
+r = sh([sys.executable, "scripts/derivar.py"] + (["--dry"] if DRY else []))
+for linea in (r.stdout.strip().splitlines() or ["sin salida"]):
+    if linea.strip():
+        print("   " + linea)
+if r.returncode and not DRY:
+    print("   OJO: alguna derivacion fallo. El archivo esta bien; los resumenes NO.")
 
 # ---- 6. comprobar una copia de punta a punta ---------------------------------
 paso(6, "comprobar un archivo en las tres copias")

@@ -47,12 +47,21 @@ on:
         required: false
         type: string
 
+# El flujo escribe en el repositorio (deposita el resultado y archiva el harness), asi
+# que necesita permiso de escritura. Sin esto el push falla al final de una corrida de
+# 40 minutos — y falla DESPUES de gastar el tiempo, que es el peor momento.
+permissions:
+  contents: write
+
 jobs:
   correr:
     runs-on: ubuntu-latest
     timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Sin esto el checkout deja el token fuera y el push del deposito no autentica.
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -175,6 +184,56 @@ jobs:
           name: harness-eon-${{ inputs.grid }}-K${{ inputs.candidatos }}
           path: code/eon_harness@*.py
           if-no-files-found: error
+
+      - name: Depositar el resultado en el repositorio
+        # EL ESLABON QUE FALTABA, y es el que hacia que todo fueran piezas sueltas.
+        #
+        # Hasta hoy, cuando una corrida terminaba el artefacto se quedaba dentro de
+        # GitHub Actions y **alguien tenia que acordarse de bajarlo**. Si nadie se
+        # acordaba, la corrida existia y el archivo no. Nada avisaba.
+        #
+        # Ahora el resultado se deposita solo, con su sha256 en el nombre — la misma
+        # convencion que ya usa el sellador. Desde ese momento aparece como «esperando
+        # sello» en el Terminal, sin que nadie lo anuncie.
+        #
+        # LO QUE ESTE PASO NO HACE, a proposito: no sella. El sello es un acto del
+        # laboratorio, que lee el resultado y decide que afirma. Automatizarlo borraria
+        # la separacion laboratorio/notario, que esta documentada como decision y no
+        # como pendiente (CLAUDE.md Rosetta §11). Depositar no es certificar.
+        if: success()
+        run: |
+          python3 - <<'FIN'
+          import hashlib, json, os, shutil
+          src = "harness/resultado_eon.json"
+          d = json.load(open(src)); p = d["params"]
+          h = hashlib.sha256(open(src, "rb").read()).hexdigest()
+          q = d.get("quantum") or d.get("cuantico") or {}
+          # El nombre lleva lo que distingue una corrida de otra: red, tamano del
+          # problema, pasos dados y capas. Dos corridas con el mismo nombre y distinto
+          # contenido serian indistinguibles en el directorio.
+          nombre = "eon_%s_K%s_p%s_c%s@%s.json" % (
+              p["grid"].replace("IEEE ", "").strip(), p["n_candidates"],
+              q.get("pasos_dados", "NA"), q.get("layers", "NA"), h[:8])
+          os.makedirs("resultados_eon", exist_ok=True)
+          dst = os.path.join("resultados_eon", nombre)
+          shutil.copy(src, dst)
+          print("depositado %s" % dst)
+          print("sha256 %s" % h)
+          FIN
+          git config user.name  "rosettaq-ci"
+          git config user.email "ci@rosettaquantum.com"
+          git add resultados_eon/ code/ 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "nada nuevo que depositar"
+          else
+            git commit -q -m "CI: resultado de ${{ inputs.grid }} K=${{ inputs.candidatos }}
+
+          Depositado por el flujo, no a mano. Queda como «esperando sello» hasta que el
+          laboratorio lo lea y decida que afirma. Depositar no es certificar."
+            # Reintento con rebase: otro actor pudo commitear mientras corriamos.
+            git pull --rebase -q origin main || true
+            git push -q origin HEAD:main && echo "publicado en main"
+          fi
 
       - name: Guardar el resultado
         if: always()
