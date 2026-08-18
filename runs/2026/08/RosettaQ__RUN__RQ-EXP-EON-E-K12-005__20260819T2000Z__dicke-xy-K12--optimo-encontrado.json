@@ -1,0 +1,95 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-EON-E-K12-005__20260819T2000Z__dicke-xy-K12--optimo-encontrado.json",
+  "file_id": "RQ-EXP-EON-E-K12-005",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Lote E — demo pre-registrada: QAOA con estado inicial de Dicke |D^12_5> y mezclador XY en anillo, donde TODO disparo cumple la cardinalidad por construccion. Cumple la promesa del §8 del informe de E.ON. Sellado por el laboratorio; anclaje del notario.",
+  "pre_registro": {
+   "file_id": "RQ-PREREG-EON-DICKE-001",
+   "content_hash": "sha256:4923551787bf882e108a8370acf8382e85c616386676002d2665a9344ccddfc1",
+   "commit": "bfff674",
+   "orden": "el commit del pre-registro es ANTERIOR en el historial a los cuatro depositos de CI; el orden es un hecho de git, no una afirmacion."
+  },
+  "resolucion_de_lo_pre_declarado": {
+   "este_punto": "gap 0.0000 esperado y CUMPLIDO (el X-mixer daba 0.4601).",
+   "la_expectativa_que_FALLO": "el costo de pared: se pre-declaro «hasta ~3x mas lento por paso» y fue de 0,5x (K=8: 24 s vs 46 s) a 1,26x (K=16: 826 s vs 655 s). Fallo en la direccion favorable y se reporta igual: una prediccion que solo se cuenta cuando acierta no es una prediccion.",
+   "regla": "cada expectativa por separado, cumplida o fallada, contra el texto sellado ANTES de correr. Sin reinterpretacion."
+  },
+  "guardias": {
+   "a_soporte_del_estado_FINAL": "masa fuera del subespacio de peso 5 < 1e-9, medida sobre el vector analitico tras las p capas (prueba preparacion Y mezclador). En esta corrida: ~1e-33.",
+   "b_toda_muestra_de_peso_5": "2000/2000; una sola infactible aborta.",
+   "probadas_por_mutacion": "prep contaminada -> (a) grita con masa 8,3e-02; contaminada y sin (a) -> (b) atrapa 173/2000. El caso base pasa.",
+   "c_ising_reproduce_qubo": "activo (desvio ~1e-11 sobre 24 asignaciones)"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-19T20:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "eon_harness.py",
+   "harness_version": "1.2.0",
+   "harness_sha256": "sha256:094595db3e8471b92d97fc110404267289800f08867baab8e9cf30cabbd809c2",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:803a028d6bfab2ed954968072e71a6827775cca89f4745f788ee7da8b49fa002"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "resultados_eon/eon_case118_K12_p400_c3_dicke@8715ae2e.json",
+    "sha256": "sha256:8715ae2ea9305e03646cf4dde2973d39b3996e7ef77e2dad53676f27556f9a3c"
+   },
+   "K": 12,
+   "capas": 3,
+   "mixer": "xy_dicke",
+   "subespacio_factible": 792,
+   "fraccion_valida": 1.0,
+   "resultado": {
+    "optimo_exacto": 1820.4092359167626,
+    "clasico": {
+     "valor": 1820.4092359167626,
+     "status": "OPTIMAL",
+     "segundos": 0.043
+    },
+    "cuantico": {
+     "valor": 1820.4092359167626,
+     "segundos": 216.843,
+     "gap_pct": 0.0
+    }
+   },
+   "contraste_con_el_X_mixer_del_lote_D": {
+    "gap_x": 0.4601,
+    "gap_dicke": 0.0,
+    "pared_x_s": 196,
+    "pared_dicke_s": 216.843
+   },
+   "outcome": "tie",
+   "cruce_ventaja_cuantica": "0",
+   "advertencia_de_cobertura": "2000 disparos sobre 792 estados factibles = 2.53 por estado: la cobertura vuelve a colapsar con K mas grande. Esta serie no demuestra escalamiento; demuestra que el desperdicio de disparos infactibles era una parte medible de la brecha."
+  },
+  "como": {
+   "pasos": "400/400",
+   "harness_sha256": "094595db3e8471b92d97fc110404267289800f08867baab8e9cf30cabbd809c2",
+   "penalidad": "NO quitada, como decidio el pre-registro: identicamente 0 en el subespacio factible; QUBO y arbitros = lote D.",
+   "compute": "GitHub Actions (experimento-eon.yml, input mezclador)"
+  },
+  "cuando": {
+   "archived_at": "2026-08-19T20:00:00Z"
+  },
+  "donde": {
+   "compute": "CI de evidence",
+   "verificacion": "Mac local (lab) + verificacion independiente de la coordinacion contra origin"
+  },
+  "porque": {
+   "question": "¿cuanto de la brecha del X-mixer era desperdicio de disparos infactibles y cuanto es del metodo?",
+   "lo_que_NO_autoriza": "ninguna afirmacion de ventaja cuantica ni de escalamiento. Cruces: cero."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; commit, ancla y tres copias del notario."
+  }
+ }
+}

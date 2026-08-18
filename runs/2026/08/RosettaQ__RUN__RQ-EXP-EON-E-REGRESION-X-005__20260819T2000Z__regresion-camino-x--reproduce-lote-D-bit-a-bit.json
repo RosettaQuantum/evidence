@@ -1,0 +1,90 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-EON-E-REGRESION-X-005__20260819T2000Z__regresion-camino-x--reproduce-lote-D-bit-a-bit.json",
+  "file_id": "RQ-EXP-EON-E-REGRESION-X-005",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Lote E — regresion del camino X: misma corrida que el lote D K=8, tras agregar la variante Dicke. Existe para probar que el camino viejo no se movio.",
+  "pre_registro": {
+   "file_id": "RQ-PREREG-EON-DICKE-001",
+   "content_hash": "sha256:4923551787bf882e108a8370acf8382e85c616386676002d2665a9344ccddfc1",
+   "commit": "bfff674",
+   "orden": "el commit del pre-registro es ANTERIOR en el historial a los cuatro depositos de CI; el orden es un hecho de git, no una afirmacion."
+  },
+  "resolucion_de_lo_pre_declarado": {
+   "este_punto": "no es parte de la demo: es la prueba de que agregar la variante NO movio el camino viejo. Reproduce el lote D (RQ-EXP-EON-D-K08-004, artefacto @cc096d21) bit a bit, incluido quantum.value.",
+   "la_expectativa_que_FALLO": "el costo de pared: se pre-declaro «hasta ~3x mas lento por paso» y fue de 0,5x (K=8: 24 s vs 46 s) a 1,26x (K=16: 826 s vs 655 s). Fallo en la direccion favorable y se reporta igual: una prediccion que solo se cuenta cuando acierta no es una prediccion.",
+   "regla": "cada expectativa por separado, cumplida o fallada, contra el texto sellado ANTES de correr. Sin reinterpretacion."
+  },
+  "guardias": {
+   "a_soporte_del_estado_FINAL": "no aplica (camino X)",
+   "b_toda_muestra_de_peso_5": "no aplica (camino X)",
+   "probadas_por_mutacion": "prep contaminada -> (a) grita con masa 8,3e-02; contaminada y sin (a) -> (b) atrapa 173/2000. El caso base pasa.",
+   "c_ising_reproduce_qubo": "activo (desvio ~1e-11 sobre 24 asignaciones)"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-19T20:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "eon_harness.py",
+   "harness_version": "1.2.0",
+   "harness_sha256": "sha256:094595db3e8471b92d97fc110404267289800f08867baab8e9cf30cabbd809c2",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:e777c9894eadd3e93b58c56fc55b8ed3f6ff8e8186df791262c02f7be5ac2e5e"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "resultados_eon/eon_case118_K8_p400_c2@b0198c60.json",
+    "sha256": "sha256:b0198c6096a1371818ae8d76f4a319c53f777bdd5e2dc1794107bf7117928c2b"
+   },
+   "K": 8,
+   "capas": 2,
+   "mixer": "x",
+   "subespacio_factible": null,
+   "fraccion_valida": null,
+   "resultado": {
+    "optimo_exacto": 1882.9203759527718,
+    "clasico": {
+     "valor": 1882.9203759527718,
+     "status": "OPTIMAL",
+     "segundos": 0.01
+    },
+    "cuantico": {
+     "valor": 1882.9203759527718,
+     "segundos": 51.998,
+     "gap_pct": 0.0
+    }
+   },
+   "contraste_con_el_X_mixer_del_lote_D": null,
+   "outcome": "tie",
+   "cruce_ventaja_cuantica": "0",
+   "advertencia_de_cobertura": null
+  },
+  "como": {
+   "pasos": "400/400",
+   "harness_sha256": "094595db3e8471b92d97fc110404267289800f08867baab8e9cf30cabbd809c2",
+   "penalidad": "NO quitada, como decidio el pre-registro: identicamente 0 en el subespacio factible; QUBO y arbitros = lote D.",
+   "compute": "GitHub Actions (experimento-eon.yml, input mezclador)"
+  },
+  "cuando": {
+   "archived_at": "2026-08-19T20:00:00Z"
+  },
+  "donde": {
+   "compute": "CI de evidence",
+   "verificacion": "Mac local (lab) + verificacion independiente de la coordinacion contra origin"
+  },
+  "porque": {
+   "question": "¿cuanto de la brecha del X-mixer era desperdicio de disparos infactibles y cuanto es del metodo?",
+   "lo_que_NO_autoriza": "ninguna afirmacion de ventaja cuantica ni de escalamiento. Cruces: cero."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; commit, ancla y tres copias del notario."
+  }
+ }
+}
