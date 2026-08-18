@@ -46,6 +46,10 @@ on:
         description: 'capas del circuito (vacío = escala con el problema: K/4, mínimo 2)'
         required: false
         type: string
+      mezclador:
+        description: "mezclador del QAOA: 'x' (default) o 'xy_dicke' (disparos factibles por construcción, PREREG RQ-PREREG-EON-DICKE-001)"
+        required: false
+        type: string
 
 # El flujo escribe en el repositorio (deposita el resultado y archiva el harness), asi
 # que necesita permiso de escritura. Sin esto el push falla al final de una corrida de
@@ -100,6 +104,7 @@ jobs:
           RQ_STEPS: ${{ inputs.pasos }}
           RQ_TIME_BUDGET: ${{ inputs.reloj }}
           RQ_LAYERS: ${{ inputs.capas }}
+          RQ_MIXER: ${{ inputs.mezclador }}
           RQ_OUT: resultado_eon.json
         run: |
           cd harness
@@ -211,9 +216,12 @@ jobs:
           # El nombre lleva lo que distingue una corrida de otra: red, tamano del
           # problema, pasos dados y capas. Dos corridas con el mismo nombre y distinto
           # contenido serian indistinguibles en el directorio.
-          nombre = "eon_%s_K%s_p%s_c%s@%s.json" % (
+          # La variante lleva su mezclador en el nombre: dos corridas identicas salvo el
+          # mezclador serian indistinguibles en el directorio sin esto.
+          tag = "" if q.get("mixer") in (None, "x") else "_" + q["mixer"].replace("xy_", "")
+          nombre = "eon_%s_K%s_p%s_c%s%s@%s.json" % (
               p["grid"].replace("IEEE ", "").strip(), p["n_candidates"],
-              q.get("pasos_dados", "NA"), q.get("layers", "NA"), h[:8])
+              q.get("pasos_dados", "NA"), q.get("layers", "NA"), tag, h[:8])
           os.makedirs("resultados_eon", exist_ok=True)
           dst = os.path.join("resultados_eon", nombre)
           shutil.copy(src, dst)

@@ -21,6 +21,14 @@ import pandapower as pp
 import pandapower.networks as nw
 
 SEED = int(os.environ.get("RQ_SEED", 42))
+# MEZCLADOR DEL QAOA. "x" = el camino de siempre (Hadamard + RX), byte-identico.
+# "xy_dicke" = la variante pre-registrada en RQ-PREREG-EON-DICKE-001: estado inicial de
+# Dicke |D^K_k> y mezclador XY en anillo, de modo que TODO disparo cumple la cardinalidad
+# por construccion. La decision de NO quitar la penalidad esta en el pre-registro: sobre
+# el subespacio de peso k vale exactamente 0, asi que QUBO y arbitros no cambian.
+MIXER = os.environ.get("RQ_MIXER") or "x"
+if MIXER not in ("x", "xy_dicke"):
+    raise SystemExit("RQ_MIXER=%r: los mezcladores son 'x' y 'xy_dicke'" % MIXER)
 LOAD_SCALE = float(os.environ.get("RQ_LOADSCALE", 2.6))   # estres para inducir congestion
 K_BUDGET = int(os.environ.get("RQ_BUDGET", 5))            # lineas a construir (cardinalidad objetivo)
 LAMBDA_COST = float(os.environ.get("RQ_LAMBDA", 0.02))    # peso del costo de build
@@ -327,11 +335,28 @@ for i in range(K):
         cij=J[i][j]+J[j][i]
         if abs(cij)>1e-12: co.append(cij);op.append(qml.PauliZ(i)@qml.PauliZ(j))
 H=qml.Hamiltonian(co,op); dev=qml.device("default.qubit",wires=K)
+if MIXER == "xy_dicke":
+    # El vector de Dicke exacto: uniforme sobre las C(K,k) cadenas de peso k. La fase de
+    # esta demo es simulacion; preparar Dicke por circuito es problema de hardware.
+    _pesok = [i for i in range(2**K) if bin(i).count("1") == K_BUDGET]
+    _dicke = np.zeros(2**K); _dicke[_pesok] = 1.0/np.sqrt(len(_pesok))
+
 def circ(p):
-    for w in range(K): qml.Hadamard(wires=w)
+    if MIXER == "xy_dicke":
+        qml.StatePrep(_dicke, wires=range(K))
+    else:
+        for w in range(K): qml.Hadamard(wires=w)
     for l in range(QAOA_LAYERS):
         qml.templates.ApproxTimeEvolution(H,p[0][l],1)
-        for w in range(K): qml.RX(2*p[1][l],wires=w)
+        if MIXER == "xy_dicke":
+            # XY en anillo: exp(-i*beta*(XX+YY)) por par (XX y YY del mismo par conmutan).
+            # Conserva el peso de Hamming: la dinamica nunca sale del subespacio factible.
+            for w in range(K):
+                a2, b2 = w, (w+1) % K
+                qml.IsingXX(2*p[1][l], wires=[a2, b2])
+                qml.IsingYY(2*p[1][l], wires=[a2, b2])
+        else:
+            for w in range(K): qml.RX(2*p[1][l],wires=w)
 @qml.qnode(dev)
 def cost_fn(p): circ(p); return qml.expval(H)
 t0=time.time(); pnp.random.seed(SEED)
@@ -345,10 +370,41 @@ devs=qml.device("default.qubit",wires=K,shots=QAOA_SHOTS,seed=SEED)
 def samp(p): circ(p); return qml.sample(wires=range(K))
 S=np.array(samp(params)); vals=[qubo_val(s) for s in S]; qi=int(np.argmin(vals))
 qx=[int(b) for b in S[qi]]
+
+_fv_construccion = None
+if MIXER == "xy_dicke":
+    # GUARDIA (a) — sobre el vector de estado FINAL, no sobre la intencion del circuito:
+    # tras las p capas optimizadas, la masa fuera del subespacio de peso k debe ser ~0.
+    # Probar el estado final prueba la preparacion Y el mezclador a la vez.
+    _deva = qml.device("default.qubit", wires=K)
+    @qml.qnode(_deva)
+    def _estado(p):
+        circ(p); return qml.state()
+    _vec = np.asarray(_estado(params))
+    _masa_fuera = float(sum(abs(_vec[i])**2 for i in range(2**K)
+                            if bin(i).count("1") != K_BUDGET))
+    if _masa_fuera > 1e-9:
+        raise SystemExit("ABORTA (guardia a): el estado final tiene masa %.3e fuera del "
+                         "subespacio de peso %d. El mezclador NO conserva la cardinalidad "
+                         "o la preparacion esta contaminada." % (_masa_fuera, K_BUDGET))
+    # GUARDIA (b) — cada muestra de peso k; en simulacion exacta debe ser el 100 %.
+    _malas = [i for i, fila in enumerate(S) if int(sum(fila)) != K_BUDGET]
+    if _malas:
+        raise SystemExit("ABORTA (guardia b): %d de %d muestras NO tienen peso %d (primera: "
+                         "fila %d). Un solo disparo infactible desmiente la construccion."
+                         % (len(_malas), len(S), K_BUDGET, _malas[0]))
+    _fv_construccion = 1.0
+    print("[dicke] guardia a: masa fuera del subespacio %.2e | guardia b: %d/%d muestras "
+          "de peso %d" % (_masa_fuera, len(S), len(S), K_BUDGET))
 # El artefacto declara si el optimizador AGOTO su presupuesto o lo corto el reloj. Sin
 # este campo, una brecha grande por falta de tiempo se lee como una brecha grande del
 # metodo — que fue exactamente lo que paso con K=16 y K=20 el 2026-08-13.
 quantum={"framework":"PennyLane","backend":"default.qubit (CPU sim)","layers":QAOA_LAYERS,
+    "mixer":MIXER,
+    **({"estado_inicial":"dicke |D^%d_%d>"%(K,K_BUDGET),
+        "subespacio_factible":len(_pesok),
+        "fraccion_valida_por_construccion":_fv_construccion,
+        "prereg":"RQ-PREREG-EON-DICKE-001"} if MIXER=="xy_dicke" else {}),
     "optimizer":f"Adam, {steps} steps","shots":QAOA_SHOTS,
     "pasos_dados":steps,"pasos_de_presupuesto":QAOA_STEPS,
     "reloj_s":TIME_BUDGET_S,
