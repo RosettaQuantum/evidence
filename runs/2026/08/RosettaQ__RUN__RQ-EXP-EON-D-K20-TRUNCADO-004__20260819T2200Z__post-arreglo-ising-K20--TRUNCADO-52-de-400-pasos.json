@@ -1,0 +1,91 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-EON-D-K20-TRUNCADO-004__20260819T2200Z__post-arreglo-ising-K20--TRUNCADO-52-de-400-pasos.json",
+  "file_id": "RQ-EXP-EON-D-K20-TRUNCADO-004",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Lote D, punto K=20: TRUNCADO. El reloj corto el optimizador en 52 de 400 pasos; este punto mide el presupuesto de computo, no el metodo, y NO pertenece a la serie controlada — precedente: RQ-EXP-EON-C-K20-TRUNCADO-003. Sellado por el laboratorio con decision de Norte (opcion A, 19-ago, reversible por Nicholas); anclaje del notario.",
+  "por_que_52_y_no_27": "el par pre-arreglo (@cce92640) se trunco en 27 de 400 con el mismo reloj de 2400 s: el punto de corte depende de la velocidad del runner de CI y NO es reproducible. Fuente de no-determinismo conocida y declarada — no misteriosa. La brecha (4.4349 vs 2.2551) difiere como consecuencia del corte, no del metodo.",
+  "EL_HALLAZGO_QUE_ESTE_ARTEFACTO_CARGA": {
+   "que": "entre las dos corridas K=20, el optimo exacto y CP-SAT se mueven JUNTOS 7.276e-12 (1,7e-15 relativo) con librerias identicas (numpy 2.4.6, pandapower 3.5.4, python 3.12.13): la INSTANCIA que pandapower construye difiere en los ultimos bits entre CPUs distintas. En K=8/12/16 los pares calzaron bit a bit.",
+   "por_que_importa": "obliga a distinguir dos afirmaciones que veniamos tratando como una: «reproducible al decimal» (cierto) y «bit a bit entre maquinas» (falso a ~1e-15). Cualquier sello futuro de reproducibilidad declara cual de las dos afirma."
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-19T22:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "eon_harness.py",
+   "harness_version": "1.1.0",
+   "harness_sha256": "sha256:50cd5d6f67f965ce0c22cc6af3455aa0751b3e75307934388b4f66f06c59cf38",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:27df73ab30b7e8370f4b01295fcf6744105f503d0162b1523b76fff27a9ef103"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "resultados_eon/eon_case118_K20_p52_c3@df4999bc.json",
+    "sha256": "sha256:df4999bc08c2c698327584fc09bc8c92befe6fa73bcb3735c89184542283a1a2"
+   },
+   "censo_de_la_red": {
+    "grid": "IEEE case118",
+    "n_buses": 118,
+    "n_lines": 173
+   },
+   "K": 20,
+   "capas": 3,
+   "optimizador": {
+    "pasos_dados": 52,
+    "pasos_de_presupuesto": 400,
+    "reloj_s": 2400.0,
+    "truncado_por_reloj": true
+   },
+   "resultado": {
+    "optimo_exacto": 4218.948397151344,
+    "clasico": {
+     "valor": 4218.948397151344,
+     "status": "OPTIMAL",
+     "segundos": 7.435
+    },
+    "cuantico": {
+     "valor": 4406.054966020853,
+     "segundos": 1946.603,
+     "gap_pct": 4.4349,
+     "ADVERTENCIA": "esta brecha mide el presupuesto, no el metodo"
+    }
+   },
+   "outcome": "not yet — classical wins",
+   "cruce_ventaja_cuantica": "0"
+  },
+  "como": {
+   "harness_del_artefacto": {
+    "sha256": "50cd5d6f67f965ce0c22cc6af3455aa0751b3e75307934388b4f66f06c59cf38",
+    "archivado_como": "code/eon_harness@50cd5d6f.py"
+   },
+   "harness_actual_del_repo_distinto_y_por_que": "el repo ya lleva la variante dicke (094595db3e84…); este artefacto es anterior a ese cambio y su procedencia resuelve a la copia archivada, no al harness vivo.",
+   "validacion_AC": {
+    "convergio": false,
+    "error": "Power Flow nr did not converge after 10 iterations!"
+   },
+   "compute": "GitHub Actions (experimento-eon.yml)"
+  },
+  "cuando": {
+   "archived_at": "2026-08-19T22:00:00Z"
+  },
+  "donde": {
+   "compute": "CI de evidence",
+   "verificacion": "Mac local (lab)"
+  },
+  "porque": {
+   "question": "cerrar el lote D sin cabos: el punto truncado tambien se archiva, declarado como lo que es.",
+   "decision": "Norte, opcion A del 19-ago, anunciada con reversibilidad."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; commit, ancla y tres copias del notario."
+  }
+ }
+}
