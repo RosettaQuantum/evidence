@@ -1,0 +1,196 @@
+{
+ "experimento": "RQ-EON-QPU-003 (p=1, variables permutadas)",
+ "NO_SELLADO": "no sellado ni anclado.",
+ "pregunta": "la anti-preferencia dentro del subespacio valido de la corrida 2 (z = +6.5), ¿sigue a las VARIABLES (metodo) o se queda con los QUBITS (dispositivo)?",
+ "serie": {
+  "comparabilidad": "las tres corridas comparten backend, cadena y marca de calibracion: la serie vale",
+  "backend": "ibm_marrakesh",
+  "cadena_qubits": [
+   75,
+   59,
+   55,
+   54,
+   53,
+   39,
+   33,
+   34,
+   35,
+   19
+  ],
+  "calibracion_las_tres_corridas": "2026-08-17 15:17:21-03:00",
+  "misma_calibracion_que_1_y_2": true,
+  "nota": "las tres corridas comparten backend, cadena de qubits y marca de calibracion. No hubo recalibracion en el medio: la serie es una serie."
+ },
+ "hardware": {
+  "job_id": "da1nmikdedkc73er95d0",
+  "disparos_pedidos": 8192,
+  "disparos_recibidos": 8192,
+  "cadenas_distintas": 986,
+  "permutacion_variable_a_qubit_logico": [
+   6,
+   5,
+   7,
+   8,
+   2,
+   4,
+   9,
+   3,
+   1,
+   0
+  ],
+  "permutacion_variable_a_qubit_fisico": [
+   33,
+   39,
+   34,
+   35,
+   55,
+   53,
+   19,
+   54,
+   59,
+   75
+  ],
+  "n_2q": 192,
+  "n_2q_corrida_2": 157,
+  "duracion_us": 13.6,
+  "sha256_transpilado": "sha256:edb342228e476bc00fb3d6dd513457e61eb083285baca1a8e21c942278f9dd64",
+  "preflight": "el transpilado permutado, sin ruido, reproduce EL MISMO ideal p=1 con TVD 2.4e-15",
+  "cadena_pedida": [
+   75,
+   59,
+   55,
+   54,
+   53,
+   39,
+   33,
+   34,
+   35,
+   19
+  ],
+  "cadena_usada": {
+   "qubits_fisicos_con_operaciones": [
+    19,
+    33,
+    34,
+    35,
+    39,
+    53,
+    54,
+    55,
+    59,
+    75
+   ],
+   "fuente": {
+    "archivo": "30_circuito_transpilado_perm.qasm",
+    "sha256": "edb342228e476bc00fb3d6dd513457e61eb083285baca1a8e21c942278f9dd64",
+    "que_es": "el circuito transpilado que se ENVIO al backend"
+   },
+   "corroboracion_independiente": "la sesion coordinadora recupero de IBM el circuito ejecutado de los tres trabajos y obtuvo el mismo conjunto. Dos evidencias distintas: esta es lo enviado; la suya, lo ejecutado."
+  },
+  "cadena_pedida_y_usada_coinciden": {
+   "como_conjunto": true,
+   "calculado_por": "comparacion de conjuntos entre cadena_pedida y los qubits con operaciones del QASM enviado — calculado al escribir este campo, no afirmado",
+   "limite": "el QASM no conserva el ORDEN de la cadena, solo que conjunto de qubits fisicos llevo compuertas; la coincidencia declarada es de conjunto.",
+   "por_que_existe_este_campo": "pedir no es obtener. Si el transpilador eligiera otra cadena, un sello sin este campo afirmaria una condicion fisica que no ocurrio, anclado y citable."
+  }
+ },
+ "reglas_de_seleccion_incluidas_las_descartadas": {
+  "R1_descartada": "primer desarreglo (semilla 42) dentro del +-10 % de las 157 compuertas de la corrida 2. ABORTO: en un camino la identidad es el encaje optimo, toda permutacion sube el conteo (7 desarreglos: 183 a 271 compuertas).",
+  "R2_descartada": "la inversion de la cadena entraba en el +-10 % (161 compuertas) pero separaba las dos ramas por 1.4 sigma: un experimento disenado para no concluir. No se envia algo asi.",
+  "R3_usada": "el discriminador es el SIGNO de la desviacion contra el azar, no la magnitud: mas compuertas atenuan las dos ramas hacia el azar, pero atenuar nunca lo cruza. Se toman las candidatas con ramas de signo OPUESTO y separacion >= 5 sigma, y entre esas la de MENOS compuertas.",
+  "candidatas_evaluadas": 41,
+  "candidatas_con_signo_opuesto": 20,
+  "elegida": "desarreglo aleatorio"
+ },
+ "PREDICCION_escrita_antes": {
+  "RAMA_A": {
+   "significa": "la anti-preferencia es del METODO (problema + ansatz + su interaccion con el ruido): esta atada a que variable es cual, no a que qubit la lleva",
+   "prediccion": 8249.9,
+   "z": 6.47,
+   "signo": "POR ENCIMA del azar"
+  },
+  "RAMA_B": {
+   "significa": "es del DISPOSITIVO: un sesgo fijo en el espacio de los qubits que en la corrida 2 se proyecto sobre el costo por casualidad del mapeo. Al permutar se proyecta distinto.",
+   "modelo": "p_B = F*ideal en espacio de variables (F = 0.5219, medido en la corrida 2) + el residuo de la corrida 2 reindexado por la permutacion, en espacio de qubits",
+   "prediccion": 8155.0,
+   "z": -6.88,
+   "signo": "POR DEBAJO del azar"
+  },
+  "regla_de_lectura": {
+   "A_si": "la media medida queda POR ENCIMA del azar con z > +3",
+   "B_si": "la media medida queda POR DEBAJO del azar con z < -3",
+   "AMBIGUO_si": "|z| <= 3, o sea indistinguible del azar en cualquiera de los dos lados. Un tercer envio que no zanja tambien es informacion y se dice asi, sin forzar la lectura.",
+   "por_que_el_signo_y_no_la_magnitud": "este circuito tiene 192 compuertas contra 157 de la corrida 2 (+22 %) y dura 13.6 us contra 12.2. Mas ruido atenua las dos ramas HACIA el azar, asi que la magnitud no es comparable entre corridas — pero ninguna atenuacion cambia de que lado del azar cae el numero.",
+   "limites_declarados": [
+    "la rama B es UNA realizacion del residuo reindexado, no un promedio: con un solo envio B puede imitar a A por azar, y al reves.",
+    "el circuito permutado es mas largo, asi que el sesgo del aparato tampoco es identico al de la corrida 2: el valor numerico de B es aproximado. Lo robusto es el signo.",
+    "un circuito mas largo puede traer sesgo propio nuevo, no solo atenuar el viejo."
+   ]
+  }
+ },
+ "MEDIDO": {
+  "valor_medio_de_los_validos": 8199.7,
+  "error_1sigma": 6.4,
+  "azar": 8203.9,
+  "z_contra_el_azar": -0.66,
+  "corrida_2_sin_permutar": 8249.9,
+  "z_corrida_2": 6.5
+ },
+ "VEREDICTO_POR_LA_REGLA_DECLARADA": "AMBIGUO — indistinguible del azar; el tercer envio NO zanja",
+ "lo_que_SI_queda_establecido": "la rama A esta EXCLUIDA: predijo 8249.9 y se midio 8199.7, a 7.9 sigma. Y la escapatoria habitual —«se lavo porque este circuito tiene mas ruido»— esta cerrada por medicion: la corrida 3 salio MAS limpia que la 2 pese a tener 192 compuertas contra 157 (F 0.6383 contra 0.5219, TVD 0.2272 contra 0.2986, fraccion valida 0.3856 contra 0.3158). Con MAS senal ideal sobreviviente, la anti-preferencia igual desaparecio. **La anti-preferencia de la corrida 2 NO sigue a las variables: no es del metodo.**",
+ "lo_que_NO_queda_establecido": "la rama B tampoco acerto: su prediccion puntual era 8155.0 y quedo a 7.0 sigma de lo medido. O sea que el sesgo no se re-proyecto como mi modelo decia. Descartar A no confirma B: dice que el efecto no esta atado a las variables, no que mi descripcion de como se ata a los qubits sea correcta.",
+ "hipotesis_C_que_no_estaba_en_las_ramas": "queda una tercera que mi diseno de dos ramas no contemplaba y que hay que decir: que el efecto de la corrida 2 haya sido TRANSITORIO —un evento del chip durante esos 4 segundos— y no una propiedad estable ni de las variables ni de los qubits. Lo medido es compatible con eso. Separarla exige repetir el circuito IDENTIDAD de la corrida 2, que no corri y no corro sin autorizacion.",
+ "masa_valida_por_cuartil_Q1_mejores": {
+  "corrida_3": [
+   0.2381,
+   0.2767,
+   0.2431,
+   0.2422
+  ],
+  "corrida_2": [
+   0.2049,
+   0.2497,
+   0.2493,
+   0.2961
+  ],
+  "ideal": [
+   0.2591,
+   0.2535,
+   0.2474,
+   0.2399
+  ],
+  "azar": [
+   0.25,
+   0.25,
+   0.25,
+   0.25
+  ]
+ },
+ "otras_metricas": {
+  "fraccion_valida_cruda": 0.38562,
+  "TVD_contra_el_ideal": 0.227164,
+  "F": 0.638345,
+  "comparacion": "fraccion valida 0.3856 (corrida 2: 0.3158, corrida 1: 0.2681, azar 0.2461)"
+ },
+ "EL_ORACULO_TERCER_PUNTO": "ni la calibracion ni el conteo de compuertas ordenan estas tres corridas. F medido: 0.462 con 354 compuertas (corrida 1), 0.522 con 157 (corrida 2), 0.638 con 192 (corrida 3). La corrida 3 tiene 22 % mas compuertas que la 2 y retiene MAS senal. Sumado a los dos errores de signo opuesto del predictor (corto en p=2, largo en p=1), la conclusion se mantiene y se refuerza: no hay predictor; hay una linea base de tres puntos contra la que se medira el proximo.",
+ "qpu": {
+  "segundos_gastados": 4,
+  "tope_autorizado_s": 10,
+  "estimacion_previa_s": 2.16,
+  "usage_estimation_ibm_s": {
+   "quantum_seconds": 5.094623493
+  },
+  "cuota_antes_s": 568,
+  "cuota_despues_s": 564,
+  "envios": 1,
+  "acumulado_tres_corridas_s": 12
+ },
+ "versiones": {
+  "python": "3.12.14",
+  "qiskit": "2.5.2",
+  "qiskit-ibm-runtime": "0.49.0",
+  "numpy": "2.5.2",
+  "scipy": "1.16.3",
+  "pandapower": "3.3.3"
+ }
+}

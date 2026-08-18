@@ -1,0 +1,70 @@
+{"python": "3.9.6", "numpy": "2.0.2", "red": "case118", "semilla": 42, "k_budget": 5, "reloj_s": 900.0, "C_OV": 1.0, "VOLL": 20.0, "W_BUILD": 10.0, "sigma_carga": 0.15, "p_falla_gen": 0.15, "falla_max": 0.5, "theta_max": 10.0, "cp_dtheta": 0.0001, "cp_mw": 0.1, "cp_tol_u": 2}
+
+=== PRUEBA 1 — la fisica: S=1 SIN recurso == el flujo DC del harness ===
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=2 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 8 paralelos + 2 nuevos = 10 sobre una red de 173 lineas
+theta base max = 2.9966 rad (cota del modelo: 10.0)
+  plan [3, 4, 5, 7, 9]  sobrecarga modelo=  9410.836 MW   pandapower=  9410.836 MW   dif rel=3.476e-11   (loading>100 sumado: 6017.4)
+  plan [0, 1, 2, 3, 4]  sobrecarga modelo=  9831.689 MW   pandapower=  9831.689 MW   dif rel=2.084e-11   (loading>100 sumado: 6277.0)
+  plan [5, 6, 7, 8, 9]  sobrecarga modelo= 10931.699 MW   pandapower= 10931.699 MW   dif rel=6.217e-12   (loading>100 sumado: 7057.0)
+  plan [1, 3, 5, 7, 8]  sobrecarga modelo= 10728.349 MW   pandapower= 10728.349 MW   dif rel=8.114e-12   (loading>100 sumado: 7095.9)
+  -> CRITERIO: dif relativa maxima 3.476e-11 (tope 1e-4): PASA
+
+=== PRUEBA 1 bis — S=1 CON recurso contra un arbitro independiente ===
+  MILP conjunto      : valor=397.6768  set=[1, 3, 4, 5, 7]  OPTIMAL
+  arbitro C(10,5)=252 piezas (7s): valor=397.6768  set=[1, 3, 4, 5, 7]
+  -> CP/MILP == arbitro: True
+  congestion DC del harness (loading>100 sumado):  sin construir 7174.8 | plan determinista [3, 4, 5, 7, 9] 6017.4 | plan estocastico [1, 3, 4, 5, 7] 6148.1
+
+=== PRUEBA 2 — S escenarios IDENTICOS al nominal == S=1 ===
+  S=5   identicos: valor=     1988.3839  /S=    397.6768  vs S=1     397.6768  ->  CALZA
+  S=20  identicos: valor=     7953.5357  /S=    397.6768  vs S=1     397.6768  ->  CALZA
+
+=== PRUEBA 3 — un escenario extremo tiene que MOVER la decision ===
+  x10 sobre 1 de 2 escenarios, probado en los 99 buses con carga
+  buses que MUEVEN el plan optimo: 29 de 99
+  buses cuyo extremo no cambia ni el objetivo: 2 de 99
+    bus 0    (  132.6 MW) -> [3, 4, 5, 7, 8]   (nominal: [1, 3, 4, 5, 7])
+    bus 1    (   52.0 MW) -> [3, 4, 5, 7, 8]   (nominal: [1, 3, 4, 5, 7])
+    bus 2    (  101.4 MW) -> [3, 4, 5, 7, 8]   (nominal: [1, 3, 4, 5, 7])
+    bus 3    (  101.4 MW) -> [3, 4, 5, 7, 8]   (nominal: [1, 3, 4, 5, 7])
+    bus 5    (  135.2 MW) -> [3, 4, 5, 7, 8]   (nominal: [1, 3, 4, 5, 7])
+  -> LOS ESCENARIOS LLEGAN A LA DECISION
+
+=== PRUEBA 4 — la discretizacion de CP-SAT no cambia el optimo ===
+  CP-SAT S=1: FEASIBLE valor=396.5 set=[1, 3, 4, 5, 7]   MILP: 397.6768 set=[1, 3, 4, 5, 7]   dif rel=0.0029591518575589996
+
+{
+ "1_fisica_reproduce_el_flujo_DC_del_harness": true,
+ "2_promedio_bien_ponderado": true,
+ "3_los_escenarios_mueven_la_decision": true,
+ "4_la_discretizacion_cpsat_no_deforma": true
+}
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=2 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 8 paralelos + 2 nuevos = 10 sobre una red de 173 lineas
+  K=10  S=1    cpsat  FEASIBLE      900.0s  vars=660      restr=888      valor=396.6          cota=395.7          brecha=0.2269
+  K=10  S=1    SCIP   OPTIMAL         0.1s  vars=660      restr=702      valor=397.676786     cota=397.676786     brecha=0.0
+  FRONTERA de cpsat: K=10 S=1 -> FEASIBLE en 900.0s
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=3 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 11 paralelos + 3 nuevos = 14 sobre una red de 173 lineas
+  K=14  S=1    SCIP   OPTIMAL         0.1s  vars=672      restr=722      valor=388.84981      cota=388.84981      brecha=0.0
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=5 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 15 paralelos + 5 nuevos = 20 sobre una red de 173 lineas
+AVISO: 2 candidata(s) NUEVA(s) del harness unen buses de tension distinta [(138.0, 345.0), (161.0, 138.0)]. Se modelan como lo hace pandapower (tension del bus de origen); la prueba 1 comprueba que la reproduccion sigue siendo exacta.
+  K=20  S=1    SCIP   OPTIMAL         0.1s  vars=690      restr=752      valor=392.10553      cota=392.10553      brecha=0.0
+  K=10  S=5    SCIP   OPTIMAL         0.8s  vars=3260     restr=3506     valor=4218.291502    cota=4218.291502    brecha=0.0
+  K=14  S=5    SCIP   OPTIMAL         1.0s  vars=3304     restr=3606     valor=4220.431596    cota=4220.431596    brecha=0.0
+  K=20  S=5    SCIP   OPTIMAL         1.4s  vars=3370     restr=3756     valor=4226.802857    cota=4226.802857    brecha=0.0
+  K=10  S=20   SCIP   OPTIMAL        11.2s  vars=13010    restr=14021    valor=22657.557379   cota=22657.557379   brecha=0.0
+  K=14  S=20   SCIP   OPTIMAL        10.5s  vars=13174    restr=14421    valor=22666.117755   cota=22666.117755   brecha=0.0
+  K=20  S=20   SCIP   OPTIMAL        20.1s  vars=13420    restr=15021    valor=22691.602797   cota=22691.602797   brecha=0.0
+  K=10  S=50   SCIP   OPTIMAL        48.6s  vars=32510    restr=35051    valor=52768.372236   cota=52768.372236   brecha=0.0
+  K=14  S=50   SCIP   OPTIMAL        52.5s  vars=32914    restr=36051    valor=52789.773177   cota=52789.773177   brecha=0.0
+  K=20  S=50   SCIP   OPTIMAL        67.4s  vars=33520    restr=37551    valor=52853.485782   cota=52853.485782   brecha=0.0
+  K=10  S=100  SCIP   OPTIMAL       135.7s  vars=65010    restr=70101    valor=104655.899148  cota=104655.899148  brecha=0.0
+  K=14  S=100  SCIP   OPTIMAL       165.7s  vars=65814    restr=72101    valor=104698.701029  cota=104698.701029  brecha=0.0
+  K=20  S=100  SCIP   OPTIMAL       269.2s  vars=67020    restr=75101    valor=104826.126239  cota=104826.126239  brecha=0.0

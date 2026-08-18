@@ -1,0 +1,340 @@
+{
+ "experimento": "RQ-EON-QPU-001",
+ "que_es": "primera corrida del track E.ON (expansion de red electrica) en hardware cuantico real. Las 21 corridas selladas anteriores del track son todas simulacion.",
+ "NO_SELLADO": "este artefacto NO esta sellado ni anclado. Lo produce el laboratorio; sellar es de otra sesion.",
+ "problema": {
+  "fuente": {
+   "archivo": "/Users/nicholasiakl/Documents/Claude/Projects/Rosetta Quantum/evidence/harness/eon_harness.py",
+   "sha256": "sha256:804701105653c5203b2c04eb4bf1be8a88c2ae0368f89d6e220f6536ba59ab76",
+   "marcador": "# --- 1. optimo exacto (arbitro) ---",
+   "env": {
+    "RQ_GRID": "case118",
+    "RQ_CAND": "10",
+    "RQ_SEED": "42"
+   }
+  },
+  "red": {
+   "grid": "case118",
+   "n_bus": 118,
+   "n_line": 173,
+   "load_scale": 2.6,
+   "tighten": 0.5,
+   "congestion_base_dc": 7174.7890469658405
+  },
+  "K": 10,
+  "k_budget": 5,
+  "lambda_cost": 0.02,
+  "penalty": 1746.186226324171,
+  "seed": 42,
+  "candidatos": [
+   {
+    "tipo": "parallel",
+    "detalle": [
+     172
+    ]
+   },
+   {
+    "tipo": "parallel",
+    "detalle": [
+     92
+    ]
+   },
+   {
+    "tipo": "parallel",
+    "detalle": [
+     91
+    ]
+   },
+   {
+    "tipo": "parallel",
+    "detalle": [
+     90
+    ]
+   },
+   {
+    "tipo": "parallel",
+    "detalle": [
+     89
+    ]
+   },
+   {
+    "tipo": "parallel",
+    "detalle": [
+     88
+    ]
+   },
+   {
+    "tipo": "parallel",
+    "detalle": [
+     171
+    ]
+   },
+   {
+    "tipo": "parallel",
+    "detalle": [
+     85
+    ]
+   },
+   {
+    "tipo": "new",
+    "detalle": [
+     10,
+     91
+    ]
+   },
+   {
+    "tipo": "new",
+    "detalle": [
+     51,
+     117
+    ]
+   }
+  ],
+  "optimo_exacto": {
+   "metodo": "fuerza bruta 2^10 = 1024 evaluaciones",
+   "valor": 7557.593351927542,
+   "x": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1
+   ],
+   "n_seleccionadas": 5,
+   "indice": 117
+  },
+  "espectro_crudo_en": "01_qubo_eon_case118_K10.json (las 1024 cadenas con su valor QUBO)"
+ },
+ "circuito": {
+  "ansatz": "QAOA, p=2 (= RQ_LAYERS = K//4 del harness), mezclador X estandar",
+  "parametros_gamma": [
+   9.721666195812183e-05,
+   0.0003677319929679563
+  ],
+  "parametros_beta": [
+   2.866981662853939,
+   3.0600124825181694
+  ],
+  "optimizacion": "Nelder-Mead multi-arranque (60 arranques, semilla 42) en simulador exacto. 0 s de QPU: en hardware se corrio SOLO el circuito final.",
+  "compuertas_2q": 354,
+  "profundidad": 460,
+  "duracion_us": 18.1,
+  "base": "CZ (sin compuertas fraccionarias; ver REGISTRO-PREVIO.md seccion 7)",
+  "sha256_transpilado": "sha256:e68340f7d319078d95515ae545f869eb6218bd58b0d024efce13f2f89bd3e5c4",
+  "qasm_en": "05_circuito_transpilado.qasm"
+ },
+ "hardware": {
+  "backend": "ibm_marrakesh",
+  "por_que": "cola 0 trabajos contra 184 de ibm_kingston y 24738 de ibm_fez; y mejor calibracion del dia donde nos duele: error CZ mediano 3.17e-03 contra 6.69e-03, error de lectura mediano 1.07e-02 contra 1.51e-02. Kingston gana en T2 (133.9 us contra 61.1 us) y aun asi pierde, porque este circuito son 354 compuertas de 2 qubits.",
+  "cadena_de_qubits": [
+   75,
+   59,
+   55,
+   54,
+   53,
+   39,
+   33,
+   34,
+   35,
+   19
+  ],
+  "criterio_de_la_cadena": "declarado ANTES de mirar resultados (REGISTRO-PREVIO.md 4.2): camino simple de 10 qubits que minimiza sum -ln(1-err_cz) + sum -ln(1-err_lectura), busqueda exhaustiva sobre el acoplamiento; desempate por T2. 0 s de QPU.",
+  "calibracion_marca": "2026-08-17 15:17:21-03:00",
+  "err_cz_de_las_9_aristas": [
+   0.00307,
+   0.00222,
+   0.00176,
+   0.00158,
+   0.00219,
+   0.00158,
+   0.00159,
+   0.00298,
+   0.00366
+  ],
+  "err_lectura_de_los_10_qubits": [
+   0.00549,
+   0.00488,
+   0.00696,
+   0.00439,
+   0.00403,
+   0.01282,
+   0.01697,
+   0.00427,
+   0.00793,
+   0.00415
+  ],
+  "job_id": "da1mmre3kjvs7386ufb0",
+  "disparos_pedidos": 8192,
+  "disparos_recibidos": 8192,
+  "cadenas_distintas_observadas": 1005,
+  "counts_crudos_en": "07_resultado_crudo.json",
+  "cadena_pedida": [
+   75,
+   59,
+   55,
+   54,
+   53,
+   39,
+   33,
+   34,
+   35,
+   19
+  ],
+  "cadena_usada": {
+   "qubits_fisicos_con_operaciones": [
+    19,
+    33,
+    34,
+    35,
+    39,
+    53,
+    54,
+    55,
+    59,
+    75
+   ],
+   "fuente": {
+    "archivo": "05_circuito_transpilado.qasm",
+    "sha256": "e68340f7d319078d95515ae545f869eb6218bd58b0d024efce13f2f89bd3e5c4",
+    "que_es": "el circuito transpilado que se ENVIO al backend"
+   },
+   "corroboracion_independiente": "la sesion coordinadora recupero de IBM el circuito ejecutado de los tres trabajos y obtuvo el mismo conjunto. Dos evidencias distintas: esta es lo enviado; la suya, lo ejecutado."
+  },
+  "cadena_pedida_y_usada_coinciden": {
+   "como_conjunto": true,
+   "calculado_por": "comparacion de conjuntos entre cadena_pedida y los qubits con operaciones del QASM enviado — calculado al escribir este campo, no afirmado",
+   "limite": "el QASM no conserva el ORDEN de la cadena, solo que conjunto de qubits fisicos llevo compuertas; la coincidencia declarada es de conjunto.",
+   "por_que_existe_este_campo": "pedir no es obtener. Si el transpilador eligiera otra cadena, un sello sin este campo afirmaria una condicion fisica que no ocurrio, anclado y citable."
+  }
+ },
+ "mitigacion": {
+  "M3": "PROHIBIDA y no usada. Devuelve cuasi-probabilidades que mueven peso hacia las cadenas que nosotros contamos como validas: mediria el supuesto del corrector, no el hardware.",
+  "ZNE_PEC_TREX": "no aplican: son de EstimatorOptions y aca se leen cadenas con Sampler.",
+  "twirling_de_medicion": false,
+  "twirling_de_compuertas": false,
+  "desacople_dinamico": false,
+  "post_proceso": "ninguno. No se descarto ni un disparo."
+ },
+ "1_fraccion_valida_CRUDA": {
+  "definicion": "cadena con exactamente 5 bits en 1 (la restriccion de cardinalidad del QUBO)",
+  "valor": 0.268066,
+  "n": 2196,
+  "de": 8192,
+  "error_1sigma": 0.004894,
+  "ideal_del_mismo_circuito": 0.514271,
+  "azar_ciego_252_de_1024": 0.246094,
+  "lectura": "26.81 % contra 24.61 % de azar ciego: el hardware queda 2.2 puntos sobre tirar una moneda, unas 4.5 sigma. La estructura del QAOA sobrevive apenas. Y queda POR DEBAJO del rango 33.9 %-64.0 % de la bateria anterior — que eran circuitos de otra clase (CTQW, codificacion one-hot), no comparables uno a uno.",
+  "bateria_anterior_referencia": "33.9 % a 64.0 % (track de corredores CTQW, otra codificacion)"
+ },
+ "2_desviacion_vs_ideal": {
+  "TVD": 0.334702,
+  "fidelidad_clasica": 0.722274,
+  "TVD_que_daria_ruido_total_uniforme": 0.541437,
+  "senal_ideal_sobreviviente_F": 0.46204164092076094,
+  "fidelidad_predicha_por_calibracion": 0.418189220738219,
+  "lectura": "F medido = 0.462 contra 0.418 predicho por la calibracion del dia ANTES de enviar. El criterio de seleccion no solo se declaro antes: acerto.",
+  "el_ruido_NO_es_simetrico": {
+   "cardinalidad_media_hardware": 4.3929443359375,
+   "cardinalidad_media_ideal": 4.522619040397905,
+   "histograma_cardinalidad_hw": [
+    0.0008544921875,
+    0.00927734375,
+    0.033935546875,
+    0.1259765625,
+    0.42333984375,
+    0.26806640625,
+    0.084228515625,
+    0.0394287109375,
+    0.0115966796875,
+    0.0029296875,
+    0.0003662109375
+   ],
+   "histograma_cardinalidad_ideal": [
+    3.099593028216802e-05,
+    0.0003076213864612665,
+    0.0006616500667296997,
+    0.002172959668523806,
+    0.47833744434227937,
+    0.5142709879445335,
+    0.0008840552271468832,
+    0.0024084400258853962,
+    0.0007498690148086128,
+    0.00015760481539001591,
+    1.837157795693057e-05
+   ],
+   "frac_valida_si_solo_hubiera_ruido_de_lectura": 0.4985048636073136,
+   "lectura": "el ruido arrastra hacia el 0 (cardinalidad media 4.39 contra 4.52 ideal): las cadenas de 5 bits caen a 4 mas de lo que suben a 6. Aplicar SOLO el canal de lectura publicado deja la fraccion valida en 49.85 %, o sea que la lectura explica 1.6 de los 24.6 puntos perdidos: el resto es el circuito (354 compuertas de 2 qubits, 18.1 us). Y es la razon concreta de no haber usado twirling de medicion: simetrizar este sesgo habria devuelto poblacion de cardinalidad 4 a la 5 y subido la fraccion valida sin una sola medicion nueva."
+  }
+ },
+ "3_calidad_del_mejor_plan": {
+  "optimo_exacto": 7557.593351927542,
+  "x_optimo": [
+   0,
+   0,
+   0,
+   1,
+   1,
+   1,
+   0,
+   1,
+   0,
+   1
+  ],
+  "mejor_valido_en_hardware": 7557.593351927542,
+  "brecha_pct": 0.0,
+  "veces_que_salio_el_optimo": 19,
+  "ideal_mismos_8192_disparos": {
+   "mejor_valido": 7557.593351927542,
+   "brecha_pct": 0.0,
+   "veces_que_salio_el_optimo": 21
+  },
+  "ESTA_METRICA_ESTA_SATURADA": {
+   "probabilidad_de_que_el_azar_ciego_encuentre_el_optimo_con_8192_disparos": 0.999666,
+   "lectura": "con 1024 cadenas y 8192 disparos, un muestreador UNIFORME encuentra el optimo con probabilidad 99.97 %. Que el hardware lo haya encontrado no distingue al metodo: a K=10 esta metrica no mide nada. Se reporta porque se pidio, y se declara saturada."
+  },
+  "medida_que_si_discrimina": {
+   "valor_QUBO_medio_de_los_disparos_validos_hardware": 8201.44,
+   "mismo_en_el_ideal": 8182.634,
+   "mismo_si_se_eligiera_al_azar_entre_las_252_validas": 8203.883,
+   "lectura": "entre las cadenas validas el hardware promedia 8201.4 contra 8182.6 del ideal y 8203.9 del azar: dentro del subespacio valido casi no queda preferencia por las buenas. Lo que el ruido se comio primero fue el ordenamiento fino, no la restriccion."
+  }
+ },
+ "qpu": {
+  "segundos_gastados": 4,
+  "estimacion_propia_previa_s": 2.2,
+  "usage_estimation_de_ibm_s": {
+   "quantum_seconds": 5.026370095
+  },
+  "cuota_antes_s": 576,
+  "cuota_despues_s": 572,
+  "limite_total_s": 600,
+  "tope_autorizado_para_esta_corrida_s": 120,
+  "envios": 1
+ },
+ "versiones": {
+  "python": "3.12.14",
+  "qiskit": "2.5.2",
+  "qiskit-ibm-runtime": "0.49.0",
+  "numpy": "2.5.2",
+  "scipy": "1.16.3",
+  "pandapower": "3.3.3",
+  "rustworkx": "0.18.1",
+  "interprete": "/Users/nicholasiakl/Documents/Claude/Projects/Rosetta Quantum/.venv-lab/bin/python"
+ },
+ "controles_hechos_antes_de_gastar": [
+  "el QUBO se saco EJECUTANDO el harness, no reimplementandolo (sha256 del archivo en 'problema.fuente')",
+  "dos implementaciones independientes del QAOA (numpy sobre el espectro crudo vs circuito Qiskit sobre la conversion Ising) coinciden con TVD = 1.2e-15",
+  "el circuito TRANSPILADO, reducido a sus 10 qubits fisicos, se simulo exacto y reproduce el ideal con TVD = 3.0e-15",
+  "el sha256 del transpilado se recomputo justo antes de enviar y se comparo con el del preflight",
+  "la cuota se releyo contra la API en el momento del envio (576 s), no se heredo de un reporte"
+ ],
+ "controles_hechos_despues": [
+  "el orden de bits se verifico contra BitArray.slice_bits de la propia libreria, clbit por clbit, porque el chequeo por TVD invertida salio empatado (0.3347 contra 0.3314) y no podia decidir: invertir bits conserva la cardinalidad y la distribucion ideal es casi plana dentro de cada clase",
+  "las cuentas suman exactamente los 8192 disparos declarados"
+ ]
+}

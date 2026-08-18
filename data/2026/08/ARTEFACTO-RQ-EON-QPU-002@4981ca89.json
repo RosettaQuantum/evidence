@@ -1,0 +1,199 @@
+{
+ "experimento": "RQ-EON-QPU-002 (p=1)",
+ "ADVERTENCIA_DE_PROCEDENCIA": "p=1 se eligio DESPUES de ver el resultado de p=2. Es una alternativa elegida a posteriori, no la receta pre-declarada. La corrida pre-declarada es la de p=2 (RQ-EON-QPU-001) y las dos se publican; esta NO la reemplaza.",
+ "NO_SELLADO": "no sellado ni anclado; lo produce el laboratorio.",
+ "relacion_con_la_corrida_1": {
+  "corrida_predeclarada": "RQ-EON-QPU-001 (p=2) — esa es la que se decidio antes de ver nada",
+  "esta": "alternativa elegida DESPUES de ver fallar a p=2. Aunque la decision sea razonable, la seleccion existe y esta corrida NO reemplaza a la primera. Se publican las dos.",
+  "que_se_mantuvo_igual": [
+   "backend ibm_marrakesh",
+   "cadena de qubits (el mismo criterio la volvio a elegir)",
+   "marca de calibracion (identica: no hubo recalibracion entre las dos)",
+   "8192 disparos",
+   "mismo QUBO, misma semilla",
+   "sin fraccionarias, sin DD, sin twirling, sin M3"
+  ],
+  "unico_cambio": "p = 1 en vez de p = 2"
+ },
+ "hardware": {
+  "backend": "ibm_marrakesh",
+  "cadena_de_qubits": [
+   75,
+   59,
+   55,
+   54,
+   53,
+   39,
+   33,
+   34,
+   35,
+   19
+  ],
+  "cadena_igual_a_corrida_1": true,
+  "calibracion_marca": "2026-08-17 15:17:21-03:00",
+  "calibracion_marca_corrida_1": "2026-08-17 15:17:21-03:00",
+  "misma_calibracion_que_corrida_1": true,
+  "job_id": "da1nc5sdedkc73er8qb0",
+  "disparos_pedidos": 8192,
+  "disparos_recibidos": 8192,
+  "cadenas_distintas": 990,
+  "n_2q": 157,
+  "profundidad": 274,
+  "duracion_us": 12.2,
+  "sha256_transpilado": "sha256:e1448e7cd1886cc62549ef1d2ba162884315fcfcc746174ecea46f8106bb01ba",
+  "cadena_pedida": [
+   75,
+   59,
+   55,
+   54,
+   53,
+   39,
+   33,
+   34,
+   35,
+   19
+  ],
+  "cadena_usada": {
+   "qubits_fisicos_con_operaciones": [
+    19,
+    33,
+    34,
+    35,
+    39,
+    53,
+    54,
+    55,
+    59,
+    75
+   ],
+   "fuente": {
+    "archivo": "20_circuito_transpilado_p1.qasm",
+    "sha256": "e1448e7cd1886cc62549ef1d2ba162884315fcfcc746174ecea46f8106bb01ba",
+    "que_es": "el circuito transpilado que se ENVIO al backend"
+   },
+   "corroboracion_independiente": "la sesion coordinadora recupero de IBM el circuito ejecutado de los tres trabajos y obtuvo el mismo conjunto. Dos evidencias distintas: esta es lo enviado; la suya, lo ejecutado."
+  },
+  "cadena_pedida_y_usada_coinciden": {
+   "como_conjunto": true,
+   "calculado_por": "comparacion de conjuntos entre cadena_pedida y los qubits con operaciones del QASM enviado — calculado al escribir este campo, no afirmado",
+   "limite": "el QASM no conserva el ORDEN de la cadena, solo que conjunto de qubits fisicos llevo compuertas; la coincidencia declarada es de conjunto.",
+   "por_que_existe_este_campo": "pedir no es obtener. Si el transpilador eligiera otra cadena, un sello sin este campo afirmaria una condicion fisica que no ocurrio, anclado y citable."
+  }
+ },
+ "PREDICCION_vs_MEDIDO": {
+  "F (senal sobreviviente)": {
+   "predicho": 0.6592,
+   "medido": 0.521949497842402,
+   "dif": -0.13725050215759804
+  },
+  "fraccion valida (apuesta)": {
+   "predicho": 0.277,
+   "medido": 0.3157958984375,
+   "dif": 0.038795898437499976
+  },
+  "fraccion valida (canal)": {
+   "predicho": 0.3494,
+   "medido": 0.3157958984375,
+   "dif": -0.03360410156249999
+  },
+  "TVD contra el ideal": {
+   "predicho": 0.1957,
+   "medido": 0.29858634795671135,
+   "dif": 0.10288634795671134
+  },
+  "valor medio de los validos": {
+   "predicho": 8195.6,
+   "medido": 8249.85373544102,
+   "dif": 54.25373544101967
+  }
+ },
+ "veredicto_del_oraculo": "la calibracion predijo F = 0.6592 y se midio F = 0.5219: se paso por 0.1373. En p=2 habia predicho 0.418 y medido 0.462, o sea se habia quedado corta. Dos apuestas, dos errores en direcciones opuestas (razon medido/predicho: 1.105 en p=2, 0.792 en p=1): el oraculo NO es confiable, y el acierto de la primera corrida se lee mejor como suerte que como calibracion del metodo. Se dice ahora, que es cuando cuesta.",
+ "apuesta_de_fraccion_valida": "aposte por 0.2770 (retencion proporcional) contra 0.3494 (modelo de canal); se midio 0.3158. Los dos erraron y el que yo declare primario fue el PEOR de los dos por 0.0052. Queda dicho.",
+ "1_fraccion_valida_CRUDA": {
+  "valor": 0.315796,
+  "n": 2587,
+  "de": 8192,
+  "sigma": 0.005136,
+  "ideal_del_mismo_circuito": 0.510535,
+  "azar_ciego": 0.246094,
+  "corrida_1_p2": 0.268066,
+  "lectura": "el circuito corto retiene mas: 31.58 % contra 26.81 % de p=2, sobre un azar de 24.61 %. Medido en puntos sobre el azar: 7.0 contra 2.2. El circuito con menos de la mitad de compuertas (157 contra 354) conserva unas 3 veces mas de la estructura del QAOA."
+ },
+ "2_desviacion_vs_ideal": {
+  "TVD": 0.298586,
+  "corrida_1_p2": 0.334702,
+  "F": 0.521949,
+  "F_corrida_1_p2": 0.462042,
+  "F_predicha": 0.6592,
+  "cardinalidad_media": 4.5306,
+  "cardinalidad_media_ideal": 4.6243,
+  "cardinalidad_media_corrida_1": 4.3929,
+  "lectura": "la deriva hacia el 0 tambien baja con el circuito corto: cardinalidad media 4.531 contra 4.393 de p=2 (ideal 4.624). Consistente con relajacion durante 12.2 us en vez de 18.1 us."
+ },
+ "3_LA_QUE_IMPORTA_preferencia_dentro_del_subespacio_valido": {
+  "valor_medio_de_los_validos_hardware": 8249.85,
+  "error_1sigma": 7.07,
+  "azar_entre_las_252_validas": 8203.88,
+  "ideal_del_mismo_circuito": 8193.21,
+  "z_contra_el_azar": 6.5,
+  "corrida_1_p2": {
+   "media": 8201.44,
+   "ideal": 8182.63,
+   "z": -0.31
+  },
+  "masa_por_cuartil_de_calidad_Q1_mejores": {
+   "hardware_p1": [
+    0.2049,
+    0.2497,
+    0.2493,
+    0.2961
+   ],
+   "ideal_p1": [
+    0.2591,
+    0.2535,
+    0.2474,
+    0.2399
+   ],
+   "azar": [
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ]
+  },
+  "HALLAZGO_ABIERTO": "el hardware en p=1 no es solo peor que el ideal: es PEOR QUE EL AZAR dentro del subespacio valido, por 46.0 unidades y a 6.5 sigma. Pone 29.6 % de su masa valida en el peor cuartil y 20.5 % en el mejor, cuando el ideal hace lo contrario (24.0 % y 25.9 %). Es robusto: sobrevive a quitar las 5 cadenas mas frecuentes y aparece igual en la mediana. p=2 no muestra nada (z = -0.31).",
+  "lo_que_NO_lo_explica": [
+   "ruido despolarizante: mezclar el ideal con la uniforme mueve el numero HACIA el azar, nunca lo cruza. Ningun valor de F puede producir un z positivo.",
+   "el mapeo variable->qubit: el peso de error de lectura de los qubits en 1 da 0.0359 tanto en el hardware como en el azar — las cadenas buenas no cayeron en qubits peores.",
+   "un gamma efectivo distinto (incluido el signo cambiado): el barrido de escala sobre gamma reproduce la fraccion valida (0.3154 contra 0.3158 observada) pero se queda en media 8200.0 contra 8249.9 observada. Ningun s del barrido llega a la media observada con una fraccion valida compatible."
+  ],
+  "prueba_que_lo_zanjaria_y_NO_se_corrio": "reenviar el MISMO circuito p=1 con las 10 variables permutadas sobre la misma cadena de qubits. Si la anti-preferencia sigue a las variables, es coherente/algoritmica; si se queda con los qubits, es del dispositivo. Cuesta lo mismo que esta corrida (4 s) y necesita OK: no habia autorizacion para un tercer envio."
+ },
+ "4_mejor_plan_SATURADA": {
+  "brecha_pct": 0.0,
+  "veces_el_optimo": 4,
+  "veces_el_optimo_corrida_1": 19,
+  "nota": "sigue sin servir: con 1024 cadenas y 8192 disparos el azar encuentra el optimo con probabilidad 0.9997. Se reporta y se declara saturada."
+ },
+ "qpu": {
+  "segundos_gastados": 4,
+  "estimacion_previa_s": 2.15,
+  "usage_estimation_ibm_s": {
+   "quantum_seconds": 4.882194085
+  },
+  "cuota_antes_s": 572,
+  "cuota_despues_s": 568,
+  "tope_autorizado_s": 60,
+  "envios": 1,
+  "acumulado_de_las_dos_corridas_s": 8
+ },
+ "versiones": {
+  "python": "3.12.14",
+  "qiskit": "2.5.2",
+  "qiskit-ibm-runtime": "0.49.0",
+  "numpy": "2.5.2",
+  "scipy": "1.16.3",
+  "pandapower": "3.3.3",
+  "rustworkx": "0.18.1"
+ }
+}
