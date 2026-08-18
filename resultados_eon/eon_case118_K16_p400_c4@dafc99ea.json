@@ -1,0 +1,237 @@
+{
+  "track": "E.ON grid-expansion",
+  "instance": "case118_stress2.6_K16_seed42",
+  "params": {
+    "grid": "IEEE case118",
+    "n_buses": 118,
+    "n_lines": 173,
+    "load_scale": 2.6,
+    "n_candidates": 16,
+    "k_budget": 5,
+    "lambda_cost": 0.02,
+    "seed": 42,
+    "time_budget_s": 2400.0
+  },
+  "grid_physics": {
+    "base_congestion_dc": 7174.789,
+    "congestion_model": "2nd-order DC superposition (measured r_i, q_ij via pandapower rundcpp)",
+    "measure_runtime_s": 54.64,
+    "candidates": [
+      {
+        "type": "parallel",
+        "detail": [
+          2
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          4
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          30
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          19
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          28
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          56
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          46
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          37
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          49
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          61
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          58
+        ]
+      },
+      {
+        "type": "parallel",
+        "detail": [
+          62
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          10,
+          91
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          51,
+          117
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          82,
+          10
+        ]
+      },
+      {
+        "type": "new",
+        "detail": [
+          11,
+          62
+        ]
+      }
+    ],
+    "ac_validation": {
+      "base": {
+        "converged": false,
+        "error": "Power Flow nr did not converge after 10 iterations!"
+      },
+      "classical_build": {
+        "converged": false,
+        "error": "Power Flow nr did not converge after 10 iterations!"
+      },
+      "built_lines": [
+        3,
+        6,
+        7,
+        13,
+        15
+      ]
+    }
+  },
+  "exact": {
+    "value": 4295.42082062981,
+    "x": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    "runtime_s": 0.334,
+    "n_selected": 5,
+    "arbitro": "fuerza bruta 2^16"
+  },
+  "classical": {
+    "solver": "OR-Tools CP-SAT",
+    "status": "OPTIMAL",
+    "value": 4295.42082062981,
+    "x": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    "runtime_s": 0.813,
+    "n_selected": 5
+  },
+  "quantum": {
+    "framework": "PennyLane",
+    "backend": "default.qubit (CPU sim)",
+    "layers": 4,
+    "optimizer": "Adam, 400 steps",
+    "shots": 2000,
+    "pasos_dados": 400,
+    "pasos_de_presupuesto": 400,
+    "reloj_s": 2400.0,
+    "truncado_por_reloj": false,
+    "advertencia": null,
+    "value": 4351.526116512432,
+    "x": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    "runtime_s": 778.496,
+    "n_selected": 5
+  },
+  "verdict": {
+    "protocol": "juez-v1: misma instancia + mismo presupuesto ambos lados; optimo exacto DC como arbitro; modelo de congestion 2do-orden DC validado en AC",
+    "exact_optimum": 4295.42082062981,
+    "arbitro": "fuerza bruta 2^16",
+    "arbitro_efectivo": "fuerza bruta",
+    "classical_gap_pct": 0.0,
+    "quantum_gap_pct": 1.3062,
+    "outcome": "not yet \u2014 classical wins"
+  },
+  "lib_versions": {
+    "pennylane": "0.45.1",
+    "numpy": "2.4.6",
+    "python": "3.12.13",
+    "pandapower": "3.5.4",
+    "harness_sha256": "50cd5d6f67f965ce0c22cc6af3455aa0751b3e75307934388b4f66f06c59cf38"
+  }
+}
