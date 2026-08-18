@@ -1,0 +1,97 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EON-QPU-002__20260817T2000Z__qaoa-p1-case118-K10--elegida-a-posteriori.json",
+  "file_id": "RQ-EON-QPU-002",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "QAOA del QUBO de E.ON (case118, K=10) en hardware real (ibm_marrakesh), 2026-08-17. El artefacto del laboratorio viaja anclado por sha256; las cifras de este sello se recomputaron de los conteos crudos. Sellado por el laboratorio; el anclaje es del notario.",
+  "por_que_la_calidad_SI_es_sellable_pese_al_defecto_del_ising": "el defecto QUBO->Ising del 2026-08-18 vive en eon_harness.py; este pipeline NO usa esa conversion: 01_extraer_qubo.py toma solo el QUBO (que el defecto no toca) y 02_qaoa_ideal.py construye su propio Ising con un assert sobre el espectro COMPLETO que se niega a enviar si no reproduce el QUBO. Verificado leyendo el codigo y reproduciendo la matematica por separado, no el reporte.",
+  "cadena_pedida_vs_usada": {
+   "pedida": [
+    75,
+    59,
+    55,
+    54,
+    53,
+    39,
+    33,
+    34,
+    35,
+    19
+   ],
+   "usada_conjunto": [
+    19,
+    33,
+    34,
+    35,
+    39,
+    53,
+    54,
+    55,
+    59,
+    75
+   ],
+   "coinciden_como_conjunto": true,
+   "fuentes": "QASM enviado (lab) + circuito ejecutado recuperado de IBM (coordinadora): dos evidencias independientes, mismo conjunto. El QASM no conserva el orden; la coincidencia es de conjunto.",
+   "regla": "pedir no es obtener: el sello declara lo que ocurrio."
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-18T18:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "02_qaoa_ideal.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:c0920bbcddfca5973a78a0d36dc61533b83a87c0ab6dcb72043bb4c811ef0d8b",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:1365b2de2097d266ca63c1e524590832029183b03352dd6226fc9ccec4aad35b"
+ },
+ "w6": {
+  "que": {
+   "artefacto_del_laboratorio": {
+    "archivo": "lab-eon-qpu-2026-08-17/ARTEFACTO-RQ-EON-QPU-002.json",
+    "sha256": "sha256:4981ca89577d1455e834e8dd728249621154f3629bd6aded17e9072e286514fd"
+   },
+   "resultado_crudo": {
+    "archivo": "lab-eon-qpu-2026-08-17/22_resultado_crudo_p1.json",
+    "sha256": "sha256:dd09780a5254495bce8f25795101a93a4c5b649f26832bb7f0c8d4999242bf09",
+    "job_id": "da1nc5sdedkc73er8qb0"
+   },
+   "circuito_enviado": {
+    "archivo": "lab-eon-qpu-2026-08-17/20_circuito_transpilado_p1.qasm",
+    "sha256": "sha256:e1448e7cd1886cc62549ef1d2ba162884315fcfcc746174ecea46f8106bb01ba"
+   },
+   "fraccion_valida_cruda": {
+    "validos": 2587,
+    "shots": 8192,
+    "fraccion": 0.315796,
+    "azar_ciego": 0.24609375,
+    "definicion": "cadenas con exactamente 5 unos (la cardinalidad del QUBO)"
+   },
+   "cruce_ventaja_cuantica": "0"
+  },
+  "como": {
+   "backend": "ibm_marrakesh",
+   "shots": 8192,
+   "notas_del_artefacto_que_este_sello_no_repite": "la advertencia de procedencia (p=1 elegida a posteriori), el veredicto del oraculo (dos apuestas, dos errores en direcciones opuestas: no hay predictor, hay linea base) y el veredicto de la permutacion (AMBIGUO contra el azar; la rama A excluida a 7,9 sigma; descartar A no confirma B) viven DENTRO del artefacto anclado, escritos antes de este sello. El sello no los parafrasea: los ancla."
+  },
+  "cuando": {
+   "archived_at": "2026-08-18T18:00:00Z"
+  },
+  "donde": {
+   "compute": "ibm_marrakesh",
+   "verificacion": "Mac local (sesion laboratorio)"
+  },
+  "porque": {
+   "question": "¿el circuito corre fiel en hardware y la senal medida es del metodo o del dispositivo?",
+   "por_que_se_publica": "el trato es publicar gane o pierda."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; el anclaje es del notario."
+  }
+ }
+}

@@ -1,0 +1,226 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-EON-ESTOCASTICO-001__20260814T2000Z__frontera-de-prueba-de-optimalidad--dos-etapas.json",
+  "file_id": "RQ-EXP-EON-ESTOCASTICO-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Track E.ON, expansion de red ESTOCASTICA en dos etapas: primera etapa binaria (que lineas construir), segunda continua (operar bajo S escenarios de demanda y falla de generacion). No es una corrida: es un barrido de 17 filas que busca donde el solucionador clasico deja de PROBAR optimalidad dentro del presupuesto de 900.0 s. Sellado por el laboratorio; el anclaje es del notario.",
+  "que_NO_es_esto": "no es una comparacion cuantico-clasico. El brazo cuantico NUNCA CORRIO: PennyLane no instala sobre el Python 3.9 de esta maquina. Toda la medicion es del lado clasico.",
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-14T20:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "eon_estocastico.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:da73c313b8f57303aa4d969ba3691b9d9bc210e506b5270879ce3ec00059bb4b",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:bf9d4e7c7b306ed2b3f16dc50487a910f99818bd9cc00b908b1f8ca89ee9e377"
+ },
+ "w6": {
+  "que": {
+   "frontera": {
+    "K": 10,
+    "S": 250,
+    "motor": "SCIP",
+    "status": "FEASIBLE",
+    "segundos": 900.14,
+    "valor": 266782.721639,
+    "cota": 261627.312322,
+    "brecha_de_optimalidad_pct": 1.9324,
+    "n_variables": 162510,
+    "n_restricciones": 175251,
+    "corte": "reloj",
+    "que_significa": "SCIP entrega una solucion factible y una cota, y la distancia entre las dos es lo que NO alcanzo a cerrar. No dice que la solucion sea mala: dice que dentro del presupuesto ya no puede DEMOSTRAR que sea la mejor."
+   },
+   "todo_lo_demas_prueba_optimalidad": {
+    "OPTIMAL": 15,
+    "brecha_maxima_entre_los_OPTIMAL": 0.0,
+    "S_que_prueban": [
+     1,
+     5,
+     20,
+     50,
+     100
+    ]
+   },
+   "denominador": {
+    "grilla_declarada": 21,
+    "S_declarados": [
+     1,
+     5,
+     20,
+     50,
+     100,
+     250,
+     500
+    ],
+    "K_declarados": [
+     10,
+     14,
+     20
+    ],
+    "intentados": 16,
+    "probados_OPTIMAL": 15,
+    "cortados_por_reloj": 1,
+    "cortados_por_memoria": 0,
+    "NO_INTENTADOS": [
+     {
+      "K": 10,
+      "S": 500
+     },
+     {
+      "K": 14,
+      "S": 250
+     },
+     {
+      "K": 14,
+      "S": 500
+     },
+     {
+      "K": 20,
+      "S": 250
+     },
+     {
+      "K": 20,
+      "S": 500
+     }
+    ],
+    "por_que_no_se_intentaron": "el barrido se detiene al encontrar la frontera, como se le pidio. Esos pares NO estan medidos y no se puede decir nada de ellos — ni que fallarian ni que pasarian."
+   },
+   "el_tamano_de_la_PRIMERA_etapa_no_crece_con_S": {
+    "variables_binarias": [
+     10,
+     14,
+     20
+    ],
+    "por_que_importa": "el problema clasico crece unas 650 variables por escenario, pero la primera etapa se queda en K. La frontera cae con 10 candidatas: 10 variables binarias, 10 qubits — dentro de lo que ya se corrio en ibm_kingston."
+   },
+   "LO_QUE_ACOTA_LA_FRONTERA_Y_NO_ESTABA_DICHO": {
+    "el_plan_deja_de_moverse_en_S=5": {
+     "K=10": {
+      "n_planes_distintos": 1,
+      "S_medidos": [
+       1,
+       5,
+       20,
+       50,
+       100,
+       250
+      ],
+      "cambia_despues_de_S": null
+     },
+     "K=14": {
+      "n_planes_distintos": 2,
+      "S_medidos": [
+       1,
+       5,
+       20,
+       50,
+       100
+      ],
+      "cambia_despues_de_S": 5
+     },
+     "K=20": {
+      "n_planes_distintos": 2,
+      "S_medidos": [
+       1,
+       5,
+       20,
+       50,
+       100
+      ],
+      "cambia_despues_de_S": 5
+     }
+    },
+    "lectura": "en K=10 el plan de primera etapa es IDENTICO en los seis valores de S medidos; en K=14 y K=20 cambia una vez, entre S=1 y S=5, y despues nunca mas. Asi que pasar de S=100 a S=250 compra una estimacion de costo mas fina, NO una decision distinta. La frontera es real —ahi se deja de probar optimalidad— pero no se puede leer como «hace falta otro metodo para obtener el plan correcto»: el plan ya estaba estable. Medido sobre UNA semilla (42) y UNA red (case118)."
+   },
+   "cruce_ventaja_cuantica": "0"
+  },
+  "como": {
+   "el_arbitro_cambio_y_por_que": {
+    "motor_de_este_track": "SCIP (via PuLP/pyscipopt)",
+    "motor_de_los_doce_sellos_anteriores": "OR-Tools CP-SAT",
+    "razon": "CP-SAT no admite variables continuas, y la segunda etapa lo es. Discretizado, en el punto mas chico (K=10, S=1) quedo FEASIBLE tras 900.05 s.",
+    "y_ademas_subvalua": {
+     "cpsat_valor": 396.6,
+     "optimo_probado_por_SCIP": 397.676786,
+     "segundos_cpsat": 900.05,
+     "segundos_scip": 0.1,
+     "lectura": "CP-SAT devuelve un valor POR DEBAJO del optimo probado: la discretizacion abarata el costo. Una frontera sacada de CP-SAT habria medido la discretizacion, no el problema."
+    },
+    "por_que_se_declara": "doce sellos anteriores de este track usan CP-SAT. Cambiar de arbitro sin decirlo los contradice sin explicacion."
+   },
+   "las_cuatro_pruebas": {
+    "1_la_fisica_reproduce_pandapower": "diferencia relativa maxima 3,476e-11 sobre 4 planes (tope 1e-4)",
+    "1bis_arbitro_independiente": "enumeracion de las C(10,5)=252 primeras etapas da el mismo optimo (397,6768) y el mismo conjunto [1,3,4,5,7] que el MILP",
+    "2_escenarios_identicos": "S=5 y S=20 identicos al nominal dan el valor exacto de S=1",
+    "3_los_escenarios_llegan_a_la_decision": "un escenario extremo mueve el plan optimo en 29 de los 99 buses con carga"
+   },
+   "TRES_COSAS_QUE_EL_LOG_DICE_MAL": {
+    "1_la_prueba_4_afirma_mas_de_lo_que_prueba": {
+     "se_llama": "«la discretizacion de CP-SAT no cambia el optimo», y su resumen dice `4_la_discretizacion_cpsat_no_deforma: true`",
+     "lo_que_muestra": "el CONJUNTO elegido no cambia ([1,3,4,5,7] en los dos), pero el VALOR si: 396,5 contra 397,6768, 0,296 % por debajo. La prueba comprueba el conjunto y el nombre afirma el optimo.",
+     "por_que_importa": "es la misma forma que el defecto de julio de este track: una etiqueta que afirma mas que la medicion que tiene debajo. Y aqui el `true` viaja en un resumen legible por maquina, que es donde nadie lo relee."
+    },
+    "2_el_aviso_de_los_transformadores_cita_una_prueba_que_no_lo_cubre": {
+     "el_aviso": "con K=20, dos candidatas «nuevas» unen buses de 138/345 kV y 161/138 kV — fisicamente transformadores, no lineas. pandapower no se queja. Registrado como D-011.",
+     "lo_que_el_aviso_promete": "«la prueba 1 comprueba que la reproduccion sigue siendo exacta»",
+     "el_problema": "la prueba 1 corrio con K=10 y sus cuatro planes usan indices 0-9. Los transformadores aparecen recien en K=20: la prueba citada NO cubre el caso que el aviso tranquiliza. El defecto queda reproducido y NO arreglado, y la garantia que lo acompanaba tampoco existe."
+    },
+    "3_el_log_imprime_un_banner_de_QAOA_que_nunca_corrio": {
+     "que_imprime": "`[qaoa] capas=2 · pasos=120 · reloj=120s · disparos=2000` en cada seccion del log",
+     "que_paso": "ningun QAOA corrio: PennyLane no instala sobre Python 3.9. Son parametros de configuracion impresos por el armado, no el registro de una ejecucion.",
+     "por_que_se_declara": "un lector del log concluye que hubo un brazo cuantico. El log es evidencia; si dice algo que no paso, hay que decirlo aqui."
+    }
+   },
+   "una_discrepancia_menor_pero_medida": "CP-SAT en el mismo punto da 396,5 en el log de pruebas y 396,6 en la fila del barrido: dos corridas, dos valores. Las dos por debajo del optimo probado, asi que la conclusion no cambia; se anota porque una cifra que se mueve entre corridas no se cita sin decirlo.",
+   "artefactos": {
+    "motor": {
+     "archivo": "eon_estocastico.py",
+     "sha256": "sha256:da73c313b8f57303aa4d969ba3691b9d9bc210e506b5270879ce3ec00059bb4b"
+    },
+    "barrido": {
+     "archivo": "barrido_eon_estocastico.csv",
+     "sha256": "sha256:525520d36b84a625c85102e585991f1994c4012bd7f3c89170154989ae9f22d2",
+     "filas": 17
+    },
+    "log_de_pruebas": {
+     "archivo": "pruebas_eon_estocastico.log",
+     "sha256": "sha256:239d36bab49edc64ae536f7d726f66aaa1f9faa525c8d8a3be0e6ec105a9688a"
+    }
+   },
+   "parametros_del_barrido": {
+    "red": "case118",
+    "semilla": 42,
+    "k_budget": 5,
+    "presupuesto_de_reloj_s": 900.0,
+    "modelo_2a_etapa": "flujo DC con angulos (KVL) + redespacho + deslastre",
+    "sigma_carga": 0.15,
+    "p_falla_gen": 0.15,
+    "voll": 20.0
+   }
+  },
+  "cuando": {
+   "archived_at": "2026-08-14T20:00:00Z"
+  },
+  "donde": {
+   "compute": "Mac local (sesion coordinadora)",
+   "verificacion": "Mac local (sesion laboratorio), fila por fila del CSV"
+  },
+  "porque": {
+   "question": "¿donde deja el solucionador clasico de PROBAR optimalidad dentro del presupuesto operativo declarado?",
+   "respuesta": "en K=10, S=250: FEASIBLE a los 900.14 s con brecha de 1.9324 %.",
+   "para_que_sirve": "el rival es lo que el cliente usa hoy. Saber donde ese rival deja de demostrar optimalidad es lo que define si hay lugar para otro metodo — y con que tamano de primera etapa habria que atacarlo.",
+   "lo_que_NO_autoriza_a_decir": "que un metodo cuantico lo resolveria. No se corrio ninguno. La frontera dice donde se acaba la PRUEBA del clasico, no donde empieza la ventaja de nadie."
+  },
+  "quien": {
+   "corrida": "sesion coordinadora",
+   "sellado_y_verificado": "sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "quien corre no sella; quien sella no ancla."
+  }
+ }
+}

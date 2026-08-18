@@ -1,0 +1,93 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-EON-D-K12-004__20260818T2100Z__post-arreglo-ising-K12--clasico-gana.json",
+  "file_id": "RQ-EXP-EON-D-K12-004",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Track E.ON, lote POST-arreglo del Ising: red fija case118, K=12, 400 pasos de presupuesto, capas=3. Primer lote cuyo artefacto registra el sha256 del harness que lo produjo. Sellado por el laboratorio; el anclaje es del notario.",
+  "el_arreglo_que_este_lote_incorpora": "la conversion QUBO->Ising del harness perdia la mitad del campo lineal h (h[j] nunca se descontaba): el brazo cuantico optimizaba una funcion DISTINTA de la que resolvian CP-SAT y la fuerza bruta. Corregido en c140e6ef con un guardia que exige, en cada corrida y sobre la instancia real, que la energia Ising reproduzca el QUBO. Los sellos previos del track con brazo cuantico simulado llevan el defecto y se corrigen por errata, nunca reescribiendolos.",
+  "procedencia_del_harness": {
+   "harness_sha256_en_el_artefacto": "50cd5d6f67f965ce0c22cc6af3455aa0751b3e75307934388b4f66f06c59cf38",
+   "recomputado_del_repo": "50cd5d6f67f965ce0c22cc6af3455aa0751b3e75307934388b4f66f06c59cf38",
+   "coinciden": true,
+   "por_que": "el informe de E.ON denuncia que el artefacto no guardaba el hash del harness; este lote existe para que esa frase no nazca falsa."
+  },
+  "reproducibilidad_contra_el_deposito_anterior": {
+   "anterior": "eon_case118_K12_p400_c3@f0627454.json",
+   "quantum_gap_pct": 0.4601,
+   "identico_punto_por_punto": true,
+   "que_se_comparo": "quantum_gap_pct, classical_gap_pct, exact_optimum y pasos_dados; el unico cambio del harness entre ambos es el campo harness_sha256."
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-18T21:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "eon_harness.py",
+   "harness_version": "1.1.0",
+   "harness_sha256": "sha256:50cd5d6f67f965ce0c22cc6af3455aa0751b3e75307934388b4f66f06c59cf38",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:b9e99347a364bbdec3a97ceb8b429ece2a39ad8cefa307882e50b08449151ff6"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "resultados_eon/eon_case118_K12_p400_c3@877491b6.json",
+    "sha256": "sha256:877491b605d9e5f386e78deca0f65270a72d518709c8579a0c8a939796a772fb"
+   },
+   "censo_de_la_red": {
+    "grid": "IEEE case118",
+    "n_buses": 118,
+    "n_lines": 173
+   },
+   "K": 12,
+   "capas": 3,
+   "optimizador": {
+    "pasos_dados": 400,
+    "pasos_de_presupuesto": 400,
+    "reloj_s": 2400.0,
+    "truncado_por_reloj": false
+   },
+   "resultado": {
+    "optimo_exacto": 1820.4092359167626,
+    "clasico": {
+     "valor": 1820.4092359167626,
+     "status": "OPTIMAL",
+     "segundos": 0.043
+    },
+    "cuantico": {
+     "valor": 1828.7847769613618,
+     "segundos": 194.013,
+     "gap_pct": 0.4601
+    }
+   },
+   "outcome": "not yet — classical wins",
+   "cruce_ventaja_cuantica": "0"
+  },
+  "como": {
+   "validacion_AC": {
+    "convergio": false,
+    "error": "Power Flow nr did not converge after 10 iterations!"
+   },
+   "compute": "GitHub Actions (experimento-eon.yml), entorno reconstruido desde cero; el harness queda archivado en code/ por hash."
+  },
+  "cuando": {
+   "archived_at": "2026-08-18T21:00:00Z"
+  },
+  "donde": {
+   "compute": "CI de evidence",
+   "verificacion": "Mac local (lab)"
+  },
+  "porque": {
+   "question": "¿que hace el QAOA contra CP-SAT cuando los tres brazos por fin compiten sobre el MISMO problema?",
+   "respuesta": "not yet — classical wins (gap 0.4601 %)"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; el anclaje es del notario."
+  }
+ }
+}
