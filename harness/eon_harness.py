@@ -15,7 +15,7 @@ Formulacion (variante binaria de line-additions, ref [4] del brief E.ON):
   - El set ganador se VALIDA en flujo AC completo (honestidad: el modelo es
     2do-orden DC; reportamos el error vs fisica real).
 """
-import os, json, time, itertools, platform
+import os, json, time, itertools, platform, hashlib
 import numpy as np
 import pandapower as pp
 import pandapower.networks as nw
@@ -393,7 +393,11 @@ result={"track":"E.ON grid-expansion","instance":f"{GRID}_stress{LOAD_SCALE}_K{K
         "candidates":[{"type":c[0],"detail":c[1:] } for c in cand],
         "ac_validation":{"base":ac_base,"classical_build":ac_built,"built_lines":sel_c}},
     "exact":exact,"classical":classical,"quantum":quantum,"verdict":verdict,
-    "lib_versions":{"pennylane":qml.__version__,"numpy":np.__version__,"python":platform.python_version(),"pandapower":pp.__version__}}
+    "lib_versions":{"pennylane":qml.__version__,"numpy":np.__version__,"python":platform.python_version(),"pandapower":pp.__version__,
+        # El hash del harness que PRODUJO este artefacto, leido del archivo en
+        # disco al correr — el que un tercero recomputa con sha256sum. Sin esto,
+        # el artefacto no puede probar que codigo lo genero (defecto de julio).
+        "harness_sha256":hashlib.sha256(open(__file__,"rb").read()).hexdigest()}}
 out=os.environ.get("RQ_OUT","result_eon.json")
 json.dump(result,open(out,"w"),indent=2)
 print(json.dumps(verdict,indent=1))
