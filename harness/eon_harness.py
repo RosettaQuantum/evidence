@@ -278,11 +278,47 @@ classical={"solver":"OR-Tools CP-SAT","status":solver.StatusName(st),"value":qub
 import pennylane as qml
 from pennylane import numpy as pnp
 Qs=(Q+Q.T)/2; J=np.zeros((K,K)); h=np.zeros(K); off=CONST
+# CONVERSION QUBO -> ISING. Corregida el 2026-08-18; antes perdia un termino.
+#
+# EL DEFECTO, y lo que costo: el bucle hacia `h[i] -= Qs[i][j]/4` pero NO `h[j] -=`.
+# Como recorre los pares ordenados (i,j) y (j,i), el acoplamiento J salia bien —cada
+# par lo recibe dos veces— pero el campo lineal `h` quedaba EN LA MITAD: x_j aparece en
+# los dos terminos del par y solo se le descontaba uno.
+#
+# Consecuencia: el brazo cuantico optimizaba una funcion DISTINTA de la que resolvian
+# CP-SAT y la fuerza bruta. Los tres brazos deben competir sobre el mismo problema; el
+# cuantico competia sobre uno deformado, y eso inflaba `quantum_gap_pct` por una razon
+# que no es del metodo. Desvio medido: 24.381 en K=8, 165.857 en K=20.
+#
+# Comprobado sobre las 64 asignaciones de un QUBO aleatorio de 6 variables: la version
+# vieja se desvia hasta 1,303; esta da 0,000000 exacto. El guardia de abajo lo exige en
+# cada corrida, sobre la instancia real, para que no vuelva a pasar sin que nadie mire.
+#
+# Lo encontro el agente que medía redes tensoriales — no era su tarea, y lo declaro.
 for i in range(K):
     off+=Qs[i][i]/2+c_lin[i]/2; h[i]-=Qs[i][i]/2+c_lin[i]/2
     for j in range(K):
         if i!=j:
-            off+=Qs[i][j]/4; h[i]-=Qs[i][j]/4; J[i][j]+=Qs[i][j]/4
+            off+=Qs[i][j]/4; h[i]-=Qs[i][j]/4; h[j]-=Qs[i][j]/4; J[i][j]+=Qs[i][j]/4
+# EL GUARDIA DE LA CONVERSION, y se prueba contra el defecto real de arriba.
+# Comprueba sobre ESTA instancia que la energia Ising reproduce el QUBO exacto. Es
+# barato —unas pocas asignaciones al azar— y habria gritado el primer dia.
+_rs = np.random.RandomState(SEED)
+_peor = 0.0
+for _ in range(24):
+    _x = _rs.randint(0, 2, K).astype(float)
+    _z = 1.0 - 2.0 * _x
+    _E = off + float(h @ _z) + sum(J[a][b] * _z[a] * _z[b]
+                                   for a in range(K) for b in range(K) if a != b)
+    _peor = max(_peor, abs(_E - qubo_val(_x)))
+if _peor > 1e-6:
+    raise SystemExit(
+        "ABORTA: la conversion QUBO->Ising no reproduce el QUBO (desvio %.6f).\n"
+        "  El brazo cuantico estaria optimizando una funcion DISTINTA de la que resuelven\n"
+        "  CP-SAT y la fuerza bruta, y su brecha se inflaria por una razon que no es del\n"
+        "  metodo. Exactamente el defecto del 2026-08-18." % _peor)
+print("[ising] la conversion reproduce el QUBO (desvio maximo %.2e sobre 24 asignaciones)" % _peor)
+
 co=[];op=[]
 for i in range(K):
     if abs(h[i])>1e-12: co.append(h[i]);op.append(qml.PauliZ(i))
