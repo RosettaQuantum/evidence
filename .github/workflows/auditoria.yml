@@ -46,12 +46,25 @@ jobs:
       - name: Auditar procedencia
         run: |
           python3 scripts/check_provenance.py | tee proc.txt
-          FALTAN=$(grep -oE "SIN publicar: +[0-9]+" proc.txt | grep -oE "[0-9]+$")
+          # EL DEFECTO QUE TUVO ESTE PASO 12+ CORRIDAS EN ROJO, encontrado el 19-ago:
+          # el grep buscaba "SIN publicar: +[0-9]+" pero la linea real del auditor dice
+          # "SIN publicar (pendientes):". El patron NUNCA calzo, el grep salia 1, y con
+          # `bash -e` eso mataba el paso — el rojo no dependia del estado del archivo.
+          # Un control que lee texto con el patron equivocado (§4 bis), fallando ademas
+          # en la direccion ruidosa: rojo perpetuo que se volvio ruido de fondo.
+          # Ahora: el patron calza con la linea real, y si NO se puede extraer el conteo
+          # eso es un fallo PROPIO y declarado (la ausencia no se convierte en cero).
+          FALTAN=$(grep -oE "SIN publicar \(pendientes\): +[0-9]+" proc.txt | grep -oE "[0-9]+$" || true)
+          if [ -z "$FALTAN" ]; then
+            echo "::error::no pude leer el conteo de 'SIN publicar' en la salida del auditor — el formato cambio y este paso quedo ciego"
+            exit 1
+          fi
           echo "sin_publicar=$FALTAN" >> $GITHUB_ENV
-          # Una referencia sin publicar es deuda declarada, no corrupcion: avisa, no rompe.
-          # La unica conocida y aceptada es sigo_features@0460d1f6 (ver NOTES/).
-          if [ "${FALTAN:-0}" -gt 1 ]; then
-            echo "::warning::${FALTAN} referencias de procedencia sin publicar (esperada: 1)"
+          # Las perdidas declaradas se cuentan aparte (PROCEDENCIA-PERDIDA.md); pendiente
+          # de publicar debe ser CERO. Mayor que cero es deuda real: rompe, no avisa.
+          if [ "$FALTAN" -gt 0 ]; then
+            echo "::error::${FALTAN} referencias de procedencia sin publicar (esperado: 0)"
+            exit 1
           fi
 
       # 3. Las dos copias publicas siguen byte-identicas
