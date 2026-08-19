@@ -1,0 +1,481 @@
+{
+ "ataque": "S3",
+ "prereg": "RQ-PREREG-HSBC-002-ATAQUE",
+ "manifest": "RQ-DATA-HSBC-ULB-001",
+ "arff_sha256": "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+ "modelo": "xgboost v1 (config del baseline @2072bc53)",
+ "S3_es_diagnostico_defectuoso": true,
+ "corridas": [
+  {
+   "etiqueta": "S3_seed100",
+   "AUPRC": 0.999998,
+   "AUC_ROC": 0.999998,
+   "F1_05": 0.999868,
+   "confusion": {
+    "tn": 56848,
+    "fp": 15,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 2e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed101",
+   "AUPRC": 0.999999,
+   "AUC_ROC": 0.999999,
+   "F1_05": 0.999886,
+   "confusion": {
+    "tn": 56850,
+    "fp": 13,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 1e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed102",
+   "AUPRC": 0.999995,
+   "AUC_ROC": 0.999995,
+   "F1_05": 0.999842,
+   "confusion": {
+    "tn": 56845,
+    "fp": 18,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 2e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed103",
+   "AUPRC": 0.999983,
+   "AUC_ROC": 0.999985,
+   "F1_05": 0.999877,
+   "confusion": {
+    "tn": 56849,
+    "fp": 14,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 1.1e-05,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed104",
+   "AUPRC": 0.999986,
+   "AUC_ROC": 0.999987,
+   "F1_05": 0.999868,
+   "confusion": {
+    "tn": 56848,
+    "fp": 15,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 7e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed105",
+   "AUPRC": 1.0,
+   "AUC_ROC": 1.0,
+   "F1_05": 0.999894,
+   "confusion": {
+    "tn": 56851,
+    "fp": 12,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 0.0,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed106",
+   "AUPRC": 0.999987,
+   "AUC_ROC": 0.999989,
+   "F1_05": 0.999851,
+   "confusion": {
+    "tn": 56846,
+    "fp": 17,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 7e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed107",
+   "AUPRC": 0.999988,
+   "AUC_ROC": 0.999988,
+   "F1_05": 0.999824,
+   "confusion": {
+    "tn": 56843,
+    "fp": 20,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 5e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed108",
+   "AUPRC": 0.999998,
+   "AUC_ROC": 0.999998,
+   "F1_05": 0.999912,
+   "confusion": {
+    "tn": 56853,
+    "fp": 10,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 1e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed109",
+   "AUPRC": 0.999995,
+   "AUC_ROC": 0.999995,
+   "F1_05": 0.999894,
+   "confusion": {
+    "tn": 56851,
+    "fp": 12,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 3e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed110",
+   "AUPRC": 0.999984,
+   "AUC_ROC": 0.999985,
+   "F1_05": 0.999807,
+   "confusion": {
+    "tn": 56841,
+    "fp": 22,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 7e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed111",
+   "AUPRC": 0.999996,
+   "AUC_ROC": 0.999996,
+   "F1_05": 0.999938,
+   "confusion": {
+    "tn": 56856,
+    "fp": 7,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 4e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed112",
+   "AUPRC": 0.999995,
+   "AUC_ROC": 0.999995,
+   "F1_05": 0.999868,
+   "confusion": {
+    "tn": 56848,
+    "fp": 15,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 4e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed113",
+   "AUPRC": 0.999975,
+   "AUC_ROC": 0.99998,
+   "F1_05": 0.999859,
+   "confusion": {
+    "tn": 56847,
+    "fp": 16,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 1.5e-05,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed114",
+   "AUPRC": 0.999999,
+   "AUC_ROC": 0.999999,
+   "F1_05": 0.999886,
+   "confusion": {
+    "tn": 56850,
+    "fp": 13,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 1e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed115",
+   "AUPRC": 0.999991,
+   "AUC_ROC": 0.999992,
+   "F1_05": 0.999886,
+   "confusion": {
+    "tn": 56850,
+    "fp": 13,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 4e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed116",
+   "AUPRC": 0.999995,
+   "AUC_ROC": 0.999996,
+   "F1_05": 0.999921,
+   "confusion": {
+    "tn": 56854,
+    "fp": 9,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 3e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed117",
+   "AUPRC": 0.999976,
+   "AUC_ROC": 0.999983,
+   "F1_05": 0.999859,
+   "confusion": {
+    "tn": 56847,
+    "fp": 16,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 1.7e-05,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed118",
+   "AUPRC": 0.999995,
+   "AUC_ROC": 0.999995,
+   "F1_05": 0.999894,
+   "confusion": {
+    "tn": 56851,
+    "fp": 12,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 2e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  },
+  {
+   "etiqueta": "S3_seed119",
+   "AUPRC": 0.99999,
+   "AUC_ROC": 0.999991,
+   "F1_05": 0.999877,
+   "confusion": {
+    "tn": 56849,
+    "fp": 14,
+    "fn": 0,
+    "tp": 56863
+   },
+   "AUPRC_boot_se": 6e-06,
+   "train": {
+    "n": 454904,
+    "fraudes": 227452,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 113726,
+    "fraudes": 56863,
+    "tasa": 0.5
+   }
+  }
+ ],
+ "resumen": {
+  "n": 20,
+  "AUPRC_media": 0.999991,
+  "AUPRC_sd": 7e-06,
+  "AUPRC_min": 0.999975,
+  "AUPRC_max": 1.0,
+  "mediana_boot_se": 4e-06
+ },
+ "seed_base": 42,
+ "harness_sha256": "ba944efbee4b1eb8b67e302fbba738fa43fa4393e689cc977c91727bc33e6a0a",
+ "imblearn_version": "0.14.2"
+}
