@@ -37,3 +37,32 @@ esa referencia en particular. Las otras referencias de esos mismos sellos sí re
 `5ad5e838`). Publicar otra versión bajo el nombre del hash perdido convertiría un hueco
 declarado en una afirmación falsa, que es estrictamente peor: el verificador diría «resuelto»
 sobre un archivo que no es el que se usó.
+
+## `eon_estocastico.py` — `sha256:da73c313…`
+
+**Lo declara**: `RQ-EXP-EON-ESTOCASTICO-001` (1 referencia).
+
+**Estado**: perdido de forma permanente. El archivo se selló el 14-ago citando la versión
+que corría ese día; el 17-ago se editó en el árbol de trabajo (51 KB → 97 KB, el trabajo
+del mapa de dureza) **sin que la versión sellada se hubiera commiteado nunca**. El archivo
+vivo actual es `2e0b6478…` — otra versión, no la citada.
+
+**Dónde se buscó** (búsqueda de la sesión de laboratorio, 2026-08-18):
+
+| Dónde | Qué se encontró |
+|---|---|
+| Historial git de `evidence` (todas las ramas) | sólo versiones con otro hash |
+| Por hash en todo `~/Documents/Claude` | el vivo (`2e0b6478…`), nunca `da73c313…` |
+| Snapshots de Time Machine | los locales son del 18-ago, posteriores a la edición |
+
+**Qué significa para quien verifica.** El sello que lo cita sigue verificando perfecto: su
+hash reproduce, su contenido no cambió. Lo que no se puede hacer es el paso extra —bajar
+el archivo de procedencia y recomputar su hash— para esa referencia. Las demás referencias
+del mismo sello (`barrido_eon_estocastico@525520d3.csv`, `pruebas_eon_estocastico@239d36ba.log`)
+sí resuelven: se publicaron el 18-ago.
+
+**Qué NO se hizo, y por qué.** No se sustituyó por la versión viva (`2e0b6478…`): publicar
+otra versión bajo el nombre del hash perdido convertiría un hueco declarado en una
+afirmación falsa. Y la lección quedó cerrada como regla el mismo día: **la procedencia se
+publica en el mismo acto que el sello, o el sello nace con una promesa a plazo** — los
+lotes D y E ya se sellaron con todo publicado antes.
