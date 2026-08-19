@@ -113,9 +113,36 @@ if os.path.exists(PERDIDA):
     declarados_perdidos = {m.lower() for m in
                            re.findall(r'sha256:([0-9a-f]{8,})', open(PERDIDA).read())}
 
+# Tercera categoria (20-ago, diseno de Norte + Main, la ejerce el lab como tercero):
+# VERIFICABLE-EN-FUENTE-DE-TERCEROS — no republicable por licencia, pero el tercero lo
+# sirve desde su fuente oficial. La diferencia con una perdida es COMPROBABLE, no
+# declarada: cada entrada exige `fuente-oficial:` con URL http(s) y `verificacion:`.
+# Una entrada sin esos campos hace fallar al auditor ENTERO (falla cerrado): sin fuente
+# publica, es una perdida con mejor nombre y va al otro archivo.
+TERCEROS = os.path.join(os.path.dirname(PERDIDA), "PROCEDENCIA-EN-FUENTE-DE-TERCEROS.md")
+verificables_terceros = set()
+if os.path.exists(TERCEROS):
+    cuerpo = open(TERCEROS).read()
+    # cada entrada arranca en "## " y debe traer sus tres campos
+    entradas = re.split(r"\n## ", cuerpo)[1:]
+    for e in entradas:
+        sha = re.search(r"sha256:([0-9a-f]{16,64})", e)
+        url = re.search(r"fuente-oficial\**:?\**\s*(https?://\S+)", e)
+        ver = re.search(r"verificacion\**:", e)
+        if not (sha and url and ver):
+            print("ERROR: entrada malformada en PROCEDENCIA-EN-FUENTE-DE-TERCEROS.md — "
+                  "faltan campos obligatorios (sha256 / fuente-oficial con URL / "
+                  "verificacion) en: %s" % e.split("\n")[0][:70])
+            sys.exit(1)
+        verificables_terceros.add(sha.group(1).lower())
+
 perdidas = {k: v for k, v in faltan.items()
             if any(k[1].split(":")[-1].lower().startswith(h) for h in declarados_perdidos)}
 faltan = {k: v for k, v in faltan.items() if k not in perdidas}
+terceros = {k: v for k, v in faltan.items()
+            if any(k[1].split(":")[-1].lower().startswith(h) or h.startswith(k[1].split(":")[-1].lower())
+                   for h in verificables_terceros)}
+faltan = {k: v for k, v in faltan.items() if k not in terceros}
 
 print(f"referencias de procedencia declaradas: {total}")
 print(f"resueltas contra archivos publicados:  "
@@ -123,6 +150,10 @@ print(f"resueltas contra archivos publicados:  "
 print(f"SIN publicar (pendientes):             {len(faltan)}")
 print(f"declaradas PERDIDAS (no recuperables): {len(perdidas)}"
       f"{'' if not perdidas else '  <- ver PROCEDENCIA-PERDIDA.md'}")
+print(f"verificables en fuente de terceros:    {len(terceros)}"
+      f"{'' if not terceros else '  <- ver PROCEDENCIA-EN-FUENTE-DE-TERCEROS.md'}")
+for (nombre, sha), ids in sorted(terceros.items()):
+    print(f"   tercero  {nombre[:32]:<34} {sha[:16]}...  lo declara {', '.join(sorted(ids))}")
 for (nombre, sha), ids in sorted(perdidas.items()):
     print(f"   perdida  {nombre[:32]:<34} {sha[:16]}...  la declaran {', '.join(sorted(ids))}")
 if VERBOSE:
