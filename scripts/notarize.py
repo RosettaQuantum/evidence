@@ -60,6 +60,34 @@ if malos:
     sys.exit(1)
 print("   0 INVALID")
 
+# ---- 1 bis. la procedencia se exige ANTES de estampar --------------------------
+# Pregunta de diseno de Norte (20-ago) tras un caso real: el prereg de Airbus se sello
+# y se anclo citando su script productor (seal_prereg_airbus.py) que NO estaba publicado
+# — el guard solo protesto DESPUES, en el CI. Un sello cuya procedencia no resuelve nace
+# con una promesa a plazo, y el plazo es donde los archivos mutan (caso eon_estocastico:
+# la promesa vencio sin pagarse y hubo que declarar la perdida).
+# Desde ahora el notario exige la procedencia resuelta ANTES de estampar nada: si el
+# conteo de pendientes no es cero —o no se puede leer, que no es lo mismo que cero
+# (§5 quater)— no hay ancla. Las perdidas DECLARADAS se cuentan aparte y no bloquean;
+# los archivos de terceros no-republicables necesitaran su propia categoria declarada.
+# El CI sigue auditando despues: esta capa atrapa el nacimiento, aquella atrapa la deriva.
+paso("1 bis", "procedencia resuelta antes de anclar (falla cerrado)")
+r = sh([sys.executable, "scripts/check_provenance.py"])
+_salida = r.stdout + r.stderr
+_m = re.search(r"SIN publicar \(pendientes\):\s+(\d+)", _salida)
+if not _m:
+    print("   ABORTADO — no pude leer el conteo de procedencia. La ausencia del dato no")
+    print("   es un cero: sin conteo no se ancla.")
+    sys.exit(1)
+if int(_m.group(1)) > 0:
+    print("   ABORTADO — %s referencias de procedencia sin publicar. No se estampa un" % _m.group(1))
+    print("   sello cuyo propio productor o fuentes no estan publicados:")
+    for _l in _salida.splitlines():
+        if _l.strip().startswith(("lab-", "seal_", "evidence")) or "declara" in _l:
+            print("   " + _l.strip()[:100])
+    sys.exit(1)
+print("   0 sin publicar (las perdidas declaradas se cuentan aparte)")
+
 # ---- 2. anclar ---------------------------------------------------------------
 paso(2, "anclar en OpenTimestamps")
 sin_ots = [p for p in archives() if not os.path.exists(p + ".ots")]
