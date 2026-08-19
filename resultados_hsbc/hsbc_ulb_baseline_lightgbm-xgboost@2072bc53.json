@@ -1,0 +1,72 @@
+{
+ "manifest": "RQ-DATA-HSBC-ULB-001",
+ "arff_sha256": "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+ "particion": {
+  "tipo": "temporal 80/20 por Time",
+  "corte_fila": 227845,
+  "train": {
+   "filas": 227845,
+   "fraudes": 417,
+   "tasa": 0.00183
+  },
+  "test": {
+   "filas": 56962,
+   "fraudes": 75,
+   "tasa": 0.001317,
+   "sha256": "88f43ccb6ffcd6aeed624b6db4c81c170c625ffcd24ad52105978f02a6924131"
+  },
+  "solape_de_contenido_duplicados_exactos": 0
+ },
+ "scale_pos_weight": 545.39,
+ "seed": 42,
+ "modelos": {
+  "xgboost": {
+   "AUPRC": 0.800822,
+   "AUC_ROC": 0.987796,
+   "F1_umbral_0.5": 0.823529,
+   "confusion_0.5": {
+    "tn": 56882,
+    "fp": 5,
+    "fn": 19,
+    "tp": 56
+   },
+   "AUPRC_IC95": [
+    0.70543,
+    0.882776
+   ],
+   "AUC_IC95": [
+    0.977478,
+    0.995726
+   ],
+   "bootstrap_validos": 2000,
+   "segundos": 63.4
+  },
+  "lightgbm": {
+   "AUPRC": 0.005831,
+   "AUC_ROC": 0.842062,
+   "F1_umbral_0.5": 0.013111,
+   "confusion_0.5": {
+    "tn": 47263,
+    "fp": 9624,
+    "fn": 11,
+    "tp": 64
+   },
+   "AUPRC_IC95": [
+    0.004266,
+    0.007426
+   ],
+   "AUC_IC95": [
+    0.798236,
+    0.880127
+   ],
+   "bootstrap_validos": 2000,
+   "segundos": 39.0
+  }
+ },
+ "harness_sha256": "a6c8f2bef4eb6de5a547a5f568a25acca0822a5feae3a5c837b4f26ec6c2f84b",
+ "lib_versions": {
+  "numpy": "2.5.2",
+  "pandas": "3.0.5",
+  "sklearn": "1.9.0"
+ }
+}
