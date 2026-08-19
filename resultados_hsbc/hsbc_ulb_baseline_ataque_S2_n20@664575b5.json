@@ -1,0 +1,481 @@
+{
+ "ataque": "S2",
+ "prereg": "RQ-PREREG-HSBC-002-ATAQUE",
+ "manifest": "RQ-DATA-HSBC-ULB-001",
+ "arff_sha256": "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+ "modelo": "xgboost v1 (config del baseline @2072bc53)",
+ "S3_es_diagnostico_defectuoso": false,
+ "corridas": [
+  {
+   "etiqueta": "S2_seed100",
+   "AUPRC": 0.839196,
+   "AUC_ROC": 0.974545,
+   "F1_05": 0.835052,
+   "confusion": {
+    "tn": 56849,
+    "fp": 15,
+    "fn": 17,
+    "tp": 81
+   },
+   "AUPRC_boot_se": 0.036489,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed101",
+   "AUPRC": 0.897916,
+   "AUC_ROC": 0.992391,
+   "F1_05": 0.874372,
+   "confusion": {
+    "tn": 56850,
+    "fp": 14,
+    "fn": 11,
+    "tp": 87
+   },
+   "AUPRC_boot_se": 0.029779,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed102",
+   "AUPRC": 0.895733,
+   "AUC_ROC": 0.987495,
+   "F1_05": 0.862944,
+   "confusion": {
+    "tn": 56850,
+    "fp": 14,
+    "fn": 13,
+    "tp": 85
+   },
+   "AUPRC_boot_se": 0.02775,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed103",
+   "AUPRC": 0.844445,
+   "AUC_ROC": 0.985498,
+   "F1_05": 0.854167,
+   "confusion": {
+    "tn": 56852,
+    "fp": 12,
+    "fn": 16,
+    "tp": 82
+   },
+   "AUPRC_boot_se": 0.035681,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed104",
+   "AUPRC": 0.865463,
+   "AUC_ROC": 0.973382,
+   "F1_05": 0.861538,
+   "confusion": {
+    "tn": 56851,
+    "fp": 13,
+    "fn": 14,
+    "tp": 84
+   },
+   "AUPRC_boot_se": 0.032909,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed105",
+   "AUPRC": 0.858334,
+   "AUC_ROC": 0.981522,
+   "F1_05": 0.849741,
+   "confusion": {
+    "tn": 56851,
+    "fp": 13,
+    "fn": 16,
+    "tp": 82
+   },
+   "AUPRC_boot_se": 0.033473,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed106",
+   "AUPRC": 0.837171,
+   "AUC_ROC": 0.963978,
+   "F1_05": 0.835052,
+   "confusion": {
+    "tn": 56849,
+    "fp": 15,
+    "fn": 17,
+    "tp": 81
+   },
+   "AUPRC_boot_se": 0.035702,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed107",
+   "AUPRC": 0.855886,
+   "AUC_ROC": 0.975687,
+   "F1_05": 0.824121,
+   "confusion": {
+    "tn": 56845,
+    "fp": 19,
+    "fn": 16,
+    "tp": 82
+   },
+   "AUPRC_boot_se": 0.034355,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed108",
+   "AUPRC": 0.901064,
+   "AUC_ROC": 0.980669,
+   "F1_05": 0.907216,
+   "confusion": {
+    "tn": 56856,
+    "fp": 8,
+    "fn": 10,
+    "tp": 88
+   },
+   "AUPRC_boot_se": 0.028548,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed109",
+   "AUPRC": 0.856747,
+   "AUC_ROC": 0.976121,
+   "F1_05": 0.860215,
+   "confusion": {
+    "tn": 56856,
+    "fp": 8,
+    "fn": 18,
+    "tp": 80
+   },
+   "AUPRC_boot_se": 0.03313,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed110",
+   "AUPRC": 0.782453,
+   "AUC_ROC": 0.977697,
+   "F1_05": 0.774869,
+   "confusion": {
+    "tn": 56845,
+    "fp": 19,
+    "fn": 24,
+    "tp": 74
+   },
+   "AUPRC_boot_se": 0.038119,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed111",
+   "AUPRC": 0.868665,
+   "AUC_ROC": 0.984987,
+   "F1_05": 0.886486,
+   "confusion": {
+    "tn": 56859,
+    "fp": 5,
+    "fn": 16,
+    "tp": 82
+   },
+   "AUPRC_boot_se": 0.034108,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed112",
+   "AUPRC": 0.849703,
+   "AUC_ROC": 0.977042,
+   "F1_05": 0.839378,
+   "confusion": {
+    "tn": 56850,
+    "fp": 14,
+    "fn": 17,
+    "tp": 81
+   },
+   "AUPRC_boot_se": 0.033885,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed113",
+   "AUPRC": 0.798302,
+   "AUC_ROC": 0.970955,
+   "F1_05": 0.806452,
+   "confusion": {
+    "tn": 56851,
+    "fp": 13,
+    "fn": 23,
+    "tp": 75
+   },
+   "AUPRC_boot_se": 0.038899,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed114",
+   "AUPRC": 0.85217,
+   "AUC_ROC": 0.965086,
+   "F1_05": 0.839378,
+   "confusion": {
+    "tn": 56850,
+    "fp": 14,
+    "fn": 17,
+    "tp": 81
+   },
+   "AUPRC_boot_se": 0.032871,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed115",
+   "AUPRC": 0.902326,
+   "AUC_ROC": 0.979517,
+   "F1_05": 0.887755,
+   "confusion": {
+    "tn": 56853,
+    "fp": 11,
+    "fn": 11,
+    "tp": 87
+   },
+   "AUPRC_boot_se": 0.026824,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed116",
+   "AUPRC": 0.838882,
+   "AUC_ROC": 0.977495,
+   "F1_05": 0.857143,
+   "confusion": {
+    "tn": 56854,
+    "fp": 10,
+    "fn": 17,
+    "tp": 81
+   },
+   "AUPRC_boot_se": 0.035056,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed117",
+   "AUPRC": 0.843216,
+   "AUC_ROC": 0.972643,
+   "F1_05": 0.841026,
+   "confusion": {
+    "tn": 56849,
+    "fp": 15,
+    "fn": 16,
+    "tp": 82
+   },
+   "AUPRC_boot_se": 0.035765,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed118",
+   "AUPRC": 0.856047,
+   "AUC_ROC": 0.9779,
+   "F1_05": 0.84375,
+   "confusion": {
+    "tn": 56851,
+    "fp": 13,
+    "fn": 17,
+    "tp": 81
+   },
+   "AUPRC_boot_se": 0.033615,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  },
+  {
+   "etiqueta": "S2_seed119",
+   "AUPRC": 0.846967,
+   "AUC_ROC": 0.985674,
+   "F1_05": 0.848168,
+   "confusion": {
+    "tn": 56852,
+    "fp": 12,
+    "fn": 17,
+    "tp": 81
+   },
+   "AUPRC_boot_se": 0.032722,
+   "train": {
+    "n": 454902,
+    "fraudes": 227451,
+    "tasa": 0.5
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 98,
+    "tasa": 0.00172
+   }
+  }
+ ],
+ "resumen": {
+  "n": 20,
+  "AUPRC_media": 0.854534,
+  "AUPRC_sd": 0.030631,
+  "AUPRC_min": 0.782453,
+  "AUPRC_max": 0.902326,
+  "mediana_boot_se": 0.03375
+ },
+ "seed_base": 42,
+ "harness_sha256": "ba944efbee4b1eb8b67e302fbba738fa43fa4393e689cc977c91727bc33e6a0a",
+ "imblearn_version": "0.14.2"
+}
