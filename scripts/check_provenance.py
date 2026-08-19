@@ -84,9 +84,20 @@ def referencias(doc):
 
 pub = publicados()
 total, faltan, ok = 0, {}, []
-for p in sorted(glob.glob("runs/**/*.json", recursive=True)
-                + glob.glob("prereg/**/*.json", recursive=True)
-                + glob.glob("verdicts/**/*.json", recursive=True)):
+# EL ALCANCE SALE DE LA DEFINICION UNICA, no de una lista escrita aqui. La version
+# anterior recorria solo runs/, prereg/ y verdicts/ — 95 de 108 sellos — y en la zona
+# ciega (reports, recipes, manifests, predictions) habia 8 referencias sin resolver que
+# nunca reporto. Decia «0 pendientes» y era verdad sobre lo que miraba, no sobre el
+# archivo: la §5 bis literal, alcance menor que el declarado y en verde. Lo encontro el
+# laboratorio el 19-ago midiendo el denominador. Una lista que vive en dos lugares ya
+# divergio (§5 bis regla 3): esta se importa de donde el notario toma la suya.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from notarize_globs import ARCHIVE_GLOBS
+
+_sellos = sorted(set(f for g in ARCHIVE_GLOBS for f in glob.glob(g, recursive=True)
+                     if not f.endswith(".ots")))
+print(f"sellos auditados: {len(_sellos)} (alcance = ARCHIVE_GLOBS, la misma del notario)")
+for p in _sellos:
     try:
         doc = json.load(open(p))
     except Exception:
