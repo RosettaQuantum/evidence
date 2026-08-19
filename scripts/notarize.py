@@ -14,6 +14,7 @@ Uso:
 REGLA DE PARADA: si `verify_seals.py` reporta un solo INVALID, aborta antes de estampar
 nada. Un sello que no verifica no se ancla — ese es el negocio entero.
 """
+import datetime as _dt
 import glob, json, os, re, subprocess, sys
 
 sys.path.insert(0, "tools")
@@ -87,6 +88,46 @@ if int(_m.group(1)) > 0:
             print("   " + _l.strip()[:100])
     sys.exit(1)
 print("   0 sin publicar (las perdidas declaradas se cuentan aparte)")
+
+# ---- 1 ter. ningun sello declara el futuro ------------------------------------
+# El identificador de cada artefacto lleva una marca de tiempo, y la escribia quien
+# redactaba leyendola de SU contexto — que puede estar corrido respecto del reloj real.
+# Resultado medido el 19-ago: 14 artefactos publicados declaran una fecha POSTERIOR a su
+# propio commit, lo que es imposible. Cae justo sobre el eje temporal donde vive toda la
+# afirmacion de esta casa («la pregunta quedo fijada antes que el codigo»), asi que el
+# defecto es barato de cometer y caro de explicar.
+#
+# Este guardia vive en el NOTARIO ademas de en el sellador a proposito: es la
+# comprobacion que hace OTRO actor. Un guardia que solo vive en quien produce el sello
+# es un guardia que se revisa a si mismo (§11 de CLAUDE.md, la separacion).
+#
+# Las incoherencias historicas estan declaradas en FECHAS-DECLARADAS-INCOHERENTES.md y no
+# bloquean —publicado es publicado, se marca y no se reescribe—; cualquier sello NUEVO con
+# fecha futura si bloquea. Asi la nota no es decorativa: la lee el codigo.
+paso("1 ter", "ningun sello declara una fecha futura (falla cerrado)")
+_ahora = _dt.datetime.now(_dt.timezone.utc)
+_NOTA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                     "FECHAS-DECLARADAS-INCOHERENTES.md")
+_declaradas = set()
+if os.path.exists(_NOTA):
+    _declaradas = set(re.findall(r"(2026\d{4}T\d{4}Z)", open(_NOTA).read()))
+_futuros = []
+for _p in archives():
+    _m = re.search(r"__(2026\d{4}T\d{4}Z)__", os.path.basename(_p))
+    if not _m:
+        continue
+    _id = _dt.datetime.strptime(_m.group(1), "%Y%m%dT%H%MZ").replace(tzinfo=_dt.timezone.utc)
+    if _id > _ahora and _m.group(1) not in _declaradas:
+        _futuros.append((os.path.basename(_p)[:70], _m.group(1)))
+if _futuros:
+    print("   ABORTADO — %d sello(s) declaran una fecha que todavia no ocurrio." % len(_futuros))
+    print("   Un sello no puede declarar el futuro: el ID sale del reloj, no del contexto.")
+    for _n, _i in _futuros:
+        print("     %s  <- %s" % (_i, _n))
+    print("   Si son historicos y no se pueden reescribir, se declaran en")
+    print("   FECHAS-DECLARADAS-INCOHERENTES.md con su tabla y su explicacion.")
+    sys.exit(1)
+print("   0 sellos con fecha futura (%d historicos declarados en la nota)" % len(_declaradas))
 
 # ---- 2. anclar ---------------------------------------------------------------
 paso(2, "anclar en OpenTimestamps")
