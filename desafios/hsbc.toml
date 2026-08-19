@@ -1,0 +1,25 @@
+# Configuracion del track HSBC para el corredor `replicar.py`.
+# La bateria de verificacion post-CI se define AQUI, una vez, y el corredor la ejerce
+# SIEMPRE — el tramo que antes se escribia a mano cada vez, donde un olvido no se nota.
+
+[track]
+nombre = "hsbc"
+workflow = "experimento-hsbc.yml"
+resultados = "resultados_hsbc"
+
+[datos]
+manifest_id = "RQ-DATA-HSBC-ULB-001"
+arff_sha256 = "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a"
+
+[preregs]
+ids = ["RQ-PREREG-HSBC-001", "RQ-PREREG-HSBC-002-ATAQUE"]
+
+[harness]
+ruta = "harness/hsbc_harness.py"
+archivadas = "code/hsbc_harness@*.py"
+
+[guardias]
+# campos que TODO artefacto del track debe traer; su ausencia es fallo, no aviso
+campos_siempre = ["arff_sha256", "harness_sha256", "manifest"]
+campos_baseline = ["particion", "modelos"]
+campos_ataque = ["ataque", "corridas", "resumen", "prereg"]
