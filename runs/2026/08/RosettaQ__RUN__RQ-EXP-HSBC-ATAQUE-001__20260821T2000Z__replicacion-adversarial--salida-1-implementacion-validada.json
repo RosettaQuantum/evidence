@@ -1,0 +1,103 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-HSBC-ATAQUE-001__20260821T2000Z__replicacion-adversarial--salida-1-implementacion-validada.json",
+  "file_id": "RQ-EXP-HSBC-ATAQUE-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Resultado de la replicacion adversarial del baseline HSBC: 65 entrenamientos en 4 series, contra las salidas SELLADAS ANTES en RQ-PREREG-HSBC-002-ATAQUE. La salida que hablo se CALCULA en el sellador contra la banda pre-fijada; si no aplicara, el sellador aborta. Sellado por el laboratorio; anclaje del notario.",
+  "prereg": {
+   "file_id": "RQ-PREREG-HSBC-002-ATAQUE",
+   "content_hash": "sha256:87c187b48627d52958728365c1e31b08c71a656bfbad14b8f632f89b9fdcf8c4"
+  },
+  "LA_SALIDA_QUE_HABLO": {
+   "salida": 1,
+   "texto_sellado_antes": "S2 (correcto) reproduce -> los numeros publicados son alcanzables con protocolo limpio; la diferencia temporal-vs-aleatorio se sostiene como dureza de protocolo; implementacion validada.",
+   "el_numero": "media S2 = 0.8545, dentro de la banda pre-fijada [0.841, 0.901]",
+   "el_hueco_anticipado_NO_se_materializo": "antes de correr se advirtio que si S2 quedaba bajo banda Y S3 la sobrepasaba, las salidas selladas tenian un hueco. No ocurrio: la salida 1 dispara sin ambiguedad. La advertencia consta porque anticipar el hueco propio vale mas que acertar."
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-21T20:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_ataque_hsbc.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:9fcc66554e5ba740a0422ee49779747bb9187ba309cbfcae7788de3a710d76a3",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:12f18492764f1f7108f14d451f8e9620da7918564c158c13302d77ef4d7b3115"
+ },
+ "w6": {
+  "que": {
+   "series": {
+    "S1": {
+     "archivo": "hsbc_ulb_baseline_ataque_S1_n20@ffcf8721.json",
+     "sha256": "sha256:ffcf872170a5fa4d5b3f0b42802059b7b4e9f94bcbfe4d24d3f35f91c69cfdbc",
+     "n": 20,
+     "AUPRC_media": 0.854162,
+     "AUPRC_sd": 0.032435
+    },
+    "S2": {
+     "archivo": "hsbc_ulb_baseline_ataque_S2_n20@664575b5.json",
+     "sha256": "sha256:664575b536f7979fbd0fc092246bc9144a7e173b8aa8da34deb7087c94de298e",
+     "n": 20,
+     "AUPRC_media": 0.854534,
+     "AUPRC_sd": 0.030631
+    },
+    "S3": {
+     "archivo": "hsbc_ulb_baseline_ataque_S3_n20@bf62f223.json",
+     "sha256": "sha256:bf62f2233c0fc772e42400006a9e11101be38928cf317e7cb3852519cd34186a",
+     "n": 20,
+     "AUPRC_media": 0.999991,
+     "AUPRC_sd": 7e-06
+    },
+    "S4": {
+     "archivo": "hsbc_ulb_baseline_ataque_S4_n5@25c008b1.json",
+     "sha256": "sha256:25c008b1fdf791b19c63b4a20b01d284c09ef7ed2a0b56bf8fb5236763f11498",
+     "n": 5,
+     "AUPRC_media": 0.782906,
+     "AUPRC_sd": 0.029529
+    }
+   },
+   "criterio_C_calculado": {
+    "delta_S1_menos_S4": 0.071256,
+    "welch_p": 0.002451,
+    "exige": "p < 0.01",
+    "ruido_boot_mediano": 0.035097,
+    "exige_delta_mayor_que": 0.070194,
+    "cumple_las_DOS": true,
+    "MARGEN_ESTRECHO_declarado": "la segunda condicion pasa por 0.0011 (0.0713 contra 0.0702). Se dice con el numero: un criterio que pasa por un pelo es un criterio que pasa, pero el lector decide con el margen a la vista."
+   },
+   "ataque_B_sensibilidad_del_corte": "AUPRC temporal 0.81->0.74 entre cortes 70% y 90% (media 0.783, sd 0.030): el efecto no depende de un corte unico. El corte 90 queda con 22 fraudes en test y es el mas ruidoso.",
+   "S3_el_diagnostico": {
+    "resultado": "AUPRC = 1.0000 en las 20 semillas (sd 1e-5)",
+    "QUE_NO_ES": "no es un resultado de rendimiento: es la aritmetica de la metrica sobre una prevalencia FABRICADA (50% sintetico vs 0.172% real) mas los gemelos sinteticos del train filtrados al test. NINGUN numero de S3 se cita jamas como rendimiento.",
+    "que_SI_demuestra": "el protocolo SMOTE-antes-del-split no infla la metrica: la SATURA. Quien evalue asi puede reportar perfeccion con cualquier modelo."
+   },
+   "el_hallazgo_que_nadie_aposto": "SMOTE-dentro mueve el AUPRC en +0.0003 sobre el aleatorio puro (0.8545 vs 0.8542): en esta implementacion y dataset, EL SPLIT HACE TODO EL TRABAJO y el sobremuestreo no aporta. Sostenido por construccion (mismos datos, mismo modelo, misma implementacion), no por literatura.",
+   "cruce_ventaja_cuantica": "0 (no aplica: ataque enteramente clasico)"
+  },
+  "como": {
+   "modelo_unico": "XGBoost config v1 del baseline @2072bc53 en las 4 series",
+   "verificacion": "las 5 piezas del track verificadas por tools/replicar.py (bateria de 7 tramos con denominador): 0 fallos; el unico saltado por artefacto era «sin sello» — este sello lo cierra.",
+   "compute": "GitHub Actions, 4 despachos, ~65 entrenamientos"
+  },
+  "cuando": {
+   "archived_at": "2026-08-21T20:00:00Z"
+  },
+  "donde": {
+   "compute": "CI de evidence",
+   "verificacion": "Mac local (lab)"
+  },
+  "porque": {
+   "question": "¿mide bien la maquina? Respuesta: si — reproduce los numeros publicados con el protocolo ajeno, y el efecto de protocolo que midio se sostiene bajo su propio criterio pre-sellado.",
+   "que_NO_autoriza": "ninguna novedad cientifica: el fenomeno esta taxonomizado en la literatura (Kapoor & Narayanan). El aporte es la maquina que lo mide con pre-registro anclado y recomputo por terceros."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario; texto publico via Norte + OK de Nicholas."
+  }
+ }
+}
