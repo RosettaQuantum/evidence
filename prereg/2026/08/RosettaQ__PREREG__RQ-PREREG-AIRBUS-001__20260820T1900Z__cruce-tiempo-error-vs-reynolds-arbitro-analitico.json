@@ -1,0 +1,72 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__PREREG__RQ-PREREG-AIRBUS-001__20260820T1900Z__cruce-tiempo-error-vs-reynolds-arbitro-analitico.json",
+  "file_id": "RQ-PREREG-AIRBUS-001",
+  "type": "PREREG",
+  "is_demo": false,
+  "scope_note": "Pre-registro del track Airbus (solvers cuanticos de PDEs, aerodinamica) del 2026 Global Quantum + AI Challenge. Redactado por la sesion de coordinacion, sellado por el laboratorio ANTES de que exista una linea del instrumento — el orden en el historial de git es el activo. Arranque cubierto por la aprobacion de Nicholas (HSBC + Airbus en paralelo, 19-ago).",
+  "statement_oficial": {
+   "archivo": "Airbus-Challenge-Statement-vF.pdf",
+   "sha256": "sha256:4a2e084dd25d49343c98475091eede479513779c4306e90260f9b9cf518f77c6"
+  },
+  "texto_fuente": {
+   "archivo": "PREREG-AIRBUS-borrador.md",
+   "sha256": "sha256:6a7db2fc5293c503dca7dd26004acf53ad6cb1a9a02b1512d26a38fe99ee4120",
+   "publicado_como": "data/2026/08/PREREG-AIRBUS-borrador@6a7db2fc.md",
+   "regla": "la procedencia se publica en el mismo acto que el sello (leccion de eon_estocastico)."
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-20T19:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_prereg_airbus.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:be840b0dcf1b2ae4e5a4644cd7dc03b510ef4abe19f704d52ef3e0c0c1da4feb",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:39a16cf63a36095217fdf5fbdbf104f015c01617eb5e0944e90627d8d0d4af02"
+ },
+ "w6": {
+  "que": {
+   "pregunta_pre_registrada": "sobre el vortice de Taylor-Green convectivo 2D (Navier-Stokes incompresible, el caso del statement): ¿donde, sobre el eje del numero de Reynolds, se cruzan — si se cruzan — las curvas de tiempo-y-error de un solver cuantico de PDEs y de los solvers clasicos de referencia, midiendo el error contra la solucion analitica exacta?",
+   "los_DOS_desenlaces_son_entregables": {
+    "si_cruza": "el cruce es incuestionable porque el arbitro es una formula cerrada, no una estimacion.",
+    "si_no_cruza": "la curva completa tiempo-y-error vs Reynolds ES el entregable que el statement pide («a plot characterizing the obtained (or estimated) time-to-solution and the numerical error across a range of Reynolds»). No hay plan B: hay dos resultados posibles y ambos se publican sellados."
+   },
+   "riesgo_conocido_declarado_ANTES": "el propio brief (§3.2) admite que la fisica es no-lineal y no-unitaria y el hardware cuantico es lineal y unitario. La linealizacion de Carleman trunca, y el orden de truncamiento acota que Reynolds son honestamente alcanzables. EXPECTATIVA PRE-DECLARADA: el piloto cuantico sera competitivo, si lo es, solo en Reynolds bajos y mallas chicas; el valor del track no depende de que gane — depende de que la curva sea exacta y reproducible."
+  },
+  "como": {
+   "arbitro": "la solucion analitica del statement (§5.3) evaluada en la malla en el tiempo final T; error = L2 relativo del campo de velocidad contra la formula. Sin arbitro aprendido, sin arbitro numerico: formula.",
+   "brazos_clasicos_DOS": "para no comparar contra un espantapajaros: (a) espectral (calidad de referencia en malla periodica); (b) diferencias finitas de 2.o orden (el metodo de ingenieria). Presupuesto de pared identico por punto, declarado en el artefacto.",
+   "brazo_cuantico_v1": "linealizacion de Carleman (orden declarado en cada artefacto) + evolucion del sistema lineal por metodo variacional en statevector. SIN QPU en esta fase: cero gasto de cuota; hardware solo con OK explicito de Nicholas.",
+   "eje_y_regla_de_corte": "Reynolds creciente con la malla acoplada segun el statement («grid resolution must increase with Reynolds number»); la regla de acople se fija en el instrumento y viaja en cada artefacto. El rango NO se elige a mano: arranca donde los tres brazos resuelven con error < 1 % y sube hasta que diferencias finitas degrada (error > 10 % en el presupuesto declarado) o el brazo cuantico agota memoria — el punto de corte SE MIDE Y SE DECLARA, no se decide (la leccion del K=20).",
+   "guardias_del_instrumento": [
+    "1. en t=0 el campo inicial reproduce la analitica al epsilon de maquina, o aborta.",
+    "2. cada artefacto declara lo que OCURRIO, no lo que se pidio: malla real, pasos reales, orden de Carleman real, harness_sha256.",
+    "3. un nan o un campo vacio en cualquier brazo aborta la corrida entera — la ausencia no viaja como valor.",
+    "4. la procedencia se publica en el mismo acto que el sello.",
+    "todas se prueban por mutacion antes de la primera corrida real."
+   ]
+  },
+  "cuando": {
+   "archived_at": "2026-08-20T19:00:00Z",
+   "fase_I_cierra": "2026-09-15"
+  },
+  "donde": {
+   "compute": "CI de evidence (por construir; ni una linea existe al sellar)"
+  },
+  "porque": {
+   "question": "ver `pregunta_pre_registrada`",
+   "que_NO_afirma": "ventaja cuantica salvo cruce medido con este protocolo; nada se extrapola mas alla del ultimo Reynolds medido; no se compara contra solvers comerciales de CFD que no corrimos."
+  },
+  "quien": {
+   "redaccion": "sesion de coordinacion (Rosetta Q Main)",
+   "sellado": "sesion laboratorio",
+   "anclaje": "notario (Main)",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "quien redacta no sella; quien sella no ancla."
+  }
+ }
+}
