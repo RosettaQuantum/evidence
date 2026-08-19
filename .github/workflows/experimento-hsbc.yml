@@ -11,6 +11,10 @@ on:
         description: "modelos coma-separados: xgboost,lightgbm,sklearn_hgbt (vacio = xgboost,lightgbm)"
         required: false
         type: string
+      ataque:
+        description: "serie del ataque (prereg 002): S1|S2|S3|S4 (vacio = baseline normal)"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -28,7 +32,7 @@ jobs:
           python-version: "3.12"
 
       - name: Instalar el entorno
-        run: pip install --quiet numpy pandas scikit-learn xgboost lightgbm
+        run: pip install --quiet numpy pandas scikit-learn xgboost lightgbm imbalanced-learn
 
       - name: Descargar el dato y verificarlo contra el MANIFEST sellado
         # El sha256 esperado es el de RQ-DATA-HSBC-ULB-001. Si OpenML sirviera otra cosa,
@@ -41,6 +45,7 @@ jobs:
         # SIN `|| echo warning`: un experimento que falla tiene que fallar.
         env:
           RQ_MODELOS: ${{ inputs.modelos }}
+          RQ_ATAQUE: ${{ inputs.ataque }}
           RQ_ARFF: creditcard.arff
           RQ_OUT: resultado_hsbc.json
           RQ_SCORES_PREFIX: scores_
@@ -54,7 +59,10 @@ jobs:
           def sha8(p): return hashlib.sha256(open(p, "rb").read()).hexdigest()[:8]
           os.makedirs("resultados_hsbc", exist_ok=True)
           d = json.load(open("resultado_hsbc.json"))
-          modelos = "-".join(sorted(d["modelos"]))
+          if d.get("ataque"):
+              modelos = "ataque_%s_n%d" % (d["ataque"], d["resumen"]["n"])
+          else:
+              modelos = "-".join(sorted(d["modelos"]))
           dst = "resultados_hsbc/hsbc_ulb_baseline_%s@%s.json" % (modelos, sha8("resultado_hsbc.json"))
           shutil.copy("resultado_hsbc.json", dst); print("depositado", dst)
           for f in glob.glob("scores_*.npz"):
