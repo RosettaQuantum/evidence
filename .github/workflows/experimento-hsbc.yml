@@ -1,0 +1,69 @@
+# Track HSBC (deteccion de fraude, ULB) — el experimento vive en CI, no en un Mac.
+# Mismo patron que experimento-eon.yml: entorno desde cero, dato verificado contra el
+# manifest sellado ANTES de gastar tiempo, deposito por hash, harness archivado por hash.
+
+name: Experimento HSBC (fraude ULB)
+
+on:
+  workflow_dispatch:
+    inputs:
+      modelos:
+        description: "modelos coma-separados: xgboost,lightgbm,sklearn_hgbt (vacio = xgboost,lightgbm)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  correr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar el entorno
+        run: pip install --quiet numpy pandas scikit-learn xgboost lightgbm
+
+      - name: Descargar el dato y verificarlo contra el MANIFEST sellado
+        # El sha256 esperado es el de RQ-DATA-HSBC-ULB-001. Si OpenML sirviera otra cosa,
+        # el flujo muere AQUI, antes de entrenar nada sobre bytes que nadie fijo.
+        run: |
+          curl -sL --retry 3 "https://openml.org/data/v1/download/1673544/creditcard.arff" -o creditcard.arff
+          echo "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a  creditcard.arff" | sha256sum -c -
+
+      - name: Correr el experimento
+        # SIN `|| echo warning`: un experimento que falla tiene que fallar.
+        env:
+          RQ_MODELOS: ${{ inputs.modelos }}
+          RQ_ARFF: creditcard.arff
+          RQ_OUT: resultado_hsbc.json
+          RQ_SCORES_PREFIX: scores_
+        run: python3 harness/hsbc_harness.py
+
+      - name: Depositar resultado y scores por hash + archivar el harness
+        if: success()
+        run: |
+          python3 - <<'FIN'
+          import hashlib, json, os, shutil, glob
+          def sha8(p): return hashlib.sha256(open(p, "rb").read()).hexdigest()[:8]
+          os.makedirs("resultados_hsbc", exist_ok=True)
+          d = json.load(open("resultado_hsbc.json"))
+          modelos = "-".join(sorted(d["modelos"]))
+          dst = "resultados_hsbc/hsbc_ulb_baseline_%s@%s.json" % (modelos, sha8("resultado_hsbc.json"))
+          shutil.copy("resultado_hsbc.json", dst); print("depositado", dst)
+          for f in glob.glob("scores_*.npz"):
+              d2 = "resultados_hsbc/%s@%s.npz" % (f[:-4], sha8(f))
+              shutil.copy(f, d2); print("depositado", d2)
+          h = "harness/hsbc_harness.py"
+          shutil.copy(h, "code/hsbc_harness@%s.py" % sha8(h)); print("harness archivado")
+          FIN
+          git config user.name "CI"; git config user.email "ci@rosettaquantum.com"
+          git add resultados_hsbc code/hsbc_harness@*.py
+          git commit -m "CI: baseline HSBC ULB (${{ inputs.modelos || 'xgboost,lightgbm' }})"
+          git pull --rebase origin main && git push origin main
