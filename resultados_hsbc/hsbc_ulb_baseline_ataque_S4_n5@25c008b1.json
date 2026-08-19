@@ -1,0 +1,136 @@
+{
+ "ataque": "S4",
+ "prereg": "RQ-PREREG-HSBC-002-ATAQUE",
+ "manifest": "RQ-DATA-HSBC-ULB-001",
+ "arff_sha256": "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+ "modelo": "xgboost v1 (config del baseline @2072bc53)",
+ "S3_es_diagnostico_defectuoso": false,
+ "corridas": [
+  {
+   "etiqueta": "S4_corte70",
+   "AUPRC": 0.808622,
+   "AUC_ROC": 0.98208,
+   "F1_05": 0.828283,
+   "confusion": {
+    "tn": 85327,
+    "fp": 8,
+    "fn": 26,
+    "tp": 82
+   },
+   "AUPRC_boot_se": 0.0336,
+   "train": {
+    "n": 199364,
+    "fraudes": 384,
+    "tasa": 0.001926
+   },
+   "test": {
+    "n": 85443,
+    "fraudes": 108,
+    "tasa": 0.001264
+   }
+  },
+  {
+   "etiqueta": "S4_corte75",
+   "AUPRC": 0.798518,
+   "AUC_ROC": 0.980939,
+   "F1_05": 0.809524,
+   "confusion": {
+    "tn": 71102,
+    "fp": 6,
+    "fn": 26,
+    "tp": 68
+   },
+   "AUPRC_boot_se": 0.038239,
+   "train": {
+    "n": 213605,
+    "fraudes": 398,
+    "tasa": 0.001863
+   },
+   "test": {
+    "n": 71202,
+    "fraudes": 94,
+    "tasa": 0.00132
+   }
+  },
+  {
+   "etiqueta": "S4_corte80",
+   "AUPRC": 0.800822,
+   "AUC_ROC": 0.987796,
+   "F1_05": 0.823529,
+   "confusion": {
+    "tn": 56882,
+    "fp": 5,
+    "fn": 19,
+    "tp": 56
+   },
+   "AUPRC_boot_se": 0.043972,
+   "train": {
+    "n": 227845,
+    "fraudes": 417,
+    "tasa": 0.00183
+   },
+   "test": {
+    "n": 56962,
+    "fraudes": 75,
+    "tasa": 0.001317
+   }
+  },
+  {
+   "etiqueta": "S4_corte85",
+   "AUPRC": 0.769204,
+   "AUC_ROC": 0.976332,
+   "F1_05": 0.8125,
+   "confusion": {
+    "tn": 42665,
+    "fp": 5,
+    "fn": 13,
+    "tp": 39
+   },
+   "AUPRC_boot_se": 0.057031,
+   "train": {
+    "n": 242085,
+    "fraudes": 440,
+    "tasa": 0.001818
+   },
+   "test": {
+    "n": 42722,
+    "fraudes": 52,
+    "tasa": 0.001217
+   }
+  },
+  {
+   "etiqueta": "S4_corte90",
+   "AUPRC": 0.737365,
+   "AUC_ROC": 0.937751,
+   "F1_05": 0.727273,
+   "confusion": {
+    "tn": 28453,
+    "fp": 6,
+    "fn": 6,
+    "tp": 16
+   },
+   "AUPRC_boot_se": 0.086556,
+   "train": {
+    "n": 256326,
+    "fraudes": 470,
+    "tasa": 0.001834
+   },
+   "test": {
+    "n": 28481,
+    "fraudes": 22,
+    "tasa": 0.000772
+   }
+  }
+ ],
+ "resumen": {
+  "n": 5,
+  "AUPRC_media": 0.782906,
+  "AUPRC_sd": 0.029529,
+  "AUPRC_min": 0.737365,
+  "AUPRC_max": 0.808622,
+  "mediana_boot_se": 0.043972
+ },
+ "seed_base": 42,
+ "harness_sha256": "ba944efbee4b1eb8b67e302fbba738fa43fa4393e689cc977c91727bc33e6a0a",
+ "imblearn_version": "0.14.2"
+}
