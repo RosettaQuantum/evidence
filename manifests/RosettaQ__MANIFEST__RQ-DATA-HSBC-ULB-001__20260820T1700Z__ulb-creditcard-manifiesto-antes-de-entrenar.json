@@ -1,0 +1,105 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__MANIFEST__RQ-DATA-HSBC-ULB-001__20260820T1700Z__ulb-creditcard-manifiesto-antes-de-entrenar.json",
+  "file_id": "RQ-DATA-HSBC-ULB-001",
+  "type": "MANIFEST",
+  "is_demo": false,
+  "scope_note": "Manifiesto del dataset primario del track HSBC (ULB creditcard), sellado ANTES de la primera corrida de entrenamiento — guardia (b) del pre-registro RQ-PREREG-HSBC-001. Toda corrida del track declara contra que manifest corrio. El dato NO viaja en el archivo: viaja su hash y la receta para obtenerlo de la fuente.",
+  "prereg": {
+   "file_id": "RQ-PREREG-HSBC-001",
+   "content_hash": "sha256:b04f214fae845b1c50431d225e6590b0956d8920c24b7c7fa26ed94c58f3f2db"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-20T17:00:00+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_data_ulb.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:d3ed02821b136f5c4d1ae94152165e44e21b3a5c6801b4580b3db8b4103134ce",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:71010a1afbf85a0d831bfdc4dcca75754a439125af7fb680132ba3cf71e4503f"
+ },
+ "w6": {
+  "que": {
+   "dataset": "European Cardholder (ULB) — creditcard",
+   "fuente": {
+    "url": "https://openml.org/data/v1/download/1673544/creditcard.arff",
+    "openml_id": 1597,
+    "version": 1,
+    "md5_declarado_por_openml": "178bcf9bb1f31a3dfe12d0e577884add",
+    "md5_medido": "178bcf9bb1f31a3dfe12d0e577884add",
+    "sha256_medido": "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+    "licencia": "OpenML lo publica como 'Public'; la tabla §6.1 del statement de HSBC lo lista via Kaggle como 'Open Database License'. Ambas procedencias se declaran; ninguna restringe este uso."
+   },
+   "censo": {
+    "filas": 284807,
+    "columnas": 31,
+    "nombres_columnas": [
+     "Time",
+     "V1",
+     "V2",
+     "V3",
+     "V4",
+     "V5",
+     "V6",
+     "V7",
+     "V8",
+     "V9",
+     "V10",
+     "V11",
+     "V12",
+     "V13",
+     "V14",
+     "V15",
+     "V16",
+     "V17",
+     "V18",
+     "V19",
+     "V20",
+     "V21",
+     "V22",
+     "V23",
+     "V24",
+     "V25",
+     "V26",
+     "V27",
+     "V28",
+     "Amount",
+     "Class"
+    ],
+    "fraudes": 492,
+    "no_fraudes": 284315,
+    "tasa_fraude": 0.00172749,
+    "rango_Time_s": [
+     0.0,
+     172792.0
+    ],
+    "nulos_totales": 0
+   }
+  },
+  "como": {
+   "receta_para_un_tercero": "curl -L https://openml.org/data/v1/download/1673544/creditcard.arff -o creditcard.arff ; md5 debe dar 178bcf9bb1f31a3dfe12d0e577884add y sha256 fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+   "medido_por": {
+    "archivo": "lab-hsbc-2026-08-20/01_manifiesto.py",
+    "sha256": "sha256:1d5ee030b9a0c65a1b7cf4fb8300082b7a8613c92642e3df01b56d08e98afeee"
+   }
+  },
+  "cuando": {
+   "archived_at": "2026-08-20T17:00:00Z"
+  },
+  "donde": {
+   "descarga_y_medicion": "Mac local (sesion laboratorio)"
+  },
+  "porque": {
+   "question": "fijar los bytes exactos del dato ANTES de que exista un modelo, para que ningun resultado pueda elegir su dataset."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}
