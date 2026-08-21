@@ -288,19 +288,63 @@ def coeficientes_de(ruta):
 
 def prueba(art_ruta, salida, qubo):
     """La prueba con criterio de exito explicito. FALLA CERRADA: si no reproduce, se
-    reporta la desviacion. Jamas se ajusta un coeficiente para que calce."""
+    reporta la desviacion. Jamas se ajusta un coeficiente para que calce.
+
+    POR QUE ESTA PRUEBA DECLARA SU PRECISION EN VEZ DE AFIRMAR CERO
+    ---------------------------------------------------------------
+    La primera version comparaba con `==` y publicaba `desviacion: 0.0` con veredicto
+    REPRODUCE. Era verdad —en el numpy del CI—. Ejercido desde afuera con otro numpy,
+    el mismo archivo da -3.6e-12 en el minimo, y el que lo ejerce lee que la prueba
+    falla. La afirmacion era mas fuerte de lo que el dato aguanta, y el archivo existe
+    justamente para el que la va a ejercer desde afuera.
+
+    La suma de 21 terminos que rondan 1e5 no es asociativa en punto flotante: el
+    resultado depende del ORDEN, y ningun orden es mas correcto que otro. Asi que la
+    prueba ahora hace tres cosas honestas en vez de una optimista:
+
+    1. Evalua en TRES ordenes distintos y publica los tres, para que el lector vea
+       cuanto se mueven los ultimos bits y no crea que descubrio un error.
+    2. Compara contra una tolerancia DERIVADA, no elegida: n * eps * suma|terminos|,
+       que es la cota clasica del error de redondeo de una suma de n terminos.
+    3. Separa las dos afirmaciones, porque una es portable y la otra no:
+       - el ARGMIN (que x gana) reproduce EXACTO en todos los ordenes -> afirmacion dura
+       - el VALOR reproduce dentro de la tolerancia -> afirmacion con su precision
+    """
     art = json.load(open(art_ruta))
     Q, c_lin, CONST = qubo
     K = salida["problema"]["K"]
     kb = salida["problema"]["k_budget"]
+    eps = float(np.finfo(float).eps)
+
+    def terminos(x):
+        """Los sumandos del valor, sueltos. De aqui salen los tres ordenes Y la cota."""
+        t = [float(c_lin[i]) for i in range(K) if x[i]]
+        t += [float(Q[i][j]) for i in range(K) for j in range(i, K) if x[i] and x[j]]
+        t.append(float(CONST))
+        return t
 
     def val(x):
-        x = np.asarray(x, float)
-        return float(x @ Q @ x + c_lin @ x + CONST)
+        """El orden CANONICO, y esta declarado en el artefacto: numpy `x @ Q @ x`."""
+        xv = np.asarray(x, float)
+        return float(xv @ Q @ xv + c_lin @ xv + CONST)
+
+    def ordenes(x):
+        t = terminos(x)
+        suma_bucles = 0.0
+        for v in t:
+            suma_bucles += v
+        return {
+            "numpy_x@Q@x": val(x),
+            "bucles_i_luego_j": suma_bucles,
+            "por_magnitud_creciente": float(np.sum(sorted(t, key=abs))),
+        }
+
+    def tolerancia(x):
+        t = terminos(x)
+        return len(t) * eps * sum(abs(v) for v in t)
 
     # (a) los subconjuntos de cardinalidad exacta
-    mejor, mx = None, None
-    n_sub = 0
+    mejor, mx, n_sub = None, None, 0
     for sel in itertools.combinations(range(K), kb):
         x = [0] * K
         for i in sel:
@@ -319,7 +363,15 @@ def prueba(art_ruta, salida, qubo):
 
     ex_v, ex_x = float(art["exact"]["value"]), list(art["exact"]["x"])
     qu_v, qu_x = float(art["quantum"]["value"]), list(art["quantum"]["x"])
-    qu_recomp = val(qu_x)
+
+    ord_min, ord_qu = ordenes(mx), ordenes(qu_x)
+    tol_min, tol_qu = tolerancia(mx), tolerancia(qu_x)
+    peor_min = max(abs(v - ex_v) for v in ord_min.values())
+    peor_qu = max(abs(v - qu_v) for v in ord_qu.values())
+
+    # EL ARGMIN es la afirmacion dura: no depende del orden de suma, porque las
+    # diferencias entre candidatos son de orden 1 y el ruido de redondeo de 1e-12.
+    argmin_ok = (mx == ex_x) and (fbx == ex_x)
 
     r = {
         "subconjuntos_de_tamano_k": n_sub,
@@ -327,18 +379,39 @@ def prueba(art_ruta, salida, qubo):
         "fuerza_bruta_2^K": {"minimo": mejor_fb, "x": fbx, "evaluaciones": 1 << K},
         "publicado": {"exact_value": ex_v, "exact_x": ex_x,
                       "quantum_value": qu_v, "quantum_x": qu_x},
-        "quantum_value_recomputado": qu_recomp,
-        "reproduce": {
-            "minimo": mejor == ex_v,
-            "x_del_minimo": mx == ex_x,
-            "valor_del_x_cuantico": qu_recomp == qu_v,
+        "precision": {
+            "por_que": ("la suma no es asociativa en punto flotante: el valor depende del "
+                        "orden de los sumandos y ningun orden es mas correcto que otro. "
+                        "Se publican tres para que el que ejerza este archivo desde afuera "
+                        "vea cuanto se mueven los ultimos bits en vez de leer un fallo."),
+            "orden_canonico": "numpy_x@Q@x",
+            "minimo_en_tres_ordenes": ord_min,
+            "x_cuantico_en_tres_ordenes": ord_qu,
+            "tolerancia_derivada": {
+                "formula": "n_terminos * eps_maquina * suma(|terminos|)",
+                "eps_maquina": eps,
+                "del_minimo": tol_min,
+                "del_x_cuantico": tol_qu,
+                "no_es_elegida": ("es la cota clasica del error de redondeo de una suma de "
+                                  "n terminos, no un numero puesto para que calce"),
+            },
+            "desviacion_peor_de_los_tres_ordenes": {
+                "minimo": peor_min, "x_cuantico": peor_qu},
         },
-        "desviacion": {
-            "minimo": mejor - ex_v,
-            "valor_del_x_cuantico": qu_recomp - qu_v,
+        "reproduce": {
+            "x_del_minimo_EXACTO": argmin_ok,
+            "minimo_dentro_de_tolerancia": peor_min <= tol_min,
+            "valor_del_x_cuantico_dentro_de_tolerancia": peor_qu <= tol_qu,
         },
     }
     r["veredicto"] = "REPRODUCE" if all(r["reproduce"].values()) else "NO REPRODUCE"
+    r["que_significa_el_veredicto"] = (
+        "REPRODUCE quiere decir dos cosas distintas y conviene no mezclarlas: el ARGMIN "
+        "—cual de los %d subconjuntos gana— reproduce EXACTO, bit a bit, en los tres "
+        "ordenes de suma; y el VALOR reproduce dentro de la tolerancia derivada, que es "
+        "lo maximo que se puede afirmar de una suma de punto flotante. Si lo ejerces y "
+        "obtienes una diferencia de orden 1e-12, no encontraste un error: encontraste "
+        "esto." % n_sub)
     return r
 
 
