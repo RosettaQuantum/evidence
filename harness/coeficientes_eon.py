@@ -384,6 +384,14 @@ def prueba(art_ruta, salida, qubo):
                         "orden de los sumandos y ningun orden es mas correcto que otro. "
                         "Se publican tres para que el que ejerza este archivo desde afuera "
                         "vea cuanto se mueven los ultimos bits en vez de leer un fallo."),
+            "LOS_TRES_ORDENES_SON_EJEMPLOS_NO_UNA_COTA": (
+                "Existen ordenes de suma que caen FUERA de estos tres, por arriba y por "
+                "abajo: sumar CONST primero da 4295.418727527082 en case118, y un doble "
+                "bucle que acumule distinto da 4295.418727527091. No leas estos tres "
+                "valores como el rango posible — son una ilustracion de la magnitud. "
+                "LA COTA ES `tolerancia_derivada`, y solo esa. Este rotulo existe porque "
+                "la version anterior invitaba a leerlos como rango, que es la misma "
+                "trampa que traia el `desviacion: 0.0` que este bloque vino a reemplazar."),
             "orden_canonico": "numpy_x@Q@x",
             "minimo_en_tres_ordenes": ord_min,
             "x_cuantico_en_tres_ordenes": ord_qu,
@@ -411,7 +419,7 @@ def prueba(art_ruta, salida, qubo):
         "ordenes de suma; y el VALOR reproduce dentro de la tolerancia derivada, que es "
         "lo maximo que se puede afirmar de una suma de punto flotante. Si lo ejerces y "
         "obtienes una diferencia de orden 1e-12, no encontraste un error: encontraste "
-        "esto." % n_sub)
+        "esto: la cota es la tolerancia derivada, no los tres ordenes de ejemplo." % n_sub)
     return r
 
 
