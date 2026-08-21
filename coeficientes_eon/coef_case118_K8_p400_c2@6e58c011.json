@@ -1,0 +1,343 @@
+{
+  "completa_a": {
+    "aclaracion": "este archivo NO corrige ni reemplaza al artefacto: lo completa. El sello publicado no se toca.",
+    "artefacto": "resultados_eon/eon_case118_K8_p400_c2@cc096d21.json",
+    "por_que": "declara `2nd-order DC superposition (measured r_i, q_ij via pandapower rundcpp)` y no publica esos coeficientes",
+    "sha256": "cc096d21ccb52d651ada8dc77199d06c16d1a9f7aeac260af779b151b74e01cc"
+  },
+  "costo": {
+    "chequeo": "los 2 pares de lineas nuevas replayados salen en el mismo orden que los publicados",
+    "como": "np.random.default_rng(42), se consumen los sorteos de pares de buses \u2014rechazos incluidos\u2014 y despues uniform(0.9, 1.1, K)",
+    "pares": [
+      [
+        10,
+        91
+      ],
+      [
+        51,
+        117
+      ]
+    ],
+    "reconstruido": true
+  },
+  "lib_versions": {
+    "numpy": "2.4.6",
+    "pandapower": "3.5.4",
+    "python": "3.12.14"
+  },
+  "medido": {
+    "cost": [
+      1.0394736058118728,
+      0.9188354695775299,
+      1.0951244703273513,
+      1.0522279403980708,
+      1.0572128610553908,
+      0.9256227265351092,
+      1.7821389376424042,
+      1.7534872887237294
+    ],
+    "flujos_dc_corridos": 37,
+    "q_ij": {
+      "0_1": -2.610611922980752,
+      "0_2": 0.06943012418378203,
+      "0_3": 0.37249788294047903,
+      "0_4": 0.0066786185207092785,
+      "0_5": 0.0032621288619338884,
+      "0_6": -40.885060293217975,
+      "0_7": -0.002903261029132409,
+      "1_2": 1.4365632259696213,
+      "1_3": 4.8992197949983165,
+      "1_4": 0.20141482813505718,
+      "1_5": 0.05608978942109388,
+      "1_6": 9.078085441986332,
+      "1_7": -0.08758868305358192,
+      "2_3": -2.01205084868252,
+      "2_4": -10.980851337050808,
+      "2_5": 0.20488569051121885,
+      "2_6": 2.1213634704508877,
+      "2_7": 2.059988484405949,
+      "3_4": 0.13927994444020442,
+      "3_5": -0.09562704247764486,
+      "3_6": -23.82043548456113,
+      "3_7": -0.2314292335004211,
+      "4_5": 0.6953160479042708,
+      "4_6": 3.863098066683051,
+      "4_7": 3.530037995255043,
+      "5_6": 8.441223751377038,
+      "5_7": -2.5546688288895893,
+      "6_7": 57.385292826270415
+    },
+    "relief_i": [
+      92.72234800360275,
+      102.0071175749481,
+      73.81041024349906,
+      123.60818105014641,
+      79.76791640350348,
+      60.07854610742106,
+      -347.534964436898,
+      163.3661507289562
+    ],
+    "tiempo_medicion_s": 13.4
+  },
+  "problema": {
+    "K": 8,
+    "candidatos": [
+      {
+        "detail": [
+          2
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          4
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          30
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          19
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          28
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          56
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          10,
+          91
+        ],
+        "type": "new"
+      },
+      {
+        "detail": [
+          51,
+          117
+        ],
+        "type": "new"
+      }
+    ],
+    "k_budget": 5,
+    "lambda_cost": 0.02,
+    "penalty": 490.0984521868686,
+    "seed": 42
+  },
+  "producido_por": {
+    "archivo": "harness/coeficientes_eon.py",
+    "metodo": "anclado al artefacto publicado: los candidatos se LEEN de el, no se regeneran. No se re-corrio el harness \u2014 ninguna version archivada reproduce esta instancia.",
+    "sha256": "7b48e161a28eaa053bcd8cb912d12865160eb795540423e2bce671808e347fb5"
+  },
+  "prueba": {
+    "fuerza_bruta_2^K": {
+      "evaluaciones": 256,
+      "minimo": 1882.9203759527718,
+      "x": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    "minimo_recomputado": 1882.9203759527718,
+    "precision": {
+      "LOS_TRES_ORDENES_SON_EJEMPLOS_NO_UNA_COTA": "Existen ordenes de suma que caen FUERA de estos tres, por arriba y por abajo: sumar CONST primero da 4295.418727527082 en case118, y un doble bucle que acumule distinto da 4295.418727527091. No leas estos tres valores como el rango posible \u2014 son una ilustracion de la magnitud. LA COTA ES `tolerancia_derivada`, y solo esa. Este rotulo existe porque la version anterior invitaba a leerlos como rango, que es la misma trampa que traia el `desviacion: 0.0` que este bloque vino a reemplazar.",
+      "desviacion_peor_de_los_tres_ordenes": {
+        "minimo": 1.8189894035458565e-12,
+        "x_cuantico": 1.8189894035458565e-12
+      },
+      "minimo_en_tres_ordenes": {
+        "bucles_i_luego_j": 1882.9203759527736,
+        "numpy_x@Q@x": 1882.9203759527718,
+        "por_magnitud_creciente": 1882.9203759527718
+      },
+      "orden_canonico": "numpy_x@Q@x",
+      "por_que": "la suma no es asociativa en punto flotante: el valor depende del orden de los sumandos y ningun orden es mas correcto que otro. Se publican tres para que el que ejerza este archivo desde afuera vea cuanto se mueven los ultimos bits en vez de leer un fallo.",
+      "tolerancia_derivada": {
+        "del_minimo": 2.1969189238178798e-10,
+        "del_x_cuantico": 2.1969189238178798e-10,
+        "eps_maquina": 2.220446049250313e-16,
+        "formula": "n_terminos * eps_maquina * suma(|terminos|)",
+        "no_es_elegida": "es la cota clasica del error de redondeo de una suma de n terminos, no un numero puesto para que calce"
+      },
+      "x_cuantico_en_tres_ordenes": {
+        "bucles_i_luego_j": 1882.9203759527736,
+        "numpy_x@Q@x": 1882.9203759527718,
+        "por_magnitud_creciente": 1882.9203759527718
+      }
+    },
+    "publicado": {
+      "exact_value": 1882.9203759527718,
+      "exact_x": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "quantum_value": 1882.9203759527718,
+      "quantum_x": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    "que_significa_el_veredicto": "REPRODUCE quiere decir dos cosas distintas y conviene no mezclarlas: el ARGMIN \u2014cual de los 56 subconjuntos gana\u2014 reproduce EXACTO, bit a bit, en los tres ordenes de suma; y el VALOR reproduce dentro de la tolerancia derivada, que es lo maximo que se puede afirmar de una suma de punto flotante. Si lo ejerces y obtienes una diferencia de orden 1e-12, no encontraste un error: encontraste esto: la cota es la tolerancia derivada, no los tres ordenes de ejemplo.",
+    "reproduce": {
+      "minimo_dentro_de_tolerancia": true,
+      "valor_del_x_cuantico_dentro_de_tolerancia": true,
+      "x_del_minimo_EXACTO": true
+    },
+    "subconjuntos_de_tamano_k": 56,
+    "veredicto": "REPRODUCE",
+    "x_recomputado": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1
+    ]
+  },
+  "qubo": {
+    "CONST": 12252.461304671715,
+    "Q_upper": [
+      [
+        490.0984521868686,
+        982.807516296718,
+        980.1274742495534,
+        979.8244064907967,
+        980.1902257552165,
+        980.1936422448753,
+        1021.0819646669552,
+        980.1998076347663
+      ],
+      [
+        0.0,
+        490.0984521868686,
+        978.7603411477676,
+        975.2976845787389,
+        979.9954895456021,
+        980.1408145843161,
+        971.1188189317509,
+        980.2844930567908
+      ],
+      [
+        0.0,
+        0.0,
+        490.0984521868686,
+        982.2089552224197,
+        991.177755710788,
+        979.992018683226,
+        978.0755409032863,
+        978.1369158893312
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        490.0984521868686,
+        980.057624429297,
+        980.2925314162148,
+        1004.0173398582983,
+        980.4283336072376
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        490.0984521868686,
+        979.5015883258329,
+        976.3338063070541,
+        976.6668663784822
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        490.0984521868686,
+        971.7556806223602,
+        982.7515732026268
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        490.0984521868686,
+        922.8116115474668
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        490.0984521868686
+      ]
+    ],
+    "c_lin": [
+      -4503.587628213304,
+      -4512.874810547374,
+      -4484.67457743591,
+      -4534.473206173156,
+      -4490.6328418281,
+      -4470.946103334708,
+      -4063.3154624661665,
+      -4574.217150664999
+    ],
+    "convenio": "valor(x) = x^T Q x + c_lin . x + CONST, con Q triangular superior",
+    "de_donde_sale": {
+      "CONST": "penalty * k_budget^2",
+      "Q[i][i]": "penalty",
+      "Q[i][j] (i<j)": "-q_ij[i,j] + 2*penalty",
+      "c_lin[i]": "-relief_i[i] + lambda_cost*cost[i] + penalty*(1 - 2*k_budget)",
+      "penalty": "max(1.0, max(relief_i)) * 3.0"
+    }
+  },
+  "que_es": "los coeficientes que DEFINEN el problema de esta corrida de E.ON, para que un tercero pueda recomputar su optimo sin creernos nada",
+  "red": {
+    "congestion_base_dc": 7174.789046965843,
+    "grid": "case118",
+    "load_scale": 2.6,
+    "n_bus": 118,
+    "n_line": 173,
+    "tighten": 0.5
+  }
+}

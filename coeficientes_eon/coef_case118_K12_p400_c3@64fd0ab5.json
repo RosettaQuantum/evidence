@@ -1,0 +1,526 @@
+{
+  "completa_a": {
+    "aclaracion": "este archivo NO corrige ni reemplaza al artefacto: lo completa. El sello publicado no se toca.",
+    "artefacto": "resultados_eon/eon_case118_K12_p400_c3@f0627454.json",
+    "por_que": "declara `2nd-order DC superposition (measured r_i, q_ij via pandapower rundcpp)` y no publica esos coeficientes",
+    "sha256": "f06274545528f5eb6f250063d8ac29a150ad2813bc675aef6720e20f04f113fd"
+  },
+  "costo": {
+    "chequeo": "los 3 pares de lineas nuevas replayados salen en el mismo orden que los publicados",
+    "como": "np.random.default_rng(42), se consumen los sorteos de pares de buses \u2014rechazos incluidos\u2014 y despues uniform(0.9, 1.1, K)",
+    "pares": [
+      [
+        10,
+        91
+      ],
+      [
+        51,
+        117
+      ],
+      [
+        82,
+        10
+      ]
+    ],
+    "reconstruido": true
+  },
+  "lib_versions": {
+    "numpy": "2.4.6",
+    "pandapower": "3.5.4",
+    "python": "3.12.14"
+  },
+  "medido": {
+    "cost": [
+      1.0951244703273513,
+      1.0522279403980708,
+      1.0572128610553908,
+      0.9256227265351092,
+      0.9900771875791134,
+      0.9741596048465163,
+      1.0853529977697205,
+      1.028773024016133,
+      1.064552322654166,
+      1.7796291115778395,
+      1.7018059398425198,
+      1.8196505233257008
+    ],
+    "flujos_dc_corridos": 79,
+    "q_ij": {
+      "0_1": -2.610611922980752,
+      "0_10": -0.002903261029132409,
+      "0_11": -54.29735984171748,
+      "0_2": 0.06943012418378203,
+      "0_3": 0.37249788294047903,
+      "0_4": 0.0066786185207092785,
+      "0_5": 0.0032621288619338884,
+      "0_6": 0.00477869563655986,
+      "0_7": -0.02093940790018678,
+      "0_8": -0.9063952328997402,
+      "0_9": -40.885060293217975,
+      "10_11": 22.755746322097366,
+      "1_10": -0.08758868305358192,
+      "1_11": 5.879245264668498,
+      "1_2": 1.4365632259696213,
+      "1_3": 4.8992197949983165,
+      "1_4": 0.20141482813505718,
+      "1_5": 0.05608978942109388,
+      "1_6": 0.09593766345915355,
+      "1_7": 0.6298305339132639,
+      "1_8": -4.148450823909116,
+      "1_9": 9.078085441986332,
+      "2_10": 2.059988484405949,
+      "2_11": 0.5824023731229317,
+      "2_3": -2.01205084868252,
+      "2_4": -10.980851337050808,
+      "2_5": 0.20488569051121885,
+      "2_6": 0.07186783691759047,
+      "2_7": 5.039858265637122,
+      "2_8": -2.059914343289165,
+      "2_9": 2.1213634704508877,
+      "3_10": -0.2314292335004211,
+      "3_11": -25.715806293675996,
+      "3_4": 0.13927994444020442,
+      "3_5": -0.09562704247764486,
+      "3_6": -0.167159926547356,
+      "3_7": -3.0323583510189565,
+      "3_8": -1.703657101461431,
+      "3_9": -23.82043548456113,
+      "4_10": 3.530037995255043,
+      "4_11": -15.199096744687267,
+      "4_5": 0.6953160479042708,
+      "4_6": 0.033922887612789054,
+      "4_7": 4.855314664053367,
+      "4_8": -4.4320251994622595,
+      "4_9": 3.863098066683051,
+      "5_10": -2.5546688288895893,
+      "5_11": 1.714261359392367,
+      "5_6": 0.5212994071116555,
+      "5_7": -0.05798221507757262,
+      "5_8": 0.8247044473600909,
+      "5_9": 8.441223751377038,
+      "6_10": 0.06811074716551957,
+      "6_11": -2.9853665428745444,
+      "6_7": -0.2577520898976218,
+      "6_8": -8.676839743694472,
+      "6_9": -2.8582222053919395,
+      "7_10": -3.3946792366132286,
+      "7_11": -12.866242069733744,
+      "7_8": -3.6358409377453427,
+      "7_9": -0.8640462741859665,
+      "8_10": 2.1379322623743064,
+      "8_11": -64.59810603580445,
+      "8_9": -11.249190519773947,
+      "9_10": 57.385292826270415,
+      "9_11": 166.74758038313212
+    },
+    "relief_i": [
+      92.72234800360275,
+      102.0071175749481,
+      73.81041024349906,
+      123.60818105014641,
+      79.76791640350348,
+      60.07854610742106,
+      94.5203424373558,
+      101.40135252585605,
+      151.46818901925963,
+      -347.534964436898,
+      163.3661507289562,
+      164.87787454416775
+    ],
+    "tiempo_medicion_s": 29.51
+  },
+  "problema": {
+    "K": 12,
+    "candidatos": [
+      {
+        "detail": [
+          2
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          4
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          30
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          19
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          28
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          56
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          46
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          37
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          49
+        ],
+        "type": "parallel"
+      },
+      {
+        "detail": [
+          10,
+          91
+        ],
+        "type": "new"
+      },
+      {
+        "detail": [
+          51,
+          117
+        ],
+        "type": "new"
+      },
+      {
+        "detail": [
+          82,
+          10
+        ],
+        "type": "new"
+      }
+    ],
+    "k_budget": 5,
+    "lambda_cost": 0.02,
+    "penalty": 494.63362363250326,
+    "seed": 42
+  },
+  "producido_por": {
+    "archivo": "harness/coeficientes_eon.py",
+    "metodo": "anclado al artefacto publicado: los candidatos se LEEN de el, no se regeneran. No se re-corrio el harness \u2014 ninguna version archivada reproduce esta instancia.",
+    "sha256": "7b48e161a28eaa053bcd8cb912d12865160eb795540423e2bce671808e347fb5"
+  },
+  "prueba": {
+    "fuerza_bruta_2^K": {
+      "evaluaciones": 4096,
+      "minimo": 1820.4092359167626,
+      "x": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "minimo_recomputado": 1820.4092359167626,
+    "precision": {
+      "LOS_TRES_ORDENES_SON_EJEMPLOS_NO_UNA_COTA": "Existen ordenes de suma que caen FUERA de estos tres, por arriba y por abajo: sumar CONST primero da 4295.418727527082 en case118, y un doble bucle que acumule distinto da 4295.418727527091. No leas estos tres valores como el rango posible \u2014 son una ilustracion de la magnitud. LA COTA ES `tolerancia_derivada`, y solo esa. Este rotulo existe porque la version anterior invitaba a leerlos como rango, que es la misma trampa que traia el `desviacion: 0.0` que este bloque vino a reemplazar.",
+      "desviacion_peor_de_los_tres_ordenes": {
+        "minimo": 3.637978807091713e-12,
+        "x_cuantico": 7.275957614183426e-12
+      },
+      "minimo_en_tres_ordenes": {
+        "bucles_i_luego_j": 1820.4092359167662,
+        "numpy_x@Q@x": 1820.4092359167626,
+        "por_magnitud_creciente": 1820.4092359167626
+      },
+      "orden_canonico": "numpy_x@Q@x",
+      "por_que": "la suma no es asociativa en punto flotante: el valor depende del orden de los sumandos y ningun orden es mas correcto que otro. Se publican tres para que el que ejerza este archivo desde afuera vea cuanto se mueven los ultimos bits en vez de leer un fallo.",
+      "tolerancia_derivada": {
+        "del_minimo": 2.221140066296967e-10,
+        "del_x_cuantico": 2.226841535351495e-10,
+        "eps_maquina": 2.220446049250313e-16,
+        "formula": "n_terminos * eps_maquina * suma(|terminos|)",
+        "no_es_elegida": "es la cota clasica del error de redondeo de una suma de n terminos, no un numero puesto para que calce"
+      },
+      "x_cuantico_en_tres_ordenes": {
+        "bucles_i_luego_j": 1828.784776961369,
+        "numpy_x@Q@x": 1828.7847769613618,
+        "por_magnitud_creciente": 1828.7847769613618
+      }
+    },
+    "publicado": {
+      "exact_value": 1820.4092359167626,
+      "exact_x": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "quantum_value": 1828.7847769613618,
+      "quantum_x": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    "que_significa_el_veredicto": "REPRODUCE quiere decir dos cosas distintas y conviene no mezclarlas: el ARGMIN \u2014cual de los 792 subconjuntos gana\u2014 reproduce EXACTO, bit a bit, en los tres ordenes de suma; y el VALOR reproduce dentro de la tolerancia derivada, que es lo maximo que se puede afirmar de una suma de punto flotante. Si lo ejerces y obtienes una diferencia de orden 1e-12, no encontraste un error: encontraste esto: la cota es la tolerancia derivada, no los tres ordenes de ejemplo.",
+    "reproduce": {
+      "minimo_dentro_de_tolerancia": true,
+      "valor_del_x_cuantico_dentro_de_tolerancia": true,
+      "x_del_minimo_EXACTO": true
+    },
+    "subconjuntos_de_tamano_k": 792,
+    "veredicto": "REPRODUCE",
+    "x_recomputado": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1
+    ]
+  },
+  "qubo": {
+    "CONST": 12365.840590812582,
+    "Q_upper": [
+      [
+        494.63362363250326,
+        991.8778591879873,
+        989.1978171408227,
+        988.894749382066,
+        989.2605686464858,
+        989.2639851361446,
+        989.26246856937,
+        989.2881866729067,
+        990.1736424979063,
+        1030.1523075582245,
+        989.2701505260356,
+        1043.564607106724
+      ],
+      [
+        0.0,
+        494.63362363250326,
+        987.8306840390369,
+        984.3680274700082,
+        989.0658324368715,
+        989.2111574755854,
+        989.1713096015474,
+        988.6374167310933,
+        993.4156980889156,
+        980.1891618230202,
+        989.3548359480601,
+        983.388002000338
+      ],
+      [
+        0.0,
+        0.0,
+        494.63362363250326,
+        991.279298113689,
+        1000.2480986020573,
+        989.0623615744953,
+        989.1953794280889,
+        984.2273889993694,
+        991.3271616082957,
+        987.1458837945556,
+        987.2072587806006,
+        988.6848448918836
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        494.63362363250326,
+        989.1279673205663,
+        989.3628743074842,
+        989.4344071915539,
+        992.2996056160255,
+        990.970904366468,
+        1013.0876827495676,
+        989.4986764985069,
+        1014.9830535586825
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        494.63362363250326,
+        988.5719312171022,
+        989.2333243773937,
+        984.4119326009532,
+        993.6992724644688,
+        985.4041491983235,
+        985.7372092697515,
+        1004.4663440096938
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        494.63362363250326,
+        988.7459478578949,
+        989.3252294800841,
+        988.4425428176464,
+        980.8260235136295,
+        991.8219160938961,
+        987.5529859056142
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        494.63362363250326,
+        989.5249993549041,
+        997.944087008701,
+        992.1254694703985,
+        989.199136517841,
+        992.2526138078811
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        494.63362363250326,
+        992.9030882027519,
+        990.1312935391925,
+        992.6619265016197,
+        1002.1334893347403
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        494.63362363250326,
+        1000.5164377847805,
+        987.1293150026322,
+        1053.865353300811
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        494.63362363250326,
+        931.8819544387361,
+        822.5196668818744
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        494.63362363250326,
+        966.5115009429092
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        494.63362363250326
+      ]
+    ],
+    "c_lin": [
+      -4544.403058206725,
+      -4553.688685708669,
+      -4525.491878678808,
+      -4575.292281288145,
+      -4531.450727552281,
+      -4511.761675607853,
+      -4546.2012480699295,
+      -4553.083389757905,
+      -4603.149510665336,
+      -4104.1320556734,
+      -4615.034727302689,
+      -4616.54409422623
+    ],
+    "convenio": "valor(x) = x^T Q x + c_lin . x + CONST, con Q triangular superior",
+    "de_donde_sale": {
+      "CONST": "penalty * k_budget^2",
+      "Q[i][i]": "penalty",
+      "Q[i][j] (i<j)": "-q_ij[i,j] + 2*penalty",
+      "c_lin[i]": "-relief_i[i] + lambda_cost*cost[i] + penalty*(1 - 2*k_budget)",
+      "penalty": "max(1.0, max(relief_i)) * 3.0"
+    }
+  },
+  "que_es": "los coeficientes que DEFINEN el problema de esta corrida de E.ON, para que un tercero pueda recomputar su optimo sin creernos nada",
+  "red": {
+    "congestion_base_dc": 7174.789046965843,
+    "grid": "case118",
+    "load_scale": 2.6,
+    "n_bus": 118,
+    "n_line": 173,
+    "tighten": 0.5
+  }
+}
