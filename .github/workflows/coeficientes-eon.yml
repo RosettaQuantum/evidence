@@ -1,0 +1,80 @@
+# Publica los coeficientes que definen el problema de cada corrida de E.ON.
+#
+# POR QUE ESTO CORRE EN CI Y NO EN UN MAC
+# ---------------------------------------
+# El Mac de la casa tiene Python 3.9 y los artefactos se midieron con 3.12.13,
+# numpy 2.4.6 y pandapower 3.5.4. Medir 105 coeficientes con otras versiones y
+# publicarlos como los de un sello existente seria exactamente el defecto que este
+# trabajo viene a cerrar: numeros correctos de otro problema.
+#
+# LO QUE ESTE FLUJO NO HACE, a proposito: no sella y no toca ningun archivo
+# publicado. Deposita un archivo NUEVO que declara a cual completa. Depositar no es
+# certificar (separacion laboratorio/notario, CLAUDE.md Rosetta §11).
+
+name: Coeficientes E.ON (publicar r_i, q_ij y el QUBO)
+
+on:
+  workflow_dispatch:
+    inputs:
+      artefacto:
+        description: 'ruta del artefacto, p.ej. resultados_eon/eon_case118@a3340c06.json (vacío = todos)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  medir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar el entorno EXACTO de las corridas selladas
+        # Pinneado, no "lo ultimo": los artefactos declaran estas versiones y el
+        # objetivo es reproducir su fisica, no medirla de nuevo con otra libreria.
+        run: pip install --quiet "numpy==2.4.6" "pandapower==3.5.4"
+
+      - name: Medir y probar
+        env:
+          ART: ${{ inputs.artefacto }}
+        run: |
+          cd harness
+          if [ -z "$ART" ]; then
+            python3 coeficientes_eon.py --todos
+          else
+            python3 coeficientes_eon.py --artefacto "../$ART"
+          fi
+
+      - name: Guardar la salida como artefacto del flujo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coeficientes-eon
+          path: coeficientes_eon/*.json
+          # `error` y no `warn`: un artefacto vacio es indistinguible de uno perdido.
+          if-no-files-found: error
+
+      - name: Depositar en el repositorio
+        if: success()
+        run: |
+          git config user.name  "rosettaq-ci"
+          git config user.email "ci@rosettaquantum.com"
+          git add coeficientes_eon/
+          if git diff --staged --quiet; then
+            echo "nada nuevo que depositar"
+          else
+            git commit -q -m "CI: coeficientes de E.ON (r_i, q_ij, cost y el QUBO)
+
+          Archivos NUEVOS que declaran a que artefacto completan. Ningun sello
+          publicado se toca. Queda como «esperando sello» hasta que el laboratorio
+          lo lea y decida que afirma."
+            git pull --rebase -q origin main || true
+            git push -q origin HEAD:main && echo "publicado en main"
+          fi
