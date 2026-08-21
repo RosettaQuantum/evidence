@@ -1,0 +1,32 @@
+{"python": "3.12.14", "numpy": "2.5.2", "red": "case118", "semilla": 42, "k_budget": 5, "reloj_s": 900.0, "C_OV": 1.0, "VOLL": 20.0, "W_BUILD": 10.0, "sigma_carga": 0.15, "p_falla_gen": 0.15, "falla_max": 0.5, "theta_max": 10.0, "cp_dtheta": 0.0001, "cp_mw": 0.1, "cp_tol_u": 2}
+
+=== PRUEBA Q1 — S=1, K chico: el optimo del QUBO == el optimo del MILP ===
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=2 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 6 paralelos + 2 nuevos = 8 sobre una red de 173 lineas
+  evaluador separado vs monolitico (falla cerrado):
+    plan []                 separado=        910.4776  monolitico=        910.4776  dif rel=2.489e-10
+    plan [0]                separado=        925.2430  monolitico=        925.2430  dif rel=1.417e-10
+    plan [0, 1]             separado=        832.2005  monolitico=        832.2005  dif rel=1.011e-10
+    plan [0, 1, 2]          separado=        791.7704  monolitico=        791.7704  dif rel=3.204e-10
+  QUBO S=1   : 37 evaluaciones exactas en 0.6s · E(vacio)=910.4776 · r en [-40.858, 144.145] · q en [-54.409, 41.343] · PEN=846.7
+  identidad 2do orden en |sel|<=2: peor dif relativa 0.000e+00 sobre 37 subconjuntos
+  argmin QUBO   : [3, 4, 5]  (costo exacto 529.3881)
+  argmin EXACTO : [3, 4, 5]  (costo exacto 529.3881)
+  penalidad: el argmin libre sobre 2^8 elige 3 lineas (se piden 3): OK
+  -> CRITERIO Q1: mismo optimo = True · identidad 2do orden 0.000e+00 (tope 1e-9) · arrepentimiento 0.000e+00
+
+=== PRUEBA Q3 — un escenario extremo mueve los coeficientes del QUBO ===
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=2 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 8 paralelos + 2 nuevos = 10 sobre una red de 173 lineas
+  x10 sobre 1 de 2 escenarios, probado en los 99 buses con carga
+  buses que MUEVEN los coeficientes lineales r_i: 98 de 99
+  bus de mayor carga 58 (720.2 MW): peor cambio en q_ij = 344.7523 (rel 1.741e+00)
+    bus 10   (  182.0 MW) -> max|dr| =  3026.4474  (rel 1.050e+01)
+    bus 0    (  132.6 MW) -> max|dr| =  1436.9694  (rel 4.984e+00)
+    bus 11   (  122.2 MW) -> max|dr| =  1361.1160  (rel 4.721e+00)
+    bus 58   (  720.2 MW) -> max|dr| =  1272.2515  (rel 4.413e+00)
+    bus 14   (  234.0 MW) -> max|dr| =  1268.5331  (rel 4.400e+00)
+
+escrito /private/tmp/claude-501/-Users-nicholasiakl-Documents-Claude/59fc8dd8-ebe4-4f40-950d-4e3196768742/scratchpad/pruebas_q.json

@@ -61,6 +61,40 @@ if not candidatos:
     raise SystemExit("ABORTA: ningun archivo del track E.ON. Un CSV vacio se lee como "
                      "«no hay corridas», no como «no las encontre».")
 
+def parametros(doc):
+    """Los parametros de la instancia, vengan del esquema viejo o del v3.
+
+    Devuelve (dict, fuente). Se leen por RUTA EXPLICITA y no con una busqueda a ciegas:
+    el sello v3 tiene dos ramas con campos de nombre parecido, y adivinar cual es cual
+    es como se pinta una brecha del clasico como si fuera del cuantico.
+
+    Lo que NO hace: inventar. Si un campo no esta en ninguno de los dos esquemas, sale
+    vacio y la columna lo muestra vacio.
+    """
+    w6 = doc.get("w6") or {}
+    viejo = (w6.get("como", {}) or {}).get("instance_params")
+    if isinstance(viejo, dict) and viejo:
+        return viejo, "instance_params (esquema legado)"
+
+    q = w6.get("que") or {}
+    censo = q.get("censo_de_la_red") or {}
+    tam = q.get("el_tamano_del_problema") or {}
+    como = w6.get("como") or {}
+    if censo or tam:
+        return {
+            "grid": censo.get("grid", ""),
+            "n_buses": censo.get("n_buses", ""),
+            "n_lines": censo.get("n_lines", ""),
+            "n_candidates": tam.get("variables_binarias", ""),
+            "k_budget": tam.get("k_budget", ""),
+            "load_scale": (como.get("estres") or {}).get("load_scale", ""),
+            "seed": (como.get("estres") or {}).get("seed", ""),
+            "time_budget_s": ((q.get("resultado") or {}).get("cuantico_QAOA") or {})
+                             .get("optimizador", {}).get("reloj_s", ""),
+        }, "censo_de_la_red + el_tamano_del_problema (v3)"
+    return {}, "sin parametros legibles"
+
+
 rows = []
 omitidos = []
 for path in candidatos:
@@ -89,9 +123,12 @@ for path in candidatos:
         "archived_at": fecha_de(doc),
         "grid_per_filename": filename_claim,
         "grid_per_internal_params": internal,
-        "labels_agree": "yes" if filename_claim == internal else "NO",
+        "labels_agree": acuerdo,
+        "params_source": fuente,
         "instance": q.get("instance", ""),
         "load_scale": ip.get("load_scale", ""),
+        "n_buses": ip.get("n_buses", ""),
+        "n_lines": ip.get("n_lines", ""),
         "n_candidates": ip.get("n_candidates", ""),
         "k_budget": ip.get("k_budget", ""),
         "seed": ip.get("seed", ""),
@@ -109,11 +146,12 @@ with open(OUT, "w", newline="") as f:
     w.writerows(rows)
 
 bad = [r for r in rows if r["labels_agree"] == "NO"]
+na  = [r for r in rows if r["labels_agree"] == "n/a"]
 # El DENOMINADOR, siempre: vistos / escritos / omitidos. «9 run(s)» a secas fue lo que
 # dejo pasar ocho corridas sin que nadie lo notara (§5 bis regla 1).
 print(f"escrito {OUT}: {len(candidatos)} archivo(s) del track vistos · {len(rows)} "
       f"escrito(s) · {len(omitidos)} omitido(s) por sello que no verifica · "
-      f"{len(bad)} con etiqueta en desacuerdo")
+      f"{len(bad)} en desacuerdo · {len(na)} sin dos etiquetas que comparar")
 for r in rows:
     mark = "  <-- NO CALZA" if r["labels_agree"] == "NO" else ""
     print(f"  {r['file_id']}  nombre:{r['grid_per_filename']:<13} interno:{r['grid_per_internal_params']:<13}{mark}")

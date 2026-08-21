@@ -1,0 +1,23 @@
+=== K=10  k=5  C(K,k)=252  S=100  T_OP=900s ===
+    memoria: 8.47 GB recuperables (top unused 2.54 GB)
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=2 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 8 paralelos + 2 nuevos = 10 sobre una red de 173 lineas
+    costo por plan: 1.769 s (25 planes de muestra) -> enumerar los 252 = 446 s proyectados en 1 nucleo
+    25/252 planes (41s)
+    50/252 planes (78s)
+    75/252 planes (118s)
+    100/252 planes (156s)
+    125/252 planes (193s)
+    150/252 planes (231s)
+    175/252 planes (271s)
+    200/252 planes (308s)
+    225/252 planes (349s)
+    250/252 planes (387s)
+  ARBITRO S=100: optimo REAL = 104655.899148  plan [1, 3, 4, 5, 7]  (252 de 252 planes, 389s)
+    ENUMERACION COMPLETA: optimo real = 104655.8991  plan [1, 3, 4, 5, 7]  (252/252 planes, 388.6s)
+    semilla 42    OPTIMAL     142.3s  valor=104655.899148    cota=104655.899148    brecha_cota=0.0      brecha_optimo=0.0
+    semilla 1337  OPTIMAL     137.1s  valor=104655.899148    cota=104655.899148    brecha_cota=0.0      brecha_optimo=0.0
+    semilla 2718  OPTIMAL     142.2s  valor=104655.899148    cota=104655.899148    brecha_cota=0.0      brecha_optimo=0.0
+    PRUEBA enumeracion=104655.899148  SCIP=104655.899148  dif rel=2.745e-12  ->  PASA
+    VEREDICTO K=10: A=False B=False -> no duro

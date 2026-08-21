@@ -1,0 +1,13 @@
+MAPA DE DUREZA — S=100  T_OP=900s  razon k/K=0.50  semillas=[42, 1337, 2718]
+memoria al arrancar: 8.65 GB recuperables (top unused 2.77 GB), minimo 6.0
+
+K=10  ok        880s de pared  (pico RSS 1.11 GB)
+K=14  ok        673s de pared  (pico RSS 1.21 GB)
+K=18  ok        1533s de pared  (pico RSS 1.22 GB)
+K=22  ok        2820s de pared  (pico RSS 1.07 GB)
+K=26  ok        2833s de pared  (pico RSS 1.68 GB)
+K=30  ok        2860s de pared  (pico RSS 1.26 GB)
+K=34  ok        2888s de pared  (pico RSS 1.31 GB)
+K=40  ok        2936s de pared  (pico RSS 1.60 GB)
+
+escrito en /Users/nicholasiakl/Documents/Claude/Projects/Rosetta Quantum/evidence/harness/mapa_dureza

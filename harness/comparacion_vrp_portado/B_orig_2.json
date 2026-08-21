@@ -1,0 +1,136 @@
+{
+ "track": "RQ-0019 fleet routing under uncertainty",
+ "instance": "mina_7frentes_2camiones_cap60_seed42",
+ "params": {
+  "n_nodos": 8,
+  "n_frentes": 7,
+  "n_camiones": 2,
+  "capacidad_t": 60.0,
+  "demanda_total_t": 80.58,
+  "uso_de_flota_pct": 67.2,
+  "seed": 42,
+  "presupuesto_s": 20.0,
+  "coords": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    27.396,
+    -6.112
+   ],
+   [
+    35.86,
+    19.737
+   ],
+   [
+    -40.582,
+    47.562
+   ],
+   [
+    26.114,
+    28.606
+   ],
+   [
+    -37.189,
+    -4.961
+   ],
+   [
+    -12.92,
+    42.676
+   ],
+   [
+    14.387,
+    32.276
+   ]
+  ],
+  "demanda_t": [
+   0.0,
+   10.764,
+   7.954,
+   12.21,
+   5.83,
+   15.759,
+   13.212,
+   14.855
+  ]
+ },
+ "exacto": {
+  "value": 278.9,
+  "runtime_s": 0.024,
+  "estado": "optimo",
+  "cota_inferior": 278.9,
+  "rutas": [
+   [
+    0,
+    6,
+    3,
+    5,
+    0
+   ],
+   [
+    0,
+    7,
+    4,
+    2,
+    1,
+    0
+   ]
+  ],
+  "bajo_incertidumbre": {
+   "media": 279.2175,
+   "p90": 288.9269,
+   "n_escenarios": 200,
+   "sigma": 0.1
+  }
+ },
+ "clasico": {
+  "value": 278.9027,
+  "runtime_s": 20.002,
+  "estado": "heuristica GLS",
+  "rutas": [
+   [
+    0,
+    6,
+    3,
+    5,
+    0
+   ],
+   [
+    0,
+    1,
+    2,
+    4,
+    7,
+    0
+   ]
+  ],
+  "bajo_incertidumbre": {
+   "media": 281.3808,
+   "p90": 290.9513,
+   "n_escenarios": 200,
+   "sigma": 0.1
+  }
+ },
+ "cuantico": {
+  "value": null,
+  "runtime_s": 16.09,
+  "estado": "plan invalido: una ruta excede la capacidad del camion",
+  "n_qubits": 14,
+  "capas": 2,
+  "alcance": "el cuantico decide el reparto; el orden dentro de cada camion es vecino mas cercano",
+  "rutas": null
+ },
+ "verdict": {
+  "criterio": "el retador debe SUPERAR a OR-Tools sobre la misma instancia y el mismo presupuesto. Empatar no es ganar.",
+  "rival": "OR-Tools routing con GUIDED_LOCAL_SEARCH",
+  "optimo_exacto": 278.9,
+  "brecha_clasico_pct": 0.001,
+  "brecha_cuantico_pct": null,
+  "resultado": "el cuantico no produjo un plan valido"
+ },
+ "lib_versions": {
+  "numpy": "2.5.2",
+  "python": "3.12.14"
+ }
+}

@@ -1,0 +1,11 @@
+=== K=14  k=7  C(K,k)=3,432  S=100  T_OP=900s ===
+    memoria: 8.54 GB recuperables (top unused 1.25 GB)
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=3 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 11 paralelos + 3 nuevos = 14 sobre una red de 173 lineas
+    costo por plan: 1.760 s (25 planes de muestra) -> enumerar los 3,432 = 6041 s proyectados en 1 nucleo
+    YA NO SE ENUMERA: ya no se enumera: 3,432 planes x 1.760 s/plan = 6041 s proyectados, 6.7x el presupuesto operativo de 900 s
+    semilla 42    OPTIMAL     203.6s  valor=97664.871769     cota=97664.871769     brecha_cota=0.0      brecha_optimo=None
+    semilla 1337  OPTIMAL     192.2s  valor=97664.871769     cota=97664.871769     brecha_cota=0.0      brecha_optimo=None
+    semilla 2718  OPTIMAL     198.9s  valor=97664.871769     cota=97664.871769     brecha_cota=0.0      brecha_optimo=None
+    VEREDICTO K=14: A=True B=False -> no duro

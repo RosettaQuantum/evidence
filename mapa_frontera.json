@@ -6,14 +6,14 @@
  "muro_memoria": 30,
  "nota_del_muro": "22 es el ultimo tamaño que cabe en memoria Y termina en el reloj de CI, medido el 2026-08-13. Por encima hay que ir a hardware real, que cuesta.",
  "denominador": {
-  "corridas_leidas": 68,
-  "puntos_en_el_mapa": 37,
-  "descartadas": 31
+  "corridas_leidas": 73,
+  "puntos_en_el_mapa": 41,
+  "descartadas": 32
  },
  "no_cubre": "Alosteria (RQ-0007): su metrica es un percentil de ranking, no una brecha de optimalidad. Mezclarla daria un plano cuyos ejes significan cosas distintas segun el punto. Se declara aparte en vez de forzarla.",
  "clases": {
   "Grid optimization": {
-   "n_puntos": 17,
+   "n_puntos": 21,
    "rango_variables": [
     8,
     20
@@ -37,6 +37,20 @@
  },
  "puntos": [
   {
+   "id": "RQ-EXP-EON-C-K08-003",
+   "clase": "Grid optimization",
+   "instancia": "eon_case118_K8_conv400capas2@8d570d7a.json",
+   "variables": 8,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 0.0,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": 400,
+   "pasos_de_presupuesto": 400,
+   "truncado": false
+  },
+  {
    "id": "RQ-EXP-EON-K08-002",
    "clase": "Grid optimization",
    "instancia": "eon_case14_K8@be5126af.json",
@@ -49,6 +63,20 @@
    "pasos_dados": null,
    "pasos_de_presupuesto": null,
    "truncado": null
+  },
+  {
+   "id": "RQ-EXP-EON-C-K12-003",
+   "clase": "Grid optimization",
+   "instancia": "eon_case118_K12_conv400capas3@82964bcb.json",
+   "variables": 12,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 0.4601,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": 400,
+   "pasos_de_presupuesto": 400,
+   "truncado": false
   },
   {
    "id": "RQ-EXP-EON-K12-002",
@@ -247,6 +275,20 @@
    "truncado": null
   },
   {
+   "id": "RQ-EXP-EON-C-K16-003",
+   "clase": "Grid optimization",
+   "instancia": "eon_case118_K16_conv400capas4@768a2269.json",
+   "variables": 16,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 0.7693,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": 400,
+   "pasos_de_presupuesto": 400,
+   "truncado": false
+  },
+  {
    "id": "RQ-EXP-EON-K16-002",
    "clase": "Grid optimization",
    "instancia": "eon_case57_K16@7b68e206.json",
@@ -273,6 +315,20 @@
    "pasos_dados": null,
    "pasos_de_presupuesto": null,
    "truncado": null
+  },
+  {
+   "id": "RQ-EXP-EON-C-K20-TRUNCADO-003",
+   "clase": "Grid optimization",
+   "instancia": "eon_case118_K20_conv40capas3@578d8a33.json",
+   "variables": 20,
+   "fuente_del_tamaño": "v3:el_tamano_del_problema.variables_binarias",
+   "brecha_cuantica_pct": 3.9789,
+   "brecha_clasica_pct": 0.0,
+   "arbitro": "CP-SAT OPTIMAL",
+   "cabe_en_simulacion": true,
+   "pasos_dados": 40,
+   "pasos_de_presupuesto": 400,
+   "truncado": true
   },
   {
    "id": "EXP-0012-011",
@@ -678,6 +734,10 @@
   },
   {
    "id": "RQ-POC-QPU-001",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-EON-ESTOCASTICO-001",
    "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
   }
  ]

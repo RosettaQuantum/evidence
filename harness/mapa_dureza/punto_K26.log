@@ -1,0 +1,12 @@
+=== K=26  k=13  C(K,k)=10,400,600  S=100  T_OP=900s ===
+    memoria: 8.98 GB recuperables (top unused 2.35 GB)
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=6 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 20 paralelos + 6 nuevos = 26 sobre una red de 173 lineas
+AVISO: 2 candidata(s) NUEVA(s) del harness unen buses de tension distinta [(138.0, 345.0), (161.0, 138.0)]. Se modelan como lo hace pandapower (tension del bus de origen); la prueba 1 comprueba que la reproduccion sigue siendo exacta.
+    costo por plan: 1.785 s (25 planes de muestra) -> enumerar los 10,400,600 = 18565022 s proyectados en 1 nucleo
+    YA NO SE ENUMERA: ya no se enumera: 10,400,600 planes x 1.785 s/plan = 18565022 s proyectados, 20627.8x el presupuesto operativo de 900 s
+    semilla 42    FEASIBLE    900.1s  valor=84721.698274     cota=71086.601955     brecha_cota=16.094   brecha_optimo=None
+    semilla 1337  FEASIBLE    900.0s  valor=89291.445427     cota=70668.468073     brecha_cota=20.8564  brecha_optimo=None
+    semilla 2718  FEASIBLE    900.1s  valor=86508.018216     cota=71024.369753     brecha_cota=17.8985  brecha_optimo=None
+    VEREDICTO K=26: A=True B=True -> DURO

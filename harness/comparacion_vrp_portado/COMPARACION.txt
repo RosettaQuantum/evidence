@@ -1,0 +1,27 @@
+
+==============================================================================================
+CONFIG B — 8 nodos / 2 camiones / cap 60 / seed 42 — el cuantico SI cabe (14 qubits)
+corridas: original 5 · portado 3 · campos del artefacto original 44 · comunes 44 · nuevos 49
+solo en el original (campos perdidos por el portado): []
+  IDENTICOS en todas las corridas de ambos ....... 36 de 44
+  VARIAN TAMBIEN EN EL ORIGINAL .................. 8
+       .exacto.runtime_s        orig ['0.01', '0.024', '0.025'] | port ['0.009', '0.016', '0.026']
+       .clasico.runtime_s       orig ['20.002', '20.008'] | port ['20.001', '20.002']
+       .cuantico.value          orig ['361.681', 'null'] | port ['361.681', 'null']
+       .cuantico.runtime_s      orig ['16.046', '16.051', '16.078'] | port ['16.054', '16.068', '16.095']
+       .cuantico.estado         orig ['"QAOA p=2 sobre el reparto"', '"plan invalido: una ruta excede la capacidad del camion"'] | port ['"QAO
+       .cuantico.rutas          orig ['"[[0, 1, 4, 7, 5, 0], [0, 2, 6, 3, 0]]"', 'null'] | port ['"[[0, 1, 4, 7, 5, 0], [0, 2, 6, 3, 0]]"', 'n
+       .verdict.brecha_cuantico_pct orig ['29.6812', 'null'] | port ['29.6812', 'null']
+       .verdict.resultado       orig ['"el cuantico no produjo un plan valido"', '"not yet \\u2014 classical wins"'] | port ['"el cuantico no 
+  DIFIEREN SOLO EN EL PORTADO (descalifican) ..... 0
+
+==============================================================================================
+CONFIG C — 10 nodos / 3 camiones / cap 50 / seed 42 — el cuantico NO cabe (27 qubits)
+corridas: original 6 · portado 3 · campos del artefacto original 41 · comunes 41 · nuevos 39
+solo en el original (campos perdidos por el portado): []
+  IDENTICOS en todas las corridas de ambos ....... 38 de 41
+  VARIAN TAMBIEN EN EL ORIGINAL .................. 3
+       .exacto.runtime_s        orig ['0.014', '0.015', '0.033'] | port ['0.014', '0.035', '0.037']
+       .exacto.rutas            orig ['"[[0, 1, 9, 8, 0], [0, 2, 4, 7, 0], [0, 6, 3, 5, 0]]"', '"[[0, 2, 4, 7, 0], [0, 5, 3, 6, 0], [0, 8, 9, 
+       .clasico.runtime_s       orig ['20.002', '20.003'] | port ['20.002', '20.005']
+  DIFIEREN SOLO EN EL PORTADO (descalifican) ..... 0

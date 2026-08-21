@@ -1,0 +1,237 @@
+{
+ "track": "RQ-0019 fleet routing under uncertainty",
+ "instance": "mina_9frentes_3camiones_cap50_seed42",
+ "params": {
+  "n_nodos": 10,
+  "n_frentes": 9,
+  "n_camiones": 3,
+  "capacidad_t": 50.0,
+  "demanda_total_t": 121.38,
+  "uso_de_flota_pct": 80.9,
+  "seed": 42,
+  "presupuesto_s": 20.0,
+  "coords": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    27.396,
+    -6.112
+   ],
+   [
+    35.86,
+    19.737
+   ],
+   [
+    -40.582,
+    47.562
+   ],
+   [
+    26.114,
+    28.606
+   ],
+   [
+    -37.189,
+    -4.961
+   ],
+   [
+    -12.92,
+    42.676
+   ],
+   [
+    14.387,
+    32.276
+   ],
+   [
+    -5.659,
+    -27.276
+   ],
+   [
+    5.458,
+    -43.618
+   ]
+  ],
+  "demanda_t": [
+   0.0,
+   15.759,
+   13.212,
+   14.855,
+   9.609,
+   17.619,
+   16.611,
+   15.119,
+   7.53,
+   11.067
+  ]
+ },
+ "exacto": {
+  "value": 383.703,
+  "runtime_s": 0.037,
+  "estado": "optimo",
+  "cota_inferior": 383.703,
+  "rutas": [
+   [
+    0,
+    2,
+    4,
+    7,
+    0
+   ],
+   [
+    0,
+    6,
+    3,
+    5,
+    0
+   ],
+   [
+    0,
+    8,
+    9,
+    1,
+    0
+   ]
+  ],
+  "puntaje_propio": {
+   "que_es": "objetivo entero de CP-SAT con escala esc=1000 (no costo(rutas,D))",
+   "tolerancia_rel": 0.0001,
+   "por_que": "cada arco se redondea a milesimas; sobre esta instancia el desvio es de ~3e-5 relativo y se publica medido mas abajo, en vez de viajar escondido dentro de brecha_clasico_pct"
+  },
+  "bajo_incertidumbre": {
+   "media": 386.4712,
+   "p90": 397.3098,
+   "n_escenarios": 200,
+   "sigma": 0.1
+  }
+ },
+ "clasico": {
+  "value": 383.7081,
+  "runtime_s": 20.005,
+  "estado": "heuristica GLS",
+  "rutas": [
+   [
+    0,
+    6,
+    3,
+    5,
+    0
+   ],
+   [
+    0,
+    2,
+    4,
+    7,
+    0
+   ],
+   [
+    0,
+    8,
+    9,
+    1,
+    0
+   ]
+  ],
+  "bajo_incertidumbre": {
+   "media": 386.7816,
+   "p90": 397.4443,
+   "n_escenarios": 200,
+   "sigma": 0.1
+  }
+ },
+ "cuantico": {
+  "value": null,
+  "runtime_s": 0.0,
+  "estado": "no cabe: 27 qubits para 9 frentes x 3 camiones",
+  "alcance": "el cuantico decide el reparto, no el orden"
+ },
+ "verdict": {
+  "criterio": "el retador debe SUPERAR a OR-Tools sobre la misma instancia y el mismo presupuesto. Empatar no es ganar.",
+  "rival": "OR-Tools routing con GUIDED_LOCAL_SEARCH",
+  "optimo_exacto": 383.703,
+  "brecha_clasico_pct": 0.0013,
+  "brecha_cuantico_pct": null,
+  "resultado": "el cuantico no produjo un plan valido",
+  "arbitro": "CP-SAT sin limite practico: da el optimo real cuando el tamano lo permite"
+ },
+ "lib_versions": {
+  "numpy": "2.5.2",
+  "python": "3.12.14"
+ },
+ "plantilla": {
+  "version": "experimento/v1",
+  "criterio": {
+   "texto": "el retador debe SUPERAR a OR-Tools sobre la misma instancia y el mismo presupuesto. Empatar no es ganar.",
+   "rival": "OR-Tools routing con GUIDED_LOCAL_SEARCH",
+   "porque_este_rival": "es el solucionador de ruteo que usan hoy las empresas de flota; si un metodo nuevo no le gana a esto, no aporta valor por elegante que sea",
+   "arbitro": "CP-SAT sin limite practico: da el optimo real cuando el tamano lo permite",
+   "sin_arbitro": "si el arbitro no prueba el optimo, no hay brecha absoluta y se reporta None; los brazos solo se pueden comparar entre si"
+  },
+  "criterio_huella": "sha256:e62e315f1bf893231d5a97dd58259d23e5d33854a1c396eb6d8b4bd10e26640a",
+  "roles": {
+   "exacto": "arbitro",
+   "clasico": "rival",
+   "cuantico": "retador"
+  },
+  "censo_medido": {
+   "n_nodos": 10,
+   "n_frentes": 9,
+   "n_camiones": 3,
+   "n_arcos": 90,
+   "demanda_total_t": 121.381
+  },
+  "denominador": {
+   "brazos_intentados": 3,
+   "brazos_con_valor": 2,
+   "brazos_sin_valor": {
+    "fuera_de_alcance": 1,
+    "cortado_por_reloj": 0,
+    "cortado_por_memoria": 0,
+    "sin_solucion_valida": 0
+   },
+   "brazos_truncados_por_reloj": 0
+  },
+  "puntaje_comun": {
+   "filas": [
+    {
+     "brazo": "exacto",
+     "valor_reportado": 383.703,
+     "valor_con_la_funcion_comun": 383.70808484949396,
+     "desvio_relativo": 1.3251869571571024e-05,
+     "tolerancia": 0.0001,
+     "tolerancia_efectiva": 0.0001,
+     "puntaje_propio": "objetivo entero de CP-SAT con escala esc=1000 (no costo(rutas,D))"
+    },
+    {
+     "brazo": "clasico",
+     "valor_reportado": 383.7081,
+     "valor_con_la_funcion_comun": 383.7080848494939,
+     "desvio_relativo": 3.948445888800716e-08,
+     "tolerancia": 1e-09,
+     "tolerancia_efectiva": 1.3030739245333354e-07,
+     "puntaje_propio": null
+    },
+    {
+     "brazo": "cuantico",
+     "estado": "sin solucion que puntuar"
+    }
+   ],
+   "peor_desvio_no_declarado": 3.948445888800716e-08,
+   "tolerancia_por_defecto": 1e-09,
+   "decimales_reportados": 4,
+   "que_no_cubre": "compara los brazos entre si; no sabe si la funcion comun es la correcta para el problema del cliente"
+  },
+  "memoria": {
+   "gb_disponibles": 11.57,
+   "presion_pct": 33,
+   "minimo_exigido_gb": 1.0,
+   "presion_maxima_pct": 85,
+   "metodo": "vm_stat: free+inactive+speculative, mas memory_pressure"
+  },
+  "semillas": {
+   "instancia_y_brazos": 42,
+   "nota": "un solo np.random.default_rng(seed) para instancia, escenarios y parametros iniciales del QAOA, consumido en ese orden"
+  },
+  "corrida_utc": "2026-08-18T15:17:04Z"
+ }
+}

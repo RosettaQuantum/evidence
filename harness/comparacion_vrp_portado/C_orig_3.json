@@ -1,0 +1,155 @@
+{
+ "track": "RQ-0019 fleet routing under uncertainty",
+ "instance": "mina_9frentes_3camiones_cap50_seed42",
+ "params": {
+  "n_nodos": 10,
+  "n_frentes": 9,
+  "n_camiones": 3,
+  "capacidad_t": 50.0,
+  "demanda_total_t": 121.38,
+  "uso_de_flota_pct": 80.9,
+  "seed": 42,
+  "presupuesto_s": 20.0,
+  "coords": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    27.396,
+    -6.112
+   ],
+   [
+    35.86,
+    19.737
+   ],
+   [
+    -40.582,
+    47.562
+   ],
+   [
+    26.114,
+    28.606
+   ],
+   [
+    -37.189,
+    -4.961
+   ],
+   [
+    -12.92,
+    42.676
+   ],
+   [
+    14.387,
+    32.276
+   ],
+   [
+    -5.659,
+    -27.276
+   ],
+   [
+    5.458,
+    -43.618
+   ]
+  ],
+  "demanda_t": [
+   0.0,
+   15.759,
+   13.212,
+   14.855,
+   9.609,
+   17.619,
+   16.611,
+   15.119,
+   7.53,
+   11.067
+  ]
+ },
+ "exacto": {
+  "value": 383.703,
+  "runtime_s": 0.034,
+  "estado": "optimo",
+  "cota_inferior": 383.703,
+  "rutas": [
+   [
+    0,
+    1,
+    9,
+    8,
+    0
+   ],
+   [
+    0,
+    2,
+    4,
+    7,
+    0
+   ],
+   [
+    0,
+    6,
+    3,
+    5,
+    0
+   ]
+  ],
+  "bajo_incertidumbre": {
+   "media": 386.4712,
+   "p90": 397.3098,
+   "n_escenarios": 200,
+   "sigma": 0.1
+  }
+ },
+ "clasico": {
+  "value": 383.7081,
+  "runtime_s": 20.002,
+  "estado": "heuristica GLS",
+  "rutas": [
+   [
+    0,
+    6,
+    3,
+    5,
+    0
+   ],
+   [
+    0,
+    2,
+    4,
+    7,
+    0
+   ],
+   [
+    0,
+    8,
+    9,
+    1,
+    0
+   ]
+  ],
+  "bajo_incertidumbre": {
+   "media": 386.7816,
+   "p90": 397.4443,
+   "n_escenarios": 200,
+   "sigma": 0.1
+  }
+ },
+ "cuantico": {
+  "value": null,
+  "runtime_s": 0.0,
+  "estado": "no cabe: 27 qubits para 9 frentes x 3 camiones",
+  "alcance": "el cuantico decide el reparto, no el orden"
+ },
+ "verdict": {
+  "criterio": "el retador debe SUPERAR a OR-Tools sobre la misma instancia y el mismo presupuesto. Empatar no es ganar.",
+  "rival": "OR-Tools routing con GUIDED_LOCAL_SEARCH",
+  "optimo_exacto": 383.703,
+  "brecha_clasico_pct": 0.0013,
+  "brecha_cuantico_pct": null,
+  "resultado": "el cuantico no produjo un plan valido"
+ },
+ "lib_versions": {
+  "numpy": "2.5.2",
+  "python": "3.12.14"
+ }
+}

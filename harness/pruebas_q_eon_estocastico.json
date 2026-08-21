@@ -1,0 +1,132 @@
+{
+ "entorno": {
+  "python": "3.12.14",
+  "numpy": "2.5.2",
+  "red": "case118",
+  "semilla": 42,
+  "k_budget": 5,
+  "reloj_s": 900.0,
+  "C_OV": 1.0,
+  "VOLL": 20.0,
+  "W_BUILD": 10.0,
+  "sigma_carga": 0.15,
+  "p_falla_gen": 0.15,
+  "falla_max": 0.5,
+  "theta_max": 10.0,
+  "cp_dtheta": 0.0001,
+  "cp_mw": 0.1,
+  "cp_tol_u": 2
+ },
+ "prueba_q1": {
+  "K": 8,
+  "k_budget": 3,
+  "S": 1,
+  "verificacion_evaluador": {
+   "planes": [
+    {
+     "plan": [],
+     "separado": 910.477631,
+     "monolitico": 910.477631,
+     "dif_rel": 2.488767783842924e-10
+    },
+    {
+     "plan": [
+      0
+     ],
+     "separado": 925.243021,
+     "monolitico": 925.243021,
+     "dif_rel": 1.417157515572224e-10
+    },
+    {
+     "plan": [
+      0,
+      1
+     ],
+     "separado": 832.200526,
+     "monolitico": 832.200526,
+     "dif_rel": 1.0113545730032374e-10
+    },
+    {
+     "plan": [
+      0,
+      1,
+      2
+     ],
+     "separado": 791.770441,
+     "monolitico": 791.770441,
+     "dif_rel": 3.2037265283112415e-10
+    }
+   ],
+   "peor_dif_relativa": 3.2037265283112415e-10,
+   "pasa": true,
+   "denominador": 4
+  },
+  "identidad_2do_orden_peor_dif_rel": 0.0,
+  "identidad_2do_orden_subconjuntos": 37,
+  "identidad_2do_orden_peor_sel": null,
+  "identidad_pasa": true,
+  "argmin_qubo": [
+   3,
+   4,
+   5
+  ],
+  "argmin_exacto": [
+   3,
+   4,
+   5
+  ],
+  "valor_exacto_del_plan_qubo": 529.3880940681148,
+  "valor_exacto_optimo": 529.3880940681148,
+  "arrepentimiento_relativo": 0.0,
+  "combinaciones_enumeradas": 56,
+  "combinaciones_esperadas": 56,
+  "argmin_libre_cardinalidad": 3,
+  "penalidad_respeta_cardinalidad": true,
+  "pasa": true
+ },
+ "prueba_q3": {
+  "factor": 10,
+  "buses_probados": 99,
+  "buses_que_mueven": 98,
+  "buses_quietos": 1,
+  "ejemplos_quietos": [
+   107
+  ],
+  "bus_mayor_carga": 58,
+  "cambio_max_q_ij": 344.7523020213184,
+  "cambio_max_q_ij_relativo": 1.7406248794843497,
+  "top5_lineales": [
+   {
+    "bus": 10,
+    "carga_mw": 182.0,
+    "max_dr": 3026.4474,
+    "rel": 10.497962037852242
+   },
+   {
+    "bus": 0,
+    "carga_mw": 132.6,
+    "max_dr": 1436.9694,
+    "rel": 4.984474464735306
+   },
+   {
+    "bus": 11,
+    "carga_mw": 122.2,
+    "max_dr": 1361.116,
+    "rel": 4.721358757149409
+   },
+   {
+    "bus": 58,
+    "carga_mw": 720.2,
+    "max_dr": 1272.2515,
+    "rel": 4.413111006292665
+   },
+   {
+    "bus": 14,
+    "carga_mw": 234.0,
+    "max_dr": 1268.5331,
+    "rel": 4.400212630428037
+   }
+  ],
+  "pasa": true
+ }
+}

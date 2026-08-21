@@ -1,0 +1,18 @@
+=== BARRIDO TERMINADO, arranca S=250 ===
+=== K=10  k=5  C(K,k)=252  S=250  T_OP=900s ===
+    memoria: 8.75 GB recuperables (top unused 1.48 GB)
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=2 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 8 paralelos + 2 nuevos = 10 sobre una red de 173 lineas
+    costo por plan: 4.139 s (25 planes de muestra) -> enumerar los 252 = 1043 s proyectados en 1 nucleo
+    YA NO SE ENUMERA: ya no se enumera: 252 planes x 4.139 s/plan = 1043 s proyectados, 1.2x el presupuesto operativo de 900 s
+    semilla 42    FEASIBLE    900.1s  valor=266782.721638    cota=261563.068685    brecha_cota=1.9565   brecha_optimo=None
+    semilla 1337  FEASIBLE    900.2s  valor=290192.910045    cota=245893.889609    brecha_cota=15.2654  brecha_optimo=None
+    semilla 2718  FEASIBLE    900.1s  valor=266782.721638    cota=262424.744033    brecha_cota=1.6335   brecha_optimo=None
+    VEREDICTO K=10: A=True B=True -> DURO
+
+REPRODUCIBILIDAD K=10 S=250 — optimo real 266782.7216 (enumerado, 252/252 planes, 1104s)
+  semilla 42    FEASIBLE   900.15s  valor=266782.721638    brecha vs cota=1.9565    brecha vs OPTIMO REAL=-0.0      llego al optimo=True
+  semilla 1337  FEASIBLE   900.16s  valor=290192.910045    brecha vs cota=15.2654   brecha vs OPTIMO REAL=8.775     llego al optimo=False
+  semilla 2718  FEASIBLE   900.12s  valor=266782.721638    brecha vs cota=1.6335    brecha vs OPTIMO REAL=-0.0      llego al optimo=True
+escrito /Users/nicholasiakl/Documents/Claude/Projects/Rosetta Quantum/evidence/harness/mapa_dureza/reprod_K10_S250.json

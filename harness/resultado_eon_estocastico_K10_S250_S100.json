@@ -1,0 +1,727 @@
+{
+ "entorno": {
+  "python": "3.12.14",
+  "numpy": "2.5.2",
+  "red": "case118",
+  "semilla": 42,
+  "k_budget": 5,
+  "reloj_s": 900.0,
+  "C_OV": 1.0,
+  "VOLL": 20.0,
+  "W_BUILD": 10.0,
+  "sigma_carga": 0.15,
+  "p_falla_gen": 0.15,
+  "falla_max": 0.5,
+  "theta_max": 10.0,
+  "cp_dtheta": 0.0001,
+  "cp_mw": 0.1,
+  "cp_tol_u": 2
+ },
+ "prueba_q1": {
+  "K": 8,
+  "k_budget": 3,
+  "S": 1,
+  "verificacion_evaluador": {
+   "planes": [
+    {
+     "plan": [],
+     "separado": 910.477631,
+     "monolitico": 910.477631,
+     "dif_rel": 2.488767783842924e-10
+    },
+    {
+     "plan": [
+      0
+     ],
+     "separado": 925.243021,
+     "monolitico": 925.243021,
+     "dif_rel": 1.417157515572224e-10
+    },
+    {
+     "plan": [
+      0,
+      1
+     ],
+     "separado": 832.200526,
+     "monolitico": 832.200526,
+     "dif_rel": 1.0113545730032374e-10
+    },
+    {
+     "plan": [
+      0,
+      1,
+      2
+     ],
+     "separado": 791.770441,
+     "monolitico": 791.770441,
+     "dif_rel": 3.2037265283112415e-10
+    }
+   ],
+   "peor_dif_relativa": 3.2037265283112415e-10,
+   "pasa": true,
+   "denominador": 4
+  },
+  "identidad_2do_orden_peor_dif_rel": 0.0,
+  "identidad_2do_orden_subconjuntos": 37,
+  "identidad_2do_orden_peor_sel": null,
+  "identidad_pasa": true,
+  "argmin_qubo": [
+   3,
+   4,
+   5
+  ],
+  "argmin_exacto": [
+   3,
+   4,
+   5
+  ],
+  "valor_exacto_del_plan_qubo": 529.3880940681148,
+  "valor_exacto_optimo": 529.3880940681148,
+  "arrepentimiento_relativo": 0.0,
+  "combinaciones_enumeradas": 56,
+  "combinaciones_esperadas": 56,
+  "argmin_libre_cardinalidad": 3,
+  "penalidad_respeta_cardinalidad": true,
+  "pasa": true
+ },
+ "prueba_q3": {
+  "factor": 10,
+  "buses_probados": 99,
+  "buses_que_mueven": 98,
+  "buses_quietos": 1,
+  "ejemplos_quietos": [
+   107
+  ],
+  "bus_mayor_carga": 58,
+  "cambio_max_q_ij": 344.7523020213184,
+  "cambio_max_q_ij_relativo": 1.7406248794843497,
+  "top5_lineales": [
+   {
+    "bus": 10,
+    "carga_mw": 182.0,
+    "max_dr": 3026.4474,
+    "rel": 10.497962037852242
+   },
+   {
+    "bus": 0,
+    "carga_mw": 132.6,
+    "max_dr": 1436.9694,
+    "rel": 4.984474464735306
+   },
+   {
+    "bus": 11,
+    "carga_mw": 122.2,
+    "max_dr": 1361.116,
+    "rel": 4.721358757149409
+   },
+   {
+    "bus": 58,
+    "carga_mw": 720.2,
+    "max_dr": 1272.2515,
+    "rel": 4.413111006292665
+   },
+   {
+    "bus": 14,
+    "carga_mw": 234.0,
+    "max_dr": 1268.5331,
+    "rel": 4.400212630428037
+   }
+  ],
+  "pasa": true
+ },
+ "cuantico_S250": {
+  "red": "case118",
+  "K": 10,
+  "S": 250,
+  "semilla": 42,
+  "k_budget": 5,
+  "reloj_s": 900.0,
+  "n_lineas": 173,
+  "n_trafos": 13,
+  "verificacion_evaluador": {
+   "planes": [
+    {
+     "plan": [],
+     "separado": 4570.861504,
+     "monolitico": 4570.861504,
+     "dif_rel": 1.45077853786724e-11
+    },
+    {
+     "plan": [
+      0,
+      1
+     ],
+     "separado": 4315.948017,
+     "monolitico": 4315.948017,
+     "dif_rel": 7.062155480200295e-12
+    },
+    {
+     "plan": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "separado": 3269.05643,
+     "monolitico": 3269.05643,
+     "dif_rel": 6.424318738904212e-11
+    }
+   ],
+   "peor_dif_relativa": 6.424318738904212e-11,
+   "pasa": true,
+   "denominador": 3
+  },
+  "qubo": {
+   "evaluaciones": 56,
+   "segundos": 231.73,
+   "E0": 447560.2202549002,
+   "PEN": 244678.7130699735,
+   "r": [
+    -3652.3423693858203,
+    23338.824018130777,
+    22898.101516256225,
+    43811.47797163646,
+    53044.89472320734,
+    42149.17152034538,
+    2641.7300444914144,
+    24681.83685470879,
+    2372.4087101265904,
+    9318.09833163966
+   ],
+   "q": {
+    "0_1": -14.090130502707325,
+    "0_2": -14.090130502707325,
+    "0_3": 18.229629527020734,
+    "0_4": 257.9676152173779,
+    "0_5": 14.11743352637859,
+    "0_6": 3205.4632273224997,
+    "0_7": 4.889078955922741,
+    "0_8": 727.370462900959,
+    "0_9": 202.8087244448252,
+    "1_2": -6253.591771707055,
+    "1_3": -2914.8599273229484,
+    "1_4": -1715.575702361646,
+    "1_5": -2866.0144219927606,
+    "1_6": 48.08128657512134,
+    "1_7": 110.92503512173425,
+    "1_8": -844.3409416884533,
+    "1_9": -1283.5981541079818,
+    "2_3": -2914.8599273229484,
+    "2_4": -1715.575702361646,
+    "2_5": -2866.0144219927606,
+    "2_6": 48.08128657512134,
+    "2_7": 110.92503512173425,
+    "2_8": -844.3409416884533,
+    "2_9": -1283.5981541079818,
+    "3_4": -4200.180799791589,
+    "3_5": 9705.016510612913,
+    "3_6": 51.048747506400105,
+    "3_7": 2205.9393530239468,
+    "3_8": -1294.7685323733022,
+    "3_9": -14442.189624206978,
+    "4_5": -3125.54352714977,
+    "4_6": 930.4824688227382,
+    "4_7": -452.3053370635607,
+    "4_8": -10513.798136712168,
+    "4_9": 908.7990587213426,
+    "5_6": -6.006830973550677,
+    "5_7": -2134.1682550503756,
+    "5_8": -762.0670050522895,
+    "5_9": -10213.824039321102,
+    "6_7": 0.569687528826762,
+    "6_8": 2296.7883675436606,
+    "6_9": 20412.94603064854,
+    "7_8": -64.71832819050178,
+    "7_9": -775.6973643484525,
+    "8_9": 4002.899738258915
+   }
+  },
+  "cuantico": {
+   "framework": "PennyLane",
+   "backend": "default.qubit (CPU sim)",
+   "layers": 4,
+   "optimizer": "Adam, 600 steps",
+   "shots": 2000,
+   "pasos_dados": 600,
+   "pasos_de_presupuesto": 600,
+   "reloj_s": 900.0,
+   "truncado_por_reloj": false,
+   "advertencia": null,
+   "qubits": 10,
+   "terminos_hamiltoniano": 55,
+   "escala_hamiltoniano": 452256.97897622234,
+   "forma_circuito": {
+    "S": 250,
+    "capas": 4,
+    "qubits": 10,
+    "cables_usados_por_el_circuito": 10,
+    "terminos_hamiltoniano": 55,
+    "terminos_2_cuerpos": 45,
+    "compuertas": 54,
+    "profundidad": 9,
+    "escala_hamiltoniano": 452256.97897622234,
+    "evaluaciones_para_armar_el_qubo": 56,
+    "segundos_para_armar_el_qubo": 231.73
+   },
+   "valor_qubo": 1590784.2566793272,
+   "x": [
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1
+   ],
+   "n_selected": 5,
+   "x_mejor_disparo_sin_filtrar": [
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1
+   ],
+   "n_selected_sin_filtrar": 5,
+   "regla_de_lectura": "mejor disparo con cardinalidad == K_BUDGET (5)",
+   "disparos_factibles": 2,
+   "disparos_totales": 2000,
+   "factibles_distintos": 2,
+   "factibles_posibles_C_K_kbudget": 252,
+   "segundos_optimizador": 72.772,
+   "runtime_s": 72.81,
+   "estados_distintos_muestreados": 150,
+   "espacio_total_2aK": 1024,
+   "cobertura_del_espacio_pct": 14.65,
+   "cobertura_del_espacio_factible_pct": 0.79,
+   "control_azar": {
+    "x": [
+     0,
+     1,
+     0,
+     1,
+     1,
+     1,
+     0,
+     1,
+     0,
+     0
+    ],
+    "valor_qubo": 1489314.3475887123,
+    "n_selected": 5,
+    "disparos": 2000,
+    "disparos_factibles": 486,
+    "nota": "mismos disparos y la misma regla de lectura, sin circuito. Si empata al QAOA, el circuito no aporto nada sobre muestrear al azar."
+   }
+  },
+  "clasico": {
+   "status": "FEASIBLE",
+   "valor": 290192.910046,
+   "cota": 248876.583473,
+   "x": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0
+   ],
+   "segundos": 900.16,
+   "n_variables": 162510,
+   "n_restricciones": 175251,
+   "armado_s": 1.4,
+   "brecha_pct": 14.2375,
+   "corte": "reloj",
+   "plan": [
+    3,
+    4,
+    5,
+    7,
+    8
+   ],
+   "valor_recomputado": 290192.910045215,
+   "dif_rel_recomputo": 2.7050575251979413e-12
+  },
+  "veredicto": {
+   "plan_cuantico": [
+    0,
+    2,
+    3,
+    7,
+    9
+   ],
+   "valor_exacto_cuantico": 366889.58256725123,
+   "plan_azar": [
+    1,
+    3,
+    4,
+    5,
+    7
+   ],
+   "valor_exacto_azar": 266782.72163826204,
+   "plan_scip": [
+    3,
+    4,
+    5,
+    7,
+    8
+   ],
+   "valor_exacto_scip": 290192.910045215,
+   "scip_status": "FEASIBLE",
+   "scip_cota": 248876.583473,
+   "scip_brecha_pct": 14.2375,
+   "scip_probo_optimalidad": false,
+   "diferencia_cuantico_menos_scip": 76696.672521,
+   "diferencia_pct": 26.4295,
+   "cuantico_gana": false,
+   "empatan": false,
+   "cuantico_supera_la_cota_inferior": false,
+   "mismo_plan": false,
+   "veredicto": "EL CUANTICO PIERDE",
+   "reloj_cuantico_total_s": 308.6,
+   "reloj_cuantico_desglose_s": {
+    "armar_el_qubo": 231.73,
+    "qaoa": 72.81,
+    "evaluar_el_plan": 4.06
+   },
+   "reloj_clasico_s": 901.56,
+   "mismo_presupuesto": true
+  }
+ },
+ "prueba_q2": {
+  "chico": {
+   "S": 1,
+   "capas": 4,
+   "qubits": 10,
+   "cables_usados_por_el_circuito": 10,
+   "terminos_hamiltoniano": 55,
+   "terminos_2_cuerpos": 45,
+   "compuertas": 54,
+   "profundidad": 9,
+   "escala_hamiltoniano": 1611.7542634519157,
+   "evaluaciones_para_armar_el_qubo": 56,
+   "segundos_para_armar_el_qubo": 0.89
+  },
+  "grande": {
+   "S": 250,
+   "capas": 4,
+   "qubits": 10,
+   "cables_usados_por_el_circuito": 10,
+   "terminos_hamiltoniano": 55,
+   "terminos_2_cuerpos": 45,
+   "compuertas": 54,
+   "profundidad": 9,
+   "escala_hamiltoniano": 452256.97897622234,
+   "evaluaciones_para_armar_el_qubo": 56,
+   "segundos_para_armar_el_qubo": 231.73
+  },
+  "clasico": {
+   "chico": {
+    "S": 1,
+    "n_variables": 660,
+    "n_restricciones": 702
+   },
+   "grande": {
+    "S": 250,
+    "n_variables": 162510,
+    "n_restricciones": 175251
+   }
+  },
+  "rasgos_identicos": [
+   "qubits",
+   "cables_usados_por_el_circuito",
+   "terminos_hamiltoniano",
+   "terminos_2_cuerpos",
+   "compuertas",
+   "profundidad"
+  ],
+  "rasgos_distintos": [],
+  "denominador_rasgos": 6,
+  "qubits_identicos": true,
+  "clasico_crece": true,
+  "pasa": true
+ },
+ "cuantico_S100": {
+  "red": "case118",
+  "K": 10,
+  "S": 100,
+  "semilla": 42,
+  "k_budget": 5,
+  "reloj_s": 900.0,
+  "n_lineas": 173,
+  "n_trafos": 13,
+  "verificacion_evaluador": {
+   "planes": [
+    {
+     "plan": [],
+     "separado": 4570.861504,
+     "monolitico": 4570.861504,
+     "dif_rel": 1.45077853786724e-11
+    },
+    {
+     "plan": [
+      0,
+      1
+     ],
+     "separado": 4315.948017,
+     "monolitico": 4315.948017,
+     "dif_rel": 7.062155480200295e-12
+    },
+    {
+     "plan": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "separado": 3269.05643,
+     "monolitico": 3269.05643,
+     "dif_rel": 6.424318738904212e-11
+    }
+   ],
+   "peor_dif_relativa": 6.424318738904212e-11,
+   "pasa": true,
+   "denominador": 3
+  },
+  "qubo": {
+   "evaluaciones": 56,
+   "segundos": 91.63,
+   "E0": 177113.97126919462,
+   "PEN": 100925.90787029208,
+   "r": [
+    -1457.459802944737,
+    9285.12795974745,
+    9108.838958997629,
+    18559.01309344059,
+    19858.41656062627,
+    17233.671604987874,
+    928.1400636303588,
+    9992.878983308357,
+    317.45074510303675,
+    3672.4858468887396
+   ],
+   "q": {
+    "0_1": -7.455443225015188,
+    "0_2": -7.455443225015188,
+    "0_3": 8.133797342510661,
+    "0_4": 99.4192036051827,
+    "0_5": 5.024894028931158,
+    "0_6": 1242.5152554508823,
+    "0_7": 1.483935383555945,
+    "0_8": 251.23803592662443,
+    "0_9": 80.37544739013538,
+    "1_2": -2610.241997597157,
+    "1_3": -1257.338188237045,
+    "1_4": -576.9535527887056,
+    "1_5": -1161.83084734375,
+    "1_6": 16.026287395390682,
+    "1_7": 51.20422487545875,
+    "1_8": -218.97264773468487,
+    "1_9": -426.7065271034953,
+    "2_3": -1257.338188237045,
+    "2_4": -576.9535527887056,
+    "2_5": -1161.83084734375,
+    "2_6": 16.026287395361578,
+    "2_7": 51.20422487545875,
+    "2_8": -218.97264773468487,
+    "2_9": -426.7065271034953,
+    "3_4": -1645.8993072478625,
+    "3_5": 3819.2393622546515,
+    "3_6": 15.315736904740334,
+    "3_7": 847.7214447029983,
+    "3_8": -434.5153619123448,
+    "3_9": -5796.454809817573,
+    "4_5": -1265.8230356769054,
+    "4_6": 394.52738180122105,
+    "4_7": -187.2807873224665,
+    "4_8": -3715.722845677985,
+    "4_9": 564.6013826135022,
+    "5_6": -4.920779874519212,
+    "5_7": -835.066703462071,
+    "5_8": -287.6491488191532,
+    "5_9": -4095.434566064796,
+    "6_7": -1.528266640554648,
+    "6_8": 921.3475745400647,
+    "6_9": 8285.898822990537,
+    "7_8": -9.854008243855787,
+    "7_9": -319.4589628127287,
+    "8_9": 1732.196399178094
+   }
+  },
+  "cuantico": {
+   "framework": "PennyLane",
+   "backend": "default.qubit (CPU sim)",
+   "layers": 4,
+   "optimizer": "Adam, 600 steps",
+   "shots": 2000,
+   "pasos_dados": 600,
+   "pasos_de_presupuesto": 600,
+   "reloj_s": 900.0,
+   "truncado_por_reloj": false,
+   "advertencia": null,
+   "qubits": 10,
+   "terminos_hamiltoniano": 55,
+   "escala_hamiltoniano": 185685.7864141389,
+   "forma_circuito": {
+    "S": 100,
+    "capas": 4,
+    "qubits": 10,
+    "cables_usados_por_el_circuito": 10,
+    "terminos_hamiltoniano": 55,
+    "terminos_2_cuerpos": 45,
+    "compuertas": 54,
+    "profundidad": 9,
+    "escala_hamiltoniano": 185685.7864141389,
+    "evaluaciones_para_armar_el_qubo": 56,
+    "segundos_para_armar_el_qubo": 91.63
+   },
+   "valor_qubo": 625153.6846451256,
+   "x": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   "n_selected": 5,
+   "x_mejor_disparo_sin_filtrar": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   "n_selected_sin_filtrar": 5,
+   "regla_de_lectura": "mejor disparo con cardinalidad == K_BUDGET (5)",
+   "disparos_factibles": 4,
+   "disparos_totales": 2000,
+   "factibles_distintos": 4,
+   "factibles_posibles_C_K_kbudget": 252,
+   "segundos_optimizador": 72.601,
+   "runtime_s": 72.635,
+   "estados_distintos_muestreados": 159,
+   "espacio_total_2aK": 1024,
+   "cobertura_del_espacio_pct": 15.53,
+   "cobertura_del_espacio_factible_pct": 1.59,
+   "control_azar": {
+    "x": [
+     0,
+     1,
+     0,
+     1,
+     1,
+     1,
+     0,
+     1,
+     0,
+     0
+    ],
+    "valor_qubo": 609026.4298087903,
+    "n_selected": 5,
+    "disparos": 2000,
+    "disparos_factibles": 486,
+    "nota": "mismos disparos y la misma regla de lectura, sin circuito. Si empata al QAOA, el circuito no aporto nada sobre muestrear al azar."
+   }
+  },
+  "clasico": {
+   "status": "OPTIMAL",
+   "valor": 104655.899148,
+   "cota": 104655.899148,
+   "x": [
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   "segundos": 140.17,
+   "n_variables": 65010,
+   "n_restricciones": 70101,
+   "armado_s": 0.56,
+   "brecha_pct": 0.0,
+   "corte": null,
+   "plan": [
+    1,
+    3,
+    4,
+    5,
+    7
+   ],
+   "valor_recomputado": 104655.89914771274,
+   "dif_rel_recomputo": 2.744755039577252e-12
+  },
+  "veredicto": {
+   "plan_cuantico": [
+    2,
+    3,
+    4,
+    5,
+    9
+   ],
+   "valor_exacto_cuantico": 122166.07778934517,
+   "plan_azar": [
+    1,
+    3,
+    4,
+    5,
+    7
+   ],
+   "valor_exacto_azar": 104655.89914771274,
+   "plan_scip": [
+    1,
+    3,
+    4,
+    5,
+    7
+   ],
+   "valor_exacto_scip": 104655.89914771274,
+   "scip_status": "OPTIMAL",
+   "scip_cota": 104655.899148,
+   "scip_brecha_pct": 0.0,
+   "scip_probo_optimalidad": true,
+   "diferencia_cuantico_menos_scip": 17510.178641,
+   "diferencia_pct": 16.7312,
+   "cuantico_gana": false,
+   "empatan": false,
+   "cuantico_supera_la_cota_inferior": false,
+   "mismo_plan": false,
+   "veredicto": "EL CUANTICO PIERDE",
+   "reloj_cuantico_total_s": 165.99,
+   "reloj_cuantico_desglose_s": {
+    "armar_el_qubo": 91.63,
+    "qaoa": 72.635,
+    "evaluar_el_plan": 1.73
+   },
+   "reloj_clasico_s": 140.73,
+   "mismo_presupuesto": false
+  }
+ }
+}

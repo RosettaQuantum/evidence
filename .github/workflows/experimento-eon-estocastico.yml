@@ -1,0 +1,455 @@
+# E.ON bajo incertidumbre — el brazo cuántico contra SCIP, en la frontera medida.
+#
+# POR QUÉ EXISTE ESTE ARCHIVO
+# ---------------------------
+# `experimento-eon.yml` corre el harness DETERMINISTA, donde CP-SAT devuelve OPTIMAL en
+# todos los tamaños probados y no hay nada que ganar. La frontera de verdad está en el
+# problema estocástico y ya está medida: **K=10, S=250 es donde SCIP deja de PROBAR
+# optimalidad dentro de 900 s** (FEASIBLE, brecha 1,93 %). Todo S ≤ 100 lo prueba.
+#
+# Ese punto es la ventana entera, porque la frontera cae con **10 binarias de primera
+# etapa** — diez qubits — mientras el problema clásico crece ~650 variables por escenario.
+# Hasta el 2026-08-17 el brazo cuántico nunca se cableó a ese harness: sólo corrió el
+# clásico. Este flujo existe para que la pregunta se conteste en un lugar donde tiene
+# sentido preguntarla, y para que la corrida no viva en el Mac de nadie.
+#
+# LO QUE ESTE FLUJO NO HACE, a propósito: no sella. Depositar no es certificar
+# (CLAUDE.md Rosetta §11).
+
+name: Experimento E.ON estocástico (brazo cuántico vs SCIP)
+
+on:
+  workflow_dispatch:
+    inputs:
+      grid:
+        description: 'red IEEE: case14 · case30 · case57 · case118'
+        required: true
+        default: 'case118'
+        type: string
+      seed:
+        description: 'semilla (vacío = 42)'
+        required: false
+        type: string
+      candidatos:
+        description: 'K — binarias de primera etapa = nº de qubits (vacío = 10)'
+        required: false
+        default: '10'
+        type: string
+      escenarios:
+        description: 'S — escenarios de la corrida (vacío = 250, la frontera medida)'
+        required: false
+        default: '250'
+        type: string
+      escenarios_ref:
+        description: 'S de referencia, donde SCIP SÍ prueba el óptimo (vacío = no se corre; 100 es el último probado)'
+        required: false
+        type: string
+      presupuesto:
+        description: 'k_budget — líneas a construir (vacío = 5)'
+        required: false
+        type: string
+      reloj:
+        description: 'segundos de reloj para SCIP (vacío = 900, el presupuesto declarado)'
+        required: false
+        type: string
+      q_pasos:
+        description: 'pasos del optimizador cuántico (vacío = 300)'
+        required: false
+        type: string
+      q_capas:
+        description: 'capas del circuito (vacío = escala con K: K/4, mínimo 2)'
+        required: false
+        type: string
+      q_disparos:
+        description: 'disparos del muestreo (vacío = 2000). OJO: con K=10 el espacio son 1024 estados; el artefacto declara qué fracción cubrió.'
+        required: false
+        type: string
+      q_reloj:
+        description: 'segundos de reloj para el brazo cuántico (vacío = 600). Súbelo si el optimizador se trunca.'
+        required: false
+        type: string
+      pruebas:
+        description: 'correr las pruebas Q1 y Q3 antes de la corrida (recomendado)'
+        required: false
+        default: true
+        type: boolean
+
+# El flujo escribe en el repositorio (deposita el resultado y archiva los dos harness), así
+# que necesita permiso de escritura. Sin esto el push falla al final de una corrida de una
+# hora — y falla DESPUÉS de gastar el tiempo, que es el peor momento.
+permissions:
+  contents: write
+
+jobs:
+  correr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Sin esto el checkout deja el token fuera y el push del depósito no autentica.
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar el entorno
+        run: pip install --quiet numpy pandapower ortools pennylane
+
+      # ------------------------------------------------------------------ GUARDIAS
+      # Los cuatro corren ANTES de gastar. Un experimento que muere a los 40 minutos por
+      # un nombre mal escrito o por un solucionador ausente gastó el tiempo dos veces.
+      - name: Guardia 1 — la red declarada existe
+        env:
+          RED: ${{ inputs.grid }}
+        run: |
+          python3 - <<'FIN'
+          import os, sys
+          import pandapower.networks as nw
+          red = os.environ["RED"].strip()
+          if not hasattr(nw, red):
+              sys.exit("::error::'%s' no es una red de pandapower. "
+                       "Las del catálogo del desafío son case14, case30, case57, case118." % red)
+          net = getattr(nw, red)()
+          print("%s existe: %d buses, %d lineas" % (red, len(net.bus), len(net.line)))
+          FIN
+
+      - name: Guardia 2 — los marcadores del harness siguen ahí
+        # `eon_estocastico.py` reusa la FUENTE de `eon_harness.py` ejecutándola hasta un
+        # marcador de texto. Si el harness cambió de forma, el marcador desaparece y todo
+        # lo demás mediría sobre una suposición. El archivo falla cerrado; este paso lo
+        # descubre antes de instalar nada más.
+        run: |
+          python3 - <<'FIN'
+          import sys
+          fuente = open("harness/eon_harness.py").read()
+          faltan = [m for m in ("# QUBO: minimizar", "# --- 3. cuantico QAOA ---")
+                    if m not in fuente]
+          if faltan:
+              sys.exit("::error::faltan marcadores en eon_harness.py: %s. "
+                       "eon_estocastico.py reusa su fuente hasta esos puntos." % faltan)
+          print("los 2 marcadores de reuso están presentes")
+          FIN
+
+      - name: Guardia 3 — los solucionadores existen
+        # SCIP es el rival y GLOP es el evaluador exacto por escenario. Sin cualquiera de
+        # los dos no hay medición, y el mensaje de ortools cuando falta es mudo.
+        run: |
+          python3 - <<'FIN'
+          import sys
+          from ortools.linear_solver import pywraplp
+          faltan = [s for s in ("SCIP", "GLOP") if pywraplp.Solver.CreateSolver(s) is None]
+          if faltan:
+              sys.exit("::error::solucionador(es) ausente(s): %s" % faltan)
+          import pennylane, numpy, pandapower
+          print("SCIP y GLOP disponibles · pennylane %s · pandapower %s"
+                % (pennylane.__version__, pandapower.__version__))
+          FIN
+
+      - name: Guardia 4 — corrida de ENSAYO sobre una instancia chica
+        # CLAUDE.md Rosetta §5 ter: modo informe contra datos reales antes de gastar. No es
+        # ceremonia: el ensayo del 2026-08-17 atrapó en su primera corrida que el argmin
+        # crudo del muestreo devolvía un plan de 4 líneas con presupuesto de 5, y su costo
+        # exacto salía 1,5 % bajo el de SCIP. El titular habría sido «el cuántico gana».
+        env:
+          RQ_GRID: ${{ inputs.grid }}
+          RQ_SEED: ${{ inputs.seed }}
+          RQ_BUDGET: ${{ inputs.presupuesto }}
+        run: |
+          cd harness
+          RQ_SEED="${RQ_SEED:-42}" RQ_BUDGET="${RQ_BUDGET:-5}" \
+            python3 eon_estocastico.py --ensayo --json ensayo.json
+          python3 - <<'FIN'
+          import json, sys
+          d = json.load(open("ensayo.json"))["ensayo"]["corrida"]
+          v = d["veredicto"]
+          if d["cuantico"]["n_selected"] != d["k_budget"]:
+              sys.exit("::error::el ensayo produjo un plan de %d líneas con presupuesto %d."
+                       % (d["cuantico"]["n_selected"], d["k_budget"]))
+          if not d["verificacion_evaluador"]["pasa"]:
+              sys.exit("::error::el evaluador por escenario no reproduce el monolítico.")
+          print("ensayo OK: %s · cuántico=%.4f · SCIP=%.4f"
+                % (v["veredicto"], v["valor_exacto_cuantico"], v["valor_exacto_scip"]))
+          FIN
+
+      # ------------------------------------------------------------------ LAS PRUEBAS
+      - name: Pruebas Q1 y Q3
+        # SIN `|| echo warning`. Una prueba que no corre no es una prueba que pasa.
+        if: ${{ inputs.pruebas }}
+        env:
+          RQ_GRID: ${{ inputs.grid }}
+          RQ_SEED: ${{ inputs.seed }}
+          RQ_BUDGET: ${{ inputs.presupuesto }}
+        run: |
+          cd harness
+          RQ_SEED="${RQ_SEED:-42}" RQ_BUDGET="${RQ_BUDGET:-5}" \
+            python3 eon_estocastico.py --pruebas-q --json pruebas_q.json
+          python3 - <<'FIN'
+          import json, sys
+          d = json.load(open("pruebas_q.json"))
+          q1, q3 = d["prueba_q1"], d["prueba_q3"]
+          print("Q1: identidad 2do orden %.3e · argmin QUBO %s · argmin exacto %s · "
+                "arrepentimiento %.3e · %d de %d combinaciones"
+                % (q1["identidad_2do_orden_peor_dif_rel"], q1["argmin_qubo"],
+                   q1["argmin_exacto"], q1["arrepentimiento_relativo"],
+                   q1["combinaciones_enumeradas"], q1["combinaciones_esperadas"]))
+          print("Q3: %d de %d buses mueven los coeficientes lineales · cambio máx en q_ij %.4f"
+                % (q3["buses_que_mueven"], q3["buses_probados"], q3["cambio_max_q_ij"]))
+          if not q1["identidad_pasa"]:
+              sys.exit("::error::la expansión de 2do orden no reproduce el costo exacto en "
+                       "|sel|<=2, donde es exacta por construcción. Hay un índice o un signo "
+                       "mal puestos y el resto de la medición no sirve.")
+          if not q1["penalidad_respeta_cardinalidad"]:
+              sys.exit("::error::el argmin libre del QUBO no respeta la cardinalidad: la "
+                       "penalidad es demasiado chica.")
+          if q1["combinaciones_enumeradas"] != q1["combinaciones_esperadas"]:
+              sys.exit("::error::se enumeraron %d combinaciones y se esperaban %d."
+                       % (q1["combinaciones_enumeradas"], q1["combinaciones_esperadas"]))
+          if not q3["pasa"]:
+              sys.exit("::error::ningún escenario extremo mueve los coeficientes del QUBO: "
+                       "los escenarios NO están entrando y se estaría midiendo otra cosa.")
+          if not q1["pasa"]:
+              print("::warning::Q1 pasa la identidad de 2do orden y la penalidad, pero el "
+                    "argmin del QUBO NO coincide con el del MILP (arrepentimiento %.3e). "
+                    "El QUBO es una expansión de 2do orden y el truncamiento es real: "
+                    "hay que leer el veredicto con eso puesto."
+                    % q1["arrepentimiento_relativo"])
+          FIN
+
+      # ------------------------------------------------------------------ LA CORRIDA
+      - name: Correr el experimento
+        env:
+          RQ_GRID: ${{ inputs.grid }}
+          RQ_SEED: ${{ inputs.seed }}
+          RQ_BUDGET: ${{ inputs.presupuesto }}
+          RQ_RELOJ: ${{ inputs.reloj }}
+          K: ${{ inputs.candidatos }}
+          S: ${{ inputs.escenarios }}
+          S_REF: ${{ inputs.escenarios_ref }}
+          Q_PASOS: ${{ inputs.q_pasos }}
+          Q_CAPAS: ${{ inputs.q_capas }}
+          Q_DISPAROS: ${{ inputs.q_disparos }}
+          Q_RELOJ: ${{ inputs.q_reloj }}
+        run: |
+          cd harness
+          # `if` y no `[ -n "$X" ] && ...`: GitHub corre estos pasos con `bash -e`, donde un
+          # `&&` cuyo lado izquierdo es falso hace fallar el paso entero. Con el último
+          # input vacío, la corrida moriría ANTES de empezar y el log no diría por qué.
+          ARGS="--cuantico ${K:-10} ${S:-250}"
+          if [ -n "$S_REF" ];      then ARGS="$ARGS --cuantico-ref $S_REF"; fi
+          if [ -n "$Q_PASOS" ];    then ARGS="$ARGS --q-pasos $Q_PASOS"; fi
+          if [ -n "$Q_CAPAS" ];    then ARGS="$ARGS --q-capas $Q_CAPAS"; fi
+          if [ -n "$Q_DISPAROS" ]; then ARGS="$ARGS --q-disparos $Q_DISPAROS"; fi
+          if [ -n "$Q_RELOJ" ];    then ARGS="$ARGS --q-reloj $Q_RELOJ"; fi
+          RQ_SEED="${RQ_SEED:-42}" RQ_BUDGET="${RQ_BUDGET:-5}" RQ_RELOJ="${RQ_RELOJ:-900}" \
+            python3 eon_estocastico.py $ARGS --json resultado_eon_estocastico.json
+
+      - name: Comprobar qué dice el resultado, antes de depositarlo
+        env:
+          RED: ${{ inputs.grid }}
+          S: ${{ inputs.escenarios }}
+        run: |
+          cd harness
+          python3 - <<'FIN'
+          import json, os, sys
+          import pandapower.networks as nw
+          d = json.load(open("resultado_eon_estocastico.json"))
+          S = int(os.environ.get("S") or 250)
+          red = os.environ["RED"].strip()
+          clave = "cuantico_S%d" % S
+          if clave not in d:
+              sys.exit("::error::el resultado no trae '%s'. La corrida no produjo el punto "
+                       "pedido y un archivo a medias no se deposita." % clave)
+          r = d[clave]
+
+          # 1) qué red corrió — el guardia que costó nueve sellos en el otro track
+          real = getattr(nw, red)()
+          if r["red"] != red or r["n_lineas"] != len(real.line):
+              sys.exit("::error::el resultado declara red=%s con %s líneas, y %s tiene %d. "
+                       "El sello diría una red y habría medido otra."
+                       % (r["red"], r["n_lineas"], red, len(real.line)))
+
+          # 2) el evaluador es UNO SOLO para los dos brazos
+          if not r["verificacion_evaluador"]["pasa"]:
+              sys.exit("::error::el evaluador por escenario no reproduce el monolítico.")
+          cl = r["clasico"]
+          if cl is None or cl.get("x") is None:
+              sys.exit("::error::SCIP no devolvió plan: sin rival no hay comparación.")
+          if cl["dif_rel_recomputo"] >= 1e-6:
+              sys.exit("::error::el costo recomputado del plan de SCIP no calza con el que "
+                       "SCIP reporta (%.3e). No son la misma función de costo."
+                       % cl["dif_rel_recomputo"])
+
+          # 3) el plan cuántico respeta el presupuesto
+          q = r["cuantico"]
+          if q["n_selected"] != r["k_budget"]:
+              sys.exit("::error::el plan cuántico elige %d líneas y el presupuesto es %d."
+                       % (q["n_selected"], r["k_budget"]))
+
+          # 4) TRUNCAMIENTO — el campo que costó dos conclusiones retiradas
+          if "truncado_por_reloj" not in q:
+              sys.exit("::error::el resultado no declara si el optimizador se truncó. Sin "
+                       "ese campo una brecha por falta de tiempo se lee como brecha del "
+                       "método — el defecto del 2026-08-13.")
+          if q["truncado_por_reloj"]:
+              print("::warning::OPTIMIZADOR TRUNCADO — %s" % q["advertencia"])
+          else:
+              print("optimizador: %s de %s pasos, presupuesto agotado limpio."
+                    % (q["pasos_dados"], q["pasos_de_presupuesto"]))
+
+          # 5) SI SCIP PROBÓ o no. Un FEASIBLE sin declararlo se lee como un óptimo.
+          v = r["veredicto"]
+          if cl["status"] != "OPTIMAL":
+              print("::warning::SCIP NO probó optimalidad (%s en %.1fs, brecha %s%%). El "
+                    "rival es su mejor solución, no un óptimo demostrado."
+                    % (cl["status"], cl["segundos"], cl["brecha_pct"]))
+
+          # 6) el denominador del muestreo, y la trampa que hay que declarar
+          print("muestreo: %d disparos, %d factibles, %d planes factibles distintos de "
+                "C(K,k)=%d · cobertura del espacio %.1f%% de 2^%d"
+                % (q["disparos_totales"], q["disparos_factibles"],
+                   q["factibles_distintos"], q["factibles_posibles_C_K_kbudget"],
+                   q["cobertura_del_espacio_pct"], q["qubits"]))
+          if q["cobertura_del_espacio_factible_pct"] >= 90.0:
+              print("::warning::el muestreo vio el %.1f%% de los planes factibles: a esta "
+                    "escala el brazo se acerca a una enumeración y el resultado NO "
+                    "distingue al circuito de la fuerza bruta."
+                    % q["cobertura_del_espacio_factible_pct"])
+          # EL CONTROL QUE MÁS IMPORTA, y este guardia está escrito contra el resultado real
+          # del 2026-08-17: con 2000 disparos, el muestreo uniforme encontró el óptimo
+          # verdadero (266782.7216) y el QAOA quedó 37,5 % arriba, porque su distribución
+          # concentró tanto que sólo 2 de 2000 disparos cayeron en el subespacio factible.
+          # Sin este chequeo esa comparación existe en el artefacto y no la mira nadie.
+          az = q["control_azar"]
+          if az.get("valor_qubo") is not None and v.get("valor_exacto_azar") is not None:
+              print("control de azar (mismos disparos, sin circuito): %.4f · cuántico %.4f"
+                    % (v["valor_exacto_azar"], v["valor_exacto_cuantico"]))
+              if v["valor_exacto_azar"] <= v["valor_exacto_cuantico"] + 1e-6:
+                  print("::warning::EL AZAR IGUALA O GANA AL CIRCUITO (%.4f vs %.4f) con los "
+                        "mismos %d disparos. El brazo cuántico NO aportó nada sobre tirar "
+                        "monedas en esta corrida, y así hay que publicarlo."
+                        % (v["valor_exacto_azar"], v["valor_exacto_cuantico"],
+                           q["disparos_totales"]))
+          else:
+              print("::warning::sin control de azar comparable en esta corrida: ningún "
+                    "disparo uniforme cumplió la cardinalidad. El aporte del circuito "
+                    "queda SIN ÁRBITRO y no se puede afirmar.")
+          # Y el denominador que explica el resultado: si casi ningún disparo es factible,
+          # el «mejor plan del cuántico» se eligió entre un puñado de candidatos.
+          if q["disparos_factibles"] < 0.01 * q["disparos_totales"]:
+              print("::warning::sólo %d de %d disparos fueron factibles (%.2f%%): el plan "
+                    "cuántico se eligió entre %d candidatos, no entre los %d posibles. La "
+                    "distribución del circuito está concentrada FUERA del subespacio "
+                    "factible." % (q["disparos_factibles"], q["disparos_totales"],
+                                   100.0 * q["disparos_factibles"] / q["disparos_totales"],
+                                   q["factibles_distintos"],
+                                   q["factibles_posibles_C_K_kbudget"]))
+
+          # 7) el reloj, contado entero
+          print("reloj cuántico total %.1fs %s · reloj clásico %.1fs · mismo presupuesto: %s"
+                % (v["reloj_cuantico_total_s"], v["reloj_cuantico_desglose_s"],
+                   v["reloj_clasico_s"], v["mismo_presupuesto"]))
+          if v.get("mismo_presupuesto") is False:
+              print("::warning::el brazo cuántico usó MÁS reloj que el clásico. La "
+                    "comparación no es a igual presupuesto y así hay que leerla.")
+
+          # 8) la prueba Q2: el circuito no crece con S
+          q2 = d.get("prueba_q2")
+          if q2 is None:
+              sys.exit("::error::falta la prueba Q2. Sin ella no está comprobado que el "
+                       "circuito no crece con S, que es la tesis entera del encargo.")
+          if not q2["qubits_identicos"]:
+              sys.exit("::error::el circuito CRECE con S (%d qubits en S=%d y %d en S=%d). "
+                       "No hay asimetría y el encargo se cae."
+                       % (q2["chico"]["qubits"], q2["chico"]["S"],
+                          q2["grande"]["qubits"], q2["grande"]["S"]))
+          if q2["rasgos_distintos"]:
+              sys.exit("::error::el circuito cambia con S en %s. Los qubits coinciden pero "
+                       "el objeto NO es el mismo, y la tesis es que el circuito no ve los "
+                       "escenarios." % q2["rasgos_distintos"])
+          if not q2["clasico_crece"]:
+              sys.exit("::error::el MILP clásico NO crece con S (%d vs %d variables). Sin "
+                       "crecimiento del lado clásico no hay asimetría que medir y una de "
+                       "las dos mediciones está mal."
+                       % (q2["clasico"]["chico"]["n_variables"],
+                          q2["clasico"]["grande"]["n_variables"]))
+          print("Q2 OK: %d qubits y %d de %d rasgos idénticos entre S=%d y S=%d · el MILP "
+                "pasa de %d a %d variables"
+                % (q2["chico"]["qubits"], len(q2["rasgos_identicos"]),
+                   q2["denominador_rasgos"], q2["chico"]["S"], q2["grande"]["S"],
+                   q2["clasico"]["chico"]["n_variables"],
+                   q2["clasico"]["grande"]["n_variables"]))
+
+          print("VEREDICTO: %s · cuántico %.4f · SCIP %.4f (%s) · cota %s · %+.4f%%"
+                % (v["veredicto"], v["valor_exacto_cuantico"], v["valor_exacto_scip"],
+                   cl["status"], cl["cota"], v["diferencia_pct"]))
+          FIN
+
+      - name: Archivar los harness con su hash en el nombre
+        # La corrida depende de DOS archivos vivos: `eon_estocastico.py` y el
+        # `eon_harness.py` cuya fuente reusa. Archivar sólo uno dejaría la mitad de la
+        # procedencia apuntando a una versión que puede cambiar mañana.
+        run: |
+          mkdir -p code
+          for F in eon_estocastico eon_harness; do
+            H=$(python3 -c "import hashlib;print(hashlib.sha256(open('harness/$F.py','rb').read()).hexdigest()[:8])")
+            cp "harness/$F.py" "code/$F@$H.py"
+            echo "archivado code/$F@$H.py"
+          done
+
+      - name: Guardar los harness archivados
+        uses: actions/upload-artifact@v4
+        with:
+          name: harness-eon-estocastico-${{ inputs.grid }}-K${{ inputs.candidatos }}-S${{ inputs.escenarios }}
+          path: code/eon_*@*.py
+          # `error` y no `warn`: un artefacto vacío es indistinguible de uno perdido.
+          if-no-files-found: error
+
+      - name: Depositar el resultado en el repositorio
+        # Depositar no es certificar. El sello es un acto del laboratorio, que lee el
+        # resultado y decide qué afirma (CLAUDE.md Rosetta §11).
+        if: success()
+        run: |
+          python3 - <<'FIN'
+          import hashlib, json, os, shutil
+          src = "harness/resultado_eon_estocastico.json"
+          d = json.load(open(src))
+          h = hashlib.sha256(open(src, "rb").read()).hexdigest()
+          clave = [k for k in d if k.startswith("cuantico_S")]
+          r = d[sorted(clave)[0]]
+          q = r["cuantico"]
+          nombre = "eon_estocastico_%s_K%s_S%s_p%s_c%s@%s.json" % (
+              r["red"], r["K"], r["S"], q.get("pasos_dados", "NA"),
+              q.get("layers", "NA"), h[:8])
+          os.makedirs("resultados_eon_estocastico", exist_ok=True)
+          dst = os.path.join("resultados_eon_estocastico", nombre)
+          shutil.copy(src, dst)
+          print("depositado %s" % dst)
+          print("sha256 %s" % h)
+          FIN
+          git config user.name  "rosettaq-ci"
+          git config user.email "ci@rosettaquantum.com"
+          git add resultados_eon_estocastico/ code/ 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "nada nuevo que depositar"
+          else
+            git commit -q -m "CI: E.ON estocástico ${{ inputs.grid }} K=${{ inputs.candidatos }} S=${{ inputs.escenarios }}
+
+          Brazo cuántico contra SCIP en la frontera medida, con la misma función de costo
+          exacta para los dos. Depositado por el flujo, no a mano. Queda como «esperando
+          sello» hasta que el laboratorio lo lea y decida qué afirma."
+            # Reintento con rebase: otro actor pudo commitear mientras corríamos.
+            git pull --rebase -q origin main || true
+            git push -q origin HEAD:main && echo "publicado en main"
+          fi
+
+      - name: Guardar el resultado
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultado-eon-estocastico-${{ inputs.grid }}-K${{ inputs.candidatos }}-S${{ inputs.escenarios }}-p${{ inputs.q_pasos }}
+          path: |
+            harness/resultado_eon_estocastico.json
+            harness/pruebas_q.json
+            harness/ensayo.json
+          if-no-files-found: error

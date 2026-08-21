@@ -1,0 +1,189 @@
+{
+ "K": 10,
+ "k_budget": 5,
+ "razon_budget": 0.5,
+ "S": 250,
+ "T_OP_s": 900.0,
+ "red": "case118",
+ "combinaciones": 252,
+ "memoria": {
+  "ram_top_unused_gb": 1.48,
+  "ram_recuperable_gb": 8.75,
+  "minimo_exigido_gb": 6.0
+ },
+ "reglas": {
+  "semillas": [
+   42,
+   1337,
+   2718
+  ],
+  "solucionador": "SCIP (MILP)"
+ },
+ "t_inicio": "2026-08-17T23:51:38",
+ "armado_instancia_s": 15.68,
+ "K_real_del_harness": 10,
+ "n_lineas": 173,
+ "n_trafos": 13,
+ "enumeracion": {
+  "planes_muestreados": 25,
+  "denominador": 252,
+  "segundos_muestra": 103.48,
+  "segundos_por_plan": 4.139,
+  "segundos_proyectados_1_nucleo": 1043.0,
+  "cabe_en_T_OP_proyectado": false,
+  "corrio": false,
+  "motivo": "ya no se enumera: 252 planes x 4.139 s/plan = 1043 s proyectados, 1.2x el presupuesto operativo de 900 s",
+  "planes_evaluados": 25,
+  "esperados": 252
+ },
+ "arbitro": {
+  "hay": false,
+  "fuente": null,
+  "optimo": null,
+  "plan": null
+ },
+ "solucionador": {
+  "motor": "SCIP (via ortools pywraplp)",
+  "corridas": [
+   {
+    "status": "FEASIBLE",
+    "valor": 266782.721638,
+    "cota": 261563.068685,
+    "x": [
+     0,
+     1,
+     0,
+     1,
+     1,
+     1,
+     0,
+     1,
+     0,
+     0
+    ],
+    "segundos": 900.15,
+    "n_variables": 162510,
+    "n_restricciones": 175251,
+    "semilla": 42,
+    "armado_s": 1.31,
+    "brecha_vs_cota_pct": 1.9565,
+    "brecha_vs_optimo_real_pct": -0.0,
+    "plan_es_el_optimo": true
+   },
+   {
+    "status": "FEASIBLE",
+    "valor": 290192.910045,
+    "cota": 245893.889609,
+    "x": [
+     0,
+     0,
+     0,
+     1,
+     1,
+     1,
+     0,
+     1,
+     1,
+     0
+    ],
+    "segundos": 900.16,
+    "n_variables": 162510,
+    "n_restricciones": 175251,
+    "semilla": 1337,
+    "armado_s": 1.8,
+    "brecha_vs_cota_pct": 15.2654,
+    "brecha_vs_optimo_real_pct": 8.775,
+    "plan_es_el_optimo": false
+   },
+   {
+    "status": "FEASIBLE",
+    "valor": 266782.721638,
+    "cota": 262424.744033,
+    "x": [
+     0,
+     1,
+     0,
+     1,
+     1,
+     1,
+     0,
+     1,
+     0,
+     0
+    ],
+    "segundos": 900.12,
+    "n_variables": 162510,
+    "n_restricciones": 175251,
+    "semilla": 2718,
+    "armado_s": 1.75,
+    "brecha_vs_cota_pct": 1.6335,
+    "brecha_vs_optimo_real_pct": -0.0,
+    "plan_es_el_optimo": true
+   }
+  ],
+  "semillas_corridas": 3,
+  "semillas_pedidas": 3,
+  "n_OPTIMAL": 0,
+  "denominador": 3,
+  "prueba_siempre": false,
+  "prueba_nunca": true,
+  "segundos_min": 900.12,
+  "segundos_max": 900.16,
+  "brecha_cota_min_pct": 1.6335,
+  "brecha_cota_max_pct": 15.2654,
+  "valor_min": 266782.721638,
+  "valor_max": 290192.910045,
+  "dispersion_valor_pct": 8.775,
+  "n_variables": 162510,
+  "n_restricciones": 175251
+ },
+ "prueba_enum_vs_solucionador": {
+  "pasa": null,
+  "motivo": "sin enumeracion"
+ },
+ "cuantico": {
+  "qubits_necesarios": 10,
+  "vector_estado_gb": 1.5e-05,
+  "evaluaciones_para_armar_el_qubo": 56,
+  "segundos_qubo_proyectados_cota_superior": 231.8,
+  "nota": "proyeccion con el costo por plan medido en este mismo punto; cota superior porque los planes del QUBO son de cardinalidad 0,1,2 y cuestan menos que los de cardinalidad k."
+ },
+ "veredicto": {
+  "A_no_se_enumera_en_T_OP": true,
+  "B_no_se_demuestra_en_T_OP_en_ninguna_semilla": true,
+  "duro": true,
+  "fragil": false,
+  "arbitro_disponible": false,
+  "criterio": "duro = A y B (las dos). fragil = A y el solucionador prueba en algunas semillas y en otras no."
+ },
+ "t_fin": "2026-08-18T00:38:42",
+ "arbitro_previo_enumerado": {
+  "optimo": 266782.72163826204,
+  "plan": [
+   1,
+   3,
+   4,
+   5,
+   7
+  ],
+  "segundos": 1103.94,
+  "planes": 252,
+  "esperados": 252,
+  "cabe_en_T_OP": false,
+  "fuente": "arbitro_enumeracion_K10_S250.json"
+ },
+ "reproducibilidad": {
+  "optimo_real": 266782.72163826204,
+  "plan_optimo": [
+   1,
+   3,
+   4,
+   5,
+   7
+  ],
+  "brecha_vs_optimo_real_min_pct": -0.0,
+  "brecha_vs_optimo_real_max_pct": 8.775,
+  "semillas_que_llegaron_al_optimo": 2,
+  "denominador": 3
+ }
+}

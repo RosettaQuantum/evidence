@@ -1,0 +1,18 @@
+{"python": "3.12.14", "numpy": "2.5.2", "red": "case118", "semilla": 42, "k_budget": 5, "reloj_s": 900.0, "C_OV": 1.0, "VOLL": 20.0, "W_BUILD": 10.0, "sigma_carga": 0.15, "p_falla_gen": 0.15, "falla_max": 0.5, "theta_max": 10.0, "cp_dtheta": 0.0001, "cp_mw": 0.1, "cp_tol_u": 2}
+
+=== ENSAYO — instancia chica, antes de gastar ===
+
+=== CORRIDA CUANTICA  red=case118  K=6  S=3  semilla=42 ===
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=2 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 4 paralelos + 2 nuevos = 6 sobre una red de 173 lineas
+  evaluador separado vs monolitico (falla cerrado), sobre 3 escenarios:
+    plan []                 separado=       4570.8615  monolitico=       4570.8615  dif rel=1.451e-11
+    plan [0, 1]             separado=       4315.9480  monolitico=       4315.9480  dif rel=7.062e-12
+    plan [0, 1, 2, 3, 4]    separado=       3768.2028  monolitico=       3768.2028  dif rel=8.137e-11
+  QUBO S=3   : 22 evaluaciones exactas en 1.2s · E(vacio)=4570.8615 · r en [-47.854, 408.279] · q en [-178.675, 27.608] · PEN=2073
+  QAOA: 6 qubits · 2 capas · 15/15 pasos · 200 disparos · 33 estados distintos de 64 (51.6%) · factibles 82 disparos / 6 distintos de C(6,5)=6
+  SCIP: OPTIMAL en 0.3s · valor=3768.2028 · cota=3768.202751 · brecha=0.0% · plan=[0, 1, 2, 3, 4]
+  -> EMPATE — mismo valor: cuantico 3768.2028  vs  SCIP 3768.2028  (+0.0000%)  · azar 3768.2028
+
+escrito /private/tmp/claude-501/-Users-nicholasiakl-Documents-Claude/59fc8dd8-ebe4-4f40-950d-4e3196768742/scratchpad/ensayo.json

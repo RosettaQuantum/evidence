@@ -1,0 +1,24 @@
+{"python": "3.12.14", "numpy": "2.5.2", "red": "case118", "semilla": 42, "k_budget": 5, "reloj_s": 900.0, "C_OV": 1.0, "VOLL": 20.0, "W_BUILD": 10.0, "sigma_carga": 0.15, "p_falla_gen": 0.15, "falla_max": 0.5, "theta_max": 10.0, "cp_dtheta": 0.0001, "cp_mw": 0.1, "cp_tol_u": 2}
+
+=== CORRIDA CUANTICA  red=case118  K=10  S=250  semilla=42 ===
+censo de la red: case118 -> 118 buses, 173 lineas
+[qaoa] capas=2 · pasos=120 · reloj=120s · disparos=2000
+candidatos: 8 paralelos + 2 nuevos = 10 sobre una red de 173 lineas
+  evaluador separado vs monolitico (falla cerrado), sobre 3 escenarios:
+    plan []                 separado=       4570.8615  monolitico=       4570.8615  dif rel=1.451e-11
+    plan [0, 1]             separado=       4315.9480  monolitico=       4315.9480  dif rel=7.062e-12
+    plan [0, 1, 2, 3, 4]    separado=       3269.0564  monolitico=       3269.0564  dif rel=6.424e-11
+  QUBO S=250 : 56 evaluaciones exactas en 227.1s · E(vacio)=447560.2203 · r en [-3652.342, 53044.895] · q en [-14442.190, 20412.946] · PEN=2.447e+05
+  QAOA: 10 qubits · 4 capas · 600/600 pasos · 2000 disparos · 150 estados distintos de 1024 (14.7%) · factibles 2 disparos / 2 distintos de C(10,5)=252
+  SCIP: FEASIBLE en 900.1s · valor=290192.9100 · cota=257954.106178 · brecha=11.1094% · plan=[3, 4, 5, 7, 8]
+  -> EL CUANTICO PIERDE: cuantico 366889.5826  vs  SCIP 290192.9100  (+26.4295%)  · azar 266782.7216
+
+=== PRUEBA Q2 — el circuito NO crece con S ===
+  QUBO S=1   : 56 evaluaciones exactas en 0.9s · E(vacio)=910.4776 · r en [-42.573, 144.145] · q en [-54.409, 99.031] · PEN=884.6
+  circuito S=1   : 10 qubits · 10 cables trazados · 55 terminos · 54 compuertas · profundidad 9
+  circuito S=250 : 10 qubits · 10 cables trazados · 55 terminos · 54 compuertas · profundidad 9
+  idem en 6 de 6 rasgos medidos; distintos: ninguno
+  contraste, el MILP clasico: S=1 -> 660 variables / 702 restricciones   ·   S=250 -> 162510 / 175251  (x246.2)
+  costo de que no crezca: armar el QUBO paso de 56 a 56 evaluaciones exactas (0.9s -> 227.1s)
+
+escrito /private/tmp/claude-501/-Users-nicholasiakl-Documents-Claude/59fc8dd8-ebe4-4f40-950d-4e3196768742/scratchpad/resultado_S250_limpio.json
