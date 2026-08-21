@@ -1,0 +1,286 @@
+{
+ "file_id": "RQ-DIST-IDEAL-KRAS-001",
+ "que_es": "distribucion por nodo de la CTQW de KRAS_G12C en el subespacio de una excitacion: la exacta exp(-iHt) y la Trotter ideal sin ruido (r=2), que es el circuito que se envio a hardware. Publicada para que la errata de RQ-POC-QPU-001 sea comprobable por un tercero.",
+ "producido_por": {
+  "script": "ideal_ctqw_kras.py",
+  "sha256": "sha256:a0e45ef0479230bc7b203058c0b82f5ae4b62b3432421ff1c9d9751c17d19dd3",
+  "harness": "poc_ibm.py",
+  "harness_sha256": "sha256:db044b45c9867cfb019e6f905e901f0ec86b5e04a3e68f6b34dc446df0e366bc",
+  "insumo": "cache/KRAS_G12C.pkl",
+  "insumo_sha256": "sha256:5d063571e784fa3efaf96bdc47dfd103c1f2dc67c7b08d41da644a14407ffb1f"
+ },
+ "entorno": {
+  "numpy": "1.23.5",
+  "python": "3.9.6",
+  "shim_de_pickle": "numpy._core -> numpy.core (pickle escrito con numpy 2.x, runtime 1.x)"
+ },
+ "parametros": {
+  "WIN_T": 6.0,
+  "NQ": 12,
+  "trotter_r": 2,
+  "source_nodes": [
+   1
+  ],
+  "pocket_nodes": [
+   0,
+   4,
+   5,
+   6,
+   7,
+   8,
+   10,
+   11
+  ]
+ },
+ "subgraph_node_ids": [
+  8,
+  10,
+  11,
+  12,
+  58,
+  59,
+  60,
+  61,
+  62,
+  63,
+  67,
+  68
+ ],
+ "subgrafo_portable": {
+  "que_es": "todo lo que hace falta para recomputar sin el pickle: la adyacencia pesada del sub-grafo (W), el potencial on-site (v) y la fuente. H = W + diag(v); psi0 = |fuente>; psi(t) = exp(-i H t) psi0.",
+  "W": [
+   [
+    0.0,
+    0.488101818707,
+    0.0,
+    0.0,
+    0.423375803736,
+    0.412387140952,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.488101818707,
+    0.0,
+    0.822317109322,
+    0.581242994283,
+    0.372956376432,
+    0.452909044543,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.822317109322,
+    0.0,
+    0.82030115004,
+    0.500364876128,
+    0.476210045511,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.581242994283,
+    0.82030115004,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.423375803736,
+    0.372956376432,
+    0.500364876128,
+    0.0,
+    0.0,
+    0.818145183471,
+    0.532014629123,
+    0.398352351086,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.412387140952,
+    0.452909044543,
+    0.476210045511,
+    0.0,
+    0.818145183471,
+    0.0,
+    0.820459905065,
+    0.558931806312,
+    0.0,
+    0.0,
+    0.370691876381,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.532014629123,
+    0.820459905065,
+    0.0,
+    0.818981539144,
+    0.521389876094,
+    0.418201779811,
+    0.442417196617,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.398352351086,
+    0.558931806312,
+    0.818981539144,
+    0.0,
+    0.818980196925,
+    0.694960088899,
+    0.573099348374,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.521389876094,
+    0.818980196925,
+    0.0,
+    0.81328463594,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.418201779811,
+    0.694960088899,
+    0.81328463594,
+    0.0,
+    0.465340213025,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.370691876381,
+    0.442417196617,
+    0.573099348374,
+    0.0,
+    0.465340213025,
+    0.0,
+    0.818341630075
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.818341630075,
+    0.0
+   ]
+  ],
+  "v": [
+   0.0,
+   0.49912739094,
+   0.999999982548,
+   0.49912739094,
+   0.999999982548,
+   0.999999982548,
+   0.999999982548,
+   0.999999982548,
+   0.999999982548,
+   0.49912739094,
+   0.999999982548,
+   0.506108193611
+  ],
+  "source_nodes": [
+   1
+  ],
+  "t": 6.0
+ },
+ "convencion_de_bits": "nodo i = qubit i = bit clasico i. En una cadena de conteos de qiskit el caracter mas a la izquierda es el bit MAS ALTO, asi que el indice del nodo se lee invirtiendo la cadena (b[::-1].index('1')), igual que counts_to_p1 e ideal_probs.",
+ "dist_exacta_por_nodo": [
+  0.08795961,
+  0.29744716,
+  0.13100927,
+  0.07308952,
+  0.11740046,
+  0.05384292,
+  0.13925623,
+  0.05164523,
+  0.01612141,
+  0.01851935,
+  0.00697833,
+  0.00673049
+ ],
+ "dist_ideal_trotter_por_nodo": [
+  0.01091306,
+  0.05769518,
+  0.53810839,
+  0.01553726,
+  0.02970372,
+  0.00100911,
+  0.02112257,
+  0.06237563,
+  0.01790878,
+  0.20128442,
+  0.00532491,
+  0.03901696
+ ],
+ "masa_bolsillo_exacta": 0.47993469088288343,
+ "masa_bolsillo_ideal_trotter": 0.18737474776059673,
+ "validado_contra": {
+  "archivo": "poc_result_KRAS_G12C@68aada40.json",
+  "sha256": "sha256:68aada40bc3228ce2b63ab0cec65267004262fee5a18b5c635d98924fbb7062f",
+  "reproduce": [
+   "exact_pocket_mass",
+   "ideal_pocket_mass"
+  ],
+  "tolerancia": 1e-09
+ },
+ "NO_afirma": "nada sobre hardware. Es la prediccion sin ruido; la comparacion contra lo medido vive en la errata.",
+ "verificable_sin_el_pickle": {
+  "comprobado": true,
+  "max_diferencia": 6.702832733296304e-13,
+  "como": "reconstruir H = W + diag(v) desde `subgrafo_portable`, exponenciar y normalizar sobre el subespacio de una excitacion; da `dist_exacta_por_nodo`."
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__ERRATA__RQ-ERRATA-POC-QPU-001__20260821T1834Z__masa-en-bolsillo-bajo-el-azar-y-etiquetas-espejadas.json",
+  "file_id": "RQ-ERRATA-POC-QPU-001",
+  "type": "ERRATA",
+  "is_demo": false,
+  "scope_note": "Errata del sello RQ-POC-QPU-001. NO modifica el original: publicado es publicado, y el archivo, su hash y su ancla quedan intactos. Corrige una cifra mal calculada y retracta la inferencia que se apoyaba en ella. Revisada por la sesion de coordinacion y aprobada por Nicholas antes de sellar.",
+  "nota_para_el_notario": "El tipo ERRATA es nuevo en esta taxonomia. Se archiva bajo reports/ —que ya esta en ARCHIVE_GLOBS— a proposito: una carpeta nueva habria quedado fuera del notario, del auditor de procedencia y de la copia a D1 hasta que alguien se acordara de agregarla, que es exactamente el fallo del '63 de 64'. Si prefieres otra ubicacion, se mueve.",
+  "corrige": {
+   "file_id": "RQ-POC-QPU-001",
+   "content_hash": "sha256:d026eddc617f2ccdc631d20a01ca5694fa327daf7e6e357e308e50c2c952cbfb",
+   "sealed_at": "2026-08-04T16:33:46.453148+00:00",
+   "regla": "el sello original no se reescribe ni se re-sella."
+  },
+  "texto_fuente": {
+   "archivo": "ERRATA-POC-QPU-001.md",
+   "sha256": "sha256:076b8f9ed417920357bc96697fe0e76da34f013e4c5626cf936fa9471b37456a",
+   "publicado_como": "data/2026/08/ERRATA-POC-QPU-001@076b8f9e.md"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-21T18:34:29+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_errata_poc_qpu_001.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:ef95034080949d29000c385aba9440455ba6e9dbc34caaebe15d8d157db1b5f4",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:2275b61b42cab8ccc6db5aefc3cb1ba2b7aa3e402ffceb48f64556969146de3e"
+ },
+ "w6": {
+  "que": {
+   "afirmacion_retractada": "el hardware ejecuta la caminata; 38.6% de los shots los mata el ruido; de lo que sobrevive, 62.6% de la masa cae en el bolsillo alosterico (estructura, no ruido blanco). Resistencia al ruido, NO cruce.",
+   "defecto_A_numero_mal_calculado": {
+    "causa": "la cadena de bits se leyo SIN invertir. En qiskit el caracter mas a la izquierda es el bit mas alto, asi que el indice del nodo se obtiene con b[::-1].index('1'). El harness que el propio sello declara (poc_ibm.py, ideal_probs) invierte; el sello no.",
+    "masa_bolsillo_sellada": 0.6262,
+    "masa_bolsillo_corregida": 0.3534,
+    "masa_fuente_sellada": 0.0358,
+    "masa_fuente_corregida": 0.1515,
+    "efecto": "espejo exacto, nodo i <-> nodo 11-i"
+   },
+   "defecto_B_estadistico_no_sostiene": {
+    "bolsillo_nodos": 8,
+    "nodos_totales": 12,
+    "baseline_azar_uniforme": 0.6667,
+    "IC95_wilson_sellada": [
+     0.5988,
+     0.6528
+    ],
+    "IC95_wilson_corregida": [
+     0.3272,
+     0.3806
+    ],
+    "lectura": "las dos cifras estan POR DEBAJO del azar y su IC no lo toca. El estadistico citado como prueba de estructura apunta al reves."
+   },
+   "la_estructura_no_es_la_del_caminante": {
+    "chi2_vs_uniforme": 1167.0,
+    "gl": 11,
+    "chi2_vs_ideal_trotter_r2": 18804,
+    "spearman_ideal_vs_medido_corregido": 0.266,
+    "spearman_ideal_vs_medido_sellado": -0.196,
+    "TVD_medido_uniforme": 0.408,
+    "TVD_medido_ideal": 0.616,
+    "conclusion": "la distribucion no es plana, pero su desviacion no apunta hacia la fisica del caminante — y eso vale bajo LAS DOS convenciones de bits, que es lo que lo vuelve solido."
+   },
+   "modelo_descartado": {
+    "cual": "medido = lambda*ideal + (1-lambda)*uniforme",
+    "lambda_ajustado": 0.015,
+    "chi2": 1166.7,
+    "gl": 10,
+    "contra_uniforme_puro": 1167.0,
+    "por_que_se_publica": "era la lectura favorable —una caminata real lavada por ruido— y no sobrevivio a la prueba. Cero mejora."
+   },
+   "QUE_QUEDA_INTACTO": {
+    "proposito_del_sello": "¿cuanto presupuesto de coherencia consume hoy un CTQW de 12 nodos en hardware? (peaje que toda afirmacion de ventaja debe pagar)",
+    "supervivencia_one_hot": 0.614,
+    "nota": "el proposito declarado se sostiene entero y su respuesta es correcta: se reprodujo exacta desde el crudo publicado. cruce_ventaja_cuantica sigue en 0."
+   },
+   "afirmacion_corregida": "el circuito se ejecuta en hardware real y el 61,4 % de los disparos sobrevive como fisica valida; la estructura del caminante NO sobrevive al ruido, medido contra la caminata ideal publicada aqui.",
+   "alcance_del_defecto": "llego al archivo y a notas internas. NO viajo al paquete entregado a Cleveland: se revisaron los 5 archivos de la postulacion —dos PDF, el CSV de corridas, el harness y el artefacto JSON— y ninguno menciona esta corrida ni esta cifra.",
+   "hueco_declarado": "el sello nombra al recolector fetch_job.py pero NO registra su sha256, asi que no se puede fijar que version bajo estos conteos. Se publica la version actual como referencia y el argumento no depende de ella: la contradiccion se establece entre el crudo publicado y el harness que el sello declara."
+  },
+  "como": {
+   "recomputo": "desde code/poc_job_d9mu2bmij12s73ft86t0@3b45dd49.json, sobre los conteos ENTEROS y no sobre la distribucion redondeada a 4 decimales que guarda el sello (la diferencia es de la tercera cifra y se declara en el documento).",
+   "distribucion_ideal": {
+    "archivo": "dist_ideal_KRAS_G12C.json",
+    "sha256": "sha256:2744bc058f4aed2a96ba91c40692b121dab3f5fdbf2c47f7fd657847dccdd562",
+    "publicado_como": "code/dist_ideal_KRAS_G12C@2744bc05.json",
+    "autosuficiente": "trae adentro W, v y la fuente, asi que se recomputa con seis lineas de numpy sin el pickle original —que vive en un repo PRIVADO y solo carga con numpy 2.x— ni ningun codigo nuestro."
+   },
+   "generador": {
+    "archivo": "ideal_ctqw_kras.py",
+    "sha256": "sha256:a0e45ef0479230bc7b203058c0b82f5ae4b62b3432421ff1c9d9751c17d19dd3",
+    "publicado_como": "code/ideal_ctqw_kras@a0e45ef0.py"
+   },
+   "evidencia_concurrente": {
+    "archivo": "poc_ibm_run.py",
+    "sha256": "sha256:af02f3467501b967923cfc94416a6ea4b8f6b6dd6274559366f862079b6613b4",
+    "publicado_como": "code/poc_ibm_run@af02f346.py",
+    "que_muestra": "su counts_to_p1 invierte la cadena y lo documenta: 'qiskit: bit string little-endian'."
+   },
+   "recolector_de_referencia": {
+    "archivo": "fetch_job.py",
+    "sha256": "sha256:566b9095367da43f6b661bc88ae0ac593cf49500116fe5a2722c5e9992c5995e",
+    "publicado_como": "code/fetch_job@566b9095.py",
+    "salvedad": "version ACTUAL; el sello no registra cual corrio."
+   }
+  },
+  "cuando": {
+   "archived_at": "2026-08-21T18:34:29+00:00"
+  },
+  "donde": {
+   "compute": "local, sin backend de pago"
+  },
+  "porque": {
+   "question": "¿la cifra que RQ-POC-QPU-001 publica como prueba de estructura distingue senal de ruido?",
+   "respuesta": "no. Esta por debajo del azar geometrico, y ademas estaba mal calculada."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "revision": "sesion de coordinacion; aprobada por Nicholas antes de sellar",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}
