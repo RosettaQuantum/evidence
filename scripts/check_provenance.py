@@ -155,6 +155,17 @@ terceros = {k: v for k, v in faltan.items()
                    for h in verificables_terceros)}
 faltan = {k: v for k, v in faltan.items() if k not in terceros}
 
+# LO QUE ESTE AUDITOR NO CUBRE, dicho por el auditor mismo. Propuesto por el
+# laboratorio el 21-ago tras un caso real: `poc_ibm.py` arma la ruta de su insumo con
+# una plantilla (`"%s/%s.pkl" % (CACHE, name)`), asi que el rastreo por literales no la
+# ve — y ese archivo era justamente el harness de un sello anclado. El caso que mas
+# importaba pasaba en verde. Un control que no declara su punto ciego se lee como si
+# cubriera todo (CLAUDE.md §4 bis).
+print("alcance de este auditor: referencias por sha256 en los sellos de ARCHIVE_GLOBS.")
+print("  NO cubre: (a) rutas de insumo armadas con plantilla o variables — solo literales;")
+print("            (b) que un archivo publicado sea EJECUTABLE (su insumo puede faltar);")
+print("            (c) referencias por NOMBRE sin hash (campos *_en).")
+print("  ver NOTES/2026-08-21-punto-ciego-del-auditor-de-procedencia.md")
 print(f"referencias de procedencia declaradas: {total}")
 print(f"resueltas contra archivos publicados:  "
       f"{total - sum(len(v) for v in faltan.values()) - sum(len(v) for v in perdidas.values())}")
