@@ -1,0 +1,117 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-HSBC-BASE-001__20260821T1325Z__baseline-clasico-ulb-particion-temporal.json",
+  "file_id": "RQ-EXP-HSBC-BASE-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Baseline clasico del track HSBC sobre ULB con particion TEMPORAL 80/20: el numero principal del entregable. Sellado por el laboratorio; el anclaje es del notario.",
+  "prereg": {
+   "file_id": "RQ-PREREG-HSBC-001",
+   "content_hash": "sha256:b04f214fae845b1c50431d225e6590b0956d8920c24b7c7fa26ed94c58f3f2db"
+  },
+  "manifest": "RQ-DATA-HSBC-ULB-001",
+  "POR_QUE_SE_SELLA_TARDE": "el artefacto se produjo el 20-ago y quedo citado dentro de los sellos del ataque, pero sin sello propio — el unico numero principal del entregable sin certificar. Lo encontro la sesion de coordinacion leyendo el documento contra el archivo. El artefacto NO cambio: su sha256 es el mismo que citan RQ-PREREG-HSBC-002-ATAQUE y RQ-EXP-HSBC-ATAQUE-001, asi que este sello certifica exactamente lo que ya circulaba.",
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-21T13:25:51+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "hsbc_harness.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:a6c8f2bef4eb6de5a547a5f568a25acca0822a5feae3a5c837b4f26ec6c2f84b",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:2cc73ac7c845a57e575669d8426667ea9cc887de3ccf700a1343db1a6a492e9c"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "resultados_hsbc/hsbc_ulb_baseline_lightgbm-xgboost@2072bc53.json",
+    "sha256": "sha256:2072bc53d43b97761e2831f066a6c56e4607c4bd0ca19fbb52a4d4b06e9a13b5"
+   },
+   "resultado_principal_xgboost": {
+    "AUPRC": 0.800822,
+    "AUPRC_IC95": [
+     0.70543,
+     0.882776
+    ],
+    "AUC_ROC": 0.987796,
+    "AUC_IC95": [
+     0.977478,
+     0.995726
+    ],
+    "F1_umbral_0.5": 0.823529,
+    "confusion_0.5": {
+     "tn": 56882,
+     "fp": 5,
+     "fn": 19,
+     "tp": 56
+    },
+    "metrica_que_manda": "AUPRC (sellado en el prereg): con prevalencia 0,17 % el AUC-ROC es opticamente generoso"
+   },
+   "lightgbm_ABIERTO": {
+    "AUPRC": 0.005831,
+    "falsos_positivos_umbral_0.5": 9624,
+    "estado": "NO es un baseline afinado: la configuracion v1 del laboratorio lo rompe. Defecto de configuracion NUESTRA, no del metodo. No entra al entregable como baseline hasta pasar la busqueda declarada; si al final no entra, se dice por que en vez de desaparecer."
+   },
+   "particion": {
+    "tipo": "temporal 80/20 por Time",
+    "train": {
+     "filas": 227845,
+     "fraudes": 417,
+     "tasa": 0.00183
+    },
+    "test": {
+     "filas": 56962,
+     "fraudes": 75,
+     "tasa": 0.001317,
+     "sha256": "88f43ccb6ffcd6aeed624b6db4c81c170c625ffcd24ad52105978f02a6924131"
+    },
+    "duplicados_exactos_entre_mitades": 0,
+    "determinismo_entre_maquinas": "el sha256 del test es identico en el Mac local y en el runner de CI"
+   },
+   "recomputo_desde_scores_crudos": {
+    "hecho_en_este_sellado": true,
+    "tolerancia": "5e-5",
+    "xgboost": {
+     "AUPRC": 0.800822,
+     "AUC_ROC": 0.987796
+    },
+    "lightgbm": {
+     "AUPRC": 0.00583,
+     "AUC_ROC": 0.842071
+    },
+    "como": "los .npz publicados por hash permiten a un tercero rehacer las curvas exactas; se ejercio antes de sellar, no se afirmo."
+   },
+   "contexto_de_validacion": "el IC95 del AUPRC contiene el 0,871 publicado, asi que NO se afirma diferencia contra ese numero; la evidencia del efecto de protocolo es el delta intra-implementacion de RQ-EXP-HSBC-ATAQUE-001.",
+   "cruce_ventaja_cuantica": "0 (fase enteramente clasica)"
+  },
+  "como": {
+   "modelo": "XGBoost, config declarada en el artefacto",
+   "harness_sha256": "a6c8f2bef4eb6de5a547a5f568a25acca0822a5feae3a5c837b4f26ec6c2f84b",
+   "compute": "GitHub Actions (experimento-hsbc.yml)",
+   "lib_versions": {
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "sklearn": "1.9.0"
+   }
+  },
+  "cuando": {
+   "archived_at": "2026-08-21T13:25:51+00:00"
+  },
+  "donde": {
+   "compute": "CI de evidence",
+   "verificacion": "Mac local (laboratorio)"
+  },
+  "porque": {
+   "question": "¿que da un clasico afinado sobre ULB con particion temporal, con el protocolo fijado antes de mirar?",
+   "para_que": "es la referencia contra la que se mide todo lo demas del track y el numero principal del entregable."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}
