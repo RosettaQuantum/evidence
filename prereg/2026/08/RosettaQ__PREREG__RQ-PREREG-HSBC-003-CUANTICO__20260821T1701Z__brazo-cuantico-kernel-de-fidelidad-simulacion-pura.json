@@ -1,0 +1,72 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__PREREG__RQ-PREREG-HSBC-003-CUANTICO__20260821T1701Z__brazo-cuantico-kernel-de-fidelidad-simulacion-pura.json",
+  "file_id": "RQ-PREREG-HSBC-003-CUANTICO",
+  "type": "PREREG",
+  "is_demo": false,
+  "scope_note": "Pre-registro del BRAZO CUANTICO del track HSBC, sellado ANTES de que exista una linea de su instrumento — el orden en el historial de git es el activo, no esta afirmacion. El arbitro clasico ya estaba sellado y anclado, asi que este documento no puede moverlo: particion, test y metrica que manda se heredan de RQ-PREREG-HSBC-001 y se citan por content_hash. Revisado por la sesion de coordinacion antes de sellar.",
+  "prereg_arbitro": {
+   "file_id": "RQ-PREREG-HSBC-001",
+   "content_hash": "sha256:b04f214fae845b1c50431d225e6590b0956d8920c24b7c7fa26ed94c58f3f2db",
+   "regla": "lo heredado no se re-decide aqui (§10 del borrador)."
+  },
+  "texto_fuente": {
+   "archivo": "PREREG-HSBC-CUANTICO-borrador.md",
+   "sha256": "sha256:2bde6b99d4ff39f287d27eb692118011953f1fd72effe3f60a66cfffa2ddddd2",
+   "publicado_como": "data/2026/08/PREREG-HSBC-CUANTICO-borrador@2bde6b99.md",
+   "regla": "la procedencia se publica en el mismo acto que el sello."
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-21T17:01:17+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_prereg_hsbc_cuantico.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:059f14e0170d055698562ae5f1f4462f20f07478d0d00f8f0fadaca20ba71fa3",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:e15b1808c03c29a8623eb687c3790c0a00e29cb5ae3ff6848f83d94269c5abb8"
+ },
+ "w6": {
+  "que": {
+   "brazo": "kernel cuantico de fidelidad |<phi(a)|phi(b)>|^2, evaluado en simulacion exacta por productos de statevector; variacional como segundo, declarado y no ejecutado en esta fase.",
+   "GASTO_AUTORIZADO_USD": 0,
+   "hardware": {
+    "ejecutado": false,
+    "declaracion": "NINGUN circuito se ejecuta en un dispositivo real en esta fase. Nicholas rechazo el gasto por elevado. El §4.2 del statement dice textual que entrenar o inferir en hardware «is not expected nor required», asi que el alcance no se debilita: el objetivo §4.1 se cumple en simulacion exacta.",
+    "lo_que_este_track_NO_afirma_sobre_hardware": "nada sobre ruido, calibracion, fidelidad de dispositivo ni desempeno en hardware — no se corrio. Lo unico afirmado es cuanto COSTARIA.",
+    "costo_medido_no_gastado": {
+     "metodo": "derivado del diseno y de la tarifa publicada por costo_braket_hsbc.py; tarifa leida de aws.amazon.com/braket/pricing el 2026-08-21 (per-task USD 0,30 identico en los seis QPU; per-shot 0,000425 Rigetti Cepheus a 0,08 IonQ Forte).",
+     "test_completo_x2000_soportes_USD": 39018970,
+     "demo_500x100_USD": 17125,
+     "demo_200x50_USD": 3425,
+     "demo_200x50_ionq_forte_USD": 83000,
+     "HALLAZGO": "el 88 % del costo es la tarifa fija POR TAREA, porque en un kernel cada par (test, soporte) es un circuito distinto y no se amortiza repitiendo disparos. Consecuencia medida: ni reducir disparos ni cambiar de proveedor mueve el costo — solo reducir pares, y reducir pares rompe la comparabilidad con el test sellado. Esta es la respuesta al «under what conditions» del §4.2."
+    }
+   },
+   "los_0_8_minutos_NO_son_velocidad_cuantica": "el atajo del statevector existe PORQUE se simula; en una QPU ese objeto no existe y vuelven las n^2 evaluaciones. El modelo es el mismo en las dos vias: lo que cambia es el costo de obtenerlo, no lo que se calcula.",
+   "criterio_de_cruce": "el heredado del arbitro: AUPRC sobre el test completo, bootstrap 95 % sin solape, 2.000 remuestreos, semilla 42.",
+   "los_dos_desenlaces_son_entregables": "si no cruza, el entregable es el veredicto medido mas la caracterizacion de donde se acerca; el resultado negativo se publica igual."
+  },
+  "como": {
+   "simulacion": "PennyLane/statevector, CPU, CI de evidence",
+   "guardias": "falla-cerrado y probadas por mutacion (§9 del borrador)"
+  },
+  "cuando": {
+   "archived_at": "2026-08-21T17:01:17+00:00"
+  },
+  "donde": {
+   "compute": "CI de evidence — ningun backend de pago"
+  },
+  "porque": {
+   "question": "¿aporta un kernel cuantico de fidelidad a la deteccion de fraude, medido contra un clasico afinado sobre el mismo test, con el protocolo fijado antes de mirar?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario; el texto publico pasa por el OK de Nicholas."
+  }
+ }
+}
