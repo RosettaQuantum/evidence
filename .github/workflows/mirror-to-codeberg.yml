@@ -41,7 +41,38 @@ jobs:
           TOKEN="$(printf '%s' "${CODEBERG_TOKEN}" | tr -d '[:space:]')"
           git remote add codeberg \
             "https://${TOKEN}@codeberg.org/RosettaQuantum/evidence.git"
-          # --mirror-style push keeps the two byte-identical; --force so Codeberg
-          # always matches GitHub exactly (GitHub stays the single source of truth).
+          # EL GUARDIA QUE LE FALTABA AL ESPEJO (2026-08-24)
+          # ------------------------------------------------
+          # `--force` mantiene las dos copias byte-identicas, que es lo que queremos.
+          # Pero tambien significa que si el historial de GitHub retrocediera —un reset,
+          # un force-push, una rama equivocada— **este flujo destruiria fielmente la copia
+          # 2**, que es justo la que existe para sobrevivir a eso. Un espejo que se deja
+          # arrastrar no es una segunda copia: es una replica, y una replica no prueba nada.
+          #
+          # Lo detecto la sesion de CTO auditando superficies con mas de un escritor.
+          #
+          # Asi que antes de forzar se comprueba que el empujon AVANZA: la cabeza actual de
+          # Codeberg tiene que ser ancestro de lo que vamos a publicar. Si no lo es, el
+          # historial divergio y **eso lo mira un humano**, no lo resuelve un bot a las 3 AM.
+          # Falla cerrado: ante la duda no se empuja. Un archivo notarial que pierde
+          # historia en silencio no vale nada, y perder un empujon no cuesta nada.
+          git fetch codeberg "refs/heads/main:refs/remotes/codeberg/main" || true
+          if git rev-parse --verify -q refs/remotes/codeberg/main >/dev/null; then
+            ANTES=$(git rev-parse refs/remotes/codeberg/main)
+            AHORA=$(git rev-parse HEAD)
+            if [ "$ANTES" != "$AHORA" ] && ! git merge-base --is-ancestor "$ANTES" "$AHORA"; then
+              echo "::error::ABORTADO — la copia 2 NO avanzaria, retrocederia."
+              echo "  Codeberg esta en $ANTES y no es ancestro de $AHORA."
+              echo "  Empujar con --force borraria historia de la copia que existe para"
+              echo "  sobrevivir justo a esto. Divergencia = lo mira una persona."
+              echo "  Commits que se perderian:"
+              git log --oneline "$AHORA..$ANTES" | head -20
+              exit 1
+            fi
+            echo "la copia 2 avanza: $ANTES -> $AHORA"
+          else
+            echo "Codeberg todavia no tiene main: primera publicacion, no hay que perder."
+          fi
+          # Comprobado que avanza, ahora si: byte-identicas.
           git push codeberg --force --prune "refs/heads/main:refs/heads/main"
           git push codeberg --force --tags
