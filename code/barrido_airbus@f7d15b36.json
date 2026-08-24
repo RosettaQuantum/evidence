@@ -1,0 +1,676 @@
+{
+  "track": "Airbus - vortice de Taylor-Green convectivo 2D",
+  "prereg": "RQ-PREREG-AIRBUS-001",
+  "producido_por": "barrido_airbus.py",
+  "producido_por_sha256": {
+    "barrido_airbus.py": "sha256:7b7e3844fe8fc3a3d826bcadfa06b6d51f0ed233ba44743e03d39d5de078c56f",
+    "airbus_harness.py": "sha256:802cd60e05645c0e6ec5c5a85aaf7b269ee77207c34c2520758764b0991756b8",
+    "airbus_carleman.py": "sha256:b5ef810ad8790ca05c1dcc395dd6c68ec274fbef39079445c5b3435544ee86c5"
+  },
+  "statement_sha256": "4a2e084dd25d49343c98475091eede479513779c4306e90260f9b9cf518f77c6",
+  "arbitro": "formula cerrada sec.5.3 del statement",
+  "metrica_error": "L2 relativo del campo de velocidad completo",
+  "metrica_tiempo": "tiempo de pared por brazo (time.perf_counter)",
+  "regla_acople": {
+    "nombre": "acople_sqrt",
+    "descripcion": "N = potencia de 2 >= 64*sqrt(Re/100), piso 32 (resolucion crece con Re como exige el statement \u00a74.1)",
+    "n_base": 64,
+    "re_base": 100.0
+  },
+  "T_pedido": 2.0,
+  "cfl": 0.5,
+  "brazos": [
+    "espectral",
+    "fd2",
+    "carleman_K2_variacional",
+    "carleman_K1_variacional"
+  ],
+  "serie": [
+    {
+      "Re": 10.0,
+      "nu": 0.6283185307179586,
+      "malla_N": 32,
+      "T_pedido": 2.0,
+      "artefacto": "airbus_punto_Re10_N32_20260824T194943Z.json",
+      "brazos": {
+        "espectral": {
+          "error_l2_rel": 6.270327512335011e-09,
+          "tiempo_pared_s": 0.003412,
+          "pasos_reales": 7,
+          "dt_real": 0.2857142857142857,
+          "T_real": 2.0,
+          "malla_real": 32,
+          "excedio_presupuesto": false
+        },
+        "fd2": {
+          "error_l2_rel": 0.0020103373505750127,
+          "tiempo_pared_s": 0.003397,
+          "pasos_reales": 7,
+          "dt_real": 0.2857142857142857,
+          "T_real": 2.0,
+          "malla_real": 32,
+          "excedio_presupuesto": false
+        },
+        "carleman_K2_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=1049600 (max 4096), n_qubits=21 (max 12)",
+          "medicion": {
+            "m_celdas": 1024,
+            "carleman_orden_pedido": 2,
+            "dim_sistema": 1049600,
+            "n_qubits_requeridos": 21,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 1.1e-05
+        },
+        "carleman_K1_variacional": {
+          "error_l2_rel": 0.08028913374923512,
+          "tiempo_pared_s": 12.442511,
+          "pasos_reales": 30,
+          "dt_real": 0.06666666666666667,
+          "T_real": 2.0,
+          "malla_real": 32,
+          "excedio_presupuesto": false,
+          "carleman": {
+            "orden_real": 1,
+            "dim_sistema_real": 1024,
+            "n_qubits": 10,
+            "n_parametros_ansatz": 70,
+            "capas_ansatz": 6,
+            "infidelidad_inicial": 0.02375017378967781,
+            "residuo_mclachlan_max": 0.9067060214281509,
+            "error_l2_rel_carleman_exacto": 0.0020103396990059216
+          }
+        }
+      }
+    },
+    {
+      "Re": 25.0,
+      "nu": 0.25132741228718347,
+      "malla_N": 32,
+      "T_pedido": 2.0,
+      "artefacto": "airbus_punto_Re25_N32_20260824T194956Z.json",
+      "brazos": {
+        "espectral": {
+          "error_l2_rel": 6.436839151977852e-09,
+          "tiempo_pared_s": 0.003304,
+          "pasos_reales": 7,
+          "dt_real": 0.2857142857142857,
+          "T_real": 2.0,
+          "malla_real": 32,
+          "excedio_presupuesto": false
+        },
+        "fd2": {
+          "error_l2_rel": 0.002121470477094377,
+          "tiempo_pared_s": 0.007418,
+          "pasos_reales": 7,
+          "dt_real": 0.2857142857142857,
+          "T_real": 2.0,
+          "malla_real": 32,
+          "excedio_presupuesto": false
+        },
+        "carleman_K2_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=1049600 (max 4096), n_qubits=21 (max 12)",
+          "medicion": {
+            "m_celdas": 1024,
+            "carleman_orden_pedido": 2,
+            "dim_sistema": 1049600,
+            "n_qubits_requeridos": 21,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 1e-05
+        },
+        "carleman_K1_variacional": {
+          "error_l2_rel": 0.05893436555118835,
+          "tiempo_pared_s": 12.771194,
+          "pasos_reales": 30,
+          "dt_real": 0.06666666666666667,
+          "T_real": 2.0,
+          "malla_real": 32,
+          "excedio_presupuesto": false,
+          "carleman": {
+            "orden_real": 1,
+            "dim_sistema_real": 1024,
+            "n_qubits": 10,
+            "n_parametros_ansatz": 70,
+            "capas_ansatz": 6,
+            "infidelidad_inicial": 0.02375017378967781,
+            "residuo_mclachlan_max": 0.8102664224291741,
+            "error_l2_rel_carleman_exacto": 0.002121469126230219
+          }
+        }
+      }
+    },
+    {
+      "Re": 100.0,
+      "nu": 0.06283185307179587,
+      "malla_N": 64,
+      "T_pedido": 2.0,
+      "artefacto": "airbus_punto_Re100_N64_20260824T195025Z.json",
+      "brazos": {
+        "espectral": {
+          "error_l2_rel": 5.481326003741703e-10,
+          "tiempo_pared_s": 0.020668,
+          "pasos_reales": 13,
+          "dt_real": 0.15384615384615385,
+          "T_real": 2.0,
+          "malla_real": 64,
+          "excedio_presupuesto": false
+        },
+        "fd2": {
+          "error_l2_rel": 0.0005448335135601033,
+          "tiempo_pared_s": 0.017398,
+          "pasos_reales": 13,
+          "dt_real": 0.15384615384615385,
+          "T_real": 2.0,
+          "malla_real": 64,
+          "excedio_presupuesto": false
+        },
+        "carleman_K2_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=16781312 (max 4096), n_qubits=25 (max 12)",
+          "medicion": {
+            "m_celdas": 4096,
+            "carleman_orden_pedido": 2,
+            "dim_sistema": 16781312,
+            "n_qubits_requeridos": 25,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 2.5e-05
+        },
+        "carleman_K1_variacional": {
+          "error_l2_rel": 0.04855189782786296,
+          "tiempo_pared_s": 28.562302,
+          "pasos_reales": 30,
+          "dt_real": 0.06666666666666667,
+          "T_real": 2.0,
+          "malla_real": 64,
+          "excedio_presupuesto": false,
+          "carleman": {
+            "orden_real": 1,
+            "dim_sistema_real": 4096,
+            "n_qubits": 12,
+            "n_parametros_ansatz": 84,
+            "capas_ansatz": 6,
+            "infidelidad_inicial": 0.023873099405775644,
+            "residuo_mclachlan_max": 0.6989033977651326,
+            "error_l2_rel_carleman_exacto": 0.0005448332575541691
+          }
+        }
+      }
+    },
+    {
+      "Re": 400.0,
+      "nu": 0.015707963267948967,
+      "malla_N": 128,
+      "T_pedido": 2.0,
+      "artefacto": "airbus_punto_Re400_N128_20260824T195025Z.json",
+      "brazos": {
+        "espectral": {
+          "error_l2_rel": 3.436791244762966e-11,
+          "tiempo_pared_s": 0.18812,
+          "pasos_reales": 26,
+          "dt_real": 0.07692307692307693,
+          "T_real": 2.0,
+          "malla_real": 128,
+          "excedio_presupuesto": false
+        },
+        "fd2": {
+          "error_l2_rel": 0.00013712351292033986,
+          "tiempo_pared_s": 0.081006,
+          "pasos_reales": 26,
+          "dt_real": 0.07692307692307693,
+          "T_real": 2.0,
+          "malla_real": 128,
+          "excedio_presupuesto": false
+        },
+        "carleman_K2_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=268451840 (max 4096), n_qubits=29 (max 12)",
+          "medicion": {
+            "m_celdas": 16384,
+            "carleman_orden_pedido": 2,
+            "dim_sistema": 268451840,
+            "n_qubits_requeridos": 29,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 1.2e-05
+        },
+        "carleman_K1_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=16384 (max 4096), n_qubits=14 (max 12)",
+          "medicion": {
+            "m_celdas": 16384,
+            "carleman_orden_pedido": 1,
+            "dim_sistema": 16384,
+            "n_qubits_requeridos": 14,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 4e-06
+        }
+      }
+    },
+    {
+      "Re": 1600.0,
+      "nu": 0.003926990816987242,
+      "malla_N": 256,
+      "T_pedido": 2.0,
+      "artefacto": "airbus_punto_Re1600_N256_20260824T195026Z.json",
+      "brazos": {
+        "espectral": {
+          "error_l2_rel": 2.1496516533852605e-12,
+          "tiempo_pared_s": 0.904965,
+          "pasos_reales": 52,
+          "dt_real": 0.038461538461538464,
+          "T_real": 2.0,
+          "malla_real": 256,
+          "excedio_presupuesto": false
+        },
+        "fd2": {
+          "error_l2_rel": 3.4338246490846115e-05,
+          "tiempo_pared_s": 0.469201,
+          "pasos_reales": 52,
+          "dt_real": 0.038461538461538464,
+          "T_real": 2.0,
+          "malla_real": 256,
+          "excedio_presupuesto": false
+        },
+        "carleman_K2_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=4295032832 (max 4096), n_qubits=33 (max 12)",
+          "medicion": {
+            "m_celdas": 65536,
+            "carleman_orden_pedido": 2,
+            "dim_sistema": 4295032832,
+            "n_qubits_requeridos": 33,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 1.2e-05
+        },
+        "carleman_K1_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=65536 (max 4096), n_qubits=16 (max 12)",
+          "medicion": {
+            "m_celdas": 65536,
+            "carleman_orden_pedido": 1,
+            "dim_sistema": 65536,
+            "n_qubits_requeridos": 16,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 4e-06
+        }
+      }
+    },
+    {
+      "Re": 6400.0,
+      "nu": 0.0009817477042468104,
+      "malla_N": 512,
+      "T_pedido": 2.0,
+      "artefacto": "airbus_punto_Re6400_N512_20260824T195038Z.json",
+      "brazos": {
+        "espectral": {
+          "error_l2_rel": 1.3426793906445793e-13,
+          "tiempo_pared_s": 8.018783,
+          "pasos_reales": 104,
+          "dt_real": 0.019230769230769232,
+          "T_real": 2.0,
+          "malla_real": 512,
+          "excedio_presupuesto": false
+        },
+        "fd2": {
+          "error_l2_rel": 8.588150094390299e-06,
+          "tiempo_pared_s": 4.080939,
+          "pasos_reales": 104,
+          "dt_real": 0.019230769230769232,
+          "T_real": 2.0,
+          "malla_real": 512,
+          "excedio_presupuesto": false
+        },
+        "carleman_K2_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=68719738880 (max 4096), n_qubits=37 (max 12)",
+          "medicion": {
+            "m_celdas": 262144,
+            "carleman_orden_pedido": 2,
+            "dim_sistema": 68719738880,
+            "n_qubits_requeridos": 37,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 1.4e-05
+        },
+        "carleman_K1_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=262144 (max 4096), n_qubits=18 (max 12)",
+          "medicion": {
+            "m_celdas": 262144,
+            "carleman_orden_pedido": 1,
+            "dim_sistema": 262144,
+            "n_qubits_requeridos": 18,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 4e-06
+        }
+      }
+    },
+    {
+      "Re": 25600.0,
+      "nu": 0.0002454369260617026,
+      "malla_N": 1024,
+      "T_pedido": 2.0,
+      "artefacto": "airbus_punto_Re25600_N1024_20260824T195238Z.json",
+      "brazos": {
+        "espectral": {
+          "error_l2_rel": 9.460624391389788e-15,
+          "tiempo_pared_s": 78.399085,
+          "pasos_reales": 208,
+          "dt_real": 0.009615384615384616,
+          "T_real": 2.0,
+          "malla_real": 1024,
+          "excedio_presupuesto": false
+        },
+        "fd2": {
+          "error_l2_rel": 2.147262636279456e-06,
+          "tiempo_pared_s": 40.832756,
+          "pasos_reales": 208,
+          "dt_real": 0.009615384615384616,
+          "T_real": 2.0,
+          "malla_real": 1024,
+          "excedio_presupuesto": false
+        },
+        "carleman_K2_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=1099512676352 (max 4096), n_qubits=41 (max 12)",
+          "medicion": {
+            "m_celdas": 1048576,
+            "carleman_orden_pedido": 2,
+            "dim_sistema": 1099512676352,
+            "n_qubits_requeridos": 41,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 1.7e-05
+        },
+        "carleman_K1_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=1048576 (max 4096), n_qubits=20 (max 12)",
+          "medicion": {
+            "m_celdas": 1048576,
+            "carleman_orden_pedido": 1,
+            "dim_sistema": 1048576,
+            "n_qubits_requeridos": 20,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 5e-06
+        }
+      }
+    },
+    {
+      "Re": 102400.0,
+      "nu": 6.135923151542565e-05,
+      "malla_N": 2048,
+      "T_pedido": 2.0,
+      "artefacto": "airbus_punto_Re102400_N2048_20260824T201410Z.json",
+      "brazos": {
+        "espectral": {
+          "error_l2_rel": 9.024257528009099e-15,
+          "tiempo_pared_s": 840.681538,
+          "pasos_reales": 416,
+          "dt_real": 0.004807692307692308,
+          "T_real": 2.0,
+          "malla_real": 2048,
+          "excedio_presupuesto": false
+        },
+        "fd2": {
+          "error_l2_rel": 5.368274262921568e-07,
+          "tiempo_pared_s": 451.6241,
+          "pasos_reales": 416,
+          "dt_real": 0.004807692307692308,
+          "T_real": 2.0,
+          "malla_real": 2048,
+          "excedio_presupuesto": false
+        },
+        "carleman_K2_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=17592190238720 (max 4096), n_qubits=45 (max 12)",
+          "medicion": {
+            "m_celdas": 4194304,
+            "carleman_orden_pedido": 2,
+            "dim_sistema": 17592190238720,
+            "n_qubits_requeridos": 45,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 2.9e-05
+        },
+        "carleman_K1_variacional": {
+          "no_resuelto": true,
+          "motivo": "dimension del sistema de Carleman por sobre la cota declarada: dim=4194304 (max 4096), n_qubits=22 (max 12)",
+          "medicion": {
+            "m_celdas": 4194304,
+            "carleman_orden_pedido": 1,
+            "dim_sistema": 4194304,
+            "n_qubits_requeridos": 22,
+            "dim_max": 4096,
+            "qubits_max": 12
+          },
+          "tiempo_pared_s": 5e-06
+        }
+      }
+    }
+  ],
+  "puntos_no_corridos": [],
+  "corte_medido": {
+    "criterio_arranque": "error L2 rel < 0.01 en el brazo",
+    "criterio_degradacion_fd2": "error L2 rel > 0.1",
+    "Re_arranque_brazos_clasicos": 10.0,
+    "Re_arranque_tres_brazos": null,
+    "Re_degradacion_fd2": null,
+    "Re_maximo_corrido": 102400.0,
+    "malla_maxima_corrida": 2048,
+    "muro_que_corto_el_eje": "se agoto la lista de Reynolds declarada; el siguiente punto no cabia en el presupuesto (ver siguiente_punto_no_corrido)",
+    "siguiente_punto_no_corrido": {
+      "Re": 409600.0,
+      "malla_N": 4096,
+      "pared_medida_del_ultimo_punto_s": 1292.306,
+      "pared_proyectada_s": 12923.1,
+      "presupuesto_total_s": 2400.0,
+      "gastado_s": 1479.6,
+      "cabe": false,
+      "es_proyeccion_no_medicion": true
+    },
+    "fd2_error_decrece_monotono_desde_Re": 25.0,
+    "fd2_error_monotono_decreciente_en_todo_el_eje": false,
+    "lectura_medida": "Con la regla de acople del statement (la malla CRECE con Re) el error de fd2 DECRECE a lo largo del eje desde Re=25.0 en adelante, cuatro ordenes de magnitud entre punta y punta. NO decrece entre los dos primeros puntos (Re=10 y Re=25) porque ahi la regla tropieza con su propio piso N=32 y la malla no crece: ese tramo es del piso, no de la fisica. La condicion de corte por degradacion de fd2 (>10%) no se alcanza en NINGUN Reynolds corrido: el eje lo corta el presupuesto de pared, y ese es el numero que se declara. El brazo cuantico no cumple el criterio de arranque en ningun punto del eje (Re_arranque_tres_brazos = null): su error mas bajo medido sobre el eje es 4.9e-2, muy por encima del 1%."
+  },
+  "muro_brazo_cuantico": {
+    "descripcion": "Escalera a Re=10 fijo sobre el eje de la MALLA (no de Reynolds), K=1, ansatz de 6 capas: donde el brazo cuantico deja de resolver y por que. error_l2_rel_carleman_exacto es el MISMO sistema de Carleman resuelto exacto (expm_multiply): la diferencia contra el punta-a-punta es el costo del ansatz.",
+    "filas": [
+      {
+        "malla_N": 8,
+        "Re": 10.0,
+        "n_qubits": 6,
+        "dim_sistema_real": 64,
+        "n_parametros_ansatz": 42,
+        "capas_ansatz": 6,
+        "infidelidad_inicial": 5.972999872483342e-14,
+        "residuo_mclachlan_max": 9.324647701097128e-06,
+        "error_l2_rel_punta_a_punta": 0.031992008972300284,
+        "error_l2_rel_carleman_exacto": 0.03199168069005282,
+        "tiempo_pared_s": 1.826
+      },
+      {
+        "malla_N": 16,
+        "Re": 10.0,
+        "n_qubits": 8,
+        "dim_sistema_real": 256,
+        "n_parametros_ansatz": 56,
+        "capas_ansatz": 6,
+        "infidelidad_inicial": 1.3322676295501878e-15,
+        "residuo_mclachlan_max": 5.946067898321155e-06,
+        "error_l2_rel_punta_a_punta": 0.008032171521661028,
+        "error_l2_rel_carleman_exacto": 0.008031799258018753,
+        "tiempo_pared_s": 3.716
+      },
+      {
+        "malla_N": 32,
+        "Re": 10.0,
+        "n_qubits": 10,
+        "dim_sistema_real": 1024,
+        "n_parametros_ansatz": 70,
+        "capas_ansatz": 6,
+        "infidelidad_inicial": 0.02375017378967781,
+        "residuo_mclachlan_max": 0.9067060214281509,
+        "error_l2_rel_punta_a_punta": 0.08028913374923512,
+        "error_l2_rel_carleman_exacto": 0.0020103396990059216,
+        "tiempo_pared_s": 14.257
+      },
+      {
+        "malla_N": 64,
+        "Re": 10.0,
+        "n_qubits": 12,
+        "dim_sistema_real": 4096,
+        "n_parametros_ansatz": 84,
+        "capas_ansatz": 6,
+        "infidelidad_inicial": 0.023873099405775644,
+        "residuo_mclachlan_max": 0.9757873230946029,
+        "error_l2_rel_punta_a_punta": 0.14146322783986484,
+        "error_l2_rel_carleman_exacto": 0.0005027385648476773,
+        "tiempo_pared_s": 28.757
+      }
+    ]
+  },
+  "escalera_capas": {
+    "descripcion": "Mismo punto (N=32, Re=10, K=1) con mas capas de ansatz: cuanto cuesta empujar el muro de expresividad.",
+    "filas": [
+      {
+        "malla_N": 32,
+        "Re": 10.0,
+        "capas": 6,
+        "n_qubits": 10,
+        "n_parametros_ansatz": 70,
+        "infidelidad_inicial": 0.02375017378967781,
+        "residuo_mclachlan_max": 0.9067060214281509,
+        "error_l2_rel_punta_a_punta": 0.08028913374923512,
+        "tiempo_pared_s": 13.272
+      },
+      {
+        "malla_N": 32,
+        "Re": 10.0,
+        "capas": 12,
+        "n_qubits": 10,
+        "n_parametros_ansatz": 130,
+        "infidelidad_inicial": 0.00020937953436650503,
+        "residuo_mclachlan_max": 0.3639928251945945,
+        "error_l2_rel_punta_a_punta": 0.0034892018022157495,
+        "tiempo_pared_s": 48.43
+      },
+      {
+        "malla_N": 32,
+        "Re": 10.0,
+        "capas": 18,
+        "n_qubits": 10,
+        "n_parametros_ansatz": 190,
+        "infidelidad_inicial": 0.2846108334934808,
+        "residuo_mclachlan_max": 0.9820597982728052,
+        "error_l2_rel_punta_a_punta": 0.49136283444052176,
+        "tiempo_pared_s": 126.062
+      }
+    ]
+  },
+  "decisiones_no_prefijadas": {
+    "D_T": "T = 2.0 s. El prereg no fija el tiempo final; el statement sec.6 evalua en t = 1 s. Se toma T = 2.0 para que TODOS los brazos den varios pasos en todos los puntos: a T = 1 y N = 32 el brazo espectral daba 4 pasos y a N = 8 daba 1 solo paso, y con un unico paso el tiempo de pared es un piso del instrumento y no una curva. Los pasos reales de cada brazo en cada punto viajan medidos en la serie (campo pasos_reales).",
+    "D_regla_acople": "acople_sqrt con sus parametros por defecto (n_base=64, re_base=100): N = potencia de 2 >= 64*sqrt(Re/100), piso 32. Es la regla ya parametrizada del harness; se usa sin tocar y su descripcion viaja en cada artefacto de punto.",
+    "D_eje": "Reynolds en progresion geometrica de razon 4 desde Re=10, de modo que la malla acoplada duplique en cada punto (32, 32, 64, 128, ...). El extremo superior NO se elige: se corta donde lo mide la regla de corte (ver corte_medido).",
+    "D_presupuesto": "Presupuesto de pared declarado: 900 s por punto y 2400 s para el barrido completo. Antes de arrancar un punto se proyecta su costo como 10x el del punto anterior (el costo clasico crece ~N^3 y N se duplica); si la proyeccion no cabe en lo que queda, el barrido se detiene y declara el muro de presupuesto con los numeros medidos, en vez de recortar en silencio.",
+    "D_Q1_cotas_del_brazo_cuantico": "En el eje el brazo cuantico corre con dim_max=4096 y qubits_max=12, por debajo de las cotas del modulo (DIM_MAX=16384, QUBITS_MAX=14). Razon MEDIDA, no estimada: la construccion de A2 tiene nnz = 4*m^2 y la RSS maxima medida fue 0.32 GB a N=32 (m=1024) y 4.04 GB a N=64 (m=4096); el punto siguiente del eje (N=128, m=16384) proyecta ~64 GB sobre una maquina de 32 GiB. La cota se declara como decision para que el muro se reporte con su numero en vez de dejar la maquina paginando; la proyeccion se marca como proyeccion.",
+    "D_Q2_dos_ordenes_de_Carleman": "El eje lleva DOS brazos cuanticos: K=2 (el orden que SI incorpora el bloque cuadratico de Carleman, o sea la no-linealidad) y K=1 (el truncamiento lineal). Se corren los dos porque en este benchmark el termino cuadratico se cancela exactamente (test_tgv_tiene_termino_cuadratico_nulo), asi que K=1 y K=2 resuelven la misma fisica pero pagan dimensiones distintas: dim = m^K. Reportar solo uno esconderia o el costo real de linealizar la no-linealidad, o el alcance real del brazo.",
+    "D_Q3_ansatz_fijo": "El ansatz variacional se mantiene FIJO en 6 capas y 30 pasos de tiempo en todo el eje (instrumento fijo). No se le agregan capas punto a punto para 'salvar' el error: el muro de expresividad se mide y se declara (bloque muro_brazo_cuantico), y aparte se mide cuanto costaria empujarlo (escalera_capas).",
+    "D_metrica_tiempo": "'Tiempo-a-solucion' = tiempo de pared medido con time.perf_counter alrededor de la llamada al brazo, en un proceso que corre solo (sin otras cargas). No incluye el costo del arbitro analitico ni la escritura del artefacto, que son iguales para todos los brazos."
+  },
+  "decisiones_no_prefijadas_del_brazo_cuantico": {
+    "D1_discretizacion_base_de_Carleman": "Carleman se construye sobre la MISMA discretizacion de fd2 (diferencias centradas 2.o orden + Laplaciano 5 puntos + Poisson exacta del operador discreto), no sobre la espectral. Motivo: asi el limite K->infinito del brazo cuantico es exactamente el brazo fd2, y la convergencia en K es verificable contra un objeto que ya existe y ya esta probado.",
+    "D2_ansatz": "Ansatz real hardware-efficient: (capas+1) capas de RY en cada qubit separadas por CNOT en anillo. Real porque el estado de Carleman es real; un ansatz complejo gastaria la mitad de los parametros en una fase que no existe. n_parametros = n_qubits * (capas+1).",
+    "D3_orden_de_los_qubits": "El estado de Carleman se rellena con ceros hasta 2^n_qubits. El relleno es ceros exactos, no ruido: un relleno con basura seria un valor que no se midio viajando dentro del statevector.",
+    "D4_regularizacion": "M (metrica de Fubini-Study real) se invierte con Tikhonov lambda=1e-6 sobre la diagonal. M es singular por construccion cuando el ansatz tiene parametros redundantes; sin regularizacion el paso variacional explota.",
+    "D5_estado_inicial": "theta inicial se ajusta maximizando <psi(theta)|y0/||y0||> con L-BFGS-B desde una semilla PRNG fija (seed declarada). La infidelidad que quede es error del ansatz y viaja medida en el artefacto; no se disimula.",
+    "D6_muro": "Muro declarado por dos cotas duras y una medida: n_qubits > QUBITS_MAX o dim > DIM_MAX abortan ANTES de construir (motivo con el numero medido); MemoryError durante la construccion, no-finitud durante la evolucion y crecimiento de norma > FACTOR_DIVERGENCIA abortan con el paso medido.",
+    "D7_diagnostico_separado": "El artefacto trae DOS errores del brazo cuantico: el error de punta a punta (el que se compara con los clasicos) y el error del mismo sistema de Carleman resuelto EXACTO (expm_multiply). La diferencia entre ambos es el costo del ansatz variacional; sin ese par no se puede saber cual de las dos capas fallo."
+  },
+  "pared_total_eje_s": 1479.645,
+  "pared_total_script_s": 1715.967,
+  "entorno": {
+    "numpy": "1.23.5",
+    "python": "3.9.6",
+    "maquina": "macOS-26.5.2-arm64-arm-64bit",
+    "ram_bytes": 34359738368
+  },
+  "sin_red_sin_qpu": true,
+  "contenido_sha256": "sha256:1a197a03a3b609d37400fcad9d158587f9e26b37506fffd88eb44186eb4728ba",
+  "campos_no_reproducibles": {
+    "excluidos": [
+      "/entorno",
+      "/escalera_capas/filas[0]/tiempo_pared_s",
+      "/escalera_capas/filas[1]/tiempo_pared_s",
+      "/escalera_capas/filas[2]/tiempo_pared_s",
+      "/muro_brazo_cuantico/filas[0]/tiempo_pared_s",
+      "/muro_brazo_cuantico/filas[1]/tiempo_pared_s",
+      "/muro_brazo_cuantico/filas[2]/tiempo_pared_s",
+      "/muro_brazo_cuantico/filas[3]/tiempo_pared_s",
+      "/pared_total_eje_s",
+      "/pared_total_script_s",
+      "/serie[0]/artefacto (marca de tiempo en el nombre)",
+      "/serie[0]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[0]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[0]/brazos/espectral/tiempo_pared_s",
+      "/serie[0]/brazos/fd2/tiempo_pared_s",
+      "/serie[1]/artefacto (marca de tiempo en el nombre)",
+      "/serie[1]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[1]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[1]/brazos/espectral/tiempo_pared_s",
+      "/serie[1]/brazos/fd2/tiempo_pared_s",
+      "/serie[2]/artefacto (marca de tiempo en el nombre)",
+      "/serie[2]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[2]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[2]/brazos/espectral/tiempo_pared_s",
+      "/serie[2]/brazos/fd2/tiempo_pared_s",
+      "/serie[3]/artefacto (marca de tiempo en el nombre)",
+      "/serie[3]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[3]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[3]/brazos/espectral/tiempo_pared_s",
+      "/serie[3]/brazos/fd2/tiempo_pared_s",
+      "/serie[4]/artefacto (marca de tiempo en el nombre)",
+      "/serie[4]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[4]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[4]/brazos/espectral/tiempo_pared_s",
+      "/serie[4]/brazos/fd2/tiempo_pared_s",
+      "/serie[5]/artefacto (marca de tiempo en el nombre)",
+      "/serie[5]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[5]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[5]/brazos/espectral/tiempo_pared_s",
+      "/serie[5]/brazos/fd2/tiempo_pared_s",
+      "/serie[6]/artefacto (marca de tiempo en el nombre)",
+      "/serie[6]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[6]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[6]/brazos/espectral/tiempo_pared_s",
+      "/serie[6]/brazos/fd2/tiempo_pared_s",
+      "/serie[7]/artefacto (marca de tiempo en el nombre)",
+      "/serie[7]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[7]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[7]/brazos/espectral/tiempo_pared_s",
+      "/serie[7]/brazos/fd2/tiempo_pared_s"
+    ],
+    "por_que": "dependen de la maquina o del momento y ningun tercero los reproduce. Los tiempos de pared son MEDICIONES del experimento, no ruido: se comparan entre brazos de la misma corrida, nunca entre computadores.",
+    "lista_medida": "son los que el podador encontro de verdad, no los que se esperaba encontrar."
+  }
+}

@@ -1,0 +1,24 @@
+{
+ "que_es": "comparacion de DOS corridas del mismo eje en la MISMA maquina, para separar lo que reproduce de lo que no. No mide portabilidad entre computadores: para eso haria falta otra maquina, y no la tenemos.",
+ "errores": {
+  "comparados": 19,
+  "identicos": 19,
+  "reproducen_todos": true
+ },
+ "tiempos_desviacion_relativa_pct": {
+  "por_brazo": {
+   "espectral": 4.4,
+   "fd2": 7.1,
+   "carleman_K1_variacional": 31.2
+  },
+  "min": 4.4,
+  "max": 31.2
+ },
+ "razones_entre_brazos_desviacion_pct": {
+  "n": 28,
+  "mediana": 38.2,
+  "min": 1.0,
+  "max": 236.6
+ },
+ "lectura": "un cociente SUMA el ruido de sus dos terminos: cancela la velocidad de la maquina y amplifica el ruido de medicion. Con tiempos de este tamano, gana el ruido."
+}

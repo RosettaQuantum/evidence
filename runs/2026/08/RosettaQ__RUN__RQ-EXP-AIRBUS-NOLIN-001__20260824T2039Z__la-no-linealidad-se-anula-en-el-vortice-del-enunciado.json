@@ -1,0 +1,120 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-AIRBUS-NOLIN-001__20260824T2039Z__la-no-linealidad-se-anula-en-el-vortice-del-enunciado.json",
+  "file_id": "RQ-EXP-AIRBUS-NOLIN-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Donde vive la no-linealidad en la familia de Taylor-Green. Es el hallazgo del track y es sobre el BENCHMARK, no sobre nosotros.",
+  "prereg": {
+   "file_id": "RQ-PREREG-AIRBUS-001",
+   "content_hash": "sha256:39a16cf63a36095217fdf5fbdbf104f015c01617eb5e0944e90627d8d0d4af02"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-24T20:39:11+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_airbus.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:6330d33b5a364113c5a59c81ed1272a08a8288c9ee5c48b50ac78b60f3bbd185",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:89b1d737f28f731050130b311921fc2d773e94371f51baeac40f681fd0b16926"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "nolinealidad_donde_vive.json",
+    "sha256": "sha256:d120124444713d3dad2e0beb636a024ef02609237938adc3afc1af8ac552455e",
+    "publicado_como": "code/nolinealidad_donde_vive@d1201244.json",
+    "para_que_sirve_el_hash_del_archivo": "comprueba que bajaste NUESTRO artefacto exacto",
+    "contenido_determinista": {
+     "valor": "sha256:153fd1c3d0c6bc33bd6b0e62229f935d09678bf358dbf48f87189ac75d3a19eb",
+     "para_que_sirve": "comprueba que re-corriste el instrumento y la ciencia reproduce, aunque tu archivo difiera. Un tercero que re-corra y compare contra el hash del ARCHIVO va a creer que encontro un error.",
+     "no_es_el_hash_de_un_archivo": true
+    },
+    "campos_no_reproducibles": {
+     "excluidos": [
+      "/entorno",
+      "/pared_total_s"
+     ],
+     "por_que": "dependen de la maquina o del momento y ningun tercero los reproduce. Los tiempos de pared son MEDICIONES del experimento, no ruido: se comparan entre brazos de la misma corrida, nunca entre computadores.",
+     "lista_medida": "son los que el podador encontro de verdad, no los que se esperaba encontrar."
+    },
+    "instrumentos": {
+     "nolinealidad_donde_vive.py": {
+      "sha256": "sha256:f707cf906eecd4d41a5f5d81197185095f39c88946dacc741fc49fbb9a4866b0"
+     },
+     "airbus_harness.py": {
+      "sha256": "sha256:802cd60e05645c0e6ec5c5a85aaf7b269ee77207c34c2520758764b0991756b8"
+     },
+     "airbus_carleman.py": {
+      "sha256": "sha256:b5ef810ad8790ca05c1dcc395dd6c68ec274fbef39079445c5b3435544ee86c5"
+     }
+    }
+   },
+   "HALLAZGO": "en el vortice de Taylor-Green tal como el enunciado lo especifica, el termino no lineal se anula EXACTAMENTE: razon 2.347e-16 del termino lineal, a precision de maquina, en los operadores DISCRETOS y no solo en el continuo. El obstaculo que el propio enunciado nombra —llevar fisica no lineal a hardware unitario— NO SE PUEDE EXHIBIR en el caso que eligio para probarlo.",
+   "MECANISMO": "La no-linealidad discreta se anula EXACTAMENTE si y solo si la vorticidad vive en UNA sola capa de autovalor del Laplaciano discreto de 5 puntos. Mecanismo: en ese caso la funcion de corriente es psi = c*w con c constante, y el Jacobiano J(psi,w) es identicamente nulo punto a punto -- tambien en el discreto. El TGV del statement, el TGV rotado 45 grados y el TGV anisotropo son todos de una sola capa: por eso el benchmark no ejercita la no-linealidad. En cuanto el campo toca DOS capas -- una superposicion de numeros de onda distintos, o una perturbacion ajena -- la razon deja de ser cero y crece lineal con la amplitud de la componente ajena.",
+   "separacion_medida": {
+    "razon_maxima_entre_las_que_se_anulan": 3.399762200436215e-16,
+    "razon_minima_entre_las_que_no": 0.00012492716046276755,
+    "ordenes_de_magnitud": 11.6,
+    "denominador": 18,
+    "una_capa": 5,
+    "varias_capas": 13,
+    "se_cumple_en_toda_la_tabla": true
+   },
+   "LEY_QUE_LO_RESTAURA": "la razon crece LINEAL en la amplitud relativa de la perturbacion para eps pequeno: razon ~ 1.2493 * eps",
+   "controles": "el termino que se anula podria haber sido un error de nuestros operadores: las mismas matrices sobre un campo aleatorio de banda limitada dan razon 2,93e-01, no cero. El cero pertenece al problema, no al codigo.",
+   "verificado_por_el_lab": "esta corrida se re-ejecuto en esta sesion y reprodujo la tabla completa; la unica diferencia entre corridas fue el reloj."
+  },
+  "como": {
+   "codigo": {
+    "airbus_harness.py": {
+     "sha256": "sha256:802cd60e05645c0e6ec5c5a85aaf7b269ee77207c34c2520758764b0991756b8",
+     "publicado_como": "code/airbus_harness@802cd60e.py"
+    },
+    "airbus_carleman.py": {
+     "sha256": "sha256:b5ef810ad8790ca05c1dcc395dd6c68ec274fbef39079445c5b3435544ee86c5",
+     "publicado_como": "code/airbus_carleman@b5ef810a.py"
+    },
+    "barrido_airbus.py": {
+     "sha256": "sha256:7b7e3844fe8fc3a3d826bcadfa06b6d51f0ed233ba44743e03d39d5de078c56f",
+     "publicado_como": "code/barrido_airbus@7b7e3844.py"
+    },
+    "nolinealidad_donde_vive.py": {
+     "sha256": "sha256:f707cf906eecd4d41a5f5d81197185095f39c88946dacc741fc49fbb9a4866b0",
+     "publicado_como": "code/nolinealidad_donde_vive@f707cf90.py"
+    },
+    "_procedencia.py": {
+     "sha256": "sha256:afc01d80e184b7cbc3d2fd295c67d4e65dbb115f3dbae56e19a0adc9c44b68e7",
+     "publicado_como": "code/_procedencia@afc01d80.py"
+    },
+    "comparar_barrido.py": {
+     "sha256": "sha256:1b5bcb6ccd112785b78c3ca6bfb130c830936b962dac824bd1b764d5cfd54fae",
+     "publicado_como": "code/comparar_barrido@1b5bcb6c.py"
+    },
+    "build_airbus_informe.py": {
+     "sha256": "sha256:67f44f47f812585fa33b8e1ef456e1bef75f37f729ed1bbeff77e90478613cf7",
+     "publicado_como": "code/build_airbus_informe@67f44f47.py"
+    }
+   },
+   "medicion": "razon = || A2 (w kron w) || / || A1 w ||, operadores de matrices_fd"
+  },
+  "cuando": {
+   "archived_at": "2026-08-24T20:39:11+00:00"
+  },
+  "donde": {
+   "compute": "Mac local, sin red y sin QPU"
+  },
+  "porque": {
+   "question": "el termino no lineal se cancela en el TGV del enunciado. ¿En que casos de la MISMA familia SI es distinto de cero, y cuanto?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}

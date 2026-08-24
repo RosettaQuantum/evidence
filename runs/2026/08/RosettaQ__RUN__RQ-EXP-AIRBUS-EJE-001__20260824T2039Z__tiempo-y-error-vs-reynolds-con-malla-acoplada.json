@@ -1,0 +1,192 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-AIRBUS-EJE-001__20260824T2039Z__tiempo-y-error-vs-reynolds-con-malla-acoplada.json",
+  "file_id": "RQ-EXP-AIRBUS-EJE-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "El eje del track Airbus: tiempo-a-solucion y error contra Reynolds, con la malla acoplada como exige el §4.1 del enunciado, contra la solucion analitica cerrada del §5.3. Cuatro brazos: espectral, diferencias finitas y dos ordenes de Carleman variacional. Simulacion local.",
+  "prereg": {
+   "file_id": "RQ-PREREG-AIRBUS-001",
+   "content_hash": "sha256:39a16cf63a36095217fdf5fbdbf104f015c01617eb5e0944e90627d8d0d4af02"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-24T20:39:11+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_airbus.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:6330d33b5a364113c5a59c81ed1272a08a8288c9ee5c48b50ac78b60f3bbd185",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:e595fa2b873ee4c36d179b290945c15930790e87eb09592e523b023a4714716a"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "barrido_airbus.json",
+    "sha256": "sha256:f7d15b36b98d7d00176723aa53dd1e244defceda10423eb647847ef0d44ce5a5",
+    "publicado_como": "code/barrido_airbus@f7d15b36.json",
+    "para_que_sirve_el_hash_del_archivo": "comprueba que bajaste NUESTRO artefacto exacto",
+    "contenido_determinista": {
+     "valor": "sha256:1a197a03a3b609d37400fcad9d158587f9e26b37506fffd88eb44186eb4728ba",
+     "para_que_sirve": "comprueba que re-corriste el instrumento y la ciencia reproduce, aunque tu archivo difiera. Un tercero que re-corra y compare contra el hash del ARCHIVO va a creer que encontro un error.",
+     "no_es_el_hash_de_un_archivo": true
+    },
+    "campos_no_reproducibles": {
+     "excluidos": [
+      "/entorno",
+      "/escalera_capas/filas[0]/tiempo_pared_s",
+      "/escalera_capas/filas[1]/tiempo_pared_s",
+      "/escalera_capas/filas[2]/tiempo_pared_s",
+      "/muro_brazo_cuantico/filas[0]/tiempo_pared_s",
+      "/muro_brazo_cuantico/filas[1]/tiempo_pared_s",
+      "/muro_brazo_cuantico/filas[2]/tiempo_pared_s",
+      "/muro_brazo_cuantico/filas[3]/tiempo_pared_s",
+      "/pared_total_eje_s",
+      "/pared_total_script_s",
+      "/serie[0]/artefacto (marca de tiempo en el nombre)",
+      "/serie[0]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[0]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[0]/brazos/espectral/tiempo_pared_s",
+      "/serie[0]/brazos/fd2/tiempo_pared_s",
+      "/serie[1]/artefacto (marca de tiempo en el nombre)",
+      "/serie[1]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[1]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[1]/brazos/espectral/tiempo_pared_s",
+      "/serie[1]/brazos/fd2/tiempo_pared_s",
+      "/serie[2]/artefacto (marca de tiempo en el nombre)",
+      "/serie[2]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[2]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[2]/brazos/espectral/tiempo_pared_s",
+      "/serie[2]/brazos/fd2/tiempo_pared_s",
+      "/serie[3]/artefacto (marca de tiempo en el nombre)",
+      "/serie[3]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[3]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[3]/brazos/espectral/tiempo_pared_s",
+      "/serie[3]/brazos/fd2/tiempo_pared_s",
+      "/serie[4]/artefacto (marca de tiempo en el nombre)",
+      "/serie[4]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[4]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[4]/brazos/espectral/tiempo_pared_s",
+      "/serie[4]/brazos/fd2/tiempo_pared_s",
+      "/serie[5]/artefacto (marca de tiempo en el nombre)",
+      "/serie[5]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[5]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[5]/brazos/espectral/tiempo_pared_s",
+      "/serie[5]/brazos/fd2/tiempo_pared_s",
+      "/serie[6]/artefacto (marca de tiempo en el nombre)",
+      "/serie[6]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[6]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[6]/brazos/espectral/tiempo_pared_s",
+      "/serie[6]/brazos/fd2/tiempo_pared_s",
+      "/serie[7]/artefacto (marca de tiempo en el nombre)",
+      "/serie[7]/brazos/carleman_K1_variacional/tiempo_pared_s",
+      "/serie[7]/brazos/carleman_K2_variacional/tiempo_pared_s",
+      "/serie[7]/brazos/espectral/tiempo_pared_s",
+      "/serie[7]/brazos/fd2/tiempo_pared_s"
+     ],
+     "por_que": "dependen de la maquina o del momento y ningun tercero los reproduce. Los tiempos de pared son MEDICIONES del experimento, no ruido: se comparan entre brazos de la misma corrida, nunca entre computadores.",
+     "lista_medida": "son los que el podador encontro de verdad, no los que se esperaba encontrar."
+    },
+    "instrumentos": {
+     "barrido_airbus.py": {
+      "sha256": "sha256:7b7e3844fe8fc3a3d826bcadfa06b6d51f0ed233ba44743e03d39d5de078c56f"
+     },
+     "airbus_harness.py": {
+      "sha256": "sha256:802cd60e05645c0e6ec5c5a85aaf7b269ee77207c34c2520758764b0991756b8"
+     },
+     "airbus_carleman.py": {
+      "sha256": "sha256:b5ef810ad8790ca05c1dcc395dd6c68ec274fbef39079445c5b3435544ee86c5"
+     }
+    }
+   },
+   "puntos": 8,
+   "eje": {
+    "Re_min": 10.0,
+    "Re_max": 102400.0,
+    "malla_min": 32,
+    "malla_max": 2048,
+    "regla_acople": "N = potencia de 2 >= 64*sqrt(Re/100), piso 32 (resolucion crece con Re como exige el statement §4.1)"
+   },
+   "RESULTADO_errores": "el error de diferencias finitas CAE cuatro ordenes a lo largo del eje (2,01e-03 -> 5,37e-07) mientras el costo sube. Los errores reproducen EXACTO entre corridas: 19 de 19 identicos al ultimo digito.",
+   "RESULTADO_brazo_cuantico": "K=2 —el orden que SI incorpora el bloque cuadratico de Carleman— resolvio 0 de 8 puntos: necesita 21 a 45 qubits, sobre la cota declarada desde el primer punto. K=1, que descarta ese bloque, resolvio 3 de 8 con error 4,86e-02 a 8,03e-02, entre 28 y 89 veces el de diferencias finitas. El brazo cuantico no pierde la comparacion: el que lleva la fisica no se puede plantear a este acople de malla, y el que se puede plantear no es el que importa.",
+   "desviacion_de_la_regla_de_parada": "se agoto la lista de Reynolds declarada; el siguiente punto no cabia en el presupuesto (ver siguiente_punto_no_corrido)",
+   "decisiones_no_prefijadas": {
+    "del_instrumento": 8,
+    "del_brazo_cuantico": 7,
+    "donde": "nombradas dentro del artefacto, no en la memoria de nadie"
+   },
+   "cruce_ventaja_cuantica": 0
+  },
+  "como": {
+   "codigo": {
+    "airbus_harness.py": {
+     "sha256": "sha256:802cd60e05645c0e6ec5c5a85aaf7b269ee77207c34c2520758764b0991756b8",
+     "publicado_como": "code/airbus_harness@802cd60e.py"
+    },
+    "airbus_carleman.py": {
+     "sha256": "sha256:b5ef810ad8790ca05c1dcc395dd6c68ec274fbef39079445c5b3435544ee86c5",
+     "publicado_como": "code/airbus_carleman@b5ef810a.py"
+    },
+    "barrido_airbus.py": {
+     "sha256": "sha256:7b7e3844fe8fc3a3d826bcadfa06b6d51f0ed233ba44743e03d39d5de078c56f",
+     "publicado_como": "code/barrido_airbus@7b7e3844.py"
+    },
+    "nolinealidad_donde_vive.py": {
+     "sha256": "sha256:f707cf906eecd4d41a5f5d81197185095f39c88946dacc741fc49fbb9a4866b0",
+     "publicado_como": "code/nolinealidad_donde_vive@f707cf90.py"
+    },
+    "_procedencia.py": {
+     "sha256": "sha256:afc01d80e184b7cbc3d2fd295c67d4e65dbb115f3dbae56e19a0adc9c44b68e7",
+     "publicado_como": "code/_procedencia@afc01d80.py"
+    },
+    "comparar_barrido.py": {
+     "sha256": "sha256:1b5bcb6ccd112785b78c3ca6bfb130c830936b962dac824bd1b764d5cfd54fae",
+     "publicado_como": "code/comparar_barrido@1b5bcb6c.py"
+    },
+    "build_airbus_informe.py": {
+     "sha256": "sha256:67f44f47f812585fa33b8e1ef456e1bef75f37f729ed1bbeff77e90478613cf7",
+     "publicado_como": "code/build_airbus_informe@67f44f47.py"
+    }
+   },
+   "reproducibilidad": {
+    "archivo": "reproducibilidad_barrido.json",
+    "sha256": "sha256:7c1f6da8db0f5ca7ed180bc4908d6b971865264afebc2de7665942df653e844e",
+    "publicado_como": "code/reproducibilidad_barrido@7c1f6da8.json",
+    "que_mide": "comparacion de DOS corridas del mismo eje en la MISMA maquina, para separar lo que reproduce de lo que no. No mide portabilidad entre computadores: para eso haria falta otra maquina, y no la tenemos.",
+    "tiempos_desviacion_pct": {
+     "por_brazo": {
+      "espectral": 4.4,
+      "fd2": 7.1,
+      "carleman_K1_variacional": 31.2
+     },
+     "min": 4.4,
+     "max": 31.2
+    },
+    "razones_desviacion_pct": {
+     "n": 28,
+     "mediana": 38.2,
+     "min": 1.0,
+     "max": 236.6
+    },
+    "lectura": "un cociente SUMA el ruido de sus dos terminos: cancela la velocidad de la maquina y amplifica el ruido de medicion. Con tiempos de este tamano, gana el ruido."
+   }
+  },
+  "cuando": {
+   "archived_at": "2026-08-24T20:39:11+00:00"
+  },
+  "donde": {
+   "compute": "Mac local, sin red y sin QPU"
+  },
+  "porque": {
+   "question": "¿como crecen tiempo y error con Reynolds cuando la malla se acopla como el enunciado exige, y donde entra un brazo cuantico?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}
