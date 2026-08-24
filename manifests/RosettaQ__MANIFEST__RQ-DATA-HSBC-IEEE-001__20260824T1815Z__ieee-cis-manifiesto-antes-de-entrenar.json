@@ -1,0 +1,177 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__MANIFEST__RQ-DATA-HSBC-IEEE-001__20260824T1815Z__ieee-cis-manifiesto-antes-de-entrenar.json",
+  "file_id": "RQ-DATA-HSBC-IEEE-001",
+  "type": "MANIFEST",
+  "is_demo": false,
+  "scope_note": "Manifiesto del dataset de BENCHMARK del track HSBC (IEEE-CIS), sellado ANTES de la primera corrida de entrenamiento, como exige la guardia (b) del pre-registro. NINGUN dato de IEEE-CIS entra al repositorio publico: las reglas de Kaggle prohiben redistribuirlo. Lo que viaja son hashes, tamanos y censo; cada verificador baja el dato con su propia cuenta.",
+  "prereg": {
+   "file_id": "RQ-PREREG-HSBC-001",
+   "content_hash": "sha256:b04f214fae845b1c50431d225e6590b0956d8920c24b7c7fa26ed94c58f3f2db"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-24T18:15:53+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_data_ieee_cis.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:0ff9b2b3f9da2664ebb0284944e208ecb613eb16139da6a8e49f0f2af2260483",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:4215a33349f7e99266529f887c7dcc19cb7e5a7f7604d2b278f719451e817ea6"
+ },
+ "w6": {
+  "que": {
+   "dataset": "IEEE-CIS Fraud Detection (Vesta) — benchmark designado por el organizador en la tabla §6.1 del statement",
+   "licencia_y_limites": {
+    "kaggle_7A": "uso NO comercial. Se usa solo como benchmark dentro del challenge, al amparo de la designacion del organizador.",
+    "kaggle_7B": "prohibido redistribuir. Por eso ningun byte del dataset entra al repositorio publico y la referencia viaja por sha256.",
+    "comprobado": "la carpeta de datos no esta dentro de ningun repositorio git."
+   },
+   "medido_por_el_laboratorio": {
+    "inventario": [
+     {
+      "archivo": "train_transaction.csv",
+      "sha256": "sha256:3a5c83ab6b3cc13dcabe5ffa9f522307fd5f7f7b6e6f6a60c32284ca6283d642",
+      "bytes": 683351067,
+      "rol": "extraido del zip en este Mac"
+     },
+     {
+      "archivo": "train_identity.csv",
+      "sha256": "sha256:b63c725d8377be90a995268d97f347c17d456b95db45807adcf9f59cd603c37c",
+      "bytes": 26529680,
+      "rol": "extraido del zip en este Mac"
+     },
+     {
+      "archivo": "test_transaction.csv",
+      "sha256": "sha256:2a8e51f1d335a86025d2b7f45beb9b78d0ab1edd726ef531d8b71a8a0065c011",
+      "bytes": 613194934,
+      "rol": "extraido del zip en este Mac"
+     },
+     {
+      "archivo": "test_identity.csv",
+      "sha256": "sha256:3e5978cb13ca5e72f52babc4349ae0125e14b87ca8bfabe952ab67bb4ff1e10b",
+      "bytes": 25797161,
+      "rol": "extraido del zip en este Mac"
+     },
+     {
+      "archivo": "sample_submission.csv",
+      "sha256": "sha256:50d7e0d6fcfc6e498efc297001f252101512ccdcb34aefbde6db98f8242a3626",
+      "bytes": 6080314,
+      "rol": "extraido del zip en este Mac"
+     },
+     {
+      "archivo": "ieee-fraud-detection.zip",
+      "sha256": "sha256:4cc646da09d0a9b265983ffed775b1f9ee15af5266586df610e04d6adae0b829",
+      "bytes": 123856947,
+      "rol": "raiz de la cadena (unico artefacto directo del endpoint)"
+     }
+    ],
+    "censo_train_transaction": {
+     "filas": 590540,
+     "columnas": 394,
+     "tiene_isFraud": true,
+     "TransactionDT": {
+      "min": 86400,
+      "max": 15811131,
+      "span_dias": 182.0
+     },
+     "fraudes": 20663,
+     "tasa_fraude": 0.03499
+    },
+    "censo_test_transaction": {
+     "filas": 506691,
+     "columnas": 393,
+     "tiene_isFraud": false,
+     "TransactionDT": {
+      "min": 18403224,
+      "max": 34214345,
+      "span_dias": 183.0
+     }
+    },
+    "censo_train_identity": {
+     "filas": 144233,
+     "columnas": 41,
+     "tiene_isFraud": false
+    },
+    "censo_test_identity": {
+     "filas": 141907,
+     "columnas": 41,
+     "tiene_isFraud": false
+    },
+    "particion_temporal_del_prereg": {
+     "regla": "80/20 por TransactionDT, la del pre-registro RQ-PREREG-HSBC-001 §3",
+     "train": {
+      "filas": 472432,
+      "fraudes": 16599,
+      "tasa_fraude": 0.035135,
+      "TransactionDT": [
+       86400,
+       12192842
+      ],
+      "ventana_dias": 140.12
+     },
+     "test": {
+      "filas": 118108,
+      "fraudes": 4064,
+      "tasa_fraude": 0.034409,
+      "TransactionDT": [
+       12192900,
+       15811131
+      ],
+      "ventana_dias": 41.88
+     },
+     "cambio_relativo_de_la_tasa_pct": -2.1
+    },
+    "HALLAZGO_test_de_kaggle_sin_etiquetas": "test_transaction.csv NO trae isFraud: es el test de la competencia con etiquetas ocultas. Por lo tanto NINGUNA metrica propia puede calcularse sobre el, y la evaluacion sale de una particion temporal DENTRO de train_transaction.csv. Se declara aqui para que nadie lo asuma al reves.",
+    "hueco_temporal_entre_train_y_test_de_kaggle_dias": 30.0
+   },
+   "declarado_por_el_notario": {
+    "quien_descargo": "sesion de coordinacion (notario)",
+    "endpoint": "GET https://www.kaggle.com/api/v1/competitions/data/download-all/ieee-fraud-detection  (Authorization: Bearer, -L)",
+    "cuenta_kaggle": "nicholasiakl",
+    "cuenta_confirmada_por": "Nicholas, desde la pantalla de su cuenta",
+    "acepto_las_reglas_de_la_competencia": true,
+    "como_se_comprobo_la_aceptacion": "competitions/list?group=entered paso de vacio a listar ieee-fraud-detection.",
+    "fin_de_la_descarga_utc": "2026-08-24T16:43:45Z",
+    "inicio_de_la_descarga": null,
+    "inicio_AUSENTE_por_que": "no se registro; la linea se sobrescribio. Se declara ausente en vez de estimarse.",
+    "ancla_externa_de_TAMANOS": "totalBytes por archivo de /api/v1/competitions/data/list/ieee-fraud-detection; los cinco calzan.",
+    "SIN_ancla_externa_de_BYTES": "Kaggle no publica checksums. Los sha256 de este manifiesto los computamos nosotros: fijan reproducibilidad, NO certifican procedencia."
+   },
+   "contraste_con_ULB": {
+    "por_que_importa": "el pre-registro fija particion temporal en los dos datasets. La pregunta que decide cuanto vale esa particion es cuanto FUTURO ve el test, y las dos respuestas no se parecen.",
+    "ULB_ventana_de_test_horas": 7.65,
+    "IEEE_ventana_de_test_dias": 41.88,
+    "ULB_cambio_de_tasa_pct": -28.0,
+    "IEEE_cambio_de_tasa_pct": -2.1,
+    "medido_como": "misma regla 80/20 temporal en los dos. Las cifras de ULB se recomputaron desde creditcard.arff, cuyo sha256 calza con el que sella RQ-DATA-HSBC-ULB-001, y reproducen la particion del run RQ-EXP-HSBC-BASE-001 (227.845/417 y 56.962/75)."
+   },
+   "ambiguedad_del_statement_resuelta": "el statement menciona «~24,000 rows» en su guia de hardware. Medido: IEEE-CIS tiene 590.540 filas de entrenamiento, que es exactamente lo que el mismo statement declara. Las ~24.000 no corresponden a este dataset ni a ninguno de los tres designados (ULB 284.807; Sparkov ~1,8 M)."
+  },
+  "como": {
+   "receta_para_un_tercero": "1) crear cuenta en Kaggle y aceptar las reglas de ieee-fraud-detection; 2) descargar con la API oficial; 3) descomprimir; 4) recomputar los sha256 de este manifiesto. Si difieren, NO seguir: los resultados de este track estan atados a estos bytes.",
+   "medido_por": {
+    "archivo": "evidence-staging/seal_data_ieee_cis.py"
+   }
+  },
+  "cuando": {
+   "archived_at": "2026-08-24T18:15:53+00:00"
+  },
+  "donde": {
+   "datos": "Mac local, fuera de todo repositorio git",
+   "compute": "local, sin backend de pago"
+  },
+  "porque": {
+   "question": "fijar los bytes exactos del benchmark ANTES de que exista un modelo, para que ningun resultado pueda elegir sus datos despues de verlos."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio (censo y hashes)",
+   "notario": "sesion de coordinacion (descarga y sus campos)",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "quien descarga declara la descarga; quien sella recomputa los bytes; el notario ancla."
+  }
+ }
+}
