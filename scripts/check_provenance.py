@@ -137,15 +137,28 @@ if os.path.exists(TERCEROS):
     # cada entrada arranca en "## " y debe traer sus tres campos
     entradas = re.split(r"\n## ", cuerpo)[1:]
     for e in entradas:
-        sha = re.search(r"sha256:([0-9a-f]{16,64})", e)
+        # `findall` y NO `search`, y esto costo un sello (24-ago). La version anterior
+        # tomaba UN solo hash por entrada: el laboratorio declaro los seis archivos de
+        # IEEE-CIS en una entrada con tabla, el auditor registro el primero y dejo los
+        # otros CINCO como «sin publicar» **en silencio**. Lo peor no fue el numero mal:
+        # fue que una declaracion correcta se leyera como incompleta sin decir por que.
+        #
+        # Una entrada con varios hashes es legitima —los cinco CSV de IEEE-CIS vienen del
+        # mismo endpoint y comparten fuente y verificacion— asi que se registran TODOS, y
+        # se imprime cuantos, porque un conteo que nadie ve es la mitad de un guardia
+        # (CLAUDE.md §5 bis regla 1: todo lo que recorre un conjunto reporta su denominador).
+        shas = re.findall(r"sha256:([0-9a-f]{16,64})", e)
         url = re.search(r"fuente-oficial\**:?\**\s*(https?://\S+)", e)
         ver = re.search(r"verificacion\**:", e)
-        if not (sha and url and ver):
+        if not (shas and url and ver):
             print("ERROR: entrada malformada en PROCEDENCIA-EN-FUENTE-DE-TERCEROS.md — "
                   "faltan campos obligatorios (sha256 / fuente-oficial con URL / "
                   "verificacion) en: %s" % e.split("\n")[0][:70])
             sys.exit(1)
-        verificables_terceros.add(sha.group(1).lower())
+        for h in shas:
+            verificables_terceros.add(h.lower())
+        print("  terceros: '%s' declara %d hash(es)"
+              % (e.split("\n")[0].strip()[:52], len(shas)))
 
 perdidas = {k: v for k, v in faltan.items()
             if any(k[1].split(":")[-1].lower().startswith(h) for h in declarados_perdidos)}
