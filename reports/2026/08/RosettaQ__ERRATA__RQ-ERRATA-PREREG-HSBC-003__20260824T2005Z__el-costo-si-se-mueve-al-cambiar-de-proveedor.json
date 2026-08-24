@@ -1,0 +1,112 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__ERRATA__RQ-ERRATA-PREREG-HSBC-003__20260824T2005Z__el-costo-si-se-mueve-al-cambiar-de-proveedor.json",
+  "file_id": "RQ-ERRATA-PREREG-HSBC-003",
+  "type": "ERRATA",
+  "is_demo": false,
+  "scope_note": "Errata de RQ-PREREG-HSBC-003-CUANTICO. NO modifica el original: su archivo, su hash y su ancla quedan intactos. Corrige una afirmacion que la tabla del propio artefacto desmiente. Emision autorizada por Nicholas.",
+  "corrige": {
+   "file_id": "RQ-PREREG-HSBC-003-CUANTICO",
+   "content_hash": "sha256:e15b1808c03c29a8623eb687c3790c0a00e29cb5ae3ff6848f83d94269c5abb8",
+   "sealed_at": "2026-08-21T17:01:17+00:00",
+   "regla": "el sello original no se reescribe ni se re-sella."
+  },
+  "texto_fuente": {
+   "archivo": "ERRATA-PREREG-HSBC-003.md",
+   "sha256": "sha256:5eb308dea03c13014d4f0785abe938dea864d6144982a9d3053575293ae50181",
+   "publicado_como": "data/2026/08/ERRATA-PREREG-HSBC-003@5eb308de.md"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-24T20:05:02+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_errata_prereg_hsbc_003.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:063c14feceac3dc46ef2f545ce6f80b281c24e32a94cf2f9ea30c0a8c5d3cbd6",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:3b46354aaf213c160dce99bbb128e8e73597c42c4ab29319bc6ed3a22c53764f"
+ },
+ "w6": {
+  "que": {
+   "afirmacion_retractada": "ni reducir disparos ni cambiar de proveedor mueve el costo — solo reducir pares",
+   "por_que_es_falsa": "el mismo trabajo (demostracion 200x50, 10.000 pares x 100 disparos) cuesta USD 3.425 en Rigetti Cepheus y USD 83.000 en IonQ Forte. Factor 24,2. El per-shot va de 0,000425 a 0,08: factor 188.",
+   "tabla_recomputada_al_sellar": {
+    "Rigetti Cepheus": {
+     "usd_total": 3425.0,
+     "cuota_tareas_pct": 87.6,
+     "cuota_disparos_pct": 12.4
+    },
+    "IQM Garnet": {
+     "usd_total": 4450.0,
+     "cuota_tareas_pct": 67.4,
+     "cuota_disparos_pct": 32.6
+    },
+    "IQM Emerald": {
+     "usd_total": 4600.0,
+     "cuota_tareas_pct": 65.2,
+     "cuota_disparos_pct": 34.8
+    },
+    "AQT IBEX-Q1": {
+     "usd_total": 26500.0,
+     "cuota_tareas_pct": 11.3,
+     "cuota_disparos_pct": 88.7
+    },
+    "IonQ Forte": {
+     "usd_total": 83000.0,
+     "cuota_tareas_pct": 3.6,
+     "cuota_disparos_pct": 96.4
+    }
+   },
+   "que_era_cierto": "«las tareas dominan» es cierto en Rigetti (87,6 %) e IQM, y FALSO en AQT IBEX-Q1 (11,3 %) y en IonQ Forte (3,6 %). La cuota recorre un continuo, no un caso aislado: hay DOS backends por debajo del 50 %, no uno.",
+   "lo_unico_invariante": "la tarifa por tarea, USD 0,30, identica en los cinco backends que el instrumento tabula. Eso es lo que se midio; «el costo no se mueve» es lo que se escribio.",
+   "defecto_B_en_el_instrumento": {
+    "cual": "costo_braket_hsbc.py imprimia «EL COSTO LO DOMINAN LAS TAREAS, no los disparos» seguida de UN solo ejemplo, el de Rigetti. De ahi viajo la frase al artefacto.",
+    "arreglo": "el instrumento imprime ahora la cuota POR BACKEND y deriva la conclusion de ellas. Chequeo que falla cerrado: si la cuota cruza el 50 %, se niega a insinuar una frase general y nombra el backend que la desmiente.",
+    "efecto_secundario": "ejecutar el arreglo destapo un quinto backend, AQT IBEX-Q1, tambien por debajo del 50 %. La tabla original tenia tres.",
+    "por_que_no_bastaba_arreglar_el_sello": "el instrumento habria producido la misma frase la proxima vez."
+   },
+   "defecto_C_una_cifra_sin_respaldo": {
+    "cual": "el original dice «per-task USD 0,30 identico en los SEIS QPU». Nuestro instrumento tabula CINCO.",
+    "estado": "PENDIENTE DE VERIFICAR en la fuente. Comprobarlo exige volver a la pagina de tarifas de AWS y esta errata no la consulto.",
+    "impacto": "ninguno sobre las cifras: ningun numero de esta errata ni del original depende de que sean cinco o seis."
+   },
+   "QUE_NO_SE_RETRACTA": "la decision operativa. La demostracion acotada sobre Rigetti Cepheus a USD 3.425 sigue siendo la elegida y sigue siendo la respuesta al «under what conditions» del §4.2. Se corrige el alcance de la explicacion, no la decision. El gasto autorizado sigue en US$0 y ninguna tarea se envio a Braket.",
+   "afirmacion_corregida": "la tarifa por tarea (USD 0,30) es identica en los backends tabulados y no se negocia; por eso en los de disparo barato (Rigetti, IQM) el costo lo dominan las tareas y reducir disparos no lo mueve de forma apreciable. En AQT e IonQ Forte no: su disparo cuesta hasta 188 veces mas, los disparos pasan a ser el 89-96 % del total, y el mismo trabajo sube de USD 3.425 a USD 83.000. La unica palanca que reduce el costo en TODOS los backends es reducir pares, y reducir pares rompe la comparabilidad con el test sellado."
+  },
+  "como": {
+   "recomputado_por": {
+    "archivo": "costo_braket_hsbc.py",
+    "sha256": "sha256:bcf452b4b04c2b8d9aa94364a4a8e2b0c55eeb89f5bf0733b56f1ed7d8cebda7",
+    "publicado_como": "code/costo_braket_hsbc@bcf452b4.py",
+    "nota": "version CON el arreglo del defecto B. El original citaba este script por NOMBRE y sin hash, asi que corregirlo no contradice ningun hash sellado."
+   },
+   "tarifa": {
+    "fuente": "https://aws.amazon.com/braket/pricing/",
+    "leida": "2026-08-21",
+    "salvedad": "leida por nosotros; AWS no publica checksum de su pagina."
+   },
+   "afirmaciones_ejercidas_antes_de_sellar": 19
+  },
+  "cuando": {
+   "archived_at": "2026-08-24T20:05:02+00:00"
+  },
+  "donde": {
+   "compute": "local, ningun backend de pago"
+  },
+  "porque": {
+   "question": "¿«cambiar de proveedor no mueve el costo» sobrevive a la tabla del propio artefacto que lo afirma?",
+   "respuesta": "no: factor 24,2 entre el backend mas barato y el mas caro."
+  },
+  "quien": {
+   "escribio_el_defecto": "la sesion de laboratorio, que redacto y sello RQ-PREREG-HSBC-003-CUANTICO. La frase paso por la revision de coordinacion y por el OK de Nicholas sin que ninguno de los tres la contrastara contra la tabla que estaba dos lineas mas abajo, en el mismo artefacto.",
+   "lo_encontro": "la sesion «Rosetta · Cuantico», revisando el SPEC de Laboratorio Rosetta — FUERA del alcance de esa revision.",
+   "verificacion": "coordinacion recomputo con el instrumento antes de redactar; el laboratorio recomputo de nuevo a mano y ejercio las 19 afirmaciones comprobables del documento antes de sellar.",
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}
