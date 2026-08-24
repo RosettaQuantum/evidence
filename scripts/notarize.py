@@ -129,6 +129,52 @@ if _futuros:
     sys.exit(1)
 print("   0 sellos con fecha futura (%d historicos declarados en la nota)" % len(_declaradas))
 
+paso("1 quater", "ningun sello publicado cambio de bytes (falla cerrado)")
+# POR QUE EXISTE, y el escenario es real y esta medido (24-ago-2026).
+#
+# `evidence-staging/` tiene 36 sellos en su raiz, y ONCE comparten nombre con sellos ya
+# publicados en `evidence/` con BYTES DISTINTOS. La diferencia no es basura: la copia de
+# staging trae un campo explicativo de mas (`que_significa_conv_en_el_nombre`).
+#
+# O sea que **la copia no publicada es la mejor**, y ahi esta el peligro: alguien
+# ordenando el archivo la promoveria creyendo que lo mejora. Ese movimiento cambiaria el
+# hash de un sello ya publicado en GitHub, en Codeberg, en D1 y **anclado en Bitcoin** —
+# y un verificador externo lo leeria como manipulacion, con razon.
+#
+# Hoy no puede pasar por accidente: staging es plano (sin `runs/`, `prereg/`…) y sin
+# `scripts/`, asi que los globs no calzan y el import falla. Pero eso protege contra el
+# descuido, no contra la buena intencion — y la buena intencion es la ruta real.
+#
+# La regla que este guardia impone es absoluta y ya es de la casa: **publicado es
+# publicado**. Un sello mejor no reemplaza a uno peor; entra como archivo NUEVO con id
+# nuevo que declara a quien completa. Lo encontro la sesion de Producto revisando el
+# SPEC de Laboratorio Rosetta.
+_publicados = sh(["git", "ls-tree", "-r", "origin/main", "--name-only"]).stdout.split("\n")
+_publicados = set(x for x in _publicados if x)
+_mutados = []
+for _p in archives():
+    if _p not in _publicados:
+        continue                       # sello nuevo: no hay nada publicado que contradecir
+    _antes = sh(["git", "show", "origin/main:%s" % _p]).stdout
+    try:
+        _ahora_b = open(_p, encoding="utf-8").read()
+    except Exception:
+        continue
+    if _antes and _antes != _ahora_b:
+        _mutados.append(_p)
+if _mutados:
+    print("   ABORTADO — %d sello(s) YA PUBLICADOS cambiaron de bytes." % len(_mutados))
+    print("   Publicado es publicado: su hash vive en GitHub, en Codeberg, en D1 y en el")
+    print("   ancla de Bitcoin. Un sello mejor no reemplaza a uno peor.")
+    for _m in _mutados:
+        print("     %s" % _m)
+    print("   Que hacer: `git checkout origin/main -- <ruta>` para devolverlo, y si la")
+    print("   version nueva vale, publicarla como archivo NUEVO con id nuevo que declare")
+    print("   a cual completa — como se hizo con coef_case118@42d5faec.")
+    sys.exit(1)
+print("   0 sellos publicados mutados (%d comparados contra origin/main)"
+      % len([p for p in archives() if p in _publicados]))
+
 # ---- 2. anclar ---------------------------------------------------------------
 paso(2, "anclar en OpenTimestamps")
 sin_ots = [p for p in archives() if not os.path.exists(p + ".ots")]
