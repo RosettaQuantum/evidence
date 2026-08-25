@@ -1,0 +1,81 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__REPORT__RQ-REPORT-AIRBUS-002__20260825T1336Z__airbus-fase-1-informe-final-v2.json",
+  "file_id": "RQ-REPORT-AIRBUS-002",
+  "type": "REPORT",
+  "is_demo": false,
+  "scope_note": "Version 2 del entregable de Fase 1 del track Airbus. SUPERSEDE a RQ-REPORT-AIRBUS-001, que queda intacto y anclado — no era falso cuando se sello.",
+  "supersede": {
+   "file_id": "RQ-REPORT-AIRBUS-001",
+   "content_hash": "sha256:78150faefc7efb72765f9901b7e06d6f9fda9f9a451f6e4d0e27119ed6927a91",
+   "por_que": "la v1 afirma en su §7, con etiqueta [measured], que «the sweep artifacts are not sealed yet». Era CIERTO al generarla y dejo de serlo veinte minutos despues, cuando se sellaron las corridas. El acto de archivar cambio el hecho descrito.",
+   "regla": "la v1 no se reescribe ni se re-sella. Un jurado que la lea encontrara una afirmacion que era verdadera en su fecha."
+  },
+  "prereg": {
+   "file_id": "RQ-PREREG-AIRBUS-001",
+   "content_hash": "sha256:39a16cf63a36095217fdf5fbdbf104f015c01617eb5e0944e90627d8d0d4af02"
+  },
+  "texto_fuente": {
+   "archivo": "AIRBUS-INFORME-FINAL.md",
+   "sha256": "sha256:32db96d71daea9db44e28baa30089045531ac7495292950dc91d381ec0eba84f",
+   "publicado_como": "data/2026/08/AIRBUS-INFORME-FINAL@32db96d7.md"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-25T13:36:52+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_airbus_informe_v2.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:ad0f73ff0572c56d95f373fe193b6d73000734efcfa9e1d3469fdbf8202996d8",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:54a1d65a89d1767091c916c30a1ffd60b23199d7959869fb226b71db10ca4538"
+ },
+ "w6": {
+  "que": {
+   "que_cambia_respecto_de_la_v1": {
+    "1_el_estado_del_sello_se_deriva": "el §7 ya no solo sabe decir «no estan sellados»: mira el archivo y declara los sellos con su id, su content_hash y si estan anclados. Probado por mutacion en las DOS direcciones — simulando cero sellos vuelve a decir que faltan.",
+    "2_el_§8_cita_los_dos_hashes": "antes citaba solo el del archivo. Un jurado que re-corra obtiene otro archivo por el reloj y concluye que encontro un error nuestro. Ahora van los dos, cada uno con lo que sirve: el del archivo para comprobar que son nuestros bytes exactos, el del contenido para comprobar que la ciencia reproduce."
+   },
+   "estable_bajo_su_propio_sellado": "la v2 describe SOLO los sellos de tipo RUN, que sellar este informe no cambia. Un documento que describiera el conteo total volveria a quedar obsoleto en el acto de sellarse. Esa es la leccion de la v1 y esta puesta en el diseno, no en una nota.",
+   "corridas_declaradas": [
+    {
+     "file_id": "RQ-EXP-AIRBUS-EJE-001",
+     "content_hash": "sha256:e595fa2b873ee4c36d179b290945c15930790e87eb09592e523b023a4714716a",
+     "anclado": true
+    },
+    {
+     "file_id": "RQ-EXP-AIRBUS-NOLIN-001",
+     "content_hash": "sha256:89b1d737f28f731050130b311921fc2d773e94371f51baeac40f681fd0b16926",
+     "anclado": true
+    }
+   ],
+   "lo_que_NO_cambia": "ninguna cifra ni ningun hallazgo. El termino no lineal sigue anulandose en 2.35e-16 y la regla se cumple en las 18 filas."
+  },
+  "como": {
+   "generador": {
+    "archivo": "build_airbus_informe.py",
+    "sha256": "sha256:7d0afd8e4a7752d48762aee98c31fa5bc999251786fb64de17b30f14dc54d42b",
+    "publicado_como": "code/build_airbus_informe@7d0afd8e.py"
+   },
+   "guardias": "el generador aborta si encuentra una cifra tecleada (en tuplas o en prosa) y si el conteo del titular no coincide con el de la tabla del eje. Este sellador aborta si el informe volviera a decir que los artefactos no estan sellados."
+  },
+  "cuando": {
+   "archived_at": "2026-08-25T13:36:52+00:00"
+  },
+  "donde": {
+   "compute": "Mac local"
+  },
+  "porque": {
+   "question": "¿que dice el informe cuando el archivo ya contiene sus propias corridas selladas?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lo_encontro": "la sesion de coordinacion, leyendo el informe entero antes de empaquetarlo — y el laboratorio en paralelo, al comprobar que el informe no reproducia desde su generador sellado.",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}
