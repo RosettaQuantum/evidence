@@ -6,9 +6,9 @@
  "muro_memoria": 30,
  "nota_del_muro": "22 es el ultimo tamaño que cabe en memoria Y termina en el reloj de CI, medido el 2026-08-13. Por encima hay que ir a hardware real, que cuesta.",
  "denominador": {
-  "corridas_leidas": 88,
+  "corridas_leidas": 89,
   "puntos_en_el_mapa": 41,
-  "descartadas": 47
+  "descartadas": 48
  },
  "no_cubre": "Alosteria (RQ-0007): su metrica es un percentil de ranking, no una brecha de optimalidad. Mezclarla daria un plano cuyos ejes significan cosas distintas segun el punto. Se declara aparte en vez de forzarla.",
  "clases": {
@@ -782,6 +782,10 @@
   },
   {
    "id": "RQ-EXP-N90-LOPO-002",
+   "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
+  },
+  {
+   "id": "RQ-EXP-HSBC-IEEE-001",
    "porque": "sin tamaño: ningun campo declara cuantas variables tenia"
   },
   {

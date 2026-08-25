@@ -1,0 +1,372 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-AIRBUS-RANGO-001__20260825T1437Z__el-eje-de-memoria-es-ciego-al-de-no-linealidad.json",
+  "file_id": "RQ-EXP-AIRBUS-RANGO-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Que ve una red tensorial en la familia del enunciado. Incluye el control construido para REFUTAR la hipotesis con la que se empezo, y que la refuto.",
+  "prereg": {
+   "file_id": "RQ-PREREG-AIRBUS-001",
+   "content_hash": "sha256:39a16cf63a36095217fdf5fbdbf104f015c01617eb5e0944e90627d8d0d4af02"
+  },
+  "continua": {
+   "file_id": "RQ-EXP-AIRBUS-NOLIN-001",
+   "content_hash": "sha256:89b1d737f28f731050130b311921fc2d773e94371f51baeac40f681fd0b16926",
+   "que_aporta": "aquel sello midio DONDE se anula la no-linealidad; estos dos miden que CUESTA que se anule."
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-25T14:37:41+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_airbus_mediciones.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:2474ce7a5310d143cb0f4a7ced22ebf670eb907359999bdcc08dddb6747fd56e",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:96f40af89b0f62edc067e62883ab37b132edafa95239b0a06206eb00e8ebb252"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "rango_vs_nolinealidad.json",
+    "sha256": "sha256:2ca8404f1f9daed84da95f1d65f1f3def64f5647055e6acc895c96609a641cfb",
+    "publicado_como": "code/rango_vs_nolinealidad@2ca8404f.json",
+    "contenido_determinista": {
+     "valor": "sha256:6e571a3b0343530c4ad0d4143cb82c18b8fb768764a72b3ee34d61873ab95d85",
+     "no_es_el_hash_de_un_archivo": true
+    },
+    "campos_no_reproducibles": {
+     "excluidos": [
+      "/entorno"
+     ],
+     "por_que": "dependen de la maquina"
+    }
+   },
+   "decisiones_declaradas_antes_de_medir": {
+    "metrica": "valores singulares de w[x,y]; chi(tol)=minimo k con error relativo de Frobenius <= 1e-06. Se publica el espectro completo para que cualquiera recompute chi a otra tolerancia.",
+    "biparticion": "corte x|y, por ser el corte natural del problema y el que corresponde a la estructura de modos producto del enunciado. NO se exploraron varios cortes: reportar el mas favorable seria elegir la metrica despues de ver el resultado.",
+    "metrica_de_contraste": "entropia de entrelazamiento, la estandar para «cuan dificil para una red tensorial», reportada al lado de chi para no publicar solo la que nos conviene."
+   },
+   "familia": [
+    {
+     "variante": "tgv_statement",
+     "descripcion": "el vortice de Taylor-Green del statement, tal cual",
+     "razon_no_linealidad": 2.5121800510614817e-16,
+     "capas_autovalor": 1,
+     "modos_presentes": 4,
+     "rango_numerico_chi": 1,
+     "entropia_entrelazamiento_bits": 0.0,
+     "valores_singulares": [
+      1.0
+     ]
+    },
+    {
+     "variante": "tgv_k2",
+     "descripcion": "TGV de numero de onda 2: sin(2x/L)*sin(2y/L)",
+     "razon_no_linealidad": 9.164829320498244e-17,
+     "capas_autovalor": 1,
+     "modos_presentes": 4,
+     "rango_numerico_chi": 1,
+     "entropia_entrelazamiento_bits": 0.0,
+     "valores_singulares": [
+      1.0
+     ]
+    },
+    {
+     "variante": "tgv_rotado_45",
+     "descripcion": "TGV rotado 45 grados, version exactamente periodica: sin((x+y)/L)*sin((x-y)/L)",
+     "razon_no_linealidad": 3.298794189991892e-16,
+     "capas_autovalor": 1,
+     "modos_presentes": 4,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 1.0,
+     "valores_singulares": [
+      0.707106781187,
+      0.707106781187
+     ]
+    },
+    {
+     "variante": "tgv_anisotropo_a2",
+     "descripcion": "sin(x/L)*sin(2y/L)",
+     "razon_no_linealidad": 1.887936778269924e-16,
+     "capas_autovalor": 1,
+     "modos_presentes": 4,
+     "rango_numerico_chi": 1,
+     "entropia_entrelazamiento_bits": 0.0,
+     "valores_singulares": [
+      1.0
+     ]
+    },
+    {
+     "variante": "tgv_anisotropo_a3",
+     "descripcion": "sin(x/L)*sin(3y/L)",
+     "razon_no_linealidad": 2.244016822427486e-16,
+     "capas_autovalor": 1,
+     "modos_presentes": 4,
+     "rango_numerico_chi": 1,
+     "entropia_entrelazamiento_bits": 0.0,
+     "valores_singulares": [
+      1.0
+     ]
+    },
+    {
+     "variante": "superpos_tgv_k1_k2_a0.01",
+     "descripcion": "TGV(k=1) + 0.01*TGV(k=2): dos numeros de onda a la vez",
+     "razon_no_linealidad": 0.009541326479649923,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.001473,
+     "valores_singulares": [
+      0.99995000375,
+      0.009999500037
+     ]
+    },
+    {
+     "variante": "superpos_tgv_k1_k2_a0.1",
+     "descripcion": "TGV(k=1) + 0.1*TGV(k=2): dos numeros de onda a la vez",
+     "razon_no_linealidad": 0.0933778949796957,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.080136,
+     "valores_singulares": [
+      0.99503719021,
+      0.099503719021
+     ]
+    },
+    {
+     "variante": "superpos_tgv_k1_k2_a0.5",
+     "descripcion": "TGV(k=1) + 0.5*TGV(k=2): dos numeros de onda a la vez",
+     "razon_no_linealidad": 0.31338650448635924,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.721928,
+     "valores_singulares": [
+      0.894427191,
+      0.4472135955
+     ]
+    },
+    {
+     "variante": "superpos_tgv_k1_k2_a1",
+     "descripcion": "TGV(k=1) + 1*TGV(k=2): dos numeros de onda a la vez",
+     "razon_no_linealidad": 0.32102083028723144,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 1.0,
+     "valores_singulares": [
+      0.707106781187,
+      0.707106781187
+     ]
+    },
+    {
+     "variante": "tgv_perturbado_eps0.0001",
+     "descripcion": "TGV + 0.0001 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+     "razon_no_linealidad": 0.0001249271604627692,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.0,
+     "valores_singulares": [
+      0.999999995,
+      0.0001
+     ]
+    },
+    {
+     "variante": "tgv_perturbado_eps0.001",
+     "descripcion": "TGV + 0.001 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+     "razon_no_linealidad": 0.001249268866727301,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 2.1e-05,
+     "valores_singulares": [
+      0.9999995,
+      0.0009999995
+     ]
+    },
+    {
+     "variante": "tgv_perturbado_eps0.01",
+     "descripcion": "TGV + 0.01 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+     "razon_no_linealidad": 0.012489951464049402,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.001473,
+     "valores_singulares": [
+      0.99995000375,
+      0.009999500037
+     ]
+    },
+    {
+     "variante": "tgv_perturbado_eps0.03",
+     "descripcion": "TGV + 0.03 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+     "razon_no_linealidad": 0.037403649474261454,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.010396,
+     "valores_singulares": [
+      0.999550303522,
+      0.029986509106
+     ]
+    },
+    {
+     "variante": "tgv_perturbado_eps0.1",
+     "descripcion": "TGV + 0.1 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+     "razon_no_linealidad": 0.12223011462596647,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.080136,
+     "valores_singulares": [
+      0.99503719021,
+      0.099503719021
+     ]
+    },
+    {
+     "variante": "tgv_perturbado_eps0.3",
+     "descripcion": "TGV + 0.3 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+     "razon_no_linealidad": 0.31382133267054196,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.411166,
+     "valores_singulares": [
+      0.957826285221,
+      0.287347885566
+     ]
+    },
+    {
+     "variante": "tgv_perturbado_eps1",
+     "descripcion": "TGV + 1 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+     "razon_no_linealidad": 0.4198204186064912,
+     "capas_autovalor": 2,
+     "modos_presentes": 8,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 1.0,
+     "valores_singulares": [
+      0.707106781187,
+      0.707106781187
+     ]
+    },
+    {
+     "variante": "aleatorio_banda_kmax2",
+     "descripcion": "control superior: campo aleatorio de banda limitada |k|<=2, semilla 20260819",
+     "razon_no_linealidad": 0.29287004163098995,
+     "capas_autovalor": 5,
+     "modos_presentes": 24,
+     "rango_numerico_chi": 5,
+     "entropia_entrelazamiento_bits": 1.708829,
+     "valores_singulares": [
+      0.70530669916,
+      0.537931799548,
+      0.345422187341,
+      0.305710224196,
+      0.019915081425
+     ]
+    },
+    {
+     "variante": "aleatorio_banda_kmax4",
+     "descripcion": "control superior: campo aleatorio de banda limitada |k|<=4, semilla 20260819",
+     "razon_no_linealidad": 0.2542806137623471,
+     "capas_autovalor": 14,
+     "modos_presentes": 80,
+     "rango_numerico_chi": 9,
+     "entropia_entrelazamiento_bits": 2.300131,
+     "valores_singulares": [
+      0.637469827941,
+      0.448180149369,
+      0.391613732001,
+      0.335622222488,
+      0.277856649293,
+      0.204434777253,
+      0.079973755494,
+      0.03295528662,
+      0.016835458569
+     ]
+    }
+   ],
+   "control_que_intenta_refutar": [
+    {
+     "variante": "control_producto_von_mises_k6",
+     "descripcion": "producto f(x)*g(y) de von Mises: RANGO 1 exacto y periodico, pero NO es un modo de Fourier puro. Construido para refutar la identificacion entre «rango bajo» y «una sola capa».",
+     "razon_no_linealidad": 0.0862507880160479,
+     "capas_autovalor": 40,
+     "modos_presentes": 255,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.235783,
+     "valores_singulares": [
+      0.980515933093,
+      0.196439570737
+     ]
+    },
+    {
+     "variante": "control_producto_von_mises_k12",
+     "descripcion": "el mismo, mas estrecho: mas modos de Fourier, mismo rango 1.",
+     "razon_no_linealidad": 0.16710770464671917,
+     "capas_autovalor": 40,
+     "modos_presentes": 255,
+     "rango_numerico_chi": 2,
+     "entropia_entrelazamiento_bits": 0.144948,
+     "valores_singulares": [
+      0.989632630489,
+      0.14362192267
+     ]
+    }
+   ],
+   "LA_IDENTIFICACION_SE_ROMPE": true,
+   "como_se_rompe": "existe al menos un campo de rango <= 2 que vive en varias capas y cuya no-linealidad NO es cero: control_producto_von_mises_k6, control_producto_von_mises_k12. Por lo tanto «rango bajo» y «una sola capa» NO son la misma propiedad, y la afirmacion que se sostiene es la mas debil: en LA FAMILIA DEL ENUNCIADO las dos coinciden porque esta construida a partir de un solo modo producto.",
+   "correlacion": {
+    "spearman_log10_razon_vs_chi": 0.6922,
+    "spearman_log10_razon_vs_entropia": 0.8024,
+    "n": 18
+   },
+   "RESULTADO": "la dimension de enlace se queda en 2 en toda la familia perturbada mientras la no-linealidad recorre un factor de 3.400. Una red tensorial NO distingue el caso degenerado de los perturbados: le cuestan lo mismo. El eje de memoria —que el enunciado pide como entregable— es ciego al eje que dice querer probar.",
+   "la_hipotesis_que_se_cayo": "se empezo con la idea de que «una sola capa» y «rango bajo» eran la misma propiedad. Se construyo el control que podia refutarla y la refuto: un producto de dos von Mises es rango 2, vive en 40 capas y su no-linealidad NO es cero. Se publica porque un resultado que trae adentro el caso que lo limita es el que no se puede desarmar.",
+   "un_defecto_del_propio_instrumento": "la primera version del Spearman usaba argsort(argsort(...)), que asigna rangos secuenciales a valores empatados segun el orden en que aparecen. Con chi constante devolvia +1,000: correlacion perfecta sobre una serie sin ninguna variacion, y habria confirmado la hipotesis con un numero redondo. Corregido con scipy, que promedia empates, y devolviendo None cuando no hay variacion.",
+   "cruce_ventaja_cuantica": 0
+  },
+  "como": {
+   "codigo": {
+    "airbus_harness.py": {
+     "sha256": "sha256:802cd60e05645c0e6ec5c5a85aaf7b269ee77207c34c2520758764b0991756b8"
+    },
+    "airbus_carleman.py": {
+     "sha256": "sha256:b5ef810ad8790ca05c1dcc395dd6c68ec274fbef39079445c5b3435544ee86c5"
+    },
+    "nolinealidad_donde_vive.py": {
+     "sha256": "sha256:f707cf906eecd4d41a5f5d81197185095f39c88946dacc741fc49fbb9a4866b0"
+    },
+    "_procedencia.py": {
+     "sha256": "sha256:afc01d80e184b7cbc3d2fd295c67d4e65dbb115f3dbae56e19a0adc9c44b68e7"
+    },
+    "umbral_de_deteccion.py": {
+     "sha256": "sha256:72a041006dbc130d2cc771a673d9302fbf893f5b741e9821f5a9fb82ad9129bf"
+    },
+    "rango_vs_nolinealidad.py": {
+     "sha256": "sha256:cdb36812e7ab59149670e2c994da96e59fd245f19377e06eb5abab5ae12b3955"
+    }
+   }
+  },
+  "cuando": {
+   "archived_at": "2026-08-25T14:37:41+00:00"
+  },
+  "donde": {
+   "compute": "Mac local, sin red ni QPU"
+  },
+  "porque": {
+   "question": "¿el rango necesario para representar el campo sube junto con su no-linealidad?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lo_propuso": "la sesion de coordinacion; el laboratorio la objeto antes de medirla y la medicion le dio la razon a la objecion.",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}

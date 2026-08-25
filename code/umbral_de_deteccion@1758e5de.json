@@ -1,0 +1,216 @@
+{
+ "file_id": "RQ-MEAS-AIRBUS-DETECCION-001",
+ "pregunta": "un solver que omita por completo el termino no lineal, ¿da una respuesta distinta sobre el caso del enunciado?",
+ "metodo": "solucion manufacturada (MMS): f = -(A1 w* + A2(w*(x)w*)) hace de w* una solucion estacionaria exacta del sistema completo. El error de un solver que omite el termino cuadratico es e = A1^-1 A2(w*(x)w*).",
+ "el_precio_declarado": {
+  "anade_termino_fuente": true,
+  "que_es": "verificacion de codigo, no validacion fisica. No es decaimiento libre.",
+  "que_eje_mide": "precision con la no-linealidad activa. NO mide tiempo-a-solucion contra Reynolds, que es el eje del enunciado y que ya entregamos aparte sobre el decaimiento libre con su formula cerrada. No lo reemplaza: lo complementa en la dimension que su caso no toca.",
+  "salvedad_numerica": "A1 es singular en el modo constante (laplaciano periodico); e se resuelve por minimos cuadrados. No cambia ninguna conclusion y se declara igual.",
+  "umbral_declarado_para_ciego": 1e-09
+ },
+ "RESULTADO": "sobre el vortice del enunciado, un solver que ignora POR COMPLETO el termino no lineal se equivoca en 2.11e-15 — cero de maquina. El caso no puede distinguirlo de un solver correcto. Sobre la familia reparada el mismo solver se equivoca entre 9.48e-05 y 3.53e+00: el umbral es graduable en 4.6 ordenes de magnitud.",
+ "malla_N": 16,
+ "Re": 100.0,
+ "tabla": [
+  {
+   "capas_autovalor": 1,
+   "norma_termino_no_lineal": 9.923843487882023e-17,
+   "error_del_solver_sin_no_linealidad": 2.1057270373377776e-15,
+   "norma_w": 2.546479089470326,
+   "variante": "tgv_statement",
+   "descripcion": "el vortice de Taylor-Green del statement, tal cual",
+   "detecta": false
+  },
+  {
+   "capas_autovalor": 1,
+   "norma_termino_no_lineal": 6.694157834107986e-17,
+   "error_del_solver_sin_no_linealidad": 3.9448608753158894e-16,
+   "norma_w": 2.546479089470326,
+   "variante": "tgv_k2",
+   "descripcion": "TGV de numero de onda 2: sin(2x/L)*sin(2y/L)",
+   "detecta": false
+  },
+  {
+   "capas_autovalor": 1,
+   "norma_termino_no_lineal": 1.7030161774764122e-16,
+   "error_del_solver_sin_no_linealidad": 1.0263717981215311e-15,
+   "norma_w": 2.546479089470326,
+   "variante": "tgv_rotado_45",
+   "descripcion": "TGV rotado 45 grados, version exactamente periodica: sin((x+y)/L)*sin((x-y)/L)",
+   "detecta": false
+  },
+  {
+   "capas_autovalor": 1,
+   "norma_termino_no_lineal": 7.465356612764754e-17,
+   "error_del_solver_sin_no_linealidad": 7.987753274913684e-16,
+   "norma_w": 2.546479089470326,
+   "variante": "tgv_anisotropo_a2",
+   "descripcion": "sin(x/L)*sin(2y/L)",
+   "detecta": false
+  },
+  {
+   "capas_autovalor": 1,
+   "norma_termino_no_lineal": 8.900362421969633e-17,
+   "error_del_solver_sin_no_linealidad": 1.5592600902675175e-15,
+   "norma_w": 2.5464790894703264,
+   "variante": "tgv_anisotropo_a3",
+   "descripcion": "sin(x/L)*sin(3y/L)",
+   "detecta": false
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.003769557862309198,
+   "error_del_solver_sin_no_linealidad": 0.007277838487790275,
+   "norma_w": 2.546479089470326,
+   "variante": "superpos_tgv_k1_k2_a0.01",
+   "descripcion": "TGV(k=1) + 0.01*TGV(k=2): dos numeros de onda a la vez",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.03732608730787553,
+   "error_del_solver_sin_no_linealidad": 0.07206501259048567,
+   "norma_w": 2.546479089470326,
+   "variante": "superpos_tgv_k1_k2_a0.1",
+   "descripcion": "TGV(k=1) + 0.1*TGV(k=2): dos numeros de onda a la vez",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.15079739272381715,
+   "error_del_solver_sin_no_linealidad": 0.29114265086556235,
+   "norma_w": 2.546479089470326,
+   "variante": "superpos_tgv_k1_k2_a0.5",
+   "descripcion": "TGV(k=1) + 0.5*TGV(k=2): dos numeros de onda a la vez",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.18849674090477142,
+   "error_del_solver_sin_no_linealidad": 0.3639283135819528,
+   "norma_w": 2.546479089470326,
+   "variante": "superpos_tgv_k1_k2_a1",
+   "descripcion": "TGV(k=1) + 1*TGV(k=2): dos numeros de onda a la vez",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 4.934987053740996e-05,
+   "error_del_solver_sin_no_linealidad": 9.480511421429931e-05,
+   "norma_w": 2.5464790894703264,
+   "variante": "tgv_perturbado_eps0.0001",
+   "descripcion": "TGV + 0.0001 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.0004934982168107778,
+   "error_del_solver_sin_no_linealidad": 0.000948050203573098,
+   "norma_w": 2.5464790894703264,
+   "variante": "tgv_perturbado_eps0.001",
+   "descripcion": "TGV + 0.001 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.004934493653724526,
+   "error_del_solver_sin_no_linealidad": 0.009479563559876895,
+   "norma_w": 2.546479089470326,
+   "variante": "tgv_perturbado_eps0.01",
+   "descripcion": "TGV + 0.01 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.01479164882532689,
+   "error_del_solver_sin_no_linealidad": 0.02841596018453257,
+   "norma_w": 2.5464790894703264,
+   "variante": "tgv_perturbado_eps0.03",
+   "descripcion": "TGV + 0.03 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.04886125844643463,
+   "error_del_solver_sin_no_linealidad": 0.0938664506557712,
+   "norma_w": 2.546479089470326,
+   "variante": "tgv_perturbado_eps0.1",
+   "descripcion": "TGV + 0.1 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.135825333112566,
+   "error_del_solver_sin_no_linealidad": 0.26093150962108874,
+   "norma_w": 2.5464790894703264,
+   "variante": "tgv_perturbado_eps0.3",
+   "descripcion": "TGV + 0.3 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 2,
+   "norma_termino_no_lineal": 0.24674935515449475,
+   "error_del_solver_sin_no_linealidad": 0.4740255758116446,
+   "norma_w": 2.546479089470326,
+   "variante": "tgv_perturbado_eps1",
+   "descripcion": "TGV + 1 * modo ajeno sin(2x/L)cos(3y/L) (amplitud relativa)",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 5,
+   "norma_termino_no_lineal": 0.16981692696288564,
+   "error_del_solver_sin_no_linealidad": 3.533886569882064,
+   "norma_w": 2.546479089470326,
+   "variante": "aleatorio_banda_kmax2",
+   "descripcion": "control superior: campo aleatorio de banda limitada |k|<=2, semilla 20260819",
+   "detecta": true
+  },
+  {
+   "capas_autovalor": 14,
+   "norma_termino_no_lineal": 0.20399178756489103,
+   "error_del_solver_sin_no_linealidad": 1.339034859077737,
+   "norma_w": 2.546479089470326,
+   "variante": "aleatorio_banda_kmax4",
+   "descripcion": "control superior: campo aleatorio de banda limitada |k|<=4, semilla 20260819",
+   "detecta": true
+  }
+ ],
+ "caracterizacion_de_la_clase_degenerada": {
+  "capas_autovalor": 1,
+  "norma_termino_no_lineal": 1.1239774885995402e-16,
+  "error_del_solver_sin_no_linealidad": 1.4784993829742677e-15,
+  "norma_w": 2.5464790894703255,
+  "variante": "dos_modos_de_la_MISMA_capa",
+  "descripcion": "sin(x)sin(2y) + sin(2x)sin(y): una sola capa, RANGO 2. Muestra que la clase degenerada no es «el vortice» ni «rango 1», sino la vorticidad confinada a una sola capa de autovalores.",
+  "detecta": false
+ },
+ "resumen": {
+  "ciegas": 5,
+  "total": 18,
+  "cuales": [
+   "tgv_statement",
+   "tgv_k2",
+   "tgv_rotado_45",
+   "tgv_anisotropo_a2",
+   "tgv_anisotropo_a3"
+  ],
+  "todas_de_una_capa": true
+ },
+ "producido_por_sha256": {
+  "umbral_de_deteccion.py": "sha256:72a041006dbc130d2cc771a673d9302fbf893f5b741e9821f5a9fb82ad9129bf",
+  "airbus_harness.py": "sha256:802cd60e05645c0e6ec5c5a85aaf7b269ee77207c34c2520758764b0991756b8",
+  "airbus_carleman.py": "sha256:b5ef810ad8790ca05c1dcc395dd6c68ec274fbef39079445c5b3435544ee86c5"
+ },
+ "entorno": {
+  "numpy": "2.5.2",
+  "python": "3.12.14"
+ },
+ "contenido_sha256": "sha256:f8bec5c234f2d918711cca58275d4cd7c5851f2414c4a1add4823d45615bfa41",
+ "campos_no_reproducibles": {
+  "excluidos": [
+   "/entorno"
+  ],
+  "por_que": "dependen de la maquina"
+ }
+}
