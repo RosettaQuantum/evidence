@@ -1,0 +1,110 @@
+{
+ "dataset": "ieee",
+ "manifest": "RQ-DATA-HSBC-IEEE-001",
+ "datos_sha256": "3a5c83ab6b3cc13dcabe5ffa9f522307fd5f7f7b6e6f6a60c32284ca6283d642",
+ "columnas_categoricas": {
+  "cuantas": 14,
+  "niveles_vistos_en_train": {
+   "ProductCD": 5,
+   "card4": 4,
+   "card6": 4,
+   "P_emaildomain": 59,
+   "R_emaildomain": 60,
+   "M1": 2,
+   "M2": 2,
+   "M3": 2,
+   "M4": 3,
+   "M5": 2,
+   "M6": 2,
+   "M7": 2,
+   "M8": 2,
+   "M9": 2
+  },
+  "codificacion": "ordinal ajustada SOLO con el train; una categoria que solo aparece en el test entra como -1"
+ },
+ "particion": {
+  "tipo": "temporal 80/20 por TransactionDT",
+  "corte_fila": 472432,
+  "train": {
+   "filas": 472432,
+   "fraudes": 16599,
+   "tasa": 0.035135
+  },
+  "test": {
+   "filas": 118108,
+   "fraudes": 4064,
+   "tasa": 0.034409,
+   "sha256": "2e6cab8741509f109e1a34c16d311b53a881acaafa2d1ef62596ebb676c41f85"
+  },
+  "corte_temporal": {
+   "columna": "TransactionDT",
+   "max_train": 12192842.0,
+   "min_test": 12192900.0,
+   "min_test_mayor_o_igual_que_max_train": true,
+   "ventana_de_test_dias": 41.88,
+   "ventana_de_train_dias": 140.12,
+   "cambio_relativo_de_la_tasa_pct": -2.1
+  },
+  "solape_de_contenido_duplicados_exactos": 0
+ },
+ "scale_pos_weight": 27.46,
+ "seed": 42,
+ "modelos": {
+  "xgboost": {
+   "AUPRC": 0.524973,
+   "AUC_ROC": 0.902099,
+   "F1_umbral_0.5": 0.401913,
+   "confusion_0.5": {
+    "tn": 107249,
+    "fp": 6795,
+    "fn": 1333,
+    "tp": 2731
+   },
+   "AUPRC_IC95": [
+    0.50905,
+    0.540389
+   ],
+   "AUC_IC95": [
+    0.896831,
+    0.907594
+   ],
+   "bootstrap_validos": 2000,
+   "segundos": 86.8
+  },
+  "lightgbm": {
+   "AUPRC": 0.543791,
+   "AUC_ROC": 0.905935,
+   "F1_umbral_0.5": 0.481999,
+   "confusion_0.5": {
+    "tn": 110392,
+    "fp": 3652,
+    "fn": 1614,
+    "tp": 2450
+   },
+   "AUPRC_IC95": [
+    0.527641,
+    0.558984
+   ],
+   "AUC_IC95": [
+    0.900917,
+    0.911313
+   ],
+   "bootstrap_validos": 2000,
+   "segundos": 83.2
+  }
+ },
+ "harness_sha256": "0418577832bc8a822e0dad719ea336695ce060debad9c628bbb498f43acdfb74",
+ "lib_versions": {
+  "numpy": "2.5.2",
+  "pandas": "2.3.3",
+  "sklearn": "1.9.0",
+  "xgboost": "3.4.1",
+  "lightgbm": "4.7.0"
+ },
+ "openmp": {
+  "precargada_con_ctypes": "/Users/nicholasiakl/Documents/Claude/Projects/Rosetta Quantum/.venv-lab/lib/python3.12/site-packages/sklearn/.dylibs/libomp.dylib",
+  "resolvio_el_problema": false,
+  "que_lo_resolvio": "install_name_tool -add_rpath sobre libxgboost.dylib y lib_lightgbm.dylib del venv, apuntando a la libomp que trae scikit-learn. No se instalo nada en el sistema.",
+  "por_que_no_bastaba_una_variable": "macOS borra DYLD_LIBRARY_PATH al lanzar binarios protegidos (SIP), asi que exportarla funciona en una llamada directa y se pierde en cuanto el proceso pasa por env, nohup o un runner \u2014 se ve como que el arreglo funciona hasta que corre desatendido."
+ }
+}

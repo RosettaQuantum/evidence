@@ -1,0 +1,217 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-HSBC-IEEE-001__20260825T1420Z__baseline-clasico-ieee-cis-particion-temporal.json",
+  "file_id": "RQ-EXP-HSBC-IEEE-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Baseline clasico sobre el dataset de BENCHMARK del track HSBC (IEEE-CIS), con la particion temporal que fija el pre-registro. Es una MEDICION, no una comparacion: no sella ningun contraste contra cifras publicadas de terceros.",
+  "prereg": {
+   "file_id": "RQ-PREREG-HSBC-001",
+   "content_hash": "sha256:b04f214fae845b1c50431d225e6590b0956d8920c24b7c7fa26ed94c58f3f2db"
+  },
+  "manifest": {
+   "file_id": "RQ-DATA-HSBC-IEEE-001",
+   "content_hash": "sha256:4215a33349f7e99266529f887c7dcc19cb7e5a7f7604d2b278f719451e817ea6"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-25T14:20:43+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_hsbc_ieee_baseline.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:faa1c2e0257b0e16fd3a80737c81c821051904a768c3d8e304d50f4d9f376e7d",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:e6e208d7c4433c0296e82c717a8faaa0646f4e863cefbd5ce889dd37cc07b70d"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "ieee_baseline.json",
+    "sha256": "sha256:d0c5a0fbe8fb6cfd59955e1d1d022175b05262d88a0b404f6a136444cd418080",
+    "publicado_como": "code/ieee_baseline@d0c5a0fb.json"
+   },
+   "modelos": {
+    "xgboost": {
+     "AUPRC": 0.524973,
+     "AUC_ROC": 0.902099,
+     "F1_umbral_0.5": 0.401913,
+     "confusion_0.5": {
+      "tn": 107249,
+      "fp": 6795,
+      "fn": 1333,
+      "tp": 2731
+     },
+     "AUPRC_IC95": [
+      0.50905,
+      0.540389
+     ],
+     "AUC_IC95": [
+      0.896831,
+      0.907594
+     ],
+     "bootstrap_validos": 2000,
+     "segundos": 86.8
+    },
+    "lightgbm": {
+     "AUPRC": 0.543791,
+     "AUC_ROC": 0.905935,
+     "F1_umbral_0.5": 0.481999,
+     "confusion_0.5": {
+      "tn": 110392,
+      "fp": 3652,
+      "fn": 1614,
+      "tp": 2450
+     },
+     "AUPRC_IC95": [
+      0.527641,
+      0.558984
+     ],
+     "AUC_IC95": [
+      0.900917,
+      0.911313
+     ],
+     "bootstrap_validos": 2000,
+     "segundos": 83.2
+    }
+   },
+   "mejor_por_AUPRC": {
+    "modelo": "lightgbm",
+    "AUPRC": 0.543791,
+    "IC95": [
+     0.527641,
+     0.558984
+    ],
+    "AUC_ROC": 0.905935
+   },
+   "particion": {
+    "tipo": "temporal 80/20 por TransactionDT",
+    "corte_fila": 472432,
+    "train": {
+     "filas": 472432,
+     "fraudes": 16599,
+     "tasa": 0.035135
+    },
+    "test": {
+     "filas": 118108,
+     "fraudes": 4064,
+     "tasa": 0.034409,
+     "sha256": "2e6cab8741509f109e1a34c16d311b53a881acaafa2d1ef62596ebb676c41f85"
+    },
+    "corte_temporal": {
+     "columna": "TransactionDT",
+     "max_train": 12192842.0,
+     "min_test": 12192900.0,
+     "min_test_mayor_o_igual_que_max_train": true,
+     "ventana_de_test_dias": 41.88,
+     "ventana_de_train_dias": 140.12,
+     "cambio_relativo_de_la_tasa_pct": -2.1
+    },
+    "solape_de_contenido_duplicados_exactos": 0
+   },
+   "EL_CORTE_ES_EL_FUTURO": {
+    "max_train": 12192842.0,
+    "min_test": 12192900.0,
+    "se_cumple": true,
+    "ventana_de_test_dias": 41.88,
+    "por_que_viaja_aqui": "«el test es el futuro» no es una intencion del diseno: es una desigualdad entre dos numeros. Dentro del artefacto, el lector la comprueba de un vistazo sin re-correr nada. Y el harness aborta si no se cumple: un solape daria cifras de aspecto normal respondiendo a otra pregunta, y nadie lo notaria mirando el AUPRC."
+   },
+   "contraste_con_ULB_medido_con_la_misma_regla": {
+    "ULB_ventana_de_test_horas": 7.65,
+    "IEEE_ventana_de_test_dias": 41.88,
+    "ULB_cambio_de_tasa_pct": -28.0,
+    "IEEE_cambio_de_tasa_pct": -2.1,
+    "lectura": "IEEE-CIS abre 41,88 dias de futuro real con la tasa moviendose 2,1 %; ULB abre 7,65 horas con la tasa cayendo 28 %. La misma regla aplicada a los dos."
+   },
+   "IEEE_es_mas_dificil_que_ULB": {
+    "AUPRC_IEEE": 0.543791,
+    "AUPRC_ULB": 0.800822,
+    "tasa_de_fraude_IEEE": 0.035135,
+    "tasa_de_fraude_ULB": 0.00183,
+    "lectura": "el fraude es 19 veces mas frecuente en IEEE-CIS y aun asi se predice peor. No depende de compararse con nadie."
+   },
+   "lo_que_este_sello_NO_afirma": "nada sobre el 0,9459 que el statement cita como referencia. Esa cifra es el primer lugar de la competencia de Kaggle, medida sobre SU test privado —cuyas etiquetas no existen fuera de Kaggle, hecho declarado en el manifiesto— con un ensamble de tres modelos entre 6.381 equipos. No es el mismo test que el nuestro y la comparacion pertenece al entregable, con la metodologia declarada que el propio statement exige.",
+   "decisiones_no_prefijadas": {
+    "codificacion_de_categoricas": {
+     "cuantas": 14,
+     "niveles_vistos_en_train": {
+      "ProductCD": 5,
+      "card4": 4,
+      "card6": 4,
+      "P_emaildomain": 59,
+      "R_emaildomain": 60,
+      "M1": 2,
+      "M2": 2,
+      "M3": 2,
+      "M4": 3,
+      "M5": 2,
+      "M6": 2,
+      "M7": 2,
+      "M8": 2,
+      "M9": 2
+     },
+     "codificacion": "ordinal ajustada SOLO con el train; una categoria que solo aparece en el test entra como -1"
+    },
+    "por_que_solo_con_el_train": "ajustarla sobre el dataset completo seria mirar el futuro, que es exactamente lo que la particion temporal impide."
+   },
+   "cruce_ventaja_cuantica": 0
+  },
+  "como": {
+   "harness": {
+    "archivo": "hsbc_harness.py",
+    "sha256": "sha256:0418577832bc8a822e0dad719ea336695ce060debad9c628bbb498f43acdfb74",
+    "publicado_como": "code/hsbc_harness@04185778.py"
+   },
+   "comando": {
+    "archivo": "correr_ieee.sh",
+    "sha256": "sha256:415a32f626ed349e560030dc56534b535ba97859ad4383678608239fbd962885",
+    "publicado_como": "code/correr_ieee@415a32f6.sh",
+    "por_que_un_script": "las variables van DENTRO. Pasadas por linea de comando se olvidan —paso— y macOS ademas borra las DYLD_* al cruzar env o nohup: el arreglo funciona en la prueba y se pierde en la corrida desatendida."
+   },
+   "scores_crudos": [
+    {
+     "archivo": "ieee_lightgbm.npz",
+     "sha256": "sha256:2229862fd05fadfc6275c9c34857597c83668958be295cd109ec8e4332dbb962",
+     "publicado_como": "code/ieee_lightgbm@2229862f.npz"
+    },
+    {
+     "archivo": "ieee_xgboost.npz",
+     "sha256": "sha256:641f8c91aabcf911383e94d893e064ba64b7b10bc3854c8029819092a8ff2894",
+     "publicado_como": "code/ieee_xgboost@641f8c91.npz"
+    }
+   ],
+   "por_que_los_scores": "el dataset NO se puede republicar (Kaggle §7.B), asi que se publican y_true e y_score del test: con ellos se recomputan AUPRC, AUC y cualquier umbral sin tener el dato.",
+   "entorno": {
+    "numpy": "2.5.2",
+    "pandas": "2.3.3",
+    "sklearn": "1.9.0",
+    "xgboost": "3.4.1",
+    "lightgbm": "4.7.0"
+   },
+   "openmp": {
+    "precargada_con_ctypes": "/Users/nicholasiakl/Documents/Claude/Projects/Rosetta Quantum/.venv-lab/lib/python3.12/site-packages/sklearn/.dylibs/libomp.dylib",
+    "resolvio_el_problema": false,
+    "que_lo_resolvio": "install_name_tool -add_rpath sobre libxgboost.dylib y lib_lightgbm.dylib del venv, apuntando a la libomp que trae scikit-learn. No se instalo nada en el sistema.",
+    "por_que_no_bastaba_una_variable": "macOS borra DYLD_LIBRARY_PATH al lanzar binarios protegidos (SIP), asi que exportarla funciona en una llamada directa y se pierde en cuanto el proceso pasa por env, nohup o un runner — se ve como que el arreglo funciona hasta que corre desatendido."
+   },
+   "semilla": 42,
+   "bootstrap": "2.000 remuestreos, semilla 42"
+  },
+  "cuando": {
+   "archived_at": "2026-08-25T14:20:43+00:00"
+  },
+  "donde": {
+   "compute": "Mac local. NO pudo correr en CI: el dataset no se puede redistribuir, asi que no puede subirse al runner."
+  },
+  "porque": {
+   "question": "¿que consigue un clasico afinado sobre IEEE-CIS cuando el test es futuro real y no una muestra barajada?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}
