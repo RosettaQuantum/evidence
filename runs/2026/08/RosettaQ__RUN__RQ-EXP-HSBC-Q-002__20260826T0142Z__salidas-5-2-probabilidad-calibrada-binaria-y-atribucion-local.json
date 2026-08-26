@@ -1,0 +1,373 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-HSBC-Q-002__20260826T0142Z__salidas-5-2-probabilidad-calibrada-binaria-y-atribucion-local.json",
+  "file_id": "RQ-EXP-HSBC-Q-002",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Las tres salidas que el §5.2 del enunciado de HSBC exige, producidas sobre el MISMO modelo del brazo cuantico ya sellado. Trabajo descriptivo posterior: NO esta pre-registrado y no modifica el veredicto, que vive en RQ-EXP-HSBC-Q-001.",
+  "extiende": {
+   "file_id": "RQ-EXP-HSBC-Q-001",
+   "content_hash": "sha256:436334b41baf7403d474ae820b6492a211873f02f9ff03214ea679307332075f"
+  },
+  "errata_relacionada": {
+   "file_id": "RQ-ERRATA-EXP-HSBC-Q-001",
+   "content_hash": "sha256:db1e783fa69d4e73225bde1dc42b1938284bd0e9d650cd47b9c424c4decb18de"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-26T01:42:45+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_hsbc_q_atribucion.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:3ee83caa7efb9601d98d04df3fcd6de3d7156635eda15ffc29b86173d9a9fe3a",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:2c52b228bb8b03e5e434d671e7de4439e84adc1daf8d810e66feb54c3a67906f"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "resultado_hsbc_atribucion.json",
+    "sha256": "sha256:459f12574188d45515f38d96bb149b6da0f9c2857b3905e90eb71b2537d6acb6",
+    "publicado_como": "code/resultado_hsbc_atribucion@459f1257.json"
+   },
+   "NO_PRE_REGISTRADO": {
+    "es": true,
+    "por_que_esta_bien": "no afirma ninguna hipotesis ni cambia un criterio: produce las salidas que el enunciado pide sobre un modelo ya fijado y sellado. El resultado que SI estaba pre-registrado —hay ventaja o no— no se toca."
+   },
+   "salidas_exigidas_por_el_5_2": {
+    "fraud_probability": {
+     "rango": [
+      0.029259,
+      1.0
+     ],
+     "en_0_1": true,
+     "como": "Platt (regresion logistica) sobre 20000 filas del TRAIN disjuntas del soporte, estratificadas, semilla 42",
+     "AUPRC_tras_calibrar": 0.257453,
+     "por_que_hacia_falta": "SVC.decision_function devuelve MARGENES, no probabilidades: los del brazo sellado van de -1.3810 a 1.0207. El enunciado pide «Float [0,1]»."
+    },
+    "binary_prediction": {
+     "umbral_F1_optimo_en_train": {
+      "umbral": 0.951096,
+      "umbral_aplicado_a": "probabilidad calibrada en [0,1]",
+      "precision": 0.833333,
+      "recall": 0.2,
+      "F1": 0.322581,
+      "confusion": {
+       "tn": 56884,
+       "fp": 3,
+       "fn": 60,
+       "tp": 15
+      },
+      "predichos_positivos": 18
+     },
+     "umbral_0.5": {
+      "umbral": 0.5,
+      "umbral_aplicado_a": "probabilidad calibrada en [0,1]",
+      "precision": 0.011134,
+      "recall": 0.44,
+      "F1": 0.021718,
+      "confusion": {
+       "tn": 53956,
+       "fp": 2931,
+       "fn": 42,
+       "tp": 33
+      },
+      "predichos_positivos": 2964
+     },
+     "por_que_dos": "el umbral es una decision de negocio, no una propiedad del modelo. Se dan los dos con su matriz para que el lector elija; el optimo se eligio en el TRAIN, nunca mirando el test."
+    },
+    "feature_attribution": {
+     "local_por_prediccion": {
+      "metodo": "oclusion: cada variable se reemplaza por su mediana del TRAIN y se mide el desplazamiento del score de esa fila",
+      "forma": [
+       56962,
+       8
+      ],
+      "archivo": "atribucion_local en el npz — un vector de 8 contribuciones por cada una de las 56962 transacciones del test",
+      "por_que_asi": "el enunciado pide «contribution of features to EACH prediction». Un ranking global no responde eso: responde otra pregunta."
+     },
+     "ranking_global": [
+      {
+       "variable": "V17",
+       "contribucion_media_abs": 0.063689
+      },
+      {
+       "variable": "V3",
+       "contribucion_media_abs": 0.063225
+      },
+      {
+       "variable": "V11",
+       "contribucion_media_abs": 0.062836
+      },
+      {
+       "variable": "V14",
+       "contribucion_media_abs": 0.059184
+      },
+      {
+       "variable": "V16",
+       "contribucion_media_abs": 0.058261
+      },
+      {
+       "variable": "V12",
+       "contribucion_media_abs": 0.056369
+      },
+      {
+       "variable": "V10",
+       "contribucion_media_abs": 0.055388
+      },
+      {
+       "variable": "V7",
+       "contribucion_media_abs": 0.054871
+      }
+     ]
+    },
+    "importancia_por_permutacion": {
+     "metodo": "barajar la variable en el test y medir cuanto cae el AUPRC; 10 repeticiones por variable, semilla derivada de 42",
+     "AUPRC_de_referencia": 0.257453,
+     "por_variable": {
+      "V3": {
+       "caida_media_de_AUPRC": 0.13111,
+       "IC95": [
+        0.081386,
+        0.182803
+       ],
+       "repeticiones": 10,
+       "cruza_cero": false
+      },
+      "V7": {
+       "caida_media_de_AUPRC": 0.128447,
+       "IC95": [
+        0.060863,
+        0.165599
+       ],
+       "repeticiones": 10,
+       "cruza_cero": false
+      },
+      "V10": {
+       "caida_media_de_AUPRC": 0.220202,
+       "IC95": [
+        0.178127,
+        0.238339
+       ],
+       "repeticiones": 10,
+       "cruza_cero": false
+      },
+      "V11": {
+       "caida_media_de_AUPRC": 0.223164,
+       "IC95": [
+        0.18722,
+        0.248411
+       ],
+       "repeticiones": 10,
+       "cruza_cero": false
+      },
+      "V12": {
+       "caida_media_de_AUPRC": 0.23613,
+       "IC95": [
+        0.218509,
+        0.247614
+       ],
+       "repeticiones": 10,
+       "cruza_cero": false
+      },
+      "V14": {
+       "caida_media_de_AUPRC": 0.230103,
+       "IC95": [
+        0.213474,
+        0.245952
+       ],
+       "repeticiones": 10,
+       "cruza_cero": false
+      },
+      "V16": {
+       "caida_media_de_AUPRC": 0.1999,
+       "IC95": [
+        0.166827,
+        0.226502
+       ],
+       "repeticiones": 10,
+       "cruza_cero": false
+      },
+      "V17": {
+       "caida_media_de_AUPRC": 0.244356,
+       "IC95": [
+        0.222326,
+        0.25275
+       ],
+       "repeticiones": 10,
+       "cruza_cero": false
+      }
+     },
+     "variables_cuya_caida_cruza_cero": [],
+     "LECTURA": "8 de 8 variables tienen una caida cuyo intervalo NO cruza cero: el modelo si extrae senal de ellas."
+    },
+    "muestras_de_la_ejecucion_cuantica": {
+     "EXIGIDO_TEXTUAL_POR_EL_STATEMENT": "the total number of samples used for quantum execution must be explicitly stated in the submission",
+     "soporte_estratificado": 20000,
+     "fraudes_en_el_soporte": 37,
+     "calibracion": 20000,
+     "test_evaluado": 56962,
+     "total_de_muestras_con_ejecucion_cuantica": 96962,
+     "qubits": 8,
+     "variables": [
+      "V3",
+      "V7",
+      "V10",
+      "V11",
+      "V12",
+      "V14",
+      "V16",
+      "V17"
+     ]
+    }
+   },
+   "importancia_por_permutacion": {
+    "metodo": "barajar la variable en el test y medir cuanto cae el AUPRC; 10 repeticiones por variable, semilla derivada de 42",
+    "AUPRC_de_referencia": 0.257453,
+    "por_variable": {
+     "V3": {
+      "caida_media_de_AUPRC": 0.13111,
+      "IC95": [
+       0.081386,
+       0.182803
+      ],
+      "repeticiones": 10,
+      "cruza_cero": false
+     },
+     "V7": {
+      "caida_media_de_AUPRC": 0.128447,
+      "IC95": [
+       0.060863,
+       0.165599
+      ],
+      "repeticiones": 10,
+      "cruza_cero": false
+     },
+     "V10": {
+      "caida_media_de_AUPRC": 0.220202,
+      "IC95": [
+       0.178127,
+       0.238339
+      ],
+      "repeticiones": 10,
+      "cruza_cero": false
+     },
+     "V11": {
+      "caida_media_de_AUPRC": 0.223164,
+      "IC95": [
+       0.18722,
+       0.248411
+      ],
+      "repeticiones": 10,
+      "cruza_cero": false
+     },
+     "V12": {
+      "caida_media_de_AUPRC": 0.23613,
+      "IC95": [
+       0.218509,
+       0.247614
+      ],
+      "repeticiones": 10,
+      "cruza_cero": false
+     },
+     "V14": {
+      "caida_media_de_AUPRC": 0.230103,
+      "IC95": [
+       0.213474,
+       0.245952
+      ],
+      "repeticiones": 10,
+      "cruza_cero": false
+     },
+     "V16": {
+      "caida_media_de_AUPRC": 0.1999,
+      "IC95": [
+       0.166827,
+       0.226502
+      ],
+      "repeticiones": 10,
+      "cruza_cero": false
+     },
+     "V17": {
+      "caida_media_de_AUPRC": 0.244356,
+      "IC95": [
+       0.222326,
+       0.25275
+      ],
+      "repeticiones": 10,
+      "cruza_cero": false
+     }
+    },
+    "variables_cuya_caida_cruza_cero": [],
+    "LECTURA": "8 de 8 variables tienen una caida cuyo intervalo NO cruza cero: el modelo si extrae senal de ellas."
+   },
+   "el_conteo_que_el_statement_exige_textual": {
+    "EXIGIDO_TEXTUAL_POR_EL_STATEMENT": "the total number of samples used for quantum execution must be explicitly stated in the submission",
+    "soporte_estratificado": 20000,
+    "fraudes_en_el_soporte": 37,
+    "calibracion": 20000,
+    "test_evaluado": 56962,
+    "total_de_muestras_con_ejecucion_cuantica": 96962,
+    "qubits": 8,
+    "variables": [
+     "V3",
+     "V7",
+     "V10",
+     "V11",
+     "V12",
+     "V14",
+     "V16",
+     "V17"
+    ]
+   },
+   "el_veredicto_sigue_siendo": {
+    "AUPRC": 0.257453,
+    "IC95": [
+     0.154578,
+     0.369107
+    ],
+    "cruce_ventaja_cuantica": 0,
+    "leido_de": "RQ-EXP-HSBC-Q-001"
+   },
+   "cruce_ventaja_cuantica": 0
+  },
+  "como": {
+   "harness": {
+    "archivo": "hsbc_harness.py",
+    "sha256": "sha256:d40e1c246286af6214d4de7acea6a8acbce73fde3a98dbc77342ccabeb7bae4a",
+    "publicado_como": "code/hsbc_harness@d40e1c24.py"
+   },
+   "comando": {
+    "archivo": "_correr_atribucion.sh",
+    "sha256": "sha256:59127a3e155373f379a8d91f5e3165f9709b02a8d0d386ff059fbe1dc84a21c8",
+    "publicado_como": "code/_correr_atribucion@59127a3e.sh"
+   },
+   "salidas_crudas": {
+    "archivo": "scores_atr_atribucion.npz",
+    "sha256": "sha256:a6f8ffe10cbda57b227015b267ce1330c93d05b0424591ecbf82c0d167903fc9",
+    "publicado_como": "code/scores_atr_atribucion@a6f8ffe1.npz",
+    "contiene": "y_true, proba (calibrada en [0,1]), binaria, atribucion_local (56962 x 8) y los nombres de las variables"
+   },
+   "guardias": "aborta si el harness no es el que produjo el dato, si el AUPRC difiere del primario sellado, si la probabilidad no esta en [0,1], si la calibracion movio el AUPRC, o si la atribucion local no trae una fila por transaccion del test.",
+   "semilla": 42
+  },
+  "cuando": {
+   "archived_at": "2026-08-26T01:42:45+00:00"
+  },
+  "donde": {
+   "compute": "Mac local (laboratorio). Simulacion exacta, sin QPU.",
+   "gasto_usd": 0.0
+  },
+  "porque": {
+   "question": "¿que aporta cada variable a cada prediccion del brazo cuantico, y se mueve la metrica si alguna deja de informar?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}

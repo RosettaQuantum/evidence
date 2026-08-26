@@ -1,0 +1,322 @@
+{
+ "dataset": "ulb",
+ "manifest": "RQ-DATA-HSBC-ULB-001",
+ "datos_sha256": "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+ "columnas_categoricas": {
+  "cuantas": 0,
+  "niveles_vistos_en_train": {},
+  "codificacion": "ordinal ajustada SOLO con el train; una categoria que solo aparece en el test entra como -1"
+ },
+ "particion": {
+  "tipo": "temporal 80/20 por Time",
+  "corte_fila": 227845,
+  "train": {
+   "filas": 227845,
+   "fraudes": 417,
+   "tasa": 0.00183
+  },
+  "test": {
+   "filas": 56962,
+   "fraudes": 75,
+   "tasa": 0.001317,
+   "sha256": "88f43ccb6ffcd6aeed624b6db4c81c170c625ffcd24ad52105978f02a6924131"
+  },
+  "corte_temporal": {
+   "columna": "Time",
+   "max_train": 145247.0,
+   "min_test": 145248.0,
+   "min_test_mayor_o_igual_que_max_train": true,
+   "ventana_de_test_dias": 0.32,
+   "ventana_de_train_dias": 1.68,
+   "cambio_relativo_de_la_tasa_pct": -28.1
+  },
+  "solape_de_contenido_duplicados_exactos": 0
+ },
+ "scale_pos_weight": 545.39,
+ "seed": 42,
+ "modelos": {
+  "kernel_cuantico": {
+   "AUPRC": 0.257453,
+   "AUC_ROC": 0.743759,
+   "F1_umbral_0.5": 0.076923,
+   "confusion_0.5": {
+    "tn": 56887,
+    "fp": 0,
+    "fn": 72,
+    "tp": 3
+   },
+   "AUPRC_IC95": [
+    0.154578,
+    0.369107
+   ],
+   "AUC_IC95": [
+    0.667339,
+    0.813901
+   ],
+   "bootstrap_validos": 2000,
+   "segundos": 45.0
+  }
+ },
+ "harness_sha256": "d40e1c246286af6214d4de7acea6a8acbce73fde3a98dbc77342ccabeb7bae4a",
+ "lib_versions": {
+  "numpy": "2.5.2",
+  "pandas": "2.3.3",
+  "sklearn": "1.9.0",
+  "xgboost": "3.4.1",
+  "lightgbm": "4.7.0"
+ },
+ "openmp": {
+  "precargada_con_ctypes": "/Users/nicholasiakl/Documents/Claude/Projects/Rosetta Quantum/.venv-lab/lib/python3.12/site-packages/sklearn/.dylibs/libomp.dylib",
+  "resolvio_el_problema": false,
+  "que_lo_resolvio": "install_name_tool -add_rpath sobre libxgboost.dylib y lib_lightgbm.dylib del venv, apuntando a la libomp que trae scikit-learn. No se instalo nada en el sistema.",
+  "por_que_no_bastaba_una_variable": "macOS borra DYLD_LIBRARY_PATH al lanzar binarios protegidos (SIP), asi que exportarla funciona en una llamada directa y se pierde en cuanto el proceso pasa por env, nohup o un runner \u2014 se ve como que el arreglo funciona hasta que corre desatendido."
+ },
+ "brazo": "cuantico",
+ "n_vectores_soporte": 945,
+ "salidas_5_2": {
+  "fraud_probability": {
+   "rango": [
+    0.029259,
+    1.0
+   ],
+   "en_0_1": true,
+   "como": "Platt (regresion logistica) sobre 20000 filas del TRAIN disjuntas del soporte, estratificadas, semilla 42",
+   "AUPRC_tras_calibrar": 0.257453,
+   "por_que_hacia_falta": "SVC.decision_function devuelve MARGENES, no probabilidades: los del brazo sellado van de -1.3810 a 1.0207. El enunciado pide \u00abFloat [0,1]\u00bb."
+  },
+  "binary_prediction": {
+   "umbral_F1_optimo_en_train": {
+    "umbral": 0.951096,
+    "umbral_aplicado_a": "probabilidad calibrada en [0,1]",
+    "precision": 0.833333,
+    "recall": 0.2,
+    "F1": 0.322581,
+    "confusion": {
+     "tn": 56884,
+     "fp": 3,
+     "fn": 60,
+     "tp": 15
+    },
+    "predichos_positivos": 18
+   },
+   "umbral_0.5": {
+    "umbral": 0.5,
+    "umbral_aplicado_a": "probabilidad calibrada en [0,1]",
+    "precision": 0.011134,
+    "recall": 0.44,
+    "F1": 0.021718,
+    "confusion": {
+     "tn": 53956,
+     "fp": 2931,
+     "fn": 42,
+     "tp": 33
+    },
+    "predichos_positivos": 2964
+   },
+   "por_que_dos": "el umbral es una decision de negocio, no una propiedad del modelo. Se dan los dos con su matriz para que el lector elija; el optimo se eligio en el TRAIN, nunca mirando el test."
+  },
+  "feature_attribution": {
+   "local_por_prediccion": {
+    "metodo": "oclusion: cada variable se reemplaza por su mediana del TRAIN y se mide el desplazamiento del score de esa fila",
+    "forma": [
+     56962,
+     8
+    ],
+    "archivo": "atribucion_local en el npz \u2014 un vector de 8 contribuciones por cada una de las 56962 transacciones del test",
+    "por_que_asi": "el enunciado pide \u00abcontribution of features to EACH prediction\u00bb. Un ranking global no responde eso: responde otra pregunta."
+   },
+   "ranking_global": [
+    {
+     "variable": "V17",
+     "contribucion_media_abs": 0.063689
+    },
+    {
+     "variable": "V3",
+     "contribucion_media_abs": 0.063225
+    },
+    {
+     "variable": "V11",
+     "contribucion_media_abs": 0.062836
+    },
+    {
+     "variable": "V14",
+     "contribucion_media_abs": 0.059184
+    },
+    {
+     "variable": "V16",
+     "contribucion_media_abs": 0.058261
+    },
+    {
+     "variable": "V12",
+     "contribucion_media_abs": 0.056369
+    },
+    {
+     "variable": "V10",
+     "contribucion_media_abs": 0.055388
+    },
+    {
+     "variable": "V7",
+     "contribucion_media_abs": 0.054871
+    }
+   ]
+  },
+  "importancia_por_permutacion": {
+   "metodo": "barajar la variable en el test y medir cuanto cae el AUPRC; 10 repeticiones por variable, semilla derivada de 42",
+   "AUPRC_de_referencia": 0.257453,
+   "por_variable": {
+    "V3": {
+     "caida_media_de_AUPRC": 0.13111,
+     "IC95": [
+      0.081386,
+      0.182803
+     ],
+     "repeticiones": 10,
+     "cruza_cero": false
+    },
+    "V7": {
+     "caida_media_de_AUPRC": 0.128447,
+     "IC95": [
+      0.060863,
+      0.165599
+     ],
+     "repeticiones": 10,
+     "cruza_cero": false
+    },
+    "V10": {
+     "caida_media_de_AUPRC": 0.220202,
+     "IC95": [
+      0.178127,
+      0.238339
+     ],
+     "repeticiones": 10,
+     "cruza_cero": false
+    },
+    "V11": {
+     "caida_media_de_AUPRC": 0.223164,
+     "IC95": [
+      0.18722,
+      0.248411
+     ],
+     "repeticiones": 10,
+     "cruza_cero": false
+    },
+    "V12": {
+     "caida_media_de_AUPRC": 0.23613,
+     "IC95": [
+      0.218509,
+      0.247614
+     ],
+     "repeticiones": 10,
+     "cruza_cero": false
+    },
+    "V14": {
+     "caida_media_de_AUPRC": 0.230103,
+     "IC95": [
+      0.213474,
+      0.245952
+     ],
+     "repeticiones": 10,
+     "cruza_cero": false
+    },
+    "V16": {
+     "caida_media_de_AUPRC": 0.1999,
+     "IC95": [
+      0.166827,
+      0.226502
+     ],
+     "repeticiones": 10,
+     "cruza_cero": false
+    },
+    "V17": {
+     "caida_media_de_AUPRC": 0.244356,
+     "IC95": [
+      0.222326,
+      0.25275
+     ],
+     "repeticiones": 10,
+     "cruza_cero": false
+    }
+   },
+   "variables_cuya_caida_cruza_cero": [],
+   "LECTURA": "8 de 8 variables tienen una caida cuyo intervalo NO cruza cero: el modelo si extrae senal de ellas."
+  },
+  "muestras_de_la_ejecucion_cuantica": {
+   "EXIGIDO_TEXTUAL_POR_EL_STATEMENT": "the total number of samples used for quantum execution must be explicitly stated in the submission",
+   "soporte_estratificado": 20000,
+   "fraudes_en_el_soporte": 37,
+   "calibracion": 20000,
+   "test_evaluado": 56962,
+   "total_de_muestras_con_ejecucion_cuantica": 96962,
+   "qubits": 8,
+   "variables": [
+    "V3",
+    "V7",
+    "V10",
+    "V11",
+    "V12",
+    "V14",
+    "V16",
+    "V17"
+   ]
+  }
+ },
+ "simulacion": {
+  "tipo": "statevector exacto",
+  "backend": "ninguno \u2014 no se envio nada a hardware",
+  "gasto_usd": 0.0,
+  "verificado_contra": "qiskit.circuit.library.ZZFeatureMap",
+  "max_dif_statevector": 2.831204766268183e-15,
+  "max_dif_kernel": 3.3306690738754696e-15,
+  "lo_que_NO_responde": "el comportamiento en hardware con ruido. Esto es un TECHO: con el mismo mapa, la version ruidosa no puede superar a la exacta. Que no haya ventaja aqui cierra el caso; que la hubiera no la probaria en hardware."
+ },
+ "decisiones_declaradas_antes": {
+  "D1_features": {
+   "criterio": "|Pearson con la etiqueta| sobre el TRAIN",
+   "k": 8,
+   "elegidas": [
+    "V3",
+    "V7",
+    "V10",
+    "V11",
+    "V12",
+    "V14",
+    "V16",
+    "V17"
+   ]
+  },
+  "D2_escalado": "media/sigma del train, recorte +-3 sigma, mapeo a [0, pi]",
+  "D3_codificacion": {
+   "mapa": "ZZFeatureMap",
+   "reps": 2,
+   "entrelazamiento": "full"
+  },
+  "D4_soporte": {
+   "estratificado": true,
+   "n": 20000,
+   "fraudes": 37,
+   "razon_pct": 0.185,
+   "exigido_por": "el statement pide muestreo estratificado",
+   "asimetria": "el brazo clasico se entrena con 227845 filas y 417 fraudes; este con 20000 y 37. La desventaja es del protocolo, no del metodo."
+  },
+  "D5_clasificador": {
+   "modelo": "SVC",
+   "kernel": "precomputed",
+   "C": 1.0,
+   "class_weight": "balanced"
+  }
+ },
+ "controles_exploratorios": {
+  "PRE_REGISTRADOS": false,
+  "cuando_se_decidieron": "despues de ver el resultado primario",
+  "para_que": "separar \u00abel kernel cuantico pierde\u00bb de \u00able dimos 37 positivos\u00bb. No pueden rescatar el resultado primario ni lo modifican.",
+  "resultados": {}
+ },
+ "comparacion": {
+  "contra": "RQ-EXP-HSBC-BASE-001",
+  "mismo_test": true,
+  "mismo_bootstrap": true,
+  "misma_semilla": 42,
+  "n_test": 56962,
+  "fraudes_test": 75
+ }
+}
