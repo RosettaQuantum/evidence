@@ -466,8 +466,7 @@ def correr_brazo_cuantico():
     t0 = time.time()
     clf = SVC(kernel="precomputed", C=Q_C, class_weight="balanced")
     clf.fit(K, ys)
-    n_sv = int(clf.n_support_.sum())
-    print("  SVC: %.1f s, %d vectores de soporte" % (time.time() - t0, n_sv))
+    print("  SVC: %.1f s, %d vectores de soporte" % (time.time() - t0, int(clf.n_support_.sum())))
     del K
 
     t0 = time.time()
@@ -535,7 +534,7 @@ def correr_brazo_cuantico():
 
     np.savez_compressed(os.environ.get("RQ_SCORES_PREFIX", "scores_") + "kernel_cuantico.npz",
                         y_true=yte.astype(np.int8), y_score=p.astype(np.float32))
-    extra = {"brazo": "cuantico", "n_vectores_soporte": n_sv, "simulacion": {
+    extra = {"brazo": "cuantico", "simulacion": {
         "tipo": "statevector exacto",
         "backend": "ninguno — no se envio nada a hardware",
         "gasto_usd": 0.0,

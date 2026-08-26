@@ -1,0 +1,288 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__RUN__RQ-EXP-HSBC-Q-001__20260826T0009Z__brazo-cuantico-kernel-fidelidad-simulacion-exacta--sin-ventaja.json",
+  "file_id": "RQ-EXP-HSBC-Q-001",
+  "type": "RUN",
+  "is_demo": false,
+  "scope_note": "Brazo cuantico del track HSBC: kernel de fidelidad en simulacion exacta sobre ULB, contra el clasico sellado, mismo test y mismo bootstrap. RESULTADO NEGATIVO: no hay ventaja. Se publica porque el pre-registro declaro de antemano que los dos desenlaces son entregables.",
+  "prereg": {
+   "file_id": "RQ-PREREG-HSBC-003-CUANTICO",
+   "content_hash": "sha256:e15b1808c03c29a8623eb687c3790c0a00e29cb5ae3ff6848f83d94269c5abb8"
+  },
+  "manifest": {
+   "file_id": "RQ-DATA-HSBC-ULB-001",
+   "content_hash": "sha256:71010a1afbf85a0d831bfdc4dcca75754a439125af7fb680132ba3cf71e4503f"
+  },
+  "compara_contra": {
+   "file_id": "RQ-EXP-HSBC-BASE-001",
+   "content_hash": "sha256:2cc73ac7c845a57e575669d8426667ea9cc887de3ccf700a1343db1a6a492e9c"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-26T00:09:36+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_hsbc_cuantico.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:3aac8b99e652c7a086b9c8f68a0818afd8e3cf4d97bd67fbc81ed583b2a6099e",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:436334b41baf7403d474ae820b6492a211873f02f9ff03214ea679307332075f"
+ },
+ "w6": {
+  "que": {
+   "artefacto": {
+    "archivo": "resultado_hsbc_cuantico.json",
+    "sha256": "sha256:71e071ed2f219c47e28df9980b3d8e50b5edce835c2ead44a37a217cbcb63fd7",
+    "publicado_como": "code/resultado_hsbc_cuantico@71e071ed.json"
+   },
+   "VEREDICTO": {
+    "cruce_ventaja_cuantica": 0,
+    "lectura": "el intervalo del brazo cuantico queda por debajo del clasico sellado. Por el criterio pre-registrado —AUPRC sobre el test completo, IC95 por bootstrap de 2.000 remuestreos con semilla 42, sin solape— NO hay ventaja.",
+    "cuantico": {
+     "AUPRC": 0.257453,
+     "IC95": [
+      0.154578,
+      0.369107
+     ],
+     "AUC_ROC": 0.743759
+    },
+    "clasico_sellado": {
+     "AUPRC": 0.800822,
+     "IC95": [
+      0.70543,
+      0.882776
+     ],
+     "leido_de": "RQ-EXP-HSBC-BASE-001"
+    },
+    "mismo_test_comprobado_por_hash": "88f43ccb6ffcd6aeed624b6db4c81c170c625ffcd24ad52105978f02a6924131"
+   },
+   "LO_QUE_LA_SIMULACION_EXACTA_NO_RESPONDE": "el comportamiento en hardware con ruido. Esto es un TECHO: con el mismo mapa, la version ruidosa no puede superar a la exacta. Que no haya ventaja aqui cierra el caso; que la hubiera no la probaria en hardware.",
+   "decisiones_declaradas_antes_de_mirar_el_test": {
+    "D1_features": {
+     "criterio": "|Pearson con la etiqueta| sobre el TRAIN",
+     "k": 8,
+     "elegidas": [
+      "V3",
+      "V7",
+      "V10",
+      "V11",
+      "V12",
+      "V14",
+      "V16",
+      "V17"
+     ]
+    },
+    "D2_escalado": "media/sigma del train, recorte +-3 sigma, mapeo a [0, pi]",
+    "D3_codificacion": {
+     "mapa": "ZZFeatureMap",
+     "reps": 2,
+     "entrelazamiento": "full"
+    },
+    "D4_soporte": {
+     "estratificado": true,
+     "n": 20000,
+     "fraudes": 37,
+     "razon_pct": 0.185,
+     "exigido_por": "el statement pide muestreo estratificado",
+     "asimetria": "el brazo clasico se entrena con 227845 filas y 417 fraudes; este con 20000 y 37. La desventaja es del protocolo, no del metodo."
+    },
+    "D5_clasificador": {
+     "modelo": "SVC",
+     "kernel": "precomputed",
+     "C": 1.0,
+     "class_weight": "balanced"
+    }
+   },
+   "EL_HANDICAP_Y_POR_QUE_NO_EXPLICA_EL_RESULTADO": {
+    "el_handicap": "el statement exige muestreo estratificado. Al 0,183 % de fraude, un soporte de 20000 puntos deja 37 positivos, contra los 417 con que se entreno el clasico. Es una desventaja real y del protocolo, no del metodo.",
+    "por_que_no_explica_el_resultado": "porque se midio. Con LA MISMA muestra mutilada y LAS MISMAS 8 features, un xgboost llega a 0.7460 [0.642856, 0.84294], cuyo intervalo se solapa con el del basal: el muestreo estratificado le costo al metodo clasico algo que ni siquiera es detectable. Y quitandole el handicap por completo al brazo cuantico —los 417 fraudes, soporte no estratificado— sube a 0.4887 [0.36985, 0.59794] y sigue por debajo del basal.",
+    "por_que_esto_esta_aqui": "sin esta medicion, «el kernel cuantico pierde» y «le dimos 37 positivos» son indistinguibles, y publicar el primero seria un reporte falso aunque el numero fuera correcto."
+   },
+   "TAMPOCO_LE_GANA_AL_RBF": {
+    "cuantico_IC95": [
+     0.154578,
+     0.369107
+    ],
+    "rbf_IC95": [
+     0.067262,
+     0.157488
+    ],
+    "gana": false,
+    "lectura": "con el mismo dato, las mismas features y el mismo clasificador, el kernel cuantico da 0.2575 y el RBF 0.1004. Los intervalos SE TOCAN, asi que por la misma regla que usamos para negar la ventaja cuantica frente al basal, tampoco podemos afirmar que le gane al RBF. La regla se aplica contra nosotros mismos o no es una regla.",
+    "ninguno_de_los_dos_fue_afinado": "ni el kernel cuantico ni el RBF llevan busqueda de hiperparametros. C=1 y gamma='scale' son los valores por defecto."
+   },
+   "controles_exploratorios": {
+    "PRE_REGISTRADOS": false,
+    "cuando_se_decidieron": "despues de ver el resultado primario",
+    "para_que": "separar «el kernel cuantico pierde» de «le dimos 37 positivos». No pueden rescatar el resultado primario ni lo modifican.",
+    "resultados": {
+     "A1_rbf_mismo_dato_mismas_features": {
+      "AUPRC": 0.100445,
+      "AUC_ROC": 0.964517,
+      "F1_umbral_0.5": 0.133333,
+      "confusion_0.5": {
+       "tn": 56850,
+       "fp": 37,
+       "fn": 67,
+       "tp": 8
+      },
+      "AUPRC_IC95": [
+       0.067262,
+       0.157488
+      ],
+      "AUC_IC95": [
+       0.941202,
+       0.981755
+      ],
+      "bootstrap_validos": 2000,
+      "segundos": 31.9
+     },
+     "A2_xgboost_mismo_dato_mismas_features": {
+      "AUPRC": 0.74597,
+      "AUC_ROC": 0.893406,
+      "F1_umbral_0.5": 0.80292,
+      "confusion_0.5": {
+       "tn": 56880,
+       "fp": 7,
+       "fn": 20,
+       "tp": 55
+      },
+      "AUPRC_IC95": [
+       0.642856,
+       0.84294
+      ],
+      "AUC_IC95": [
+       0.830844,
+       0.948688
+      ],
+      "bootstrap_validos": 2000,
+      "segundos": 29.3
+     },
+     "B_cuantico_con_los_417_fraudes": {
+      "AUPRC": 0.488745,
+      "AUC_ROC": 0.851763,
+      "F1_umbral_0.5": 0.333333,
+      "confusion_0.5": {
+       "tn": 56887,
+       "fp": 0,
+       "fn": 60,
+       "tp": 15
+      },
+      "AUPRC_IC95": [
+       0.36985,
+       0.59794
+      ],
+      "AUC_IC95": [
+       0.791617,
+       0.904713
+      ],
+      "bootstrap_validos": 2000,
+      "segundos": 45.9,
+      "soporte": {
+       "n": 20000,
+       "fraudes": 417,
+       "razon_pct": 2.085,
+       "estratificado": false,
+       "por_que_no": "a proposito: enriquecido en fraude para medir si el limite era el numero de positivos. Por eso NO es el resultado pre-registrado."
+      }
+     }
+    }
+   },
+   "particion": {
+    "tipo": "temporal 80/20 por Time",
+    "corte_fila": 227845,
+    "train": {
+     "filas": 227845,
+     "fraudes": 417,
+     "tasa": 0.00183
+    },
+    "test": {
+     "filas": 56962,
+     "fraudes": 75,
+     "tasa": 0.001317,
+     "sha256": "88f43ccb6ffcd6aeed624b6db4c81c170c625ffcd24ad52105978f02a6924131"
+    },
+    "corte_temporal": {
+     "columna": "Time",
+     "max_train": 145247.0,
+     "min_test": 145248.0,
+     "min_test_mayor_o_igual_que_max_train": true,
+     "ventana_de_test_dias": 0.32,
+     "ventana_de_train_dias": 1.68,
+     "cambio_relativo_de_la_tasa_pct": -28.1
+    },
+    "solape_de_contenido_duplicados_exactos": 0
+   },
+   "cruce_ventaja_cuantica": 0
+  },
+  "como": {
+   "harness": {
+    "archivo": "hsbc_harness.py",
+    "sha256": "sha256:a27348cbacc0613de8c171c1cf65ed5da7b0ef8d4ff88edd05b882cec599f651",
+    "publicado_como": "code/hsbc_harness@a27348cb.py"
+   },
+   "comando": {
+    "archivo": "_correr_cuantico.sh",
+    "sha256": "sha256:3216bb70a48b55c85e2f00c8cb20aaf639278dd98ff784c31f7819584774c61c",
+    "publicado_como": "code/_correr_cuantico@3216bb70.sh"
+   },
+   "scores_crudos": [
+    {
+     "archivo": "scores_q_kernel_cuantico.npz",
+     "sha256": "sha256:091914f16b6b9b02dc1250495d4cf7457e965699a52c28da0f243efe05f7a105",
+     "publicado_como": "code/scores_q_kernel_cuantico@091914f1.npz"
+    }
+   ],
+   "el_ejecutor_del_mapa": {
+    "que_es": "statevector propio en numpy — Walsh-Hadamard rapida mas dos diagonales de fase.",
+    "verificado_contra": "qiskit.circuit.library.ZZFeatureMap",
+    "max_dif_statevector": 2.831204766268183e-15,
+    "max_dif_kernel": 3.3306690738754696e-15,
+    "LO_QUE_LA_GUARDIA_ENCONTRO": "la primera version daba max|dK|=3e-15 y max|dpsi|=4,1e-01: el kernel coincidia y el estado no. Yo habia escrito la fase como exp(+i phi Z); qiskit la implementa con puertas P(2phi), que es exp(-i phi Z) salvo fase global — mi estado era el CONJUGADO del suyo. Como |<conj a|conj b>|^2 = |<a|b>|^2, el numero que iba al resultado era correcto por accidente mientras el objeto era otro. Una guardia que solo comparara el kernel habria dejado pasar esto entero."
+   },
+   "DESVIACIONES_DEL_PRE_REGISTRO": [
+    {
+     "declarado": "PennyLane/statevector",
+     "ejecutado": "statevector propio en numpy, verificado contra el ZZFeatureMap de qiskit a 2,8e-15 en el estado y 3,3e-15 en el kernel",
+     "por_que": "por velocidad. No se agrego ademas una verificacion contra PennyLane porque habria que transcribir el mapa a mano, y comparar mi numpy contra mi transcripcion es comparar mi codigo con mi codigo: la comprobacion contra el objeto que construye la libreria desde su propia definicion es estrictamente mas fuerte.",
+     "afecta_al_veredicto": false
+    },
+    {
+     "declarado": "CI de evidence",
+     "ejecutado": "Mac local (laboratorio)",
+     "por_que": "no se ejecuto el paso de CI. El basal sellado corrio en CI con verificacion local, asi que los dos brazos NO corrieron en el mismo entorno.",
+     "afecta_al_veredicto": false,
+     "por_que_no_afecta": "el test es el mismo, comprobado por hash, y el bootstrap usa la misma semilla sobre ese mismo test. La diferencia de entorno mueve el clasico del orden de 0,002 (local 0,798951 vs CI 0,800822) frente a una brecha de 0,54 entre los dos brazos. Queda pendiente reproducirlo en CI.",
+     "pendiente": "reproducir el brazo cuantico en CI de evidence"
+    }
+   ],
+   "reproducibilidad": "la corrida se repitio entera y dio el primario identico —AUPRC 0.2575, mismo IC, mismos 945 vectores de soporte.",
+   "entorno": {
+    "numpy": "2.5.2",
+    "pandas": "2.3.3",
+    "sklearn": "1.9.0",
+    "xgboost": "3.4.1",
+    "lightgbm": "4.7.0"
+   },
+   "semilla": 42,
+   "bootstrap": "2.000 remuestreos, semilla 42, sobre el MISMO test que el basal; una sola implementacion compartida por los dos brazos, para que los intervalos sean comparables."
+  },
+  "cuando": {
+   "archived_at": "2026-08-26T00:09:36+00:00"
+  },
+  "donde": {
+   "compute": "Mac local (laboratorio). Ningun backend de pago, ninguna QPU.",
+   "gasto_usd": 0.0
+  },
+  "porque": {
+   "question": "¿aporta un kernel cuantico de fidelidad a la deteccion de fraude, medido contra un clasico afinado sobre el mismo test, con el protocolo fijado antes de mirar?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario; el texto publico pasa por el OK de Nicholas."
+  }
+ }
+}

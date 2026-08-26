@@ -1,0 +1,205 @@
+{
+ "dataset": "ulb",
+ "manifest": "RQ-DATA-HSBC-ULB-001",
+ "datos_sha256": "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+ "columnas_categoricas": {
+  "cuantas": 0,
+  "niveles_vistos_en_train": {},
+  "codificacion": "ordinal ajustada SOLO con el train; una categoria que solo aparece en el test entra como -1"
+ },
+ "particion": {
+  "tipo": "temporal 80/20 por Time",
+  "corte_fila": 227845,
+  "train": {
+   "filas": 227845,
+   "fraudes": 417,
+   "tasa": 0.00183
+  },
+  "test": {
+   "filas": 56962,
+   "fraudes": 75,
+   "tasa": 0.001317,
+   "sha256": "88f43ccb6ffcd6aeed624b6db4c81c170c625ffcd24ad52105978f02a6924131"
+  },
+  "corte_temporal": {
+   "columna": "Time",
+   "max_train": 145247.0,
+   "min_test": 145248.0,
+   "min_test_mayor_o_igual_que_max_train": true,
+   "ventana_de_test_dias": 0.32,
+   "ventana_de_train_dias": 1.68,
+   "cambio_relativo_de_la_tasa_pct": -28.1
+  },
+  "solape_de_contenido_duplicados_exactos": 0
+ },
+ "scale_pos_weight": 545.39,
+ "seed": 42,
+ "modelos": {
+  "kernel_cuantico": {
+   "AUPRC": 0.257453,
+   "AUC_ROC": 0.743759,
+   "F1_umbral_0.5": 0.076923,
+   "confusion_0.5": {
+    "tn": 56887,
+    "fp": 0,
+    "fn": 72,
+    "tp": 3
+   },
+   "AUPRC_IC95": [
+    0.154578,
+    0.369107
+   ],
+   "AUC_IC95": [
+    0.667339,
+    0.813901
+   ],
+   "bootstrap_validos": 2000,
+   "segundos": 45.2
+  }
+ },
+ "harness_sha256": "a27348cbacc0613de8c171c1cf65ed5da7b0ef8d4ff88edd05b882cec599f651",
+ "lib_versions": {
+  "numpy": "2.5.2",
+  "pandas": "2.3.3",
+  "sklearn": "1.9.0",
+  "xgboost": "3.4.1",
+  "lightgbm": "4.7.0"
+ },
+ "openmp": {
+  "precargada_con_ctypes": "/Users/nicholasiakl/Documents/Claude/Projects/Rosetta Quantum/.venv-lab/lib/python3.12/site-packages/sklearn/.dylibs/libomp.dylib",
+  "resolvio_el_problema": false,
+  "que_lo_resolvio": "install_name_tool -add_rpath sobre libxgboost.dylib y lib_lightgbm.dylib del venv, apuntando a la libomp que trae scikit-learn. No se instalo nada en el sistema.",
+  "por_que_no_bastaba_una_variable": "macOS borra DYLD_LIBRARY_PATH al lanzar binarios protegidos (SIP), asi que exportarla funciona en una llamada directa y se pierde en cuanto el proceso pasa por env, nohup o un runner \u2014 se ve como que el arreglo funciona hasta que corre desatendido."
+ },
+ "brazo": "cuantico",
+ "simulacion": {
+  "tipo": "statevector exacto",
+  "backend": "ninguno \u2014 no se envio nada a hardware",
+  "gasto_usd": 0.0,
+  "verificado_contra": "qiskit.circuit.library.ZZFeatureMap",
+  "max_dif_statevector": 2.831204766268183e-15,
+  "max_dif_kernel": 3.3306690738754696e-15,
+  "lo_que_NO_responde": "el comportamiento en hardware con ruido. Esto es un TECHO: con el mismo mapa, la version ruidosa no puede superar a la exacta. Que no haya ventaja aqui cierra el caso; que la hubiera no la probaria en hardware."
+ },
+ "decisiones_declaradas_antes": {
+  "D1_features": {
+   "criterio": "|Pearson con la etiqueta| sobre el TRAIN",
+   "k": 8,
+   "elegidas": [
+    "V3",
+    "V7",
+    "V10",
+    "V11",
+    "V12",
+    "V14",
+    "V16",
+    "V17"
+   ]
+  },
+  "D2_escalado": "media/sigma del train, recorte +-3 sigma, mapeo a [0, pi]",
+  "D3_codificacion": {
+   "mapa": "ZZFeatureMap",
+   "reps": 2,
+   "entrelazamiento": "full"
+  },
+  "D4_soporte": {
+   "estratificado": true,
+   "n": 20000,
+   "fraudes": 37,
+   "razon_pct": 0.185,
+   "exigido_por": "el statement pide muestreo estratificado",
+   "asimetria": "el brazo clasico se entrena con 227845 filas y 417 fraudes; este con 20000 y 37. La desventaja es del protocolo, no del metodo."
+  },
+  "D5_clasificador": {
+   "modelo": "SVC",
+   "kernel": "precomputed",
+   "C": 1.0,
+   "class_weight": "balanced"
+  }
+ },
+ "controles_exploratorios": {
+  "PRE_REGISTRADOS": false,
+  "cuando_se_decidieron": "despues de ver el resultado primario",
+  "para_que": "separar \u00abel kernel cuantico pierde\u00bb de \u00able dimos 37 positivos\u00bb. No pueden rescatar el resultado primario ni lo modifican.",
+  "resultados": {
+   "A1_rbf_mismo_dato_mismas_features": {
+    "AUPRC": 0.100445,
+    "AUC_ROC": 0.964517,
+    "F1_umbral_0.5": 0.133333,
+    "confusion_0.5": {
+     "tn": 56850,
+     "fp": 37,
+     "fn": 67,
+     "tp": 8
+    },
+    "AUPRC_IC95": [
+     0.067262,
+     0.157488
+    ],
+    "AUC_IC95": [
+     0.941202,
+     0.981755
+    ],
+    "bootstrap_validos": 2000,
+    "segundos": 31.9
+   },
+   "A2_xgboost_mismo_dato_mismas_features": {
+    "AUPRC": 0.74597,
+    "AUC_ROC": 0.893406,
+    "F1_umbral_0.5": 0.80292,
+    "confusion_0.5": {
+     "tn": 56880,
+     "fp": 7,
+     "fn": 20,
+     "tp": 55
+    },
+    "AUPRC_IC95": [
+     0.642856,
+     0.84294
+    ],
+    "AUC_IC95": [
+     0.830844,
+     0.948688
+    ],
+    "bootstrap_validos": 2000,
+    "segundos": 29.3
+   },
+   "B_cuantico_con_los_417_fraudes": {
+    "AUPRC": 0.488745,
+    "AUC_ROC": 0.851763,
+    "F1_umbral_0.5": 0.333333,
+    "confusion_0.5": {
+     "tn": 56887,
+     "fp": 0,
+     "fn": 60,
+     "tp": 15
+    },
+    "AUPRC_IC95": [
+     0.36985,
+     0.59794
+    ],
+    "AUC_IC95": [
+     0.791617,
+     0.904713
+    ],
+    "bootstrap_validos": 2000,
+    "segundos": 45.9,
+    "soporte": {
+     "n": 20000,
+     "fraudes": 417,
+     "razon_pct": 2.085,
+     "estratificado": false,
+     "por_que_no": "a proposito: enriquecido en fraude para medir si el limite era el numero de positivos. Por eso NO es el resultado pre-registrado."
+    }
+   }
+  }
+ },
+ "comparacion": {
+  "contra": "RQ-EXP-HSBC-BASE-001",
+  "mismo_test": true,
+  "mismo_bootstrap": true,
+  "misma_semilla": 42,
+  "n_test": 56962,
+  "fraudes_test": 75
+ }
+}
