@@ -1,0 +1,1118 @@
+{
+ "fuente": "pandapower.networks.case118()",
+ "pandapower_version": "3.3.3",
+ "censo": {
+  "buses": 118,
+  "lineas": 173,
+  "trafos": 13
+ },
+ "ADVERTENCIA": "El indice de esta lista ES el indice que usan los candidatos del harness. NO reconstruir desde MATPOWER case118: da 175 lineas, no 173, y los indices se corren.",
+ "coordenadas_de_barras": null,
+ "lineas": [
+  {
+   "idx": 0,
+   "from_bus": 0,
+   "to_bus": 1,
+   "length_km": 1.0
+  },
+  {
+   "idx": 1,
+   "from_bus": 0,
+   "to_bus": 2,
+   "length_km": 1.0
+  },
+  {
+   "idx": 2,
+   "from_bus": 3,
+   "to_bus": 4,
+   "length_km": 1.0
+  },
+  {
+   "idx": 3,
+   "from_bus": 2,
+   "to_bus": 4,
+   "length_km": 1.0
+  },
+  {
+   "idx": 4,
+   "from_bus": 4,
+   "to_bus": 5,
+   "length_km": 1.0
+  },
+  {
+   "idx": 5,
+   "from_bus": 5,
+   "to_bus": 6,
+   "length_km": 1.0
+  },
+  {
+   "idx": 6,
+   "from_bus": 7,
+   "to_bus": 8,
+   "length_km": 1.0
+  },
+  {
+   "idx": 7,
+   "from_bus": 8,
+   "to_bus": 9,
+   "length_km": 1.0
+  },
+  {
+   "idx": 8,
+   "from_bus": 3,
+   "to_bus": 10,
+   "length_km": 1.0
+  },
+  {
+   "idx": 9,
+   "from_bus": 4,
+   "to_bus": 10,
+   "length_km": 1.0
+  },
+  {
+   "idx": 10,
+   "from_bus": 10,
+   "to_bus": 11,
+   "length_km": 1.0
+  },
+  {
+   "idx": 11,
+   "from_bus": 1,
+   "to_bus": 11,
+   "length_km": 1.0
+  },
+  {
+   "idx": 12,
+   "from_bus": 2,
+   "to_bus": 11,
+   "length_km": 1.0
+  },
+  {
+   "idx": 13,
+   "from_bus": 6,
+   "to_bus": 11,
+   "length_km": 1.0
+  },
+  {
+   "idx": 14,
+   "from_bus": 10,
+   "to_bus": 12,
+   "length_km": 1.0
+  },
+  {
+   "idx": 15,
+   "from_bus": 11,
+   "to_bus": 13,
+   "length_km": 1.0
+  },
+  {
+   "idx": 16,
+   "from_bus": 12,
+   "to_bus": 14,
+   "length_km": 1.0
+  },
+  {
+   "idx": 17,
+   "from_bus": 13,
+   "to_bus": 14,
+   "length_km": 1.0
+  },
+  {
+   "idx": 18,
+   "from_bus": 11,
+   "to_bus": 15,
+   "length_km": 1.0
+  },
+  {
+   "idx": 19,
+   "from_bus": 14,
+   "to_bus": 16,
+   "length_km": 1.0
+  },
+  {
+   "idx": 20,
+   "from_bus": 15,
+   "to_bus": 16,
+   "length_km": 1.0
+  },
+  {
+   "idx": 21,
+   "from_bus": 16,
+   "to_bus": 17,
+   "length_km": 1.0
+  },
+  {
+   "idx": 22,
+   "from_bus": 17,
+   "to_bus": 18,
+   "length_km": 1.0
+  },
+  {
+   "idx": 23,
+   "from_bus": 18,
+   "to_bus": 19,
+   "length_km": 1.0
+  },
+  {
+   "idx": 24,
+   "from_bus": 14,
+   "to_bus": 18,
+   "length_km": 1.0
+  },
+  {
+   "idx": 25,
+   "from_bus": 19,
+   "to_bus": 20,
+   "length_km": 1.0
+  },
+  {
+   "idx": 26,
+   "from_bus": 20,
+   "to_bus": 21,
+   "length_km": 1.0
+  },
+  {
+   "idx": 27,
+   "from_bus": 21,
+   "to_bus": 22,
+   "length_km": 1.0
+  },
+  {
+   "idx": 28,
+   "from_bus": 22,
+   "to_bus": 23,
+   "length_km": 1.0
+  },
+  {
+   "idx": 29,
+   "from_bus": 22,
+   "to_bus": 24,
+   "length_km": 1.0
+  },
+  {
+   "idx": 30,
+   "from_bus": 24,
+   "to_bus": 26,
+   "length_km": 1.0
+  },
+  {
+   "idx": 31,
+   "from_bus": 26,
+   "to_bus": 27,
+   "length_km": 1.0
+  },
+  {
+   "idx": 32,
+   "from_bus": 27,
+   "to_bus": 28,
+   "length_km": 1.0
+  },
+  {
+   "idx": 33,
+   "from_bus": 7,
+   "to_bus": 29,
+   "length_km": 1.0
+  },
+  {
+   "idx": 34,
+   "from_bus": 25,
+   "to_bus": 29,
+   "length_km": 1.0
+  },
+  {
+   "idx": 35,
+   "from_bus": 16,
+   "to_bus": 30,
+   "length_km": 1.0
+  },
+  {
+   "idx": 36,
+   "from_bus": 28,
+   "to_bus": 30,
+   "length_km": 1.0
+  },
+  {
+   "idx": 37,
+   "from_bus": 22,
+   "to_bus": 31,
+   "length_km": 1.0
+  },
+  {
+   "idx": 38,
+   "from_bus": 30,
+   "to_bus": 31,
+   "length_km": 1.0
+  },
+  {
+   "idx": 39,
+   "from_bus": 26,
+   "to_bus": 31,
+   "length_km": 1.0
+  },
+  {
+   "idx": 40,
+   "from_bus": 14,
+   "to_bus": 32,
+   "length_km": 1.0
+  },
+  {
+   "idx": 41,
+   "from_bus": 18,
+   "to_bus": 33,
+   "length_km": 1.0
+  },
+  {
+   "idx": 42,
+   "from_bus": 34,
+   "to_bus": 35,
+   "length_km": 1.0
+  },
+  {
+   "idx": 43,
+   "from_bus": 34,
+   "to_bus": 36,
+   "length_km": 1.0
+  },
+  {
+   "idx": 44,
+   "from_bus": 32,
+   "to_bus": 36,
+   "length_km": 1.0
+  },
+  {
+   "idx": 45,
+   "from_bus": 33,
+   "to_bus": 35,
+   "length_km": 1.0
+  },
+  {
+   "idx": 46,
+   "from_bus": 33,
+   "to_bus": 36,
+   "length_km": 1.0
+  },
+  {
+   "idx": 47,
+   "from_bus": 36,
+   "to_bus": 38,
+   "length_km": 1.0
+  },
+  {
+   "idx": 48,
+   "from_bus": 36,
+   "to_bus": 39,
+   "length_km": 1.0
+  },
+  {
+   "idx": 49,
+   "from_bus": 29,
+   "to_bus": 37,
+   "length_km": 1.0
+  },
+  {
+   "idx": 50,
+   "from_bus": 38,
+   "to_bus": 39,
+   "length_km": 1.0
+  },
+  {
+   "idx": 51,
+   "from_bus": 39,
+   "to_bus": 40,
+   "length_km": 1.0
+  },
+  {
+   "idx": 52,
+   "from_bus": 39,
+   "to_bus": 41,
+   "length_km": 1.0
+  },
+  {
+   "idx": 53,
+   "from_bus": 40,
+   "to_bus": 41,
+   "length_km": 1.0
+  },
+  {
+   "idx": 54,
+   "from_bus": 42,
+   "to_bus": 43,
+   "length_km": 1.0
+  },
+  {
+   "idx": 55,
+   "from_bus": 33,
+   "to_bus": 42,
+   "length_km": 1.0
+  },
+  {
+   "idx": 56,
+   "from_bus": 43,
+   "to_bus": 44,
+   "length_km": 1.0
+  },
+  {
+   "idx": 57,
+   "from_bus": 44,
+   "to_bus": 45,
+   "length_km": 1.0
+  },
+  {
+   "idx": 58,
+   "from_bus": 45,
+   "to_bus": 46,
+   "length_km": 1.0
+  },
+  {
+   "idx": 59,
+   "from_bus": 45,
+   "to_bus": 47,
+   "length_km": 1.0
+  },
+  {
+   "idx": 60,
+   "from_bus": 46,
+   "to_bus": 48,
+   "length_km": 1.0
+  },
+  {
+   "idx": 61,
+   "from_bus": 41,
+   "to_bus": 48,
+   "length_km": 1.0
+  },
+  {
+   "idx": 62,
+   "from_bus": 41,
+   "to_bus": 48,
+   "length_km": 1.0
+  },
+  {
+   "idx": 63,
+   "from_bus": 44,
+   "to_bus": 48,
+   "length_km": 1.0
+  },
+  {
+   "idx": 64,
+   "from_bus": 47,
+   "to_bus": 48,
+   "length_km": 1.0
+  },
+  {
+   "idx": 65,
+   "from_bus": 48,
+   "to_bus": 49,
+   "length_km": 1.0
+  },
+  {
+   "idx": 66,
+   "from_bus": 48,
+   "to_bus": 50,
+   "length_km": 1.0
+  },
+  {
+   "idx": 67,
+   "from_bus": 50,
+   "to_bus": 51,
+   "length_km": 1.0
+  },
+  {
+   "idx": 68,
+   "from_bus": 51,
+   "to_bus": 52,
+   "length_km": 1.0
+  },
+  {
+   "idx": 69,
+   "from_bus": 52,
+   "to_bus": 53,
+   "length_km": 1.0
+  },
+  {
+   "idx": 70,
+   "from_bus": 48,
+   "to_bus": 53,
+   "length_km": 1.0
+  },
+  {
+   "idx": 71,
+   "from_bus": 48,
+   "to_bus": 53,
+   "length_km": 1.0
+  },
+  {
+   "idx": 72,
+   "from_bus": 53,
+   "to_bus": 54,
+   "length_km": 1.0
+  },
+  {
+   "idx": 73,
+   "from_bus": 53,
+   "to_bus": 55,
+   "length_km": 1.0
+  },
+  {
+   "idx": 74,
+   "from_bus": 54,
+   "to_bus": 55,
+   "length_km": 1.0
+  },
+  {
+   "idx": 75,
+   "from_bus": 55,
+   "to_bus": 56,
+   "length_km": 1.0
+  },
+  {
+   "idx": 76,
+   "from_bus": 49,
+   "to_bus": 56,
+   "length_km": 1.0
+  },
+  {
+   "idx": 77,
+   "from_bus": 55,
+   "to_bus": 57,
+   "length_km": 1.0
+  },
+  {
+   "idx": 78,
+   "from_bus": 50,
+   "to_bus": 57,
+   "length_km": 1.0
+  },
+  {
+   "idx": 79,
+   "from_bus": 53,
+   "to_bus": 58,
+   "length_km": 1.0
+  },
+  {
+   "idx": 80,
+   "from_bus": 55,
+   "to_bus": 58,
+   "length_km": 1.0
+  },
+  {
+   "idx": 81,
+   "from_bus": 55,
+   "to_bus": 58,
+   "length_km": 1.0
+  },
+  {
+   "idx": 82,
+   "from_bus": 54,
+   "to_bus": 58,
+   "length_km": 1.0
+  },
+  {
+   "idx": 83,
+   "from_bus": 58,
+   "to_bus": 59,
+   "length_km": 1.0
+  },
+  {
+   "idx": 84,
+   "from_bus": 58,
+   "to_bus": 60,
+   "length_km": 1.0
+  },
+  {
+   "idx": 85,
+   "from_bus": 59,
+   "to_bus": 60,
+   "length_km": 1.0
+  },
+  {
+   "idx": 86,
+   "from_bus": 59,
+   "to_bus": 61,
+   "length_km": 1.0
+  },
+  {
+   "idx": 87,
+   "from_bus": 60,
+   "to_bus": 61,
+   "length_km": 1.0
+  },
+  {
+   "idx": 88,
+   "from_bus": 62,
+   "to_bus": 63,
+   "length_km": 1.0
+  },
+  {
+   "idx": 89,
+   "from_bus": 37,
+   "to_bus": 64,
+   "length_km": 1.0
+  },
+  {
+   "idx": 90,
+   "from_bus": 63,
+   "to_bus": 64,
+   "length_km": 1.0
+  },
+  {
+   "idx": 91,
+   "from_bus": 48,
+   "to_bus": 65,
+   "length_km": 1.0
+  },
+  {
+   "idx": 92,
+   "from_bus": 48,
+   "to_bus": 65,
+   "length_km": 1.0
+  },
+  {
+   "idx": 93,
+   "from_bus": 61,
+   "to_bus": 65,
+   "length_km": 1.0
+  },
+  {
+   "idx": 94,
+   "from_bus": 61,
+   "to_bus": 66,
+   "length_km": 1.0
+  },
+  {
+   "idx": 95,
+   "from_bus": 65,
+   "to_bus": 66,
+   "length_km": 1.0
+  },
+  {
+   "idx": 96,
+   "from_bus": 46,
+   "to_bus": 68,
+   "length_km": 1.0
+  },
+  {
+   "idx": 97,
+   "from_bus": 48,
+   "to_bus": 68,
+   "length_km": 1.0
+  },
+  {
+   "idx": 98,
+   "from_bus": 68,
+   "to_bus": 69,
+   "length_km": 1.0
+  },
+  {
+   "idx": 99,
+   "from_bus": 23,
+   "to_bus": 69,
+   "length_km": 1.0
+  },
+  {
+   "idx": 100,
+   "from_bus": 69,
+   "to_bus": 70,
+   "length_km": 1.0
+  },
+  {
+   "idx": 101,
+   "from_bus": 23,
+   "to_bus": 71,
+   "length_km": 1.0
+  },
+  {
+   "idx": 102,
+   "from_bus": 70,
+   "to_bus": 71,
+   "length_km": 1.0
+  },
+  {
+   "idx": 103,
+   "from_bus": 70,
+   "to_bus": 72,
+   "length_km": 1.0
+  },
+  {
+   "idx": 104,
+   "from_bus": 69,
+   "to_bus": 73,
+   "length_km": 1.0
+  },
+  {
+   "idx": 105,
+   "from_bus": 69,
+   "to_bus": 74,
+   "length_km": 1.0
+  },
+  {
+   "idx": 106,
+   "from_bus": 68,
+   "to_bus": 74,
+   "length_km": 1.0
+  },
+  {
+   "idx": 107,
+   "from_bus": 73,
+   "to_bus": 74,
+   "length_km": 1.0
+  },
+  {
+   "idx": 108,
+   "from_bus": 75,
+   "to_bus": 76,
+   "length_km": 1.0
+  },
+  {
+   "idx": 109,
+   "from_bus": 68,
+   "to_bus": 76,
+   "length_km": 1.0
+  },
+  {
+   "idx": 110,
+   "from_bus": 74,
+   "to_bus": 76,
+   "length_km": 1.0
+  },
+  {
+   "idx": 111,
+   "from_bus": 76,
+   "to_bus": 77,
+   "length_km": 1.0
+  },
+  {
+   "idx": 112,
+   "from_bus": 77,
+   "to_bus": 78,
+   "length_km": 1.0
+  },
+  {
+   "idx": 113,
+   "from_bus": 76,
+   "to_bus": 79,
+   "length_km": 1.0
+  },
+  {
+   "idx": 114,
+   "from_bus": 76,
+   "to_bus": 79,
+   "length_km": 1.0
+  },
+  {
+   "idx": 115,
+   "from_bus": 78,
+   "to_bus": 79,
+   "length_km": 1.0
+  },
+  {
+   "idx": 116,
+   "from_bus": 76,
+   "to_bus": 81,
+   "length_km": 1.0
+  },
+  {
+   "idx": 117,
+   "from_bus": 81,
+   "to_bus": 82,
+   "length_km": 1.0
+  },
+  {
+   "idx": 118,
+   "from_bus": 82,
+   "to_bus": 83,
+   "length_km": 1.0
+  },
+  {
+   "idx": 119,
+   "from_bus": 82,
+   "to_bus": 84,
+   "length_km": 1.0
+  },
+  {
+   "idx": 120,
+   "from_bus": 83,
+   "to_bus": 84,
+   "length_km": 1.0
+  },
+  {
+   "idx": 121,
+   "from_bus": 84,
+   "to_bus": 85,
+   "length_km": 1.0
+  },
+  {
+   "idx": 122,
+   "from_bus": 84,
+   "to_bus": 87,
+   "length_km": 1.0
+  },
+  {
+   "idx": 123,
+   "from_bus": 84,
+   "to_bus": 88,
+   "length_km": 1.0
+  },
+  {
+   "idx": 124,
+   "from_bus": 87,
+   "to_bus": 88,
+   "length_km": 1.0
+  },
+  {
+   "idx": 125,
+   "from_bus": 88,
+   "to_bus": 89,
+   "length_km": 1.0
+  },
+  {
+   "idx": 126,
+   "from_bus": 88,
+   "to_bus": 89,
+   "length_km": 1.0
+  },
+  {
+   "idx": 127,
+   "from_bus": 89,
+   "to_bus": 90,
+   "length_km": 1.0
+  },
+  {
+   "idx": 128,
+   "from_bus": 88,
+   "to_bus": 91,
+   "length_km": 1.0
+  },
+  {
+   "idx": 129,
+   "from_bus": 88,
+   "to_bus": 91,
+   "length_km": 1.0
+  },
+  {
+   "idx": 130,
+   "from_bus": 90,
+   "to_bus": 91,
+   "length_km": 1.0
+  },
+  {
+   "idx": 131,
+   "from_bus": 91,
+   "to_bus": 92,
+   "length_km": 1.0
+  },
+  {
+   "idx": 132,
+   "from_bus": 91,
+   "to_bus": 93,
+   "length_km": 1.0
+  },
+  {
+   "idx": 133,
+   "from_bus": 92,
+   "to_bus": 93,
+   "length_km": 1.0
+  },
+  {
+   "idx": 134,
+   "from_bus": 93,
+   "to_bus": 94,
+   "length_km": 1.0
+  },
+  {
+   "idx": 135,
+   "from_bus": 79,
+   "to_bus": 95,
+   "length_km": 1.0
+  },
+  {
+   "idx": 136,
+   "from_bus": 81,
+   "to_bus": 95,
+   "length_km": 1.0
+  },
+  {
+   "idx": 137,
+   "from_bus": 93,
+   "to_bus": 95,
+   "length_km": 1.0
+  },
+  {
+   "idx": 138,
+   "from_bus": 79,
+   "to_bus": 96,
+   "length_km": 1.0
+  },
+  {
+   "idx": 139,
+   "from_bus": 79,
+   "to_bus": 97,
+   "length_km": 1.0
+  },
+  {
+   "idx": 140,
+   "from_bus": 79,
+   "to_bus": 98,
+   "length_km": 1.0
+  },
+  {
+   "idx": 141,
+   "from_bus": 91,
+   "to_bus": 99,
+   "length_km": 1.0
+  },
+  {
+   "idx": 142,
+   "from_bus": 93,
+   "to_bus": 99,
+   "length_km": 1.0
+  },
+  {
+   "idx": 143,
+   "from_bus": 94,
+   "to_bus": 95,
+   "length_km": 1.0
+  },
+  {
+   "idx": 144,
+   "from_bus": 95,
+   "to_bus": 96,
+   "length_km": 1.0
+  },
+  {
+   "idx": 145,
+   "from_bus": 97,
+   "to_bus": 99,
+   "length_km": 1.0
+  },
+  {
+   "idx": 146,
+   "from_bus": 98,
+   "to_bus": 99,
+   "length_km": 1.0
+  },
+  {
+   "idx": 147,
+   "from_bus": 99,
+   "to_bus": 100,
+   "length_km": 1.0
+  },
+  {
+   "idx": 148,
+   "from_bus": 91,
+   "to_bus": 101,
+   "length_km": 1.0
+  },
+  {
+   "idx": 149,
+   "from_bus": 100,
+   "to_bus": 101,
+   "length_km": 1.0
+  },
+  {
+   "idx": 150,
+   "from_bus": 99,
+   "to_bus": 102,
+   "length_km": 1.0
+  },
+  {
+   "idx": 151,
+   "from_bus": 99,
+   "to_bus": 103,
+   "length_km": 1.0
+  },
+  {
+   "idx": 152,
+   "from_bus": 102,
+   "to_bus": 103,
+   "length_km": 1.0
+  },
+  {
+   "idx": 153,
+   "from_bus": 102,
+   "to_bus": 104,
+   "length_km": 1.0
+  },
+  {
+   "idx": 154,
+   "from_bus": 99,
+   "to_bus": 105,
+   "length_km": 1.0
+  },
+  {
+   "idx": 155,
+   "from_bus": 103,
+   "to_bus": 104,
+   "length_km": 1.0
+  },
+  {
+   "idx": 156,
+   "from_bus": 104,
+   "to_bus": 105,
+   "length_km": 1.0
+  },
+  {
+   "idx": 157,
+   "from_bus": 104,
+   "to_bus": 106,
+   "length_km": 1.0
+  },
+  {
+   "idx": 158,
+   "from_bus": 104,
+   "to_bus": 107,
+   "length_km": 1.0
+  },
+  {
+   "idx": 159,
+   "from_bus": 105,
+   "to_bus": 106,
+   "length_km": 1.0
+  },
+  {
+   "idx": 160,
+   "from_bus": 107,
+   "to_bus": 108,
+   "length_km": 1.0
+  },
+  {
+   "idx": 161,
+   "from_bus": 102,
+   "to_bus": 109,
+   "length_km": 1.0
+  },
+  {
+   "idx": 162,
+   "from_bus": 108,
+   "to_bus": 109,
+   "length_km": 1.0
+  },
+  {
+   "idx": 163,
+   "from_bus": 109,
+   "to_bus": 110,
+   "length_km": 1.0
+  },
+  {
+   "idx": 164,
+   "from_bus": 109,
+   "to_bus": 111,
+   "length_km": 1.0
+  },
+  {
+   "idx": 165,
+   "from_bus": 16,
+   "to_bus": 112,
+   "length_km": 1.0
+  },
+  {
+   "idx": 166,
+   "from_bus": 31,
+   "to_bus": 112,
+   "length_km": 1.0
+  },
+  {
+   "idx": 167,
+   "from_bus": 31,
+   "to_bus": 113,
+   "length_km": 1.0
+  },
+  {
+   "idx": 168,
+   "from_bus": 26,
+   "to_bus": 114,
+   "length_km": 1.0
+  },
+  {
+   "idx": 169,
+   "from_bus": 113,
+   "to_bus": 114,
+   "length_km": 1.0
+  },
+  {
+   "idx": 170,
+   "from_bus": 11,
+   "to_bus": 116,
+   "length_km": 1.0
+  },
+  {
+   "idx": 171,
+   "from_bus": 74,
+   "to_bus": 117,
+   "length_km": 1.0
+  },
+  {
+   "idx": 172,
+   "from_bus": 75,
+   "to_bus": 117,
+   "length_km": 1.0
+  }
+ ],
+ "trafos": [
+  {
+   "idx": 0,
+   "hv_bus": 7,
+   "lv_bus": 4
+  },
+  {
+   "idx": 1,
+   "hv_bus": 25,
+   "lv_bus": 24
+  },
+  {
+   "idx": 2,
+   "hv_bus": 29,
+   "lv_bus": 16
+  },
+  {
+   "idx": 3,
+   "hv_bus": 37,
+   "lv_bus": 36
+  },
+  {
+   "idx": 4,
+   "hv_bus": 62,
+   "lv_bus": 58
+  },
+  {
+   "idx": 5,
+   "hv_bus": 63,
+   "lv_bus": 60
+  },
+  {
+   "idx": 6,
+   "hv_bus": 64,
+   "lv_bus": 65
+  },
+  {
+   "idx": 7,
+   "hv_bus": 64,
+   "lv_bus": 67
+  },
+  {
+   "idx": 8,
+   "hv_bus": 67,
+   "lv_bus": 68
+  },
+  {
+   "idx": 9,
+   "hv_bus": 80,
+   "lv_bus": 67
+  },
+  {
+   "idx": 10,
+   "hv_bus": 80,
+   "lv_bus": 79
+  },
+  {
+   "idx": 11,
+   "hv_bus": 86,
+   "lv_bus": 85
+  },
+  {
+   "idx": 12,
+   "hv_bus": 115,
+   "lv_bus": 67
+  }
+ ]
+}
