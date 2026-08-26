@@ -12,7 +12,11 @@ manifest_id = "RQ-DATA-HSBC-ULB-001"
 arff_sha256 = "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a"
 
 [preregs]
-ids = ["RQ-PREREG-HSBC-001", "RQ-PREREG-HSBC-002-ATAQUE"]
+ids = ["RQ-PREREG-HSBC-001", "RQ-PREREG-HSBC-002-ATAQUE",
+       "RQ-PREREG-HSBC-003-CUANTICO"]
+# El 003 faltaba: el brazo cuantico corrio y se sello SIN que la bateria de guardias
+# lo cubriera. Un pre-registro que el corredor no lista es un pre-registro que nadie
+# ejerce — y no se nota, porque el corredor pasa igual.
 
 [harness]
 ruta = "harness/hsbc_harness.py"
