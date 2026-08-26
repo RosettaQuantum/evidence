@@ -479,6 +479,161 @@ def correr_brazo_cuantico():
 
     r = evaluar(p, yte, t0=_tq)
 
+    # ================= §5.2 DEL ENUNCIADO: los tres artefactos pedidos =================
+    # El enunciado pide TRES salidas y nosotros teniamos una. Ademas pide la probabilidad en
+    # [0,1] y lo que produce SVC.decision_function son MARGENES: los nuestros van de -1,38 a
+    # 1,02. AUPRC y AUC no lo notan —son de ranking— pero el «umbral 0,5» sellado aplica 0,5
+    # a un margen, y de ahi salia una Precision de 1,000 que es el punto ultraconservador,
+    # no una propiedad del modelo. Se calibra, y se dice por que.
+    extra_52 = {}
+    if os.environ.get("RQ_ATRIBUCION") == "1":
+        from sklearn.linear_model import LogisticRegression
+        from sklearn.metrics import precision_score, recall_score, precision_recall_curve
+
+        # ---- (a) CALIBRACION a [0,1]. Platt sobre un tramo del TRAIN que NO esta en el
+        #      soporte: ajustarla con el propio soporte seria optimista, y con el test seria
+        #      la fuga que la particion temporal viene a impedir.
+        resto = np.setdiff1d(np.arange(len(ytr)), sel)
+        rs3 = np.random.RandomState(SEED)
+        n_cal = min(20000, len(resto))
+        f_cal = n_cal / len(resto)
+        cp = np.where(ytr[resto] == 1)[0]; cn = np.where(ytr[resto] == 0)[0]
+        k_pos = int(round(len(cp) * f_cal))
+        selc = np.concatenate([rs3.choice(cp, k_pos, replace=False),
+                               rs3.choice(cn, n_cal - k_pos, replace=False)])
+        Xcal, ycal = Xtr[resto][selc], ytr[resto][selc]
+        s_cal = clf.decision_function(gram(mapa(Xcal), PHI_S))
+        cal = LogisticRegression(class_weight="balanced", max_iter=1000)
+        cal.fit(s_cal.reshape(-1, 1), ycal)
+        proba = cal.predict_proba(p.reshape(-1, 1))[:, 1]
+        # la calibracion es MONOTONA: no puede mover el AUPRC. Se comprueba, no se asume.
+        auprc_cal = float(average_precision_score(yte, proba))
+        if abs(auprc_cal - r["AUPRC"]) > 1e-6:
+            raise SystemExit("ABORTA: la calibracion movio el AUPRC (%.6f -> %.6f). Una "
+                             "transformacion monotona no puede: si se movio, no es monotona "
+                             "y el ranking cambio." % (r["AUPRC"], auprc_cal))
+
+        # ---- (b) PREDICCION BINARIA, con el umbral elegido en el TRAIN, no en el test
+        pc, rc, th = precision_recall_curve(ycal, cal.predict_proba(s_cal.reshape(-1,1))[:,1])
+        f1s = 2 * pc * rc / np.maximum(pc + rc, 1e-12)
+        UMBRAL = float(th[int(np.argmax(f1s[:-1]))])
+        binaria = (proba >= UMBRAL).astype(int)
+        b05 = (proba >= 0.5).astype(int)
+
+        def pr(yhat):
+            tn_, fp_, fn_, tp_ = confusion_matrix(yte, yhat).ravel()
+            return {"umbral_aplicado_a": "probabilidad calibrada en [0,1]",
+                    "precision": round(float(precision_score(yte, yhat, zero_division=0)), 6),
+                    "recall": round(float(recall_score(yte, yhat, zero_division=0)), 6),
+                    "F1": round(float(f1_score(yte, yhat, zero_division=0)), 6),
+                    "confusion": {"tn": int(tn_), "fp": int(fp_), "fn": int(fn_), "tp": int(tp_)},
+                    "predichos_positivos": int(yhat.sum())}
+
+        extra_52["fraud_probability"] = {
+            "rango": [round(float(proba.min()), 6), round(float(proba.max()), 6)],
+            "en_0_1": bool(proba.min() >= 0 and proba.max() <= 1),
+            "como": "Platt (regresion logistica) sobre %d filas del TRAIN disjuntas del "
+                    "soporte, estratificadas, semilla %d" % (len(ycal), SEED),
+            "AUPRC_tras_calibrar": round(auprc_cal, 6),
+            "por_que_hacia_falta": "SVC.decision_function devuelve MARGENES, no "
+                "probabilidades: los del brazo sellado van de %.4f a %.4f. El enunciado "
+                "pide «Float [0,1]»." % (float(p.min()), float(p.max())),
+        }
+        extra_52["binary_prediction"] = {
+            "umbral_F1_optimo_en_train": {"umbral": round(UMBRAL, 6), **pr(binaria)},
+            "umbral_0.5": {"umbral": 0.5, **pr(b05)},
+            "por_que_dos": "el umbral es una decision de negocio, no una propiedad del "
+                "modelo. Se dan los dos con su matriz para que el lector elija; el optimo "
+                "se eligio en el TRAIN, nunca mirando el test.",
+        }
+
+        # ---- (c) ATRIBUCION LOCAL: el enunciado pide «contribution of features to EACH
+        #      prediction». La importancia por permutacion es GLOBAL y no responde eso, asi
+        #      que ademas se calcula por oclusion: se reemplaza la variable por su mediana
+        #      del train y se mide cuanto se mueve el score DE ESA FILA.
+        med = np.median(Xtr[:, _orden], 0)
+        local = np.empty((len(Xte), Q_FEATURES), dtype=np.float32)
+        for j in range(Q_FEATURES):
+            Xo = Xte.copy(); Xo[:, _orden[j]] = med[j]
+            so = np.empty(len(yte))
+            for i in range(0, len(Xo), 4096):
+                so[i:i+4096] = clf.decision_function(gram(mapa(Xo[i:i+4096]), PHI_S))
+            local[:, j] = (p - so).astype(np.float32)
+            print("    atribucion local, variable %d/%d (%s)" % (j+1, Q_FEATURES, FEAT_Q[j]))
+        np.savez_compressed(os.environ.get("RQ_SCORES_PREFIX", "scores_q_")
+                            + "atribucion.npz",
+                            y_true=yte.astype(np.int8), proba=proba.astype(np.float32),
+                            binaria=binaria.astype(np.int8),
+                            atribucion_local=local, variables=np.array(FEAT_Q))
+        glob_rank = sorted(zip(FEAT_Q, np.abs(local).mean(0).tolist()),
+                           key=lambda t: -t[1])
+        extra_52["feature_attribution"] = {
+            "local_por_prediccion": {
+                "metodo": "oclusion: cada variable se reemplaza por su mediana del TRAIN y "
+                          "se mide el desplazamiento del score de esa fila",
+                "forma": [int(local.shape[0]), int(local.shape[1])],
+                "archivo": "atribucion_local en el npz — un vector de %d contribuciones por "
+                           "cada una de las %d transacciones del test"
+                           % (Q_FEATURES, len(yte)),
+                "por_que_asi": "el enunciado pide «contribution of features to EACH "
+                    "prediction». Un ranking global no responde eso: responde otra pregunta.",
+            },
+            "ranking_global": [{"variable": v, "contribucion_media_abs": round(x, 6)}
+                               for v, x in glob_rank],
+        }
+        # ---- (d) IMPORTANCIA POR PERMUTACION sobre el AUPRC. Responde otra pregunta que
+        #      la atribucion local: no «cuanto movio esta variable ESTA prediccion» sino
+        #      «cuanto se degrada la METRICA si esta variable deja de informar». Con
+        #      repeticiones para que la caida tenga intervalo y no sea una corrida sola.
+        REPS = int(os.environ.get("RQ_PERM_REPS", 10))
+        perm = {}
+        for j in range(Q_FEATURES):
+            caidas = []
+            for rep in range(REPS):
+                rp = np.random.RandomState(SEED + 1000 * j + rep)
+                Xp = Xte.copy()
+                Xp[:, _orden[j]] = Xp[rp.permutation(len(Xp)), _orden[j]]
+                sp = np.empty(len(yte))
+                for i in range(0, len(Xp), 4096):
+                    sp[i:i+4096] = clf.decision_function(gram(mapa(Xp[i:i+4096]), PHI_S))
+                caidas.append(r["AUPRC"] - float(average_precision_score(yte, sp)))
+            perm[FEAT_Q[j]] = {
+                "caida_media_de_AUPRC": round(float(np.mean(caidas)), 6),
+                "IC95": [round(float(np.percentile(caidas, 2.5)), 6),
+                         round(float(np.percentile(caidas, 97.5)), 6)],
+                "repeticiones": REPS,
+                "cruza_cero": bool(np.percentile(caidas, 2.5) <= 0 <= np.percentile(caidas, 97.5)),
+            }
+            print("    permutacion %s: caida %.6f %s" % (FEAT_Q[j],
+                  perm[FEAT_Q[j]]["caida_media_de_AUPRC"], perm[FEAT_Q[j]]["IC95"]))
+        _nada = [k for k, v in perm.items() if v["cruza_cero"]]
+        extra_52["importancia_por_permutacion"] = {
+            "metodo": "barajar la variable en el test y medir cuanto cae el AUPRC; %d "
+                      "repeticiones por variable, semilla derivada de %d" % (REPS, SEED),
+            "AUPRC_de_referencia": r["AUPRC"],
+            "por_variable": perm,
+            "variables_cuya_caida_cruza_cero": _nada,
+            "LECTURA": ("ninguna variable mueve el AUPRC de forma distinguible de cero: el "
+                        "modelo no esta usando la informacion que tiene, y eso dice algo "
+                        "sobre POR QUE perdio, no solo que perdio."
+                        if len(_nada) == Q_FEATURES else
+                        "%d de %d variables tienen una caida cuyo intervalo NO cruza cero: "
+                        "el modelo si extrae senal de ellas."
+                        % (Q_FEATURES - len(_nada), Q_FEATURES)),
+        }
+
+        extra_52["muestras_de_la_ejecucion_cuantica"] = {
+            "EXIGIDO_TEXTUAL_POR_EL_STATEMENT": "the total number of samples used for "
+                "quantum execution must be explicitly stated in the submission",
+            "soporte_estratificado": int(len(ys)),
+            "fraudes_en_el_soporte": int(ys.sum()),
+            "calibracion": int(len(ycal)),
+            "test_evaluado": int(len(yte)),
+            "total_de_muestras_con_ejecucion_cuantica": int(len(ys) + len(ycal) + len(yte)),
+            "qubits": Q_FEATURES,
+            "variables": FEAT_Q,
+        }
+
     # ---------- CONTROLES EXPLORATORIOS — NO PRE-REGISTRADOS
     # Se decidieron DESPUES de ver el primario, y eso se dice aqui y en el artefacto. No
     # cambian el resultado pre-registrado ni pueden rescatarlo: existen porque «el kernel
@@ -535,7 +690,8 @@ def correr_brazo_cuantico():
 
     np.savez_compressed(os.environ.get("RQ_SCORES_PREFIX", "scores_") + "kernel_cuantico.npz",
                         y_true=yte.astype(np.int8), y_score=p.astype(np.float32))
-    extra = {"brazo": "cuantico", "n_vectores_soporte": n_sv, "simulacion": {
+    extra = {"brazo": "cuantico", "n_vectores_soporte": n_sv, "salidas_5_2": extra_52,
+             "simulacion": {
         "tipo": "statevector exacto",
         "backend": "ninguno — no se envio nada a hardware",
         "gasto_usd": 0.0,

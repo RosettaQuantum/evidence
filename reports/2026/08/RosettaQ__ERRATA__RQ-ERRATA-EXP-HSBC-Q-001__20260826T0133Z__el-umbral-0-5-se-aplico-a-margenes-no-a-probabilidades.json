@@ -1,0 +1,115 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__ERRATA__RQ-ERRATA-EXP-HSBC-Q-001__20260826T0133Z__el-umbral-0-5-se-aplico-a-margenes-no-a-probabilidades.json",
+  "file_id": "RQ-ERRATA-EXP-HSBC-Q-001",
+  "type": "ERRATA",
+  "is_demo": false,
+  "scope_note": "Errata de RQ-EXP-HSBC-Q-001. NO modifica el original: su archivo, su hash y su ancla quedan intactos. Corrige el ALCANCE de dos campos de umbral; el veredicto del experimento no cambia. Emision autorizada por Nicholas.",
+  "corrige": {
+   "file_id": "RQ-EXP-HSBC-Q-001",
+   "content_hash": "sha256:436334b41baf7403d474ae820b6492a211873f02f9ff03214ea679307332075f"
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-26T01:33:57+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_errata_hsbc_q_001.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:7e20a7720175312f278e9984c3fc174082717613c1d043f2ae61c2c94df31175",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:db1e783fa69d4e73225bde1dc42b1938284bd0e9d650cd47b9c424c4decb18de"
+ },
+ "w6": {
+  "que": {
+   "campos_afectados": [
+    "modelos.kernel_cuantico.F1_umbral_0.5",
+    "modelos.kernel_cuantico.confusion_0.5"
+   ],
+   "que_esta_mal": "esos campos aplican un umbral de 0,5 a lo que devuelve SVC.decision_function, que son MARGENES y no probabilidades. Los del brazo cuantico van de -1.381 a 1.0207. Un 0,5 sobre esa escala no tiene el significado que tiene sobre una probabilidad, y NO es comparable con los mismos campos del brazo clasico, donde el score si es probabilidad.",
+   "la_lectura_que_invita": {
+    "precision_en_ese_punto": 1.0,
+    "recall_en_ese_punto": 0.04,
+    "predichos_positivos": 3,
+    "de_un_test_de": 56962,
+    "por_que_engana": "precision de 1.0 con 3 positivos predichos de 56962 es el punto ultraconservador de una escala arbitraria, no una propiedad del metodo. En un entregable se lee como una fortaleza."
+   },
+   "EL_VEREDICTO_NO_CAMBIA": {
+    "AUPRC": 0.257453,
+    "IC95": [
+     0.154578,
+     0.369107
+    ],
+    "AUC_ROC": 0.743759,
+    "cruce_ventaja_cuantica": 0,
+    "por_que": "AUPRC y AUC son de RANKING puro: ningun umbral los toca. Recomputados desde los scores publicados al sellar esta errata dan identicos. Esta errata NO es una retractacion del resultado; el brazo cuantico sigue por debajo del clasico y el negativo se sostiene entero."
+   },
+   "LA_CAUSA_ES_NUESTRA": "evaluar() se extrajo a UNA implementacion compartida precisamente para que los dos brazos usaran el mismo remuestreo y sus intervalos fueran comparables. Esa misma unificacion aplica el mismo `p >= 0.5` a los dos, y para el cuantico eso no significa lo mismo. UNIFICAR PARA COMPARAR FUE LO QUE INTRODUJO LA INCOMPARABILIDAD. El defecto solo aparece si alguien mira la ESCALA de los numeros en vez de confiar en el nombre del campo — `F1_umbral_0.5` suena a lo que uno espera que sea.",
+   "QUE_USAR_EN_CAMBIO": {
+    "rango": [
+     0.029259,
+     1.0
+    ],
+    "en_0_1": true,
+    "AUPRC_identico_al_sellado": true,
+    "umbral_elegido_en_el_train": {
+     "predichos_positivos": 18,
+     "precision": 0.833333,
+     "recall": 0.2,
+     "F1": 0.322581,
+     "confusion": {
+      "tn": 56884,
+      "fp": 3,
+      "fn": 60,
+      "tp": 15
+     }
+    }
+   },
+   "QUE_NO_SE_RETRACTA": "nada del veredicto, nada de los controles, nada de la comparacion contra el basal. Se corrige el alcance de dos campos de umbral.",
+   "como_se_encontro": "revisando la escala de nuestros propios scores antes de entregar, porque el enunciado del desafio pide «Fraud Probability: Float [0,1]» y hubo que comprobar si lo cumpliamos. No lo cumpliamos.",
+   "cruce_ventaja_cuantica": 0
+  },
+  "como": {
+   "artefacto_original": {
+    "archivo": "resultado_hsbc_cuantico@71e071ed.json",
+    "sha256": "sha256:71e071ed2f219c47e28df9980b3d8e50b5edce835c2ead44a37a217cbcb63fd7",
+    "publicado_como": "code/resultado_hsbc_cuantico@71e071ed.json"
+   },
+   "scores_publicados": {
+    "archivo": "scores_q_kernel_cuantico@091914f1.npz",
+    "sha256": "sha256:091914f16b6b9b02dc1250495d4cf7457e965699a52c28da0f243efe05f7a105",
+    "publicado_como": "code/scores_q_kernel_cuantico@091914f1.npz"
+   },
+   "recomputo_al_sellar": {
+    "AUPRC": 0.257453,
+    "AUC_ROC": 0.743759,
+    "confusion_0.5": {
+     "tn": 56887,
+     "fp": 0,
+     "fn": 72,
+     "tp": 3
+    },
+    "coincide_con_el_original": true
+   },
+   "guardias": "aborta si los scores publicados dejan de reproducir el artefacto, si los scores resultaran estar en [0,1] (la errata no tendria objeto), o si la probabilidad calibrada moviera el AUPRC."
+  },
+  "cuando": {
+   "archived_at": "2026-08-26T01:33:57+00:00"
+  },
+  "donde": {
+   "compute": "Mac local (laboratorio). Sin backend de pago.",
+   "gasto_usd": 0.0
+  },
+  "porque": {
+   "question": "¿los campos de umbral del brazo cuantico significan lo que su nombre sugiere?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "autorizacion": "emision de la errata autorizada por Nicholas",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario."
+  }
+ }
+}

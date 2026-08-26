@@ -67,7 +67,19 @@ def exigir_procedencia(doc, extra=()):
     (la capa 1: el sellador que se copia a code/ junto con su sello).
     """
     aud = _auditor()
-    pub = aud.publicados()
+    # `publicados()` arma su mapa con glob("**/*") RELATIVO AL DIRECTORIO ACTUAL. El auditor
+    # se escribio para correrse desde evidence/, donde eso es correcto; los selladores viven
+    # en evidence-staging/ y ahi escanea el arbol equivocado. No se noto nunca porque hasta
+    # hoy todo sellador PUBLICABA en el mismo acto lo que citaba, y esos archivos entran por
+    # `extra` sin pasar por el glob. El primer sello que cita algo YA publicado —una errata—
+    # destapa la dependencia: da «no esta publicado» sobre archivos que si lo estan.
+    # Se fija el directorio en vez de confiar en desde donde llamen.
+    _antes = os.getcwd()
+    try:
+        os.chdir(EV)
+        pub = aud.publicados()
+    finally:
+        os.chdir(_antes)
     for r in extra:
         if os.path.isfile(r):
             pub.setdefault(hashlib.sha256(open(r, "rb").read()).hexdigest(), r)
