@@ -27,3 +27,191 @@ archivadas = "code/hsbc_harness@*.py"
 campos_siempre = ["arff_sha256", "harness_sha256", "manifest"]
 campos_baseline = ["particion", "modelos"]
 campos_ataque = ["ataque", "corridas", "resumen", "prereg"]
+
+[requisitos]
+# La lista DERIVADA DEL ENUNCIADO. El motor vive en harness/guardia_requisitos.py.
+# Estaba en evidence-staging/requisitos_hsbc.py — local a un desafio y fuera del
+# archivo, o sea que el desafio siguiente partia de cero en este eje.
+seccion_mapeo = '''Resultados contra lo que ustedes piden|Results against what you asked for'''
+
+[[requisitos.item]]
+id      = '''R1'''
+seccion = '''4.1'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Develop a quantum or quantum-inspired fraud detection model and evaluate it against established classical baselines'''
+patron  = '''kernel cuántico|quantum kernel'''
+
+[[requisitos.item]]
+id      = '''R2'''
+seccion = '''4.1'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''AUC-ROC'''
+patron  = '''AUC[- ]ROC'''
+
+[[requisitos.item]]
+id      = '''R3'''
+seccion = '''4.1'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''AUPRC'''
+patron  = '''AUPRC'''
+
+[[requisitos.item]]
+id      = '''R4'''
+seccion = '''4.1'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''F1-Score'''
+patron  = '''\bF1\b'''
+
+[[requisitos.item]]
+id      = '''R5'''
+seccion = '''4.1'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Precision, Recall & Confusion Matrix'''
+patron  = '''(?is)precision.{0,400}recall.{0,600}(matriz de confusión|confusion matrix|tp=|tn=)'''
+
+[[requisitos.item]]
+id      = '''R6'''
+seccion = '''4.1'''
+nivel   = '''SUGERIDO'''
+cita    = '''benchmark against these published results and clearly report comparison methodology'''
+patron  = '''0,871|0\.871'''
+
+[[requisitos.item]]
+id      = '''R7'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Fraud Probability — Float [0, 1]'''
+patron  = '''(?i)probabilidad calibrada|calibrated probability'''
+
+[[requisitos.item]]
+id      = '''R8'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Binary Prediction — Integer {0, 1}'''
+patron  = '''(?i)predicción binaria|binary prediction'''
+
+[[requisitos.item]]
+id      = '''R9'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Feature Attribution — Contribution of features to each prediction'''
+patron  = '''(?i)por predicción|per prediction'''
+
+[[requisitos.item]]
+id      = '''R10'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Evaluation metrics on held-out test set'''
+patron  = '''(?i)(partición temporal|temporal split|corte temporal|temporal cut|held-out)'''
+
+[[requisitos.item]]
+id      = '''R11'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Comparison with at least one classical baseline'''
+patron  = '''(?i)xgboost'''
+
+[[requisitos.item]]
+id      = '''R12'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Description of quantum approach, encoding strategy, and circuit design choices'''
+patron  = '''(?i)(estrategia de codificación|encoding strategy)'''
+
+[[requisitos.item]]
+id      = '''R13'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Discussion of any observed quantum improvement and under what conditions'''
+patron  = '''(?i)(no hay ventaja|no advantage|cruce)'''
+
+[[requisitos.item]]
+id      = '''R15'''
+seccion = '''5.3'''
+nivel   = '''ESPERADO'''
+cita    = '''Feature selection is expected for quantum approaches'''
+patron  = '''(?i)(8 variables|ocho variables|eight variables|selección de variables|feature selection)'''
+
+[[requisitos.item]]
+id      = '''R16'''
+seccion = '''5.3'''
+nivel   = '''ESPERADO'''
+cita    = '''Handling of class imbalance should be documented'''
+patron  = '''(?i)(desbalance|class imbalance|scale_pos_weight)'''
+
+[[requisitos.item]]
+id      = '''R17'''
+seccion = '''5.3'''
+nivel   = '''SUGERIDO'''
+cita    = '''should consider error mitigation techniques'''
+patron  = '''(?i)(mitigación de (error|lectura)|error mitigation|zero-noise|extrapolación a ruido)'''
+
+[[requisitos.item]]
+id      = '''R18'''
+seccion = '''5.3'''
+nivel   = '''SUGERIDO'''
+cita    = '''Circuit designs should consider hardware-native gate sets and qubit connectivity'''
+patron  = '''(?i)(conectividad|gate set|transpil)'''
+
+[[requisitos.item]]
+id      = '''R19'''
+seccion = '''5.3'''
+nivel   = '''SUGERIDO'''
+cita    = '''Feature attribution or importance analysis is valued'''
+patron  = '''(?i)(atribución|attribution)'''
+
+[[requisitos.item]]
+id      = '''R20'''
+seccion = '''5.3'''
+nivel   = '''OPCIONAL'''
+cita    = '''Inference latency benchmarks'''
+patron  = '''(?i)(latencia|latency|por transacción.{0,40}(µs|ms|segundo))'''
+
+[[requisitos.item]]
+id      = '''R21'''
+seccion = '''5.3'''
+nivel   = '''OPCIONAL'''
+cita    = '''Training time comparison between quantum and classical'''
+patron  = '''(?i)(tiempo de entrenamiento|training time)'''
+
+[[requisitos.item]]
+id      = '''R22'''
+seccion = '''5.3'''
+nivel   = '''OPCIONAL'''
+cita    = '''Qubit count and circuit depth'''
+patron  = '''(?i)(\| profundidad \||profundidad transpilado|transpiled depth|\| depth \|)'''
+
+[[requisitos.item]]
+id      = '''R23'''
+seccion = '''5.3'''
+nivel   = '''OPCIONAL'''
+cita    = '''Comparison of simulator vs. hardware results'''
+patron  = '''(?i)(simulación exacta|exact simulation)'''
+
+[[requisitos.item]]
+id      = '''R24'''
+seccion = '''4.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''the total number of samples used for quantum execution must be explicitly stated'''
+patron  = '''(?i)(total 96\.962|total 96,962)'''
+
+[[requisitos.item]]
+id      = '''R26'''
+seccion = '''5.3'''
+nivel   = '''SUGERIDO'''
+cita    = '''Participants are encouraged to prototype circuits using Amazon Braket's managed simulators (SV1, TN1, DM1) before submitting jobs to quantum hardware'''
+patron  = '''(?i)(braket|SV1|simulador administrado|managed simulator)'''
+
+[[requisitos.item]]
+id      = '''R27'''
+seccion = '''4.2'''
+nivel   = '''SUGERIDO'''
+cita    = '''Documentation of hardware-specific considerations — including noise characteristics, error mitigation strategies, and performance compared to simulator results — is valued'''
+patron  = '''(?i)(mitigación de error|error mitigation|zero-noise|extrapolación|lectura errónea)'''
+
+[[requisitos.item]]
+id      = '''R25'''
+seccion = '''4.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Subsampling must be performed using stratified sampling'''
+patron  = '''(?i)(estratificad|stratified)'''

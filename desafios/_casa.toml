@@ -1,0 +1,123 @@
+# La VARA DE CASA — se aplica a TODO entregable publico, sea cual sea el desafio.
+#
+# Derivada de ESTANDAR-presentacion-entregable.md §3, §4 y §5. No se invento aqui:
+# cada item lleva la cita de la seccion del estandar de la que sale.
+#
+# El estandar existia desde antes como texto de 149 lineas y NADA lo comprobaba: los
+# generadores lo escribian, ninguna guardia lo verificaba. Esta ficha es lo que lo pone
+# en la ruta del archivo que viaja.
+
+[requisitos]
+seccion_mapeo = '''Resultados contra lo que ustedes piden|Results against what you asked for'''
+
+[[requisitos.item]]
+id      = '''C1'''
+seccion = '''5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Resumen — que se pregunto, que se hizo, que salio'''
+patron  = '''(?im)^#{1,3} .*\b(resumen|summary)\b'''
+
+[[requisitos.item]]
+id      = '''C2'''
+seccion = '''5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''La pregunta y su pre-registro — que se fijo, CUANDO, y el puntero verificable'''
+patron  = '''(?im)^#{1,3} .*(pre-?registro|pre-?registration|la pregunta|the question)'''
+
+[[requisitos.item]]
+id      = '''C3'''
+seccion = '''5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Datos — fuente, fecha, tamaño, prevalencia y sus limites medidos'''
+patron  = '''(?im)^#{1,3} .*\b(datos|data)\b'''
+
+[[requisitos.item]]
+id      = '''C4'''
+seccion = '''5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Metodo — particion, baselines, guardias y como se probaron'''
+patron  = '''(?im)^#{1,3} .*\b(m[ée]todo|method)\b'''
+
+[[requisitos.item]]
+id      = '''C5'''
+seccion = '''5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Resultados — con el §3 aplicado a cada numero'''
+patron  = '''(?im)^#{1,3} .*\b(resultados|results)\b'''
+
+[[requisitos.item]]
+id      = '''C6'''
+seccion = '''5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Los ataques al propio resultado — va ANTES de las conclusiones'''
+patron  = '''(?im)^#{1,3} .*(ataques?|attacks?)\b'''
+
+[[requisitos.item]]
+id      = '''C7'''
+seccion = '''5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Que no podemos afirmar'''
+patron  = '''(?im)^#{1,3} .*(no podemos afirmar|cannot claim|can not claim)'''
+
+[[requisitos.item]]
+id      = '''C8'''
+seccion = '''5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Reproduccion — el comando unico, ejercida por nosotros primero'''
+patron  = '''(?im)^#{1,3} .*(reproducci[óo]n|reproduce|reproduction)'''
+
+[[requisitos.item]]
+id      = '''C9'''
+seccion = '''5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Anexos — recuento REFORMS item por item y el model info sheet'''
+patron  = '''(?im)^#{1,3} .*(anexos?|annexes?|appendix|appendices)'''
+
+[[requisitos.item]]
+id      = '''C10'''
+seccion = '''4'''
+nivel   = '''ESPERADO'''
+cita    = '''El recuento REFORMS con sus ausencias nombradas'''
+patron  = '''(?i)REFORMS'''
+
+[[requisitos.item]]
+id      = '''C11'''
+seccion = '''4'''
+nivel   = '''ESPERADO'''
+cita    = '''El model info sheet de los 8 tipos de fuga (Kapoor & Narayanan)'''
+patron  = '''(?i)(model info sheet|kapoor)'''
+
+[[requisitos.item]]
+id      = '''C12'''
+seccion = '''4'''
+nivel   = '''SUGERIDO'''
+cita    = '''Los huecos del pre-registro, o que se anticiparon y no se materializaron'''
+patron  = '''(?i)(el pre-?registro no anticip|the pre-?registration did not anticip|interpretaci[óo]n posterior|post-?hoc interpretation)'''
+
+[[requisitos.item]]
+id      = '''C13'''
+seccion = '''4'''
+nivel   = '''ESPERADO'''
+cita    = '''Lo que quedo abierto — nunca desaparece en silencio'''
+patron  = '''(?i)(qued[óo] (abierto|fuera)|left open|out of scope|trabajo pendiente|remains open)'''
+
+[[requisitos.item]]
+id      = '''C14'''
+seccion = '''4'''
+nivel   = '''ESPERADO'''
+cita    = '''Las limitaciones del dato, medidas y no estimadas'''
+patron  = '''(?i)(ventana temporal|temporal window|prevalencia|prevalence)'''
+
+[[requisitos.item]]
+id      = '''C15'''
+seccion = '''4'''
+nivel   = '''SUGERIDO'''
+cita    = '''Los margenes estrechos, dichos como estrechos'''
+patron  = '''(?i)(margen estrecho|estrecho|narrow|intervalo de confianza|confidence interval)'''
+
+[[requisitos.item]]
+id      = '''C16'''
+seccion = '''3'''
+nivel   = '''ESPERADO'''
+cita    = '''Las tres etiquetas de una afirmacion: medido / por construccion / de la literatura'''
+patron  = '''(?is)(\[medido\]|\[measured\])(?=.*(por construcci[óo]n|by construction))'''
