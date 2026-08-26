@@ -1,0 +1,128 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__REPORT__RQ-REPORT-HSBC-003__20260826T1837Z__entregable-track-hsbc-es-y-en.json",
+  "file_id": "RQ-REPORT-HSBC-003",
+  "type": "REPORT",
+  "is_demo": false,
+  "reemplaza_a": [
+   "RQ-REPORT-HSBC-002",
+   "sha256:066b2c4fbd009b80e513bfe536e91f1c71dbfd6ee1aa9e273f10c61e88e67ece"
+  ],
+  "por_que_una_version_nueva": "el titulo del documento en ingles habia quedado en la version anterior del entregable —hablaba de «a fraud baseline» cuando el nucleo ya era el brazo cuantico— y la guardia de divergencia compara NUMEROS, no prosa, asi que no lo vio. El sello anterior no se reescribe.",
+  "scope_note": "El entregable del track HSBC en sus dos idiomas. Ninguna cifra esta tecleada: las dos redacciones leen los MISMOS artefactos sellados al armarse, y el generador ingles aborta si aparece un numero que el español no tiene.",
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-26T18:37:08+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.0.0",
+   "lib_sha256": "sha256:e5c5d5c3b1e07d40fb877b06acd5310b2886033592475d376fcfd0a71a439fbb",
+   "harness": "seal_reporte_hsbc.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:4d1cf07fa61064316ba852bae2c30efcfa3bb461f24ad40edaa2d17cb1724268",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:67538c679712841906d98ff28a927c6ccf68d06289fd0b4fad455f8100071902"
+ },
+ "w6": {
+  "que": {
+   "documentos": [
+    {
+     "idioma": "es",
+     "archivo": "ENTREGABLE-HSBC.md",
+     "sha256": "sha256:91b0742bead06adfcb78cb0f04fb3b522c3eaa2b4ef9d0e5ced87bcd7b753c8f",
+     "publicado_como": "data/2026/08/ENTREGABLE-HSBC@91b0742b.md"
+    },
+    {
+     "idioma": "en",
+     "archivo": "ENTREGABLE-HSBC-EN.md",
+     "sha256": "sha256:bdafc767e403810dd78a8815332dfe26688c0888a951cff5ec86d7df0ce742dd",
+     "publicado_como": "data/2026/08/ENTREGABLE-HSBC-EN@bdafc767.md"
+    }
+   ],
+   "sellos_que_citan": {
+    "RQ-DATA-HSBC-ULB-001": {
+     "content_hash": "sha256:71010a1afbf85a0d831bfdc4dcca75754a439125af7fb680132ba3cf71e4503f",
+     "anclado": true
+    },
+    "RQ-ERRATA-EXP-HSBC-Q-001": {
+     "content_hash": "sha256:db1e783fa69d4e73225bde1dc42b1938284bd0e9d650cd47b9c424c4decb18de",
+     "anclado": true
+    },
+    "RQ-ERRATA-PREREG-HSBC-003": {
+     "content_hash": "sha256:3b46354aaf213c160dce99bbb128e8e73597c42c4ab29319bc6ed3a22c53764f",
+     "anclado": true
+    },
+    "RQ-EXP-HSBC-ATAQUE-001": {
+     "content_hash": "sha256:12f18492764f1f7108f14d451f8e9620da7918564c158c13302d77ef4d7b3115",
+     "anclado": true
+    },
+    "RQ-EXP-HSBC-BASE-001": {
+     "content_hash": "sha256:2cc73ac7c845a57e575669d8426667ea9cc887de3ccf700a1343db1a6a492e9c",
+     "anclado": true
+    },
+    "RQ-EXP-HSBC-IEEE-001": {
+     "content_hash": "sha256:e6e208d7c4433c0296e82c717a8faaa0646f4e863cefbd5ce889dd37cc07b70d",
+     "anclado": true
+    },
+    "RQ-EXP-HSBC-Q-001": {
+     "content_hash": "sha256:436334b41baf7403d474ae820b6492a211873f02f9ff03214ea679307332075f",
+     "anclado": true
+    },
+    "RQ-EXP-HSBC-Q-002": {
+     "content_hash": "sha256:2c52b228bb8b03e5e434d671e7de4439e84adc1daf8d810e66feb54c3a67906f",
+     "anclado": true
+    },
+    "RQ-PREREG-HSBC-001": {
+     "content_hash": "sha256:b04f214fae845b1c50431d225e6590b0956d8920c24b7c7fa26ed94c58f3f2db",
+     "anclado": true
+    },
+    "RQ-PREREG-HSBC-002-ATAQUE": {
+     "content_hash": "sha256:87c187b48627d52958728365c1e31b08c71a656bfbad14b8f632f89b9fdcf8c4",
+     "anclado": true
+    },
+    "RQ-PREREG-HSBC-003-CUANTICO": {
+     "content_hash": "sha256:e15b1808c03c29a8623eb687c3790c0a00e29cb5ae3ff6848f83d94269c5abb8",
+     "anclado": true
+    }
+   },
+   "aprobacion": "el texto en español lo aprobo Nicholas antes de generar el ingles; el ingles no es traduccion sino una redaccion paralela sobre los mismos artefactos.",
+   "cruce_ventaja_cuantica": 0
+  },
+  "como": {
+   "generadores": [
+    {
+     "archivo": "build_hsbc_entregable.py",
+     "sha256": "sha256:d8fa570169dbdaa9a27e72b7ecb2716460089ddb0884ffd042ccfc92bd808852",
+     "publicado_como": "code/build_hsbc_entregable@d8fa5701.py"
+    },
+    {
+     "archivo": "build_hsbc_entregable_en.py",
+     "sha256": "sha256:14703cfb013b02aa0502f7df9835c3ac5eee23ba8bbfceaf949198f7b2785c06",
+     "publicado_como": "code/build_hsbc_entregable_en@14703cfb.py"
+    },
+    {
+     "archivo": "fuentes_hsbc.py",
+     "sha256": "sha256:147b0994cb36b94ecfaa10136af17d4cda2b241d497009f26350d744ce483b06",
+     "publicado_como": "code/fuentes_hsbc@147b0994.py",
+     "por_que_separado": "las tres citas externas vivian duplicadas en los dos generadores. Una cita que difiere entre los dos idiomas del mismo entregable es un defecto que nadie ve hasta que un lector compara."
+    }
+   ],
+   "guardias": "antes de sellar se re-ejecutan los dos generadores con la salida desviada y se comparan byte a byte con los .md del disco: un archivo editado a mano rompe la promesa de su propio encabezado. Ademas, todo sello citado por file_id tiene que existir y verificar."
+  },
+  "cuando": {
+   "archived_at": "2026-08-26T18:37:08+00:00"
+  },
+  "donde": {
+   "compute": "Mac local (laboratorio).",
+   "gasto_usd": 0.0
+  },
+  "porque": {
+   "question": "¿que entregamos al track HSBC, y puede el lector comprobarlo sin creernos nada?"
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "sellado por el laboratorio; anclaje del notario; el texto publico lleva el OK de Nicholas."
+  }
+ }
+}
