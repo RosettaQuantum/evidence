@@ -97,7 +97,7 @@ def cargar(ruta_toml):
             raise SystemExit("ABORTA: el patron de %s en %s no compila: %s"
                              % (it["id"], ruta_toml, e))
         reqs.append((it["id"], it["seccion"], it["nivel"], it["cita"], it["patron"]))
-    return reqs, bloque.get("seccion_mapeo", "")
+    return reqs, bloque.get("seccion_mapeo", ""), set(bloque.get("no_cumplidos", []))
 
 
 def sin_mapeo(texto, seccion_mapeo):
@@ -118,18 +118,43 @@ def sin_mapeo(texto, seccion_mapeo):
     return texto[:m.start()] + texto[fin:]
 
 
-def comprobar(texto, reqs, seccion_mapeo=""):
-    """Devuelve (cubiertos, faltantes_duros, faltantes_blandos). No aborta."""
+def comprobar(texto, reqs, seccion_mapeo="", no_cumplidos=()):
+    """Devuelve (cubiertos, faltantes_duros, faltantes_blandos, declarados_no_cumplidos).
+
+    POR QUE EXISTE `no_cumplidos` — medido el 27-ago-2026 sobre el track VW.
+    Un documento honesto declara en su cuerpo los requisitos que NO cumple, con su razon. Al
+    hacerlo escribe las mismas palabras que el patron busca —«public code repository», «task
+    accuracy on held-out split»— y el guardia los cuenta como CUBIERTOS. O sea: **declarar un
+    fallo con honestidad pone el guardia en verde**, que es exactamente al reves.
+
+    La causa es que un patron de presencia no puede leer una negacion: «tenemos repositorio» y
+    «el repositorio no existe todavia» contienen la misma palabra. No se arregla con una
+    expresion mas lista — se arregla declarandolo en la ficha, como se declara una anomalia.
+
+    Los declarados salen del numerador y viajan en su propia lista. La cobertura deja de
+    inflarse y el lector ve las tres cantidades por separado.
+    """
     texto = normalizar(sin_mapeo(texto, seccion_mapeo))
-    cub, duros, blandos = [], [], []
+    cub, duros, blandos, declarados = [], [], [], []
     for r in reqs:
-        if re.search(r[4], texto):
+        if r[0] in no_cumplidos:
+            declarados.append(r)
+            continue
+        # INSENSIBLE A MAYUSCULAS, y la razon esta medida: el patron sale de una CITA del
+        # enunciado («an ablation isolating...», «theoretical motivation») y un documento
+        # escribe esas mismas frases como TITULO, capitalizadas. R6 y R7 daban rojo sobre
+        # un documento que SI traia las dos secciones. Es un falso positivo, y un falso
+        # positivo retiene trabajo bueno — peor que dejar pasar un caso (CLAUDE.md §2).
+        # Ojo: esto vale para ESTE guardia, cuyos patrones son frases del enunciado. NO
+        # vale para el guardia de documento, donde «TODO» en mayusculas es un marcador y
+        # «todo» en minusculas es una palabra corriente del español.
+        if re.search(r[4], texto, re.IGNORECASE):
             cub.append(r[0])
         elif r[2] in DUROS:
             duros.append(r)
         else:
             blandos.append(r)
-    return cub, duros, blandos
+    return cub, duros, blandos, declarados
 
 
 def exigir(texto, reqs, etiqueta, seccion_mapeo=""):

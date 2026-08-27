@@ -34,6 +34,15 @@ desafío de HSBC, descargar «Challenge Statement vF» y recomputar `shasum -a 2
 debe dar el hash de arriba.
 **por qué no se republica**: documento de HSBC/The Quantum Insider; no somos sus licenciantes.
 
+## `VW-Group-Challenge-Statement-vF.pdf` — `sha256:ce03dd05c0c3f2584a90d8f1984f0c3be6db76471c1ab923371e4f28c5a6f2d7`
+
+**Lo declara**: `RQ-PREREG-VW-001`.
+**fuente-oficial**: https://quantumaiportal.thequantuminsider.com
+**verificacion**: iniciar sesion en el portal del 2026 Global Quantum + AI Challenge (registro
+abierto a participantes), abrir el desafio de Volkswagen Group, descargar «Challenge Statement
+vF» y recomputar `shasum -a 256` sobre el PDF descargado: debe dar el hash de arriba. Son 10
+paginas, 2.470.937 bytes.
+
 ## `ieee-fraud-detection.zip` — `sha256:4cc646da09d0a9b265983ffed775b1f9ee15af5266586df610e04d6adae0b829`
 
 **Lo declara**: `RQ-DATA-HSBC-IEEE-001` (manifiesto sellado antes de entrenar).  

@@ -1,0 +1,83 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__REPORT__RQ-REPORT-VW-001__20260827T1638Z__lo-que-el-espectro-de-llava-dice-sobre-la-compresion-tensorial.json",
+  "file_id": "RQ-REPORT-VW-001",
+  "type": "REPORT",
+  "is_demo": false,
+  "scope_note": "Entregable del track VW (Compression, Autonomous Driving) del 2026 Global Quantum + AI Challenge. NO afirma ventaja: el metodo propio queda dominado por el baseline clasico que el propio enunciado nombra. Lo que aporta es la medicion y siete requisitos declarados no cumplidos en el cuerpo. Publicacion pendiente de autorizacion de Nicholas.",
+  "cadena_de_produccion": {
+   "orden": "esperados.json -> literatura.json -> markdown -> PDF",
+   "nota": "los cuatro van para que un tercero pueda rehacer la cadena, no solo comprobar el ultimo eslabon. El PDF es lo que viaja; el markdown es su fuente; los dos json son de donde sale cada cifra.",
+   "archivos": {
+    "esperados.json": "sha256:155a35f93d721392f37aa8f9729546c5cbcfe294b68f389dea0ed06838ed6021",
+    "literatura.json": "sha256:c02fcb07c986871d605c07de2942942b4059af7a6f42cb2f9cec8706f6df7a4a",
+    "ENTREGABLE-VW-EN.md": "sha256:070bf5dd4279f17451bcf39b3a05f4135f65a13ad9077378020a65aa64361683",
+    "1_Rosetta-Quantum-VW-Deliverable.pdf": "sha256:1f92905a2b78907ec70cf2da4dd7bfb013c0f4dc0823e4a8067e08124bfce353"
+   }
+  },
+  "prereg": "RQ-PREREG-VW-001",
+  "errata": "RQ-ERRATA-VW-001",
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-27T16:38:50+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.1.0",
+   "lib_sha256": "sha256:de1928a7d29d9061c67f57433cde5f6f9963bcc48e43bb33c816f020c53e61e8",
+   "harness": "seal_report_vw.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:04dad4450e3974839ba5a28f0a11b07215b973154b57f7e270a4dbe8b6ab33f0",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:f2368329f8ee3ae3bff6adb0722daf49c56c7545af10d362e8e0f3ead29efe2e"
+ },
+ "w6": {
+  "que": {
+   "titulo": "What the Spectrum of LLaVA-1.5-7B Says About Tensor-Network Compression",
+   "el_resultado_principal": "nuestro metodo pierde contra INT8 por fila (bitsandbytes) por 56x en la mediana sobre 21 matrices a ~2x de compresion, y no gana en NINGUNA. Va en el abstract, no en la discusion.",
+   "lo_que_si_aporta": "que la afirmacion del §5.1 del propio enunciado —MPS/TTNS dan 2-10x preservando precision— no se sostiene por la descomposicion sola sobre su modelo de referencia; y que NINGUNO de nueve metodos publicados en cuatro comparaciones entre feb y jul 2026 cruza el umbral, lo que no depende de nada nuestro.",
+   "el_hallazgo_sobre_su_propia_rubrica": "cumplimos el R18 con ~5x el umbral y pedimos que NO se nos acredite: la reduccion de FLOPs es una identidad algebraica de la razon de compresion, no mide calidad y por construccion no puede penalizar su perdida.",
+   "declarados_no_cumplidos": [
+    "R2",
+    "R4",
+    "R12",
+    "R13",
+    "R15",
+    "R17",
+    "R23"
+   ],
+   "cobertura_medida_SOBRE_EL_PDF": {
+    "cubiertos": 15,
+    "de_los_que_decimos_cumplir": 17,
+    "duros_sin_cubrir": 0,
+    "blandos_sin_cubrir": [
+     "R20",
+     "R22"
+    ]
+   },
+   "paginas": 8
+  },
+  "como": {
+   "pesos": "peticiones HTTP por rango sobre los safetensors publicados: 32 MB por matriz en vez de 14 GB de modelo.",
+   "reproducibilidad": "353 valores sellados; reproducen desde cache borrado, 0 fallos. NO se cita el tiempo: hay dos cifras ciertas en el repositorio (9,5 con cache a medias, 16,5 limpia) y la que quedo DENTRO del archivo sellado es justo la que no sirve. Un tiempo se sella con su condicion al lado o no se sella.",
+   "guardias_al_sellar": "los cuatro hashes recomputados contra el disco; el PDF entre 4 y 8 paginas; ningun otro desafio nombrado en el PDF; ningun requisito duro sin cubrir, medido SOBRE EL PDF y no sobre el markdown.",
+   "compute": "CPU. Sin GPU. US$0. Sin shots."
+  },
+  "cuando": {
+   "archived_at": "2026-08-27T16:38:50+00:00",
+   "fase_I_cierra": "2026-09-15"
+  },
+  "donde": {
+   "paquete": "evidence-staging/PAQUETE-VW"
+  },
+  "porque": {
+   "question": "¿puede la compresion por redes tensoriales llevar un VLAM de 7B a hardware embarcado sin perder precision, y se puede saber antes de gastar en GPU?",
+   "para_que": "el problema declarado de VW es meter un VLAM en un SoC de vehiculo. Hoy si una campaña de compresion va a funcionar se descubre despues de pagarla."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio (medicion y guiones)",
+   "coordinacion": "Rosetta Q Main (informe, guardias y sello)",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "el texto que lee el jurado pasa por Nicholas antes de salir; la publicacion es decision suya."
+  }
+ }
+}

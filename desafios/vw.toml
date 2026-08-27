@@ -1,0 +1,223 @@
+# Ficha del track VOLKSWAGEN GROUP — Global Quantum + AI Challenge 2026.
+# Derivada de VW-Group-Challenge-Statement-vF.pdf (10 paginas). El motor vive en
+# harness/guardia_requisitos.py; esta ficha es SOLO la lista, con su cita textual al lado.
+#
+# EL NIVEL SALE DEL VERBO DEL ENUNCIADO, no de nuestra opinion sobre que importa.
+# Donde el enunciado dice «must» o «Required», el nivel es OBLIGATORIO. Donde dice
+# «Guidance threshold», es ESPERADO — y ahi hay una sutileza que se escribe entera abajo,
+# porque leerla mal nos costaria alcance.
+
+[track]
+nombre = "vw"
+estado = "en_diseno"     # NO hay workflow ni manifest todavia: no se inventan.
+# Deliberadamente SIN [datos], [preregs], [harness] ni [guardias]: escribir ahi valores
+# de mentira para «completar el formato» produce exactamente el defecto que este equipo
+# ya pago — una ficha que se ve entera y no comprueba nada. Se agregan cuando existan.
+
+[subtrack]
+# El enunciado ofrece 2 contextos x 4 sub-tracks. ESTA ficha es la del camino elegido.
+# Si el Lab cambia de sub-track, esta seccion cambia y los requisitos R10–R12 con ella.
+contexto  = "Application Context 1: Autonomous Driving"
+sub_track = "Compression"
+modelo    = "LLaVA-1.5-7B"
+datos     = "nuScenes o Waymo Open Dataset"
+baseline  = "INT8 quantization via bitsandbytes"
+mide      = "Task accuracy on held-out split; total parameter count"
+
+[requisitos]
+# Los que el documento declara NO CUMPLIDOS en su cuerpo, con su razon. Salen del numerador.
+# Sin esto, declarar un fallo con honestidad pone el guardia en verde: el cuerpo escribe las
+# mismas palabras que el patron busca. Se saca uno de aqui cuando de verdad se cumpla.
+no_cumplidos = ["R2", "R4", "R12", "R13", "R15", "R17", "R23"]
+seccion_mapeo = '''Results against what you asked for|Resultados contra lo que ustedes piden'''
+
+# ---------------------------------------------------------------- 4.1 objetivo primario
+[[requisitos.item]]
+id      = '''R1'''
+seccion = '''4.1'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Demonstrate a clear, well-justified quantum-enhanced or quantum-inspired computational advantage over an accepted classical baseline'''
+patron  = '''quantum-inspired|quantum inspired|tensor network|matrix product state|\bMPS\b'''
+
+[[requisitos.item]]
+id      = '''R2'''
+seccion = '''4.1'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Reduced parameter count at equivalent or near-equivalent task accuracy on open-sourced benchmarks'''
+patron  = '''parameter count|parameter reduction|compression ratio'''
+
+# ------------------------------------------------------------------ 5.2 salidas exigidas
+[[requisitos.item]]
+id      = '''R3'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''A functional quantum-enhanced or quantum-inspired component integrated into at least one stage of VLAM training, compression, or control'''
+patron  = '''integrated into|integration|pipeline'''
+
+[[requisitos.item]]
+id      = '''R4'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''A public code repository with a README enabling clean-environment replication of all reported results, including dependencies, random seeds, and hardware specs'''
+patron  = '''repository|repositorio|github\.com|codeberg'''
+
+[[requisitos.item]]
+id      = '''R5'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Quantitative results vs. the track-specific accepted baseline, reported as mean +/- standard deviation across at least 3 independent runs'''
+patron  = '''standard deviation|std\.? dev|mean ±|±'''
+
+[[requisitos.item]]
+id      = '''R6'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''A 4-8 page technical report covering: method description, theoretical motivation, experimental setup, results'''
+patron  = '''theoretical motivation|experimental setup'''
+
+[[requisitos.item]]
+id      = '''R7'''
+seccion = '''5.2'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''an ablation isolating the quantum/QI component from the rest of the pipeline'''
+patron  = '''ablation|ablacion'''
+
+# ---------------------------------------------------------------------- 5.3 restricciones
+[[requisitos.item]]
+id      = '''R8'''
+seccion = '''5.3'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''all resource assumptions (qubit count, gate fidelity, simulation environment name and version, total shot budget) are explicitly stated'''
+patron  = '''qubit count|gate fidelity|shot budget|simulation environment'''
+# TRAMPA DE ESTE TRACK, escrita para que no se descubra el 14-sep: nuestra via es de
+# INSPIRACION cuantica (redes tensoriales) y NO tiene circuito, asi que no hay qubits ni
+# shots que declarar. Eso NO exime: exige declarar explicitamente que no aplica Y POR QUE.
+# Un apartado ausente y un apartado con «no aplica, porque el metodo es clasico en su
+# ejecucion» se ven igual en un indice y distinto ante un jurado.
+
+[[requisitos.item]]
+id      = '''R9'''
+seccion = '''5.3'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Any degradation in task accuracy or safety performance relative to the baseline must be fully reported and discussed in the technical report'''
+patron  = '''degradation|accuracy drop|caida de precision'''
+
+# ------------------------------------------------------------------- 5.4 baseline aceptado
+[[requisitos.item]]
+id      = '''R10'''
+seccion = '''5.4'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Accepted Baseline Method: INT8 quantization via bitsandbytes'''
+patron  = '''bitsandbytes|INT8'''
+
+[[requisitos.item]]
+id      = '''R11'''
+seccion = '''5.4'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Reference Model: LLaVA-1.5-7B — Reference Dataset: nuScenes or Waymo'''
+patron  = '''LLaVA-1\.5-7B|LLaVA-1\.5|nuScenes|Waymo'''
+
+[[requisitos.item]]
+id      = '''R12'''
+seccion = '''5.4'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''What Is Measured: Task accuracy on held-out split; total parameter count'''
+patron  = '''held-out|held out|test split'''
+
+# --------------------------------------------------------------- 5.5 vara de desempeno
+[[requisitos.item]]
+id      = '''R13'''
+seccion = '''5.5'''
+nivel   = '''ESPERADO'''
+cita    = '''Compression vs. Accuracy — Guidance threshold: <=5% accuracy drop at >=2x compression'''
+patron  = '''2x|2×|compression ratio|accuracy drop'''
+# El propio enunciado trae la valvula: «Submissions are not penalized for accuracy
+# degradation below the stated minimum threshold, PROVIDED the tradeoff is clearly
+# characterized». Por eso ESPERADO y no OBLIGATORIO — pero la valvula cobra: si no
+# llegamos al umbral, CARACTERIZAR el intercambio deja de ser adorno y pasa a ser lo
+# que nos salva. Ver R14.
+
+[[requisitos.item]]
+id      = '''R14'''
+seccion = '''5.5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''If multiple compression levels are tested, submit a Pareto curve showing the tradeoff'''
+patron  = '''Pareto'''
+
+[[requisitos.item]]
+id      = '''R15'''
+seccion = '''5.5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Latency on Reference Profile — End-to-end inference time (ms) measured on a clearly stated hardware profile. Must stay within the real-time safety budget. <=100ms on stated hardware profile'''
+patron  = '''latency|latencia|100\s?ms|inference time'''
+# Ojo: es un benchmark del §5.5 y aplica AUNQUE el sub-track sea compresion. Un paquete
+# de compresion sin numero de latencia deja vacia una de las cinco filas de la tabla con
+# que nos van a puntuar.
+
+[[requisitos.item]]
+id      = '''R16'''
+seccion = '''5.5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Submitted code must run end-to-end from a clean environment with no manual intervention. All baselines, datasets, hyperparameters, random seeds, and hardware specs must be documented'''
+patron  = '''random seed|semilla|clean environment|hardware spec'''
+
+[[requisitos.item]]
+id      = '''R17'''
+seccion = '''5.5'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''Quantum Justification — A clear theoretical or empirical explanation of why the quantum or QI component provides the observed advantage'''
+patron  = '''why the quantum|why our|justification|justificacion'''
+
+[[requisitos.item]]
+id      = '''R18'''
+seccion = '''5.5'''
+nivel   = '''ESPERADO'''
+cita    = '''Efficiency Gain — FLOPs reduction (%) or wall-clock training time reduction. Guidance threshold: >=10% improvement over baseline'''
+patron  = '''FLOPs|wall-clock|wall clock'''
+
+# ------------------------------------------------------- 6. declaracion de recursos
+[[requisitos.item]]
+id      = '''R19'''
+seccion = '''6'''
+nivel   = '''OBLIGATORIO'''
+cita    = '''All submissions must include a Resource Declaration (GPU type and count, total GPU-hours, simulation environment and version, estimated energy consumption)'''
+patron  = '''Resource Declaration|GPU-hours|GPU hours'''
+# «This declaration has no bearing on evaluation scores» — pero el verbo sigue siendo
+# «must include». No puntua y es obligatoria: las dos cosas a la vez. Justo la clase de
+# item que se cae cuando alguien poda por impacto.
+
+# ---------------------------------------------------- 4.2 objetivos secundarios (opcionales)
+[[requisitos.item]]
+id      = '''R20'''
+seccion = '''4.2'''
+nivel   = '''OPCIONAL'''
+cita    = '''Energy efficiency: Report kWh or CO2e consumed versus the classical baseline'''
+patron  = '''kWh|CO2e|CO₂e'''
+
+[[requisitos.item]]
+id      = '''R21'''
+seccion = '''4.2'''
+nivel   = '''OPCIONAL'''
+cita    = '''Cross-track generalizability: Show the method transfers from one track to the other'''
+patron  = '''generalizability|transfers|cross-track'''
+
+[[requisitos.item]]
+id      = '''R22'''
+seccion = '''4.2'''
+nivel   = '''OPCIONAL'''
+cita    = '''Open-source release: Publish code and checkpoints under Apache 2.0 or MIT'''
+patron  = '''Apache 2\.0|MIT License|MIT licence'''
+
+[[requisitos.item]]
+id      = '''R23'''
+seccion = '''4.2'''
+nivel   = '''OPCIONAL'''
+cita    = '''Hardware pathway: Simulation-based analysis of near-term quantum hardware feasibility (qubit count, circuit depth, noise sensitivity)'''
+patron  = '''circuit depth|noise sensitivity|hardware pathway'''
+
+[[requisitos.item]]
+id      = '''R24'''
+seccion = '''5.1'''
+nivel   = '''OPCIONAL'''
+cita    = '''Participants may target one or more; addressing multiple with an integrated approach is eligible for bonus recognition'''
+patron  = '''bottleneck|attention|Lyapunov|RL alignment'''
