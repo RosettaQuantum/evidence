@@ -1,0 +1,87 @@
+{
+ "meta": {
+  "file_name": "RosettaQ__REPORT__RQ-REPORT-VW-004__20260827T2104Z__lo-que-el-espectro-de-llava-dice-sobre-la-compresion-tensorial.json",
+  "file_id": "RQ-REPORT-VW-004",
+  "type": "REPORT",
+  "is_demo": false,
+  "scope_note": "CUARTA version del entregable del track VW. Se re-sello ANTES de publicar (el sello previo de esta misma version nunca salio del disco) porque al ejercer la promesa del §1 bis —seguir uno mismo las instrucciones que uno da— aparecio que el informe citaba tres sellos por su identificador y no decia DONDE encontrarlos. Se descargan sin cuenta desde el archivo publico; ahora el documento lo dice. Y una segunda correccion de la misma clase, tambien antes de publicar: el pre-registro al que la referencia lleva esta en ESPAÑOL y el jurado es internacional. No se traduce —sus bytes son lo que la fecha protege— pero el cuerpo ahora dice en ingles QUE contiene, para que quien siga la referencia sepa que esta verificando aunque no lo lea. Las dos las encontro EJERCER la promesa como si uno fuera el jurado, no un guardia: un guardia comprueba lo que hay, ejercer comprueba lo que falta. Y una tercera, tambien antes de publicar: la URL del repositorio se PARTIA a mitad de palabra al maquetarse, asi que un jurado no podia copiarla. Estaba, y no servia. Ahora va en su propia linea. Sobre el track VW (Compression, Autonomous Driving) del 2026 Global Quantum + AI Challenge. NO afirma ventaja: el metodo propio queda dominado por el baseline clasico que el propio enunciado nombra. Lo que aporta es la medicion y siete requisitos declarados no cumplidos en el cuerpo. Publicacion pendiente de autorizacion de Nicholas.",
+  "cadena_de_produccion": {
+   "orden": "esperados.json -> literatura.json -> markdown -> PDF",
+   "nota": "los cuatro van para que un tercero pueda rehacer la cadena, no solo comprobar el ultimo eslabon. El PDF es lo que viaja; el markdown es su fuente; los dos json son de donde sale cada cifra.",
+   "archivos": {
+    "esperados.json": "sha256:155a35f93d721392f37aa8f9729546c5cbcfe294b68f389dea0ed06838ed6021",
+    "literatura.json": "sha256:c02fcb07c986871d605c07de2942942b4059af7a6f42cb2f9cec8706f6df7a4a",
+    "ENTREGABLE-VW-EN.md": "sha256:b5898790fbe38665f428efee1de29c68dcb6466edc0258fa3e5ee989ad5be896",
+    "1_Rosetta-Quantum-VW-Deliverable.pdf": "sha256:b59750088d8430cdef0b4d624f6b075d04205968c9a32ce219d2bf6dc8823bdd"
+   }
+  },
+  "prereg": "RQ-PREREG-VW-001",
+  "errata": "RQ-ERRATA-VW-001",
+  "sustituye_a": {
+   "file_id": "RQ-REPORT-VW-003",
+   "por_que": "Nicholas reviso el PDF y noto que FALTABA LA SECCION DE EQUIPO. Cierto: HSBC, E.ON y Airbus la llevan y VW no. Un jurado que lee cuatro entregables nuestros ve que a uno le falta quien lo firma. Agregada con la misma forma de los otros —Blue Tuna SpA, el lead, el correo, el trasfondo— y con el conteo del archivo MEDIDO al generar y anclado a su commit, porque el archivo crece y un total sin commit no se puede comprobar. Tambien pidio el guion de reproduccion en PDF legible: el paquete lleva ahora 4_reproduce.pdf, con el sha256 del fuente en su cabecera para que se pueda cotejar contra el .py del repositorio publico, que sigue siendo el ejecutable. NINGUNA de las dos la caza un guardia: la primera es una ausencia —un guardia comprueba lo que hay— y la segunda es una decision sobre para quien es el archivo. ",
+   "regla": "publicado es publicado: el primero NO se reescribe ni se re-ancla. Queda como el registro del estado ANTES de publicar el repositorio, que es un estado real y fechado, no un borrador."
+  },
+  "schema": "rosettaq-archive/v3",
+  "sealed_at": "2026-08-27T21:04:27+00:00",
+  "sealed_by": {
+   "lib": "rosettaq_seal.py",
+   "lib_version": "3.1.0",
+   "lib_sha256": "sha256:de1928a7d29d9061c67f57433cde5f6f9963bcc48e43bb33c816f020c53e61e8",
+   "harness": "seal_report_vw.py",
+   "harness_version": "1.0.0",
+   "harness_sha256": "sha256:d2600da1dc76d78d820cae64da6a55a87804c3fa269db512818bc1f01bb7f82a",
+   "convention": "v3: sha256(JCS/RFC-8785 del mismo payload de v2 — {meta sin content_hash/schema, cuerpo sin storage}). El payload no cambia; cambia la serializacion, para que el hash se pueda recomputar en cualquier lenguaje y no solo en Python."
+  },
+  "content_hash": "sha256:47d10c6045000b9d13ee26e466bef0759ac0968de7f57f86fc5e5a4d3c82de56"
+ },
+ "w6": {
+  "que": {
+   "titulo": "What the Spectrum of LLaVA-1.5-7B Says About Tensor-Network Compression",
+   "el_resultado_principal": "nuestro metodo pierde contra INT8 por fila (bitsandbytes) por 56x en la mediana sobre 21 matrices a ~2x de compresion, y no gana en NINGUNA. Va en el abstract, no en la discusion.",
+   "lo_que_si_aporta": "que la afirmacion del §5.1 del propio enunciado —MPS/TTNS dan 2-10x preservando precision— no se sostiene por la descomposicion sola sobre su modelo de referencia; y que NINGUNO de nueve metodos publicados en cuatro comparaciones entre feb y jul 2026 cruza el umbral, lo que no depende de nada nuestro.",
+   "el_hallazgo_sobre_su_propia_rubrica": "cumplimos el R18 con ~5x el umbral y pedimos que NO se nos acredite: la reduccion de FLOPs es una identidad algebraica de la razon de compresion, no mide calidad y por construccion no puede penalizar su perdida.",
+   "declarados_no_cumplidos": [
+    "R2",
+    "R12",
+    "R13",
+    "R15",
+    "R17",
+    "R23"
+   ],
+   "cobertura_medida_SOBRE_EL_PDF": {
+    "cubiertos": 17,
+    "de_los_que_decimos_cumplir": 18,
+    "duros_sin_cubrir": 0,
+    "blandos_sin_cubrir": [
+     "R20"
+    ]
+   },
+   "paginas": 8
+  },
+  "como": {
+   "pesos": "peticiones HTTP por rango sobre los safetensors publicados: 32 MB por matriz en vez de 14 GB de modelo.",
+   "reproducibilidad": "353 valores sellados; reproducen desde cache borrado, 0 fallos. NO se cita el tiempo: hay dos cifras ciertas en el repositorio (9,5 con cache a medias, 16,5 limpia) y la que quedo DENTRO del archivo sellado es justo la que no sirve. Un tiempo se sella con su condicion al lado o no se sella.",
+   "guardias_al_sellar": "los cuatro hashes recomputados contra el disco; el PDF entre 4 y 8 paginas; ningun otro desafio nombrado en el PDF; ningun requisito duro sin cubrir, medido SOBRE EL PDF y no sobre el markdown.",
+   "compute": "CPU. Sin GPU. US$0. Sin shots."
+  },
+  "cuando": {
+   "archived_at": "2026-08-27T21:04:27+00:00",
+   "fase_I_cierra": "2026-09-15"
+  },
+  "donde": {
+   "paquete": "evidence-staging/PAQUETE-VW",
+   "codigo": "https://github.com/RosettaQuantum/vw-spectral-screen"
+  },
+  "porque": {
+   "question": "¿puede la compresion por redes tensoriales llevar un VLAM de 7B a hardware embarcado sin perder precision, y se puede saber antes de gastar en GPU?",
+   "para_que": "el problema declarado de VW es meter un VLAM en un SoC de vehiculo. Hoy si una campaña de compresion va a funcionar se descubre despues de pagarla."
+  },
+  "quien": {
+   "lab": "Rosetta Quantum — sesion laboratorio (medicion y guiones)",
+   "coordinacion": "Rosetta Q Main (informe, guardias y sello)",
+   "lead": "Nicholas Iakl Freundlich",
+   "separacion_de_deberes": "el texto que lee el jurado pasa por Nicholas antes de salir; la publicacion es decision suya."
+  }
+ }
+}
