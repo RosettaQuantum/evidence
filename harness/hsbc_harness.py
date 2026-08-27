@@ -45,6 +45,47 @@ OPENMP = _asegurar_openmp()
 
 SEED = 42
 
+
+# ================== EL RELOJ DEL EJECUTOR ==================
+# DURACIONES, NO INSTANTES. El ejecutor es el unico que puede cronometrar sus propios
+# tramos —igual que un corredor es el unico que sabe cuando empezo a correr— pero NO puede
+# declarar cuando llego: esa hora la pone el Depositario, y no se toca desde aqui. Por eso
+# esto escribe `*_ms` y jamas un campo de hora de deposito.
+#
+# Y POR ESO VA EN MILISEGUNDOS CON DECIMALES: no por exactitud, sino porque hace **imposible
+# esconder un tiempo escrito a mano**. Los campos de fecha contaminados que encontro el CTO
+# caen todos en `:00` o `:30` — nadie teclea `.537065` a mano. Es mejor que el defecto no se
+# pueda disimular que construir un guardia que lo persiga.
+import contextlib
+
+
+class Fases:
+    def __init__(self):
+        self.ms = {}
+
+    @contextlib.contextmanager
+    def __call__(self, nombre):
+        t = time.perf_counter()
+        try:
+            yield
+        finally:
+            self.ms[nombre] = round((time.perf_counter() - t) * 1000.0, 3)
+
+    def informe(self):
+        tot = sum(self.ms.values())
+        return {"unidad": "ms", "medido_por": "el ejecutor, no el Depositario",
+                "tramos": dict(self.ms),
+                "reparto_pct": {k: round(100.0 * v / tot, 1) for k, v in self.ms.items()}
+                              if tot else {},
+                "total_ms": round(tot, 3),
+                "que_NO_es": "no es la hora de deposito ni el ancla. Son duraciones que el "
+                             "propio ejecutor mide de si mismo; falseables por nosotros y "
+                             "sin valor probatorio. Lo que no se puede falsear es el ancla, "
+                             "y no la escribe nadie de esta casa."}
+
+
+FASES = Fases()
+
 # ================== DE QUE DATASET SE HABLA ==================
 # El protocolo es el MISMO para los dos —particion temporal, guardias, metricas,
 # bootstrap— y lo unico que cambia es como se carga el dato y como se llaman sus
@@ -415,7 +456,8 @@ def correr_brazo_cuantico():
                 peor_k = max(peor_k, abs(km - kq))
         return peor_sv, peor_k
 
-    _dsv, _dk = _verificar_contra_qiskit()
+    with FASES("guardia_del_mapa_contra_qiskit"):
+        _dsv, _dk = _verificar_contra_qiskit()
     print("guardia statevector vs qiskit: max|dpsi|=%.2e  max|dK|=%.2e" % (_dsv, _dk))
     if not (_dsv < 1e-10 and _dk < 1e-12):
         raise SystemExit("ABORTA: mi statevector NO coincide con el ZZFeatureMap de qiskit "
@@ -458,26 +500,31 @@ def correr_brazo_cuantico():
 
     _tq = time.time()
     t0 = time.time()
-    PHI_S = mapa(Xs)
+    with FASES("mapeo_del_soporte"):
+        PHI_S = mapa(Xs)
     print("  mapa del soporte: %.1f s" % (time.time() - t0))
     t0 = time.time()
-    K = gram(PHI_S, PHI_S)
+    with FASES("kernel_gram"):
+        K = gram(PHI_S, PHI_S)
     print("  gram %dx%d: %.1f s" % (K.shape[0], K.shape[1], time.time() - t0))
     t0 = time.time()
     clf = SVC(kernel="precomputed", C=Q_C, class_weight="balanced")
-    clf.fit(K, ys)
+    with FASES("ajuste_del_clasificador"):
+        clf.fit(K, ys)
     n_sv = int(clf.n_support_.sum())
     print("  SVC: %.1f s, %d vectores de soporte" % (time.time() - t0, n_sv))
     del K
 
     t0 = time.time()
     p = np.empty(len(yte), dtype=np.float64)
-    for i in range(0, len(Xte), 4096):
-        PHI_T = mapa(Xte[i:i + 4096])
-        p[i:i + 4096] = clf.decision_function(gram(PHI_T, PHI_S))
+    with FASES("inferencia_sobre_el_test"):
+        for i in range(0, len(Xte), 4096):
+            PHI_T = mapa(Xte[i:i + 4096])
+            p[i:i + 4096] = clf.decision_function(gram(PHI_T, PHI_S))
     print("  test completo (%d filas): %.1f s" % (len(yte), time.time() - t0))
 
-    r = evaluar(p, yte, t0=_tq)
+    with FASES("evaluacion_y_bootstrap"):
+        r = evaluar(p, yte, t0=_tq)
 
     # ================= §5.2 DEL ENUNCIADO: los tres artefactos pedidos =================
     # El enunciado pide TRES salidas y nosotros teniamos una. Ademas pide la probabilidad en
@@ -810,6 +857,7 @@ out["openmp"] = {
 }
 out.update(EXTRA)
 out["brazo"] = BRAZO
+out["fases_del_ejecutor"] = FASES.informe()
 json.dump(out, open(os.environ.get("RQ_OUT", "resultado_hsbc.json"), "w"), indent=1)
 print("\ntest sha256:", test_sha[:16], "| train %d/%d fraudes | test %d/%d"
       % (int(ytr.sum()), len(tr), int(yte.sum()), len(te)))

@@ -73,7 +73,7 @@ SCHEMA_V2 = "rosettaq-archive/v2"
 SCHEMA_V3 = "rosettaq-archive/v3"
 SCHEMA = SCHEMA_V2                      # el DEFECTO sigue en v2 a proposito: ver abajo
 LIB_NAME = "rosettaq_seal.py"
-LIB_VERSION = "3.0.0"
+LIB_VERSION = "3.1.0"
 
 EXCLUDED_META = ("content_hash", "schema")
 EXCLUDED_TOP = ("meta", "storage")
@@ -151,6 +151,59 @@ def file_fingerprint(path) -> str:
 
 
 # ----------------------------------------------------------------- sealing ---
+# ================== EL ESQUEMA CONSULTABLE DE UNA CORRIDA ==================
+# Medido el 26-ago-2026: 42 corridas de agosto y 3 de julio salen VACIAS en la API. Cada
+# guion de sellado nuevo escribio su propia estructura narrativa en `w6.que` —mas rica y mas
+# honesta que la de julio— y dejo de llenar los campos que la API consulta. Ganamos prosa y
+# perdimos consulta.
+#
+# Lo que vendemos es «un archivo de mediciones selladas, LEGIBLE POR MAQUINA». Eso es cierto
+# para julio y falso para todo agosto: un agente que consulte hoy recibe corridas sin un solo
+# campo consultable, y el hallazgo existe solo en el nombre del archivo.
+#
+# LA REGLA: la estructura de `w6.que` NO la elige el guion. Los campos canonicos son
+# obligatorios para type=RUN; lo que cada experimento agregue va al lado, sin quitar nada.
+CANONICOS_RUN = ("problem_class", "instance", "outcome")
+
+
+def que_canonico(problem_class, instance, outcome, **narrativa):
+    """Construye `w6.que` con el esquema obligatorio y la narrativa al lado.
+
+    La prosa se queda entera: esto solo garantiza que ADEMAS esten los campos que hacen
+    consultable la corrida. Falla cerrado si alguno viene vacio — un campo presente y vacio
+    es peor que ausente, porque la API lo devuelve como si fuera un dato.
+    """
+    for nombre, valor in (("problem_class", problem_class), ("instance", instance),
+                          ("outcome", outcome)):
+        if valor is None or (isinstance(valor, str) and not valor.strip()):
+            raise ValueError(
+                "que_canonico: %r viene vacio. Los tres campos canonicos son obligatorios: "
+                "sin ellos la corrida se sella bien y sale vacia en la API, que es como se "
+                "perdieron 42 corridas de agosto." % nombre)
+    out = {"problem_class": problem_class, "instance": instance, "outcome": outcome}
+    out.update(narrativa)
+    return out
+
+
+def _exigir_esquema_consultable(doc):
+    """Aborta si una CORRIDA se sellaria sin los campos que la hacen consultable."""
+    if doc.get("meta", {}).get("type") != "RUN":
+        return
+    que = doc.get("w6", {}).get("que")
+    if not isinstance(que, dict):
+        raise ValueError("seal: w6.que debe ser un objeto en una corrida")
+    faltan = [k for k in CANONICOS_RUN
+              if k not in que or que[k] is None
+              or (isinstance(que[k], str) and not que[k].strip())]
+    if faltan:
+        raise ValueError(
+            "ABORTA: esta corrida se sellaria SIN los campos canonicos %s, y saldria vacia "
+            "en la API igual que las 42 de agosto. Construye w6.que con "
+            "rosettaq_seal.que_canonico(problem_class=..., instance=..., outcome=..., "
+            "**tu_narrativa) — la prosa no se toca, solo se le suma el esquema al lado."
+            % ", ".join(faltan))
+
+
 def seal(doc: dict, harness: tuple | None = None, sealed_at: str | None = None,
          correction: dict | None = None, allow_reseal: bool = False,
          schema: str = SCHEMA) -> dict:
@@ -166,6 +219,7 @@ def seal(doc: dict, harness: tuple | None = None, sealed_at: str | None = None,
     """
     if "meta" not in doc:
         raise ValueError("el documento no tiene bloque meta")
+    _exigir_esquema_consultable(doc)
     if schema not in (SCHEMA_V2, SCHEMA_V3):
         raise ValueError("convencion desconocida: %r" % (schema,))
 
