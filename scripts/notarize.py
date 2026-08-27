@@ -203,7 +203,74 @@ else:
         msg = sys.argv[sys.argv.index("-m") + 1]
     msg = msg or f"Notarizacion: {len(sin_ots)} archivo(s) nuevo(s) anclado(s) y publicado(s)"
     if not DRY:
-        sh("git add -A")
+        # ---- que se anade, y por que NO es `git add -A` --------------------------------
+        #
+        # EL DEFECTO. `git add -A` no anade "lo mio": anade **lo que haya**. En un arbol donde
+        # escriben dos actores, el trabajo en vuelo del otro entra en un commit cuyo mensaje
+        # habla de notarizacion — y no aparece en ningun conflicto, porque no hay conflicto.
+        # Es peor que dos actores peleandose un archivo: ahi los dos saben que hay disputa.
+        # Aqui **uno de los dos ni participa** y su trabajo se publica bajo la firma del otro.
+        #
+        # LO QUE ESTE PROCESO PRODUCE es exactamente: los artefactos que anclo y sus `.ots`.
+        # Nada mas. Los artefactos los escribe quien sella; el notario solo estampa.
+        producido = []
+        for _p in sin_ots:
+            producido.append(_p)              # el artefacto anclado
+            producido.append(_p + ".ots")     # su ancla
+        # Los `.ots` que el `upgrade` pudo haber tocado tambien son nuestros.
+        producido += [_p + ".ots" for _p in archives() if os.path.exists(_p + ".ots")]
+        producido = sorted({_x for _x in producido if os.path.exists(_x)})
+
+        # ---- ABORTA si va a anclar sobre una edicion en vuelo -------------------------
+        #
+        # Un artefacto NUEVO llega sin seguir (`??`) y eso es lo normal. Pero uno **seguido y
+        # modificado** (`M`) significa que alguien lo esta editando ahora, y anclar eso estampa
+        # una version intermedia: el ancla y la copia publicada dejarian de coincidir para
+        # siempre, y publicado es publicado. Se aborta NOMBRANDO el archivo, no en silencio.
+        _estado = {}
+        for _l in sh("git status --porcelain").stdout.splitlines():
+            if len(_l) > 3:
+                _estado[_l[3:].strip().strip('"')] = _l[:2]
+        _en_vuelo = [_x for _x in producido
+                     if not _x.endswith(".ots") and "M" in _estado.get(_x, "")]
+        if _en_vuelo:
+            print("   ABORTADO — se iba a anclar sobre archivos MODIFICADOS y sin commitear:")
+            for _x in _en_vuelo:
+                print(f"     {_estado[_x]} {_x}")
+            print("   Un ancla sobre una edicion en vuelo estampa una version intermedia, y")
+            print("   despues el ancla y la copia publicada no coinciden nunca mas.")
+            print("   Committea o revierte esos archivos y vuelve a correr.")
+            sys.exit(1)
+
+        # ---- lo ajeno se NOMBRA y se deja fuera, no se bloquea ------------------------
+        #
+        # Precision sobre cobertura: que otro tenga un README a medias no es razon para
+        # retener una notarizacion. Pero tampoco se pasa por alto — si no se nombra, el
+        # siguiente `git add -A` de cualquiera se lo lleva y nadie sabra de donde salio.
+        _ajeno = sorted(set(_estado) - set(producido))
+        if _ajeno:
+            print(f"   {len(_ajeno)} archivo(s) sucios que NO son de esta notarizacion y quedan fuera:")
+            for _x in _ajeno[:10]:
+                print(f"     {_estado[_x]} {_x}")
+            if len(_ajeno) > 10:
+                print(f"     … y {len(_ajeno) - 10} mas")
+
+        if not producido:
+            print("   nada producido por esta notarizacion: no hay que commitear")
+        else:
+            print(f"   se anaden {len(producido)} archivo(s) producidos por esta notarizacion")
+            sh(["git", "add", "--"] + producido)
+
+        # El commit lleva SOLO lo puesto. Se comprueba en vez de confiar: si el indice trae
+        # algo que no produjimos, alguien lo puso en paralelo entre el `add` y el `commit`.
+        _puesto = sorted(x for x in sh("git diff --cached --name-only").stdout.splitlines() if x)
+        _colado = sorted(set(_puesto) - set(producido))
+        if _colado:
+            print("   ABORTADO — el indice trae archivos que esta notarizacion no produjo:")
+            for _x in _colado[:10]:
+                print(f"     {_x}")
+            print("   Alguien escribio en paralelo. No se firma un commit con trabajo ajeno dentro.")
+            sys.exit(1)
         r = sh(["git", "commit", "-q", "-m", msg + "\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"])
         if r.returncode:
             print("   commit fallo:", (r.stdout + r.stderr)[:200])
